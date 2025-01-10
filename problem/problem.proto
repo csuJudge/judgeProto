@@ -1,0 +1,36 @@
+syntax = "proto3";
+option go_package="github.com/csuJudge/judgeProto";
+
+package oj.problem;
+
+service ProblemServer {
+  rpc QueryProblem (QueryProblemReq) returns (QueryProblemRsp) {}
+}
+
+message QueryProblemReq {
+  int32 problemID = 1;
+}
+
+message QueryProblemRsp {
+  string message = 1;
+  int64 code = 2;
+  ProblemData problem = 3;
+}
+
+message ProblemData{
+  int32 problemID = 1;
+  string ProblemName = 2;
+  string ProblemDescription = 3;
+  string ProblemHint = 4;
+  int32 Solved = 5;
+  int32 Submission = 6;
+  string InputDescription = 7;
+  string OutputDescription = 8;
+  string ProblemInput = 9;
+  string ProblemOutput = 10;
+  int32 TimeLimit = 11;
+  int32 MemoryLimit = 12;
+  int32 Knowledges = 13;
+  int32 Enable = 14;
+  int32 Difficulty = 15;
+}
