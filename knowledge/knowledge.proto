@@ -1,0 +1,38 @@
+syntax = "proto3";
+option go_package="github.com/csuJudge/judgeProto";
+
+package oj.knowledge;
+
+service KnowledgeServer {
+  rpc QueryKnowledge (QueryKnowledgeReq) returns (QueryKnowledgeRsp) {}
+  rpc AddKnowledge (AddKnowledgeReq) returns (AddKnowledgeRsp) {}
+}
+
+message QueryKnowledgeReq {
+  int32 Page = 1;  // 页
+  int32 Limit = 2; // 页大小
+}
+
+message QueryKnowledgeRsp {
+  repeated Knowledge knowledge = 1; // 知识点
+}
+
+message AddKnowledgeReq {
+  string KnowledgeName = 1;
+  int32 userID = 2;
+}
+
+message AddKnowledgeRsp {
+  string message = 1;
+  int32 retCode = 2;
+}
+
+
+message Knowledge {
+  int32 KnowledgeID = 1;
+  string KnowledgeName = 2;
+  string Creator = 3;
+  string CreateTime = 4;
+  string Enable = 5;
+  string Weight = 6;
+}
