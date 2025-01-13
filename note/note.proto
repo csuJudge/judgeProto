@@ -1,0 +1,31 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto";
+
+package oj.note;
+
+service NoteServer {
+    // QueryNote 查询题解
+    rpc QueryNote(QueryNoteReq) returns (QueryNoteRsp) {}
+    // OperateNote 操作题解
+    rpc OperateNote(OperateNoteReq) returns (OperateNoteRsp) {}
+}
+
+message QueryNoteReq {
+    int32 problemID = 1;  // 题目编号
+}
+
+message QueryNoteRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+    string note    = 3;  // 题解
+}
+
+message OperateNoteReq {
+    int32 userID    = 1;  // 用户编号
+    string note     = 2;  // 笔记
+    int32 problemID = 3;  // 题目编号
+}
+message OperateNoteRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+}
