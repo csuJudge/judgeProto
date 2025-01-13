@@ -1,47 +1,50 @@
-syntax = "proto3";
-option go_package="github.com/csuJudge/judgeProto";
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto";
 
 package oj.knowledge;
 
 service KnowledgeServer {
-  rpc QueryKnowledge (QueryKnowledgeReq) returns (QueryKnowledgeRsp) {}
-  rpc AddKnowledge (AddKnowledgeReq) returns (AddKnowledgeRsp) {}
-  rpc QueryProblemKnowledge(QueryProblemKnowledgeReq) returns (QueryProblemKnowledgeRsp) {}
+    rpc QueryKnowledge(QueryKnowledgeReq) returns (QueryKnowledgeRsp) {}
+    rpc AddKnowledge(AddKnowledgeReq) returns (AddKnowledgeRsp) {}
+    rpc QueryProblemKnowledge(QueryProblemKnowledgeReq) returns (QueryProblemKnowledgeRsp) {}
 }
 
 message QueryKnowledgeReq {
-  int32 Page = 1;  // 页
-  int32 Limit = 2; // 页大小
+    int32 page  = 1;  // 页
+    int32 limit = 2;  // 页大小
 }
 
 message QueryKnowledgeRsp {
-  repeated Knowledge knowledge = 1; // 知识点
+    repeated Knowledge knowledge = 1;  // 知识点
+    string message               = 2;  // 返回信息
+    int32 code                   = 3;  // 返回码
 }
 
 message AddKnowledgeReq {
-  string KnowledgeName = 1;
-  int32 userID = 2;
+    string knowledgeName = 1;
+    int32 userID         = 2;
 }
 
 message AddKnowledgeRsp {
-  string message = 1;
-  int32 retCode = 2;
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
 }
 
-message QueryProblemKnowledgeReq{
-  int32 problemID = 1;
+message QueryProblemKnowledgeReq {
+    int32 problemID = 1;
 }
 
-message QueryProblemKnowledgeRsp{
-  string knowledge = 1;
+message QueryProblemKnowledgeRsp {
+    string knowledge = 1;
+    string message   = 2;  // 返回信息
+    int32 code       = 3;  // 返回码
 }
-
 
 message Knowledge {
-  int32 KnowledgeID = 1;
-  string KnowledgeName = 2;
-  string Creator = 3;
-  string CreateTime = 4;
-  string Enable = 5;
-  string Weight = 6;
+    int32 KnowledgeID    = 1;
+    string KnowledgeName = 2;
+    string Creator       = 3;
+    string CreateTime    = 4;
+    string Enable        = 5;
+    string Weight        = 6;
 }

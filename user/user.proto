@@ -1,0 +1,19 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto";
+
+package oj.user;
+
+service UserServer {
+    // QueryUserPrivilege 查询用户权限
+    rpc QueryUserPrivilege(QueryUserPrivilegeReq) returns (QueryUserPrivilegeRsp) {}
+}
+
+message QueryUserPrivilegeReq {
+    int32 userID = 1;  // 用户编号
+}
+
+message QueryUserPrivilegeRsp {
+    int32 privilege = 1;  // 用户权限
+    string message  = 2;  // 返回信息
+    int32 code      = 3;  // 返回码
+}
