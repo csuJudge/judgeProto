@@ -5,6 +5,7 @@ package oj.problem;
 
 service ProblemServer {
   rpc QueryProblem (QueryProblemReq) returns (QueryProblemRsp) {}
+  rpc AddProblem (AddProblemReq) returns (AddProblemRsp) {}
 }
 
 message QueryProblemReq {
@@ -14,10 +15,10 @@ message QueryProblemReq {
 message QueryProblemRsp {
   string message = 1;
   int64 code = 2;
-  ProblemData problem = 3;
+  Problem problem = 3;
 }
 
-message ProblemData{
+message Problem{
   int32 problemID = 1;
   string ProblemName = 2;
   string ProblemDescription = 3;
@@ -33,4 +34,14 @@ message ProblemData{
   int32 Knowledges = 13;
   int32 Enable = 14;
   int32 Difficulty = 15;
+}
+
+message AddProblemRsp{
+  string message = 1;
+  int64 code = 2;
+}
+
+message AddProblemReq{
+  int32 UserID = 1;
+  Problem problem = 2;
 }

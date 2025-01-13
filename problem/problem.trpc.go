@@ -20,6 +20,8 @@ import (
 // ProblemServerService defines service.
 type ProblemServerService interface {
 	QueryProblem(ctx context.Context, req *QueryProblemReq) (*QueryProblemRsp, error)
+
+	AddProblem(ctx context.Context, req *AddProblemReq) (*AddProblemRsp, error)
 }
 
 func ProblemServerService_QueryProblem_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -40,6 +42,24 @@ func ProblemServerService_QueryProblem_Handler(svr interface{}, ctx context.Cont
 	return rsp, nil
 }
 
+func ProblemServerService_AddProblem_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &AddProblemReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ProblemServerService).AddProblem(ctx, reqbody.(*AddProblemReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // ProblemServerServer_ServiceDesc descriptor for server.RegisterService.
 var ProblemServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.problem.ProblemServer",
@@ -48,6 +68,10 @@ var ProblemServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.problem.ProblemServer/QueryProblem",
 			Func: ProblemServerService_QueryProblem_Handler,
+		},
+		{
+			Name: "/oj.problem.ProblemServer/AddProblem",
+			Func: ProblemServerService_AddProblem_Handler,
 		},
 	},
 }
@@ -66,6 +90,9 @@ type UnimplementedProblemServer struct{}
 func (s *UnimplementedProblemServer) QueryProblem(ctx context.Context, req *QueryProblemReq) (*QueryProblemRsp, error) {
 	return nil, errors.New("rpc QueryProblem of service ProblemServer is not implemented")
 }
+func (s *UnimplementedProblemServer) AddProblem(ctx context.Context, req *AddProblemReq) (*AddProblemRsp, error) {
+	return nil, errors.New("rpc AddProblem of service ProblemServer is not implemented")
+}
 
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
@@ -76,6 +103,8 @@ func (s *UnimplementedProblemServer) QueryProblem(ctx context.Context, req *Quer
 // ProblemServerClientProxy defines service client proxy
 type ProblemServerClientProxy interface {
 	QueryProblem(ctx context.Context, req *QueryProblemReq, opts ...client.Option) (rsp *QueryProblemRsp, err error)
+
+	AddProblem(ctx context.Context, req *AddProblemReq, opts ...client.Option) (rsp *AddProblemRsp, err error)
 }
 
 type ProblemServerClientProxyImpl struct {
@@ -101,6 +130,26 @@ func (c *ProblemServerClientProxyImpl) QueryProblem(ctx context.Context, req *Qu
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryProblemRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ProblemServerClientProxyImpl) AddProblem(ctx context.Context, req *AddProblemReq, opts ...client.Option) (*AddProblemRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ProblemServer/AddProblem")
+	msg.WithCalleeServiceName(ProblemServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ProblemServer")
+	msg.WithCalleeMethod("AddProblem")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &AddProblemRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

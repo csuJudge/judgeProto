@@ -22,6 +22,8 @@ type KnowledgeServerService interface {
 	QueryKnowledge(ctx context.Context, req *QueryKnowledgeReq) (*QueryKnowledgeRsp, error)
 
 	AddKnowledge(ctx context.Context, req *AddKnowledgeReq) (*AddKnowledgeRsp, error)
+
+	QueryProblemKnowledge(ctx context.Context, req *QueryProblemKnowledgeReq) (*QueryProblemKnowledgeRsp, error)
 }
 
 func KnowledgeServerService_QueryKnowledge_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -60,6 +62,24 @@ func KnowledgeServerService_AddKnowledge_Handler(svr interface{}, ctx context.Co
 	return rsp, nil
 }
 
+func KnowledgeServerService_QueryProblemKnowledge_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryProblemKnowledgeReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).QueryProblemKnowledge(ctx, reqbody.(*QueryProblemKnowledgeReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // KnowledgeServerServer_ServiceDesc descriptor for server.RegisterService.
 var KnowledgeServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.knowledge.KnowledgeServer",
@@ -72,6 +92,10 @@ var KnowledgeServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.knowledge.KnowledgeServer/AddKnowledge",
 			Func: KnowledgeServerService_AddKnowledge_Handler,
+		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/QueryProblemKnowledge",
+			Func: KnowledgeServerService_QueryProblemKnowledge_Handler,
 		},
 	},
 }
@@ -93,6 +117,9 @@ func (s *UnimplementedKnowledgeServer) QueryKnowledge(ctx context.Context, req *
 func (s *UnimplementedKnowledgeServer) AddKnowledge(ctx context.Context, req *AddKnowledgeReq) (*AddKnowledgeRsp, error) {
 	return nil, errors.New("rpc AddKnowledge of service KnowledgeServer is not implemented")
 }
+func (s *UnimplementedKnowledgeServer) QueryProblemKnowledge(ctx context.Context, req *QueryProblemKnowledgeReq) (*QueryProblemKnowledgeRsp, error) {
+	return nil, errors.New("rpc QueryProblemKnowledge of service KnowledgeServer is not implemented")
+}
 
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
@@ -105,6 +132,8 @@ type KnowledgeServerClientProxy interface {
 	QueryKnowledge(ctx context.Context, req *QueryKnowledgeReq, opts ...client.Option) (rsp *QueryKnowledgeRsp, err error)
 
 	AddKnowledge(ctx context.Context, req *AddKnowledgeReq, opts ...client.Option) (rsp *AddKnowledgeRsp, err error)
+
+	QueryProblemKnowledge(ctx context.Context, req *QueryProblemKnowledgeReq, opts ...client.Option) (rsp *QueryProblemKnowledgeRsp, err error)
 }
 
 type KnowledgeServerClientProxyImpl struct {
@@ -150,6 +179,26 @@ func (c *KnowledgeServerClientProxyImpl) AddKnowledge(ctx context.Context, req *
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &AddKnowledgeRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) QueryProblemKnowledge(ctx context.Context, req *QueryProblemKnowledgeReq, opts ...client.Option) (*QueryProblemKnowledgeRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/QueryProblemKnowledge")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("QueryProblemKnowledge")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryProblemKnowledgeRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

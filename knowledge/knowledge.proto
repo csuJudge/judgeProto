@@ -6,6 +6,7 @@ package oj.knowledge;
 service KnowledgeServer {
   rpc QueryKnowledge (QueryKnowledgeReq) returns (QueryKnowledgeRsp) {}
   rpc AddKnowledge (AddKnowledgeReq) returns (AddKnowledgeRsp) {}
+  rpc QueryProblemKnowledge(QueryProblemKnowledgeReq) returns (QueryProblemKnowledgeRsp) {}
 }
 
 message QueryKnowledgeReq {
@@ -25,6 +26,14 @@ message AddKnowledgeReq {
 message AddKnowledgeRsp {
   string message = 1;
   int32 retCode = 2;
+}
+
+message QueryProblemKnowledgeReq{
+  int32 problemID = 1;
+}
+
+message QueryProblemKnowledgeRsp{
+  string knowledge = 1;
 }
 
 
