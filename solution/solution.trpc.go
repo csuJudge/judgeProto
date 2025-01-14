@@ -21,6 +21,8 @@ import (
 type SolutionServerService interface {
 	// CountUserProblemSolution CountUserProblemSolution 计算用户题目的提交次数
 	CountUserProblemSolution(ctx context.Context, req *CountUserProblemSolutionReq) (*CountUserProblemSolutionRsp, error)
+	// RejudgeSolution RejudgeSolution 重判
+	RejudgeSolution(ctx context.Context, req *RejudgeSolutionReq) (*CommonRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -41,6 +43,24 @@ func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx
 	return rsp, nil
 }
 
+func SolutionServerService_RejudgeSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &RejudgeSolutionReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).RejudgeSolution(ctx, reqbody.(*RejudgeSolutionReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -49,6 +69,10 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/CountUserProblemSolution",
 			Func: SolutionServerService_CountUserProblemSolution_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/RejudgeSolution",
+			Func: SolutionServerService_RejudgeSolution_Handler,
 		},
 	},
 }
@@ -69,6 +93,11 @@ func (s *UnimplementedSolutionServer) CountUserProblemSolution(ctx context.Conte
 	return nil, errors.New("rpc CountUserProblemSolution of service SolutionServer is not implemented")
 }
 
+// RejudgeSolution RejudgeSolution 重判
+func (s *UnimplementedSolutionServer) RejudgeSolution(ctx context.Context, req *RejudgeSolutionReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc RejudgeSolution of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -79,6 +108,8 @@ func (s *UnimplementedSolutionServer) CountUserProblemSolution(ctx context.Conte
 type SolutionServerClientProxy interface {
 	// CountUserProblemSolution CountUserProblemSolution 计算用户题目的提交次数
 	CountUserProblemSolution(ctx context.Context, req *CountUserProblemSolutionReq, opts ...client.Option) (rsp *CountUserProblemSolutionRsp, err error)
+	// RejudgeSolution RejudgeSolution 重判
+	RejudgeSolution(ctx context.Context, req *RejudgeSolutionReq, opts ...client.Option) (rsp *CommonRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -104,6 +135,26 @@ func (c *SolutionServerClientProxyImpl) CountUserProblemSolution(ctx context.Con
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CountUserProblemSolutionRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) RejudgeSolution(ctx context.Context, req *RejudgeSolutionReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/RejudgeSolution")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("RejudgeSolution")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

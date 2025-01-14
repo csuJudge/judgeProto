@@ -23,6 +23,8 @@ type ProblemServerService interface {
 	QueryProblem(ctx context.Context, req *QueryProblemReq) (*QueryProblemRsp, error)
 	// AddProblem AddProblem 添加题目
 	AddProblem(ctx context.Context, req *AddProblemReq) (*CommonRsp, error)
+	// UpdateProblemStatus UpdateProblemStatus 更新题目状态
+	UpdateProblemStatus(ctx context.Context, req *UpdateProblemStatusReq) (*CommonRsp, error)
 	// QueryProblemDataList QueryProblemDataList 查询题目样例
 	QueryProblemDataList(ctx context.Context, req *QueryProblemDataListReq) (*QueryProblemDataListRsp, error)
 	// QueryProblemData QueryProblemData 查询题目样例数据
@@ -33,6 +35,8 @@ type ProblemServerService interface {
 	UpdateProblemData(ctx context.Context, req *UpdateProblemDataReq) (*CommonRsp, error)
 	// DeleteProblemData DeleteProblemData 删除题目样例数据
 	DeleteProblemData(ctx context.Context, req *DeleteProblemDataReq) (*CommonRsp, error)
+	// QueryContestProblem QueryContestProblem 查询作业的题目数据
+	QueryContestProblem(ctx context.Context, req *QueryContestProblemReq) (*QueryContestProblemReqRsp, error)
 }
 
 func ProblemServerService_QueryProblem_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -61,6 +65,24 @@ func ProblemServerService_AddProblem_Handler(svr interface{}, ctx context.Contex
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
 		return svr.(ProblemServerService).AddProblem(ctx, reqbody.(*AddProblemReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ProblemServerService_UpdateProblemStatus_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UpdateProblemStatusReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ProblemServerService).UpdateProblemStatus(ctx, reqbody.(*UpdateProblemStatusReq))
 	}
 
 	var rsp interface{}
@@ -161,6 +183,24 @@ func ProblemServerService_DeleteProblemData_Handler(svr interface{}, ctx context
 	return rsp, nil
 }
 
+func ProblemServerService_QueryContestProblem_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryContestProblemReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ProblemServerService).QueryContestProblem(ctx, reqbody.(*QueryContestProblemReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // ProblemServerServer_ServiceDesc descriptor for server.RegisterService.
 var ProblemServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.problem.ProblemServer",
@@ -173,6 +213,10 @@ var ProblemServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.problem.ProblemServer/AddProblem",
 			Func: ProblemServerService_AddProblem_Handler,
+		},
+		{
+			Name: "/oj.problem.ProblemServer/UpdateProblemStatus",
+			Func: ProblemServerService_UpdateProblemStatus_Handler,
 		},
 		{
 			Name: "/oj.problem.ProblemServer/QueryProblemDataList",
@@ -193,6 +237,10 @@ var ProblemServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.problem.ProblemServer/DeleteProblemData",
 			Func: ProblemServerService_DeleteProblemData_Handler,
+		},
+		{
+			Name: "/oj.problem.ProblemServer/QueryContestProblem",
+			Func: ProblemServerService_QueryContestProblem_Handler,
 		},
 	},
 }
@@ -216,6 +264,11 @@ func (s *UnimplementedProblemServer) QueryProblem(ctx context.Context, req *Quer
 // AddProblem AddProblem 添加题目
 func (s *UnimplementedProblemServer) AddProblem(ctx context.Context, req *AddProblemReq) (*CommonRsp, error) {
 	return nil, errors.New("rpc AddProblem of service ProblemServer is not implemented")
+}
+
+// UpdateProblemStatus UpdateProblemStatus 更新题目状态
+func (s *UnimplementedProblemServer) UpdateProblemStatus(ctx context.Context, req *UpdateProblemStatusReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc UpdateProblemStatus of service ProblemServer is not implemented")
 }
 
 // QueryProblemDataList QueryProblemDataList 查询题目样例
@@ -243,6 +296,11 @@ func (s *UnimplementedProblemServer) DeleteProblemData(ctx context.Context, req 
 	return nil, errors.New("rpc DeleteProblemData of service ProblemServer is not implemented")
 }
 
+// QueryContestProblem QueryContestProblem 查询作业的题目数据
+func (s *UnimplementedProblemServer) QueryContestProblem(ctx context.Context, req *QueryContestProblemReq) (*QueryContestProblemReqRsp, error) {
+	return nil, errors.New("rpc QueryContestProblem of service ProblemServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -255,6 +313,8 @@ type ProblemServerClientProxy interface {
 	QueryProblem(ctx context.Context, req *QueryProblemReq, opts ...client.Option) (rsp *QueryProblemRsp, err error)
 	// AddProblem AddProblem 添加题目
 	AddProblem(ctx context.Context, req *AddProblemReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// UpdateProblemStatus UpdateProblemStatus 更新题目状态
+	UpdateProblemStatus(ctx context.Context, req *UpdateProblemStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryProblemDataList QueryProblemDataList 查询题目样例
 	QueryProblemDataList(ctx context.Context, req *QueryProblemDataListReq, opts ...client.Option) (rsp *QueryProblemDataListRsp, err error)
 	// QueryProblemData QueryProblemData 查询题目样例数据
@@ -265,6 +325,8 @@ type ProblemServerClientProxy interface {
 	UpdateProblemData(ctx context.Context, req *UpdateProblemDataReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// DeleteProblemData DeleteProblemData 删除题目样例数据
 	DeleteProblemData(ctx context.Context, req *DeleteProblemDataReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// QueryContestProblem QueryContestProblem 查询作业的题目数据
+	QueryContestProblem(ctx context.Context, req *QueryContestProblemReq, opts ...client.Option) (rsp *QueryContestProblemReqRsp, err error)
 }
 
 type ProblemServerClientProxyImpl struct {
@@ -305,6 +367,26 @@ func (c *ProblemServerClientProxyImpl) AddProblem(ctx context.Context, req *AddP
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("ProblemServer")
 	msg.WithCalleeMethod("AddProblem")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ProblemServerClientProxyImpl) UpdateProblemStatus(ctx context.Context, req *UpdateProblemStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ProblemServer/UpdateProblemStatus")
+	msg.WithCalleeServiceName(ProblemServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ProblemServer")
+	msg.WithCalleeMethod("UpdateProblemStatus")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
@@ -410,6 +492,26 @@ func (c *ProblemServerClientProxyImpl) DeleteProblemData(ctx context.Context, re
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ProblemServerClientProxyImpl) QueryContestProblem(ctx context.Context, req *QueryContestProblemReq, opts ...client.Option) (*QueryContestProblemReqRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ProblemServer/QueryContestProblem")
+	msg.WithCalleeServiceName(ProblemServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ProblemServer")
+	msg.WithCalleeMethod("QueryContestProblem")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryContestProblemReqRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

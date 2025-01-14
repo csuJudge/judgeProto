@@ -8,6 +8,8 @@ service ProblemServer {
     rpc QueryProblem(QueryProblemReq) returns (QueryProblemRsp) {}
     // AddProblem 添加题目
     rpc AddProblem(AddProblemReq) returns (CommonRsp) {}
+    // UpdateProblemStatus 更新题目状态
+    rpc UpdateProblemStatus(UpdateProblemStatusReq) returns (CommonRsp) {}
     // QueryProblemDataList 查询题目样例
     rpc QueryProblemDataList(QueryProblemDataListReq) returns (QueryProblemDataListRsp) {}
     // QueryProblemData 查询题目样例数据
@@ -18,55 +20,83 @@ service ProblemServer {
     rpc UpdateProblemData(UpdateProblemDataReq) returns (CommonRsp) {}
     // DeleteProblemData 删除题目样例数据
     rpc DeleteProblemData(DeleteProblemDataReq) returns (CommonRsp) {}
+    // QueryContestProblem 查询作业的题目数据
+    rpc QueryContestProblem(QueryContestProblemReq) returns (QueryContestProblemReqRsp) {}
 }
 
-message DeleteProblemDataReq{
-    int32 problemID = 1; // 问题编号
-    string sampleName = 2;   // 样例名
+message QueryContestProblemReq {
+    int32 contestID = 1;  // 作业编号
 }
 
-message UpdateProblemDataReq{
-    int32 problemID = 1; // 问题编号
-    string sampleName = 2;   // 样例名
-    string input = 3; // 输入
-    string output = 4; // 输出
+message QueryContestProblemReqRsp {
+    string message                   = 1;  // 返回信息
+    int64 code                       = 2;  // 返回码
+    repeated ContestProblem problems = 3;  //  作业的题目列表
 }
 
-message CommonRsp{
-    string message  = 1; // 返回信息
-    int64 code      = 2; // 返回码
+message ContestProblem {
+    int32 problemID    = 1;  // 题目编号
+    string problemName = 2;  // 题目名称
+    int32 isDone       = 3;  // 是否做完
+    int32 solved       = 4;  // 解决
+    int32 submission   = 5;  // 提交
+    int32 difficulty   = 6;  // 难度
 }
 
-message AddProblemDataReq{
-    int32 problemID = 1; // 问题编号
-    int32 userID = 2;   // 用户编号
+message UpdateProblemStatusReq {
+    int32 userID    = 1;  // 用户主键
+    int32 problemID = 2;  // 题目主键
+    int32 status    = 3;  // 状态
 }
 
-
-message QueryProblemDataReq{
-    int32 problemID = 1; // 问题编号
-    string sampleName = 2; // 样例名称
+message DeleteProblemDataReq {
+    int32 problemID   = 1;  // 问题编号
+    string sampleName = 2;  // 样例名
 }
 
-message QueryProblemDataRsp{
-    string input = 1; // 输入
-    string output = 2; // 输出
+message UpdateProblemDataReq {
+    int32 problemID   = 1;  // 问题编号
+    string sampleName = 2;  // 样例名
+    string input      = 3;  // 输入
+    string output     = 4;  // 输出
 }
 
-message QueryProblemDataListReq{
-    int32 problemID = 1; // 问题编号
+message CommonRsp {
+    string message = 1;  // 返回信息
+    int64 code     = 2;  // 返回码
 }
 
-message QueryProblemDataListRsp{
-    string message  = 1; // 返回信息
-    int64 code      = 2; // 返回码
-    repeated Sample sample = 3; // 样例列表
+message AddProblemDataReq {
+    int32 problemID = 1;  // 问题编号
+    int32 userID    = 2;  // 用户编号
+}
+
+message QueryProblemDataReq {
+    int32 problemID   = 1;  // 问题编号
+    string sampleName = 2;  // 样例名称
+}
+
+message QueryProblemDataRsp {
+    string message = 1;  // 返回信息
+    int64 code     = 2;  // 返回码
+    string input   = 3;  // 输入
+    string output  = 4;  // 输出
+}
+
+message QueryProblemDataListReq {
+    int32 problemID = 1;  // 问题编号
+}
+
+message QueryProblemDataListRsp {
+    string message         = 1;  // 返回信息
+    int64 code             = 2;  // 返回码
+    repeated Sample sample = 3;  // 样例列表
 }
 
 message Sample {
-    string sampleName = 1; // 样例名称
-    string sampleInput = 2; // 样例输入
-    string sampleOutput = 3; // 样例输出
+    string sampleName   = 1;  // 样例名称
+    string sampleInput  = 2;  // 样例输入
+    string sampleOutput = 3;  // 样例输出
 }
 
 message QueryProblemReq {
@@ -76,9 +106,9 @@ message QueryProblemReq {
 }
 
 message QueryProblemRsp {
-    string message  = 1; // 返回信息
-    int64 code      = 2; // 返回码
-    Problem problem = 3;
+    string message  = 1;  // 返回信息
+    int64 code      = 2;  // 返回码
+    Problem problem = 3;  // 问题
 }
 
 message Problem {

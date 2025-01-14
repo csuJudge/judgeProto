@@ -60,6 +60,21 @@ func (mr *MockSolutionServerServiceMockRecorder) CountUserProblemSolution(ctx, r
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerService)(nil).CountUserProblemSolution), ctx, req)
 }
 
+// RejudgeSolution mocks base method.
+func (m *MockSolutionServerService) RejudgeSolution(ctx context.Context, req *RejudgeSolutionReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RejudgeSolution", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RejudgeSolution indicates an expected call of RejudgeSolution.
+func (mr *MockSolutionServerServiceMockRecorder) RejudgeSolution(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RejudgeSolution", reflect.TypeOf((*MockSolutionServerService)(nil).RejudgeSolution), ctx, req)
+}
+
 // MockSolutionServerClientProxy is a mock of SolutionServerClientProxy interface.
 type MockSolutionServerClientProxy struct {
 	ctrl     *gomock.Controller
@@ -106,4 +121,24 @@ func (mr *MockSolutionServerClientProxyMockRecorder) CountUserProblemSolution(ct
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountUserProblemSolution), varargs...)
+}
+
+// RejudgeSolution mocks base method.
+func (m *MockSolutionServerClientProxy) RejudgeSolution(ctx context.Context, req *RejudgeSolutionReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "RejudgeSolution", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RejudgeSolution indicates an expected call of RejudgeSolution.
+func (mr *MockSolutionServerClientProxyMockRecorder) RejudgeSolution(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RejudgeSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).RejudgeSolution), varargs...)
 }

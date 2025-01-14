@@ -4,9 +4,37 @@ option go_package = "github.com/csuJudge/judgeProto/knowledge";
 package oj.knowledge;
 
 service KnowledgeServer {
+    // QueryKnowledge 查询知识点
     rpc QueryKnowledge(QueryKnowledgeReq) returns (QueryKnowledgeRsp) {}
-    rpc AddKnowledge(AddKnowledgeReq) returns (AddKnowledgeRsp) {}
+    // AddKnowledge 添加知识点
+    rpc AddKnowledge(AddKnowledgeReq) returns (CommonRsp) {}
+    // QueryProblemKnowledge 查询题目的知识点
     rpc QueryProblemKnowledge(QueryProblemKnowledgeReq) returns (QueryProblemKnowledgeRsp) {}
+    // UpdateKnowledge 更新知识点
+    rpc UpdateKnowledge(UpdateKnowledgeReq) returns (CommonRsp) {}
+    // UpdateKnowledgeStatus 更新知识点状态
+    rpc UpdateKnowledgeStatus(UpdateKnowledgeStatusReq) returns (CommonRsp) {}
+    // UpdateKnowledgeWeight 更新知识点优先级
+    rpc UpdateKnowledgeWeight(UpdateKnowledgeWeightReq) returns (CommonRsp) {}
+}
+
+message UpdateKnowledgeWeightReq {
+    int32 userID      = 1;  // 用户主键
+    int32 knowledgeID = 2;  // 知识点主键
+    int32 moveType    = 3;  // 类型
+    int32 weight      = 4;  // 权重
+}
+
+message UpdateKnowledgeStatusReq {
+    int32 userID      = 1;  // 用户主键
+    int32 knowledgeID = 2;  // 知识点主键
+    int32 status      = 3;  // 状态
+}
+
+message UpdateKnowledgeReq {
+    int32 knowledgeID = 1;  // 知识点主键
+    string name       = 2;  // 知识点名称
+    int32 userID      = 3;  // 用户主键
 }
 
 message QueryKnowledgeReq {
@@ -15,36 +43,36 @@ message QueryKnowledgeReq {
 }
 
 message QueryKnowledgeRsp {
-    repeated Knowledge knowledge = 1;  // 知识点
-    string message               = 2;  // 返回信息
-    int32 code                   = 3;  // 返回码
+    string message               = 1;  // 返回信息
+    int32 code                   = 2;  // 返回码
+    repeated Knowledge knowledge = 3;  // 知识点
 }
 
 message AddKnowledgeReq {
-    string knowledgeName = 1;
-    int32 userID         = 2;
+    string name  = 1;  // 知识点名称
+    int32 userID = 2;  // 用户主键
 }
 
-message AddKnowledgeRsp {
+message CommonRsp {
     string message = 1;  // 返回信息
-    int32 code     = 2;  // 返回码
+    int64 code     = 2;  // 返回码
 }
 
 message QueryProblemKnowledgeReq {
-    int32 problemID = 1;
+    int32 problemID = 1;  // 问题编号
 }
 
 message QueryProblemKnowledgeRsp {
-    string knowledge = 1;
-    string message   = 2;  // 返回信息
-    int32 code       = 3;  // 返回码
+    string message    = 1;  // 返回信息
+    int32 code        = 2;  // 返回码
+    string knowledges = 3;  // 知识点的字符串集合
 }
 
 message Knowledge {
-    int32 KnowledgeID    = 1;
-    string KnowledgeName = 2;
-    string Creator       = 3;
-    string CreateTime    = 4;
-    string Enable        = 5;
-    string Weight        = 6;
+    int32 id          = 1;  // 知识点主键
+    string name       = 2;  // 知识点名称
+    string creator    = 3;  // 创建者
+    string createTime = 4;  // 创建时间
+    string enable     = 5;  // 状态
+    string weight     = 6;  // 权重
 }

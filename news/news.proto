@@ -1,0 +1,80 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto/news";
+
+package oj.news;
+
+service NewsServer {
+    // AddNews 添加公告
+    rpc AddNews(AddReq) returns (CommonRsp) {}
+    // UpdateNews 更新公告
+    rpc UpdateNews(UpdateNewsReq) returns (CommonRsp) {}
+    // UpdateNewsStatus 更新公告状态
+    rpc UpdateNewsStatus(UpdateNewsStatusReq) returns (CommonRsp) {}
+    // UpdateNewsPriority 更新公告优先级
+    rpc UpdateNewsPriority(UpdateNewsPriorityReq) returns (CommonRsp) {}
+    // QueryNewsByPageSize 分页查询公告
+    rpc QueryNewsByPageSize(QueryNewsByPageSizeReq) returns (QueryNewsByPageSizeRsp) {}
+    // QueryNews 查询公告
+    rpc QueryNews(QueryNewsReq) returns (QueryNewsReqRsp) {}
+    // QueryAllNews 分页所有查询公告
+    rpc QueryAllNews(QueryNewsByPageSizeReq) returns (QueryNewsByPageSizeRsp) {}
+}
+
+message QueryNewsByPageSizeRsp {
+    string message     = 1;  // 返回信息
+    int64 code         = 2;  // 返回码
+    repeated News news = 3;  // 公告的集合
+}
+
+message QueryNewsReq {
+    int32 newsID = 1;  // 公告的主键
+}
+
+message QueryNewsReqRsp {
+    string message = 1;  // 返回信息
+    int64 code     = 2;  // 返回码
+    News news      = 3;  // 公告
+}
+
+message News {
+    int32 id           = 1;  // 公告主键
+    string name        = 2;  // 公告名称
+    string content     = 3;  // 公告内容
+    string createdTime = 4;  // 公告创建时间
+    string author      = 5;  // 公告作业
+    int32 enable       = 6;  // 公告状态
+    int32 priority     = 7;  // 公告优先级
+}
+
+message QueryNewsByPageSizeReq {
+    int32 page  = 1;  // 页
+    int32 limit = 2;  // 页大小
+}
+
+message UpdateNewsPriorityReq {
+    int32 userID   = 1;  // 用户主键
+    int32 newsID   = 2;  // 公告主键
+    int32 priority = 3;  // 公告优先级
+}
+
+message UpdateNewsStatusReq {
+    int32 userID = 1;  // 用户主键
+    int32 newsID = 2;  // 公告主键
+    int32 status = 3;  // 状态
+}
+
+message AddReq {
+    string name    = 1;  // 新闻名
+    string content = 2;  // 内容
+    int32 userID   = 3;  // 用户编号
+}
+
+message UpdateNewsReq {
+    int32 userID = 1;  // 用户主键
+    int32 newsID = 2;  // 公告主键
+}
+
+message CommonRsp {
+    string message = 1;  // 返回信息
+    int64 code     = 2;  // 返回码
+}

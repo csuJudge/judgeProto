@@ -1,0 +1,73 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto/contest";
+
+package oj.contest;
+
+service NewsServer {
+    // QueryContest 查询作业
+    rpc QueryContest(QueryContestReq) returns (QueryContestRsp) {}
+    // QueryContestList 查询作业列表
+    rpc QueryContestList(QueryContestListReq) returns (QueryContestListRsp) {}
+    // UpdateContestStatus 更新作业状态
+    rpc UpdateContestStatus(UpdateContestStatusReq) returns (CommonRsp) {}
+}
+
+message UpdateContestStatusReq {
+    int32 userID    = 1;  // 用户主键
+    int32 contestID = 2;  // 作业主键
+    int32 status    = 3;  // 状态
+}
+
+message QueryContestListReq {
+    int32 page      = 1;  // 页
+    int32 limit     = 2;  // 页大小
+    int32 userID    = 3;  // 用户主键
+    int32 queryType = 4;  // 查询的类型
+}
+
+message QueryContestListRsp {
+    string message            = 1;  // 返回信息
+    int64 code                = 2;  // 返回码
+    repeated Contest contests = 3;  // 作业集合
+}
+
+message QueryContestReq {
+    int32 contestID = 1;  // 作业编号
+    int32 userID    = 2;  // 用户主键
+    string password = 3;  // 密码
+}
+
+message QueryContestRsp {
+    string message  = 1;  // 返回信息
+    int64 code      = 2;  // 返回码
+    Contest contest = 3;  // 作业
+}
+
+message Contest {
+    int32 contestID                  = 1;   // 作业编号
+    string startTime                 = 2;   // 开始时间
+    string endTime                   = 3;   // 结束时间
+    string title                     = 4;   // 标题
+    string description               = 5;   // 描述
+    string languageMask              = 6;   // 限制语言
+    string creator                   = 7;   // 创建者
+    repeated ContestProblem problems = 8;   // 题目列表
+    int32 createdBy                  = 9;   // 创建者编号
+    int32 private                    = 10;  // 是否私有
+    string password                  = 11;  // 密码
+    int32 enable                     = 12;  // 是否结束
+}
+
+message CommonRsp {
+    string message = 1;  // 返回信息
+    int64 code     = 2;  // 返回码
+}
+
+message ContestProblem {
+    int32 problemID    = 1;  // 题目编号
+    string problemName = 2;  // 题目名称
+    int32 isDone       = 3;  // 是否做完
+    int32 solved       = 4;  // 解决
+    int32 submission   = 5;  // 提交
+    int32 difficulty   = 6;  // 难度
+}

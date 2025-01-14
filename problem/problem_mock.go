@@ -90,6 +90,21 @@ func (mr *MockProblemServerServiceMockRecorder) DeleteProblemData(ctx, req any) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteProblemData", reflect.TypeOf((*MockProblemServerService)(nil).DeleteProblemData), ctx, req)
 }
 
+// QueryContestProblem mocks base method.
+func (m *MockProblemServerService) QueryContestProblem(ctx context.Context, req *QueryContestProblemReq) (*QueryContestProblemReqRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryContestProblem", ctx, req)
+	ret0, _ := ret[0].(*QueryContestProblemReqRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestProblem indicates an expected call of QueryContestProblem.
+func (mr *MockProblemServerServiceMockRecorder) QueryContestProblem(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestProblem", reflect.TypeOf((*MockProblemServerService)(nil).QueryContestProblem), ctx, req)
+}
+
 // QueryProblem mocks base method.
 func (m *MockProblemServerService) QueryProblem(ctx context.Context, req *QueryProblemReq) (*QueryProblemRsp, error) {
 	m.ctrl.T.Helper()
@@ -148,6 +163,21 @@ func (m *MockProblemServerService) UpdateProblemData(ctx context.Context, req *U
 func (mr *MockProblemServerServiceMockRecorder) UpdateProblemData(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateProblemData", reflect.TypeOf((*MockProblemServerService)(nil).UpdateProblemData), ctx, req)
+}
+
+// UpdateProblemStatus mocks base method.
+func (m *MockProblemServerService) UpdateProblemStatus(ctx context.Context, req *UpdateProblemStatusReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateProblemStatus", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateProblemStatus indicates an expected call of UpdateProblemStatus.
+func (mr *MockProblemServerServiceMockRecorder) UpdateProblemStatus(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateProblemStatus", reflect.TypeOf((*MockProblemServerService)(nil).UpdateProblemStatus), ctx, req)
 }
 
 // MockProblemServerClientProxy is a mock of ProblemServerClientProxy interface.
@@ -238,6 +268,26 @@ func (mr *MockProblemServerClientProxyMockRecorder) DeleteProblemData(ctx, req a
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteProblemData", reflect.TypeOf((*MockProblemServerClientProxy)(nil).DeleteProblemData), varargs...)
 }
 
+// QueryContestProblem mocks base method.
+func (m *MockProblemServerClientProxy) QueryContestProblem(ctx context.Context, req *QueryContestProblemReq, opts ...client.Option) (*QueryContestProblemReqRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryContestProblem", varargs...)
+	ret0, _ := ret[0].(*QueryContestProblemReqRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestProblem indicates an expected call of QueryContestProblem.
+func (mr *MockProblemServerClientProxyMockRecorder) QueryContestProblem(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestProblem", reflect.TypeOf((*MockProblemServerClientProxy)(nil).QueryContestProblem), varargs...)
+}
+
 // QueryProblem mocks base method.
 func (m *MockProblemServerClientProxy) QueryProblem(ctx context.Context, req *QueryProblemReq, opts ...client.Option) (*QueryProblemRsp, error) {
 	m.ctrl.T.Helper()
@@ -316,4 +366,24 @@ func (mr *MockProblemServerClientProxyMockRecorder) UpdateProblemData(ctx, req a
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateProblemData", reflect.TypeOf((*MockProblemServerClientProxy)(nil).UpdateProblemData), varargs...)
+}
+
+// UpdateProblemStatus mocks base method.
+func (m *MockProblemServerClientProxy) UpdateProblemStatus(ctx context.Context, req *UpdateProblemStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateProblemStatus", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateProblemStatus indicates an expected call of UpdateProblemStatus.
+func (mr *MockProblemServerClientProxyMockRecorder) UpdateProblemStatus(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateProblemStatus", reflect.TypeOf((*MockProblemServerClientProxy)(nil).UpdateProblemStatus), varargs...)
 }
