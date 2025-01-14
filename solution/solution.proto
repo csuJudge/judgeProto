@@ -1,0 +1,20 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto/solution";
+
+package oj.solution;
+
+service SolutionServer {
+    // CountUserProblemSolution 计算用户题目的提交次数
+    rpc CountUserProblemSolution(CountUserProblemSolutionReq) returns (CountUserProblemSolutionRsp) {}
+}
+
+message CountUserProblemSolutionReq {
+    int32 userID    = 1;  // 用户编号
+    int32 problemID = 2;  // 题目编号
+}
+
+message CountUserProblemSolutionRsp {
+    string message    = 1;  // 返回信息
+    int32 code        = 2;  // 返回码
+    int32 submitCount = 3;  // 提交次数
+}
