@@ -8,6 +8,48 @@ service SolutionServer {
     rpc CountUserProblemSolution(CountUserProblemSolutionReq) returns (CountUserProblemSolutionRsp) {}
     // RejudgeSolution 重判
     rpc RejudgeSolution(RejudgeSolutionReq) returns (CommonRsp) {}
+    // QueryRuntimeInfo 查询信息
+    rpc QueryRuntimeInfo(QueryRuntimeInfoReq) returns (QueryRuntimeInfoRsp) {}
+    // QuerySolutionResult 查询提交结果
+    rpc QuerySolutionResult(QuerySolutionResultReq) returns (QuerySolutionResultRsp) {}
+    // QuerySourceCode 查询源代码
+    rpc QuerySourceCode(QuerySourceCodeReq) returns (QuerySourceCodeRsp) {}
+}
+
+message QuerySourceCodeReq {
+    int32 solutionID = 1;  // 提交编号
+    int32 userID     = 2;  // 用户编号
+    int32 queryType  = 3;  // 请求类型
+}
+
+message QuerySourceCodeRsp {
+    string message    = 1;  // 返回信息
+    int64 code        = 2;  // 返回码
+    Solution solution = 3;  // 提交信息
+}
+
+message QuerySolutionResultReq {
+    int32 solutionID = 1;  // 提交编号
+}
+
+message QuerySolutionResultRsp {
+    string message       = 1;  // 返回信息
+    int64 code           = 2;  // 返回码
+    int32 result         = 3;  // 结果编号
+    string resultMessage = 4;  // 信息
+}
+
+message QueryRuntimeInfoReq {
+    int32 solutionID = 1;  // 提交编号
+    int32 userID     = 2;  // 用户编号
+    int32 queryType  = 3;  // 请求类型
+}
+
+message QueryRuntimeInfoRsp {
+    string message          = 1;  // 返回信息
+    int64 code              = 2;  // 返回码
+    string runtimeInfo      = 3;  // 运行信息
+    int32 compileInfoLength = 4;  //  编译信息的长度
 }
 
 message RejudgeSolutionReq {
@@ -30,4 +72,24 @@ message CountUserProblemSolutionRsp {
     string message    = 1;  // 返回信息
     int32 code        = 2;  // 返回码
     int32 submitCount = 3;  // 提交次数
+    int32 acceptCount = 4;  //  正确次数
+}
+
+message Solution {
+    int32 solutionID       = 1;   // 提交的编号
+    int32 problemID        = 2;   // 题目编号
+    int32 result           = 3;   // 结果
+    float passRate         = 4;   // 通过率
+    int32 memory           = 5;   // 内存限制
+    int32 timeLimit        = 6;   // 时间限制
+    int32 language         = 7;   // 语言
+    int32 codeLength       = 8;   // 代码长度
+    string creator         = 9;   // 提交者
+    string creatTime       = 10;  // 提交时间
+    int32 isSeeRuntimeInfo = 11;  // 是否可见运行信息
+    string userCode        = 12;  // 用户提交的代码
+    int32 creatorID        = 13;  // 提交者编号
+    int32 codeView         = 14;  // 代码是否可见
+    string problemName     = 15;  // 题目名称
+    string userNumber      = 16;  // 用户学号
 }

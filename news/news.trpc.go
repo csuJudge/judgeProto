@@ -20,7 +20,7 @@ import (
 // NewsServerService defines service.
 type NewsServerService interface {
 	// AddNews AddNews 添加公告
-	AddNews(ctx context.Context, req *AddReq) (*CommonRsp, error)
+	AddNews(ctx context.Context, req *AddNewsReq) (*CommonRsp, error)
 	// UpdateNews UpdateNews 更新公告
 	UpdateNews(ctx context.Context, req *UpdateNewsReq) (*CommonRsp, error)
 	// UpdateNewsStatus UpdateNewsStatus 更新公告状态
@@ -36,13 +36,13 @@ type NewsServerService interface {
 }
 
 func NewsServerService_AddNews_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &AddReq{}
+	req := &AddNewsReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(NewsServerService).AddNews(ctx, reqbody.(*AddReq))
+		return svr.(NewsServerService).AddNews(ctx, reqbody.(*AddNewsReq))
 	}
 
 	var rsp interface{}
@@ -209,7 +209,7 @@ func RegisterNewsServerService(s server.Service, svr NewsServerService) {
 type UnimplementedNewsServer struct{}
 
 // AddNews AddNews 添加公告
-func (s *UnimplementedNewsServer) AddNews(ctx context.Context, req *AddReq) (*CommonRsp, error) {
+func (s *UnimplementedNewsServer) AddNews(ctx context.Context, req *AddNewsReq) (*CommonRsp, error) {
 	return nil, errors.New("rpc AddNews of service NewsServer is not implemented")
 }
 
@@ -252,7 +252,7 @@ func (s *UnimplementedNewsServer) QueryAllNews(ctx context.Context, req *QueryNe
 // NewsServerClientProxy defines service client proxy
 type NewsServerClientProxy interface {
 	// AddNews AddNews 添加公告
-	AddNews(ctx context.Context, req *AddReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	AddNews(ctx context.Context, req *AddNewsReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// UpdateNews UpdateNews 更新公告
 	UpdateNews(ctx context.Context, req *UpdateNewsReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// UpdateNewsStatus UpdateNewsStatus 更新公告状态
@@ -276,7 +276,7 @@ var NewNewsServerClientProxy = func(opts ...client.Option) NewsServerClientProxy
 	return &NewsServerClientProxyImpl{client: client.DefaultClient, opts: opts}
 }
 
-func (c *NewsServerClientProxyImpl) AddNews(ctx context.Context, req *AddReq, opts ...client.Option) (*CommonRsp, error) {
+func (c *NewsServerClientProxyImpl) AddNews(ctx context.Context, req *AddNewsReq, opts ...client.Option) (*CommonRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.news.NewsServer/AddNews")

@@ -60,6 +60,51 @@ func (mr *MockSolutionServerServiceMockRecorder) CountUserProblemSolution(ctx, r
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerService)(nil).CountUserProblemSolution), ctx, req)
 }
 
+// QueryRuntimeInfo mocks base method.
+func (m *MockSolutionServerService) QueryRuntimeInfo(ctx context.Context, req *QueryRuntimeInfoReq) (*QueryRuntimeInfoRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryRuntimeInfo", ctx, req)
+	ret0, _ := ret[0].(*QueryRuntimeInfoRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryRuntimeInfo indicates an expected call of QueryRuntimeInfo.
+func (mr *MockSolutionServerServiceMockRecorder) QueryRuntimeInfo(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryRuntimeInfo", reflect.TypeOf((*MockSolutionServerService)(nil).QueryRuntimeInfo), ctx, req)
+}
+
+// QuerySolutionResult mocks base method.
+func (m *MockSolutionServerService) QuerySolutionResult(ctx context.Context, req *QuerySolutionResultReq) (*QuerySolutionResultRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuerySolutionResult", ctx, req)
+	ret0, _ := ret[0].(*QuerySolutionResultRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuerySolutionResult indicates an expected call of QuerySolutionResult.
+func (mr *MockSolutionServerServiceMockRecorder) QuerySolutionResult(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySolutionResult", reflect.TypeOf((*MockSolutionServerService)(nil).QuerySolutionResult), ctx, req)
+}
+
+// QuerySourceCode mocks base method.
+func (m *MockSolutionServerService) QuerySourceCode(ctx context.Context, req *QuerySourceCodeReq) (*QuerySourceCodeRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuerySourceCode", ctx, req)
+	ret0, _ := ret[0].(*QuerySourceCodeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuerySourceCode indicates an expected call of QuerySourceCode.
+func (mr *MockSolutionServerServiceMockRecorder) QuerySourceCode(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySourceCode", reflect.TypeOf((*MockSolutionServerService)(nil).QuerySourceCode), ctx, req)
+}
+
 // RejudgeSolution mocks base method.
 func (m *MockSolutionServerService) RejudgeSolution(ctx context.Context, req *RejudgeSolutionReq) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
@@ -121,6 +166,66 @@ func (mr *MockSolutionServerClientProxyMockRecorder) CountUserProblemSolution(ct
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountUserProblemSolution), varargs...)
+}
+
+// QueryRuntimeInfo mocks base method.
+func (m *MockSolutionServerClientProxy) QueryRuntimeInfo(ctx context.Context, req *QueryRuntimeInfoReq, opts ...client.Option) (*QueryRuntimeInfoRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryRuntimeInfo", varargs...)
+	ret0, _ := ret[0].(*QueryRuntimeInfoRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryRuntimeInfo indicates an expected call of QueryRuntimeInfo.
+func (mr *MockSolutionServerClientProxyMockRecorder) QueryRuntimeInfo(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryRuntimeInfo", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryRuntimeInfo), varargs...)
+}
+
+// QuerySolutionResult mocks base method.
+func (m *MockSolutionServerClientProxy) QuerySolutionResult(ctx context.Context, req *QuerySolutionResultReq, opts ...client.Option) (*QuerySolutionResultRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QuerySolutionResult", varargs...)
+	ret0, _ := ret[0].(*QuerySolutionResultRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuerySolutionResult indicates an expected call of QuerySolutionResult.
+func (mr *MockSolutionServerClientProxyMockRecorder) QuerySolutionResult(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySolutionResult", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QuerySolutionResult), varargs...)
+}
+
+// QuerySourceCode mocks base method.
+func (m *MockSolutionServerClientProxy) QuerySourceCode(ctx context.Context, req *QuerySourceCodeReq, opts ...client.Option) (*QuerySourceCodeRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QuerySourceCode", varargs...)
+	ret0, _ := ret[0].(*QuerySourceCodeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuerySourceCode indicates an expected call of QuerySourceCode.
+func (mr *MockSolutionServerClientProxyMockRecorder) QuerySourceCode(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySourceCode", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QuerySourceCode), varargs...)
 }
 
 // RejudgeSolution mocks base method.

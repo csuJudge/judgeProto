@@ -5,7 +5,7 @@ package oj.news;
 
 service NewsServer {
     // AddNews 添加公告
-    rpc AddNews(AddReq) returns (CommonRsp) {}
+    rpc AddNews(AddNewsReq) returns (CommonRsp) {}
     // UpdateNews 更新公告
     rpc UpdateNews(UpdateNewsReq) returns (CommonRsp) {}
     // UpdateNewsStatus 更新公告状态
@@ -63,15 +63,17 @@ message UpdateNewsStatusReq {
     int32 status = 3;  // 状态
 }
 
-message AddReq {
+message AddNewsReq {
     string name    = 1;  // 新闻名
     string content = 2;  // 内容
     int32 userID   = 3;  // 用户编号
 }
 
 message UpdateNewsReq {
-    int32 userID = 1;  // 用户主键
-    int32 newsID = 2;  // 公告主键
+    int32 userID   = 1;  // 用户主键
+    int32 newsID   = 2;  // 公告主键
+    string name    = 3;  // 名称
+    string content = 4;  // 内容
 }
 
 message CommonRsp {

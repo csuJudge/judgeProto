@@ -10,6 +10,12 @@ service ProblemServer {
     rpc AddProblem(AddProblemReq) returns (CommonRsp) {}
     // UpdateProblemStatus 更新题目状态
     rpc UpdateProblemStatus(UpdateProblemStatusReq) returns (CommonRsp) {}
+    // QueryProblemList 查询题目列表
+    rpc QueryProblemList(QueryProblemListReq) returns (QueryProblemListRsp) {}
+    // QueryProblemName 查询题目名称
+    rpc QueryProblemName(QueryProblemNameReq) returns (QueryProblemListRsp) {}
+    // updateProblemVisitNumber 更新题目访问数据
+    rpc updateProblemVisitNumber(updateProblemVisitNumberReq) returns (CommonRsp) {}
     // QueryProblemDataList 查询题目样例
     rpc QueryProblemDataList(QueryProblemDataListReq) returns (QueryProblemDataListRsp) {}
     // QueryProblemData 查询题目样例数据
@@ -22,6 +28,27 @@ service ProblemServer {
     rpc DeleteProblemData(DeleteProblemDataReq) returns (CommonRsp) {}
     // QueryContestProblem 查询作业的题目数据
     rpc QueryContestProblem(QueryContestProblemReq) returns (QueryContestProblemReqRsp) {}
+}
+
+message updateProblemVisitNumberReq {
+    int32 userID    = 1;  // 用户编号
+    int32 problemID = 2;  // 问题编号
+}
+
+message QueryProblemNameReq {
+    int32 userID = 1;  // 用户编号
+}
+
+message QueryProblemListReq {
+    int32 page   = 1;  // 页
+    int32 limit  = 2;  // 页大小
+    int32 userID = 3;  // 用户编号
+}
+
+message QueryProblemListRsp {
+    string message           = 1;  // 返回信息
+    int64 code               = 2;  // 返回码
+    repeated Problem problem = 3;  // 问题列表
 }
 
 message QueryContestProblemReq {
@@ -127,6 +154,7 @@ message Problem {
     string Knowledges         = 13;
     int32 Enable              = 14;
     int32 Difficulty          = 15;
+    int32 isDone              = 16;
 }
 
 message AddProblemReq {

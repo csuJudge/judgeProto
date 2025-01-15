@@ -25,6 +25,12 @@ type ProblemServerService interface {
 	AddProblem(ctx context.Context, req *AddProblemReq) (*CommonRsp, error)
 	// UpdateProblemStatus UpdateProblemStatus 更新题目状态
 	UpdateProblemStatus(ctx context.Context, req *UpdateProblemStatusReq) (*CommonRsp, error)
+	// QueryProblemList QueryProblemList 查询题目列表
+	QueryProblemList(ctx context.Context, req *QueryProblemListReq) (*QueryProblemListRsp, error)
+	// QueryProblemName QueryProblemName 查询题目名称
+	QueryProblemName(ctx context.Context, req *QueryProblemNameReq) (*QueryProblemListRsp, error)
+	// UpdateProblemVisitNumber updateProblemVisitNumber 更新题目访问数据
+	UpdateProblemVisitNumber(ctx context.Context, req *UpdateProblemVisitNumberReq) (*CommonRsp, error)
 	// QueryProblemDataList QueryProblemDataList 查询题目样例
 	QueryProblemDataList(ctx context.Context, req *QueryProblemDataListReq) (*QueryProblemDataListRsp, error)
 	// QueryProblemData QueryProblemData 查询题目样例数据
@@ -83,6 +89,60 @@ func ProblemServerService_UpdateProblemStatus_Handler(svr interface{}, ctx conte
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
 		return svr.(ProblemServerService).UpdateProblemStatus(ctx, reqbody.(*UpdateProblemStatusReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ProblemServerService_QueryProblemList_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryProblemListReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ProblemServerService).QueryProblemList(ctx, reqbody.(*QueryProblemListReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ProblemServerService_QueryProblemName_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryProblemNameReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ProblemServerService).QueryProblemName(ctx, reqbody.(*QueryProblemNameReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ProblemServerService_UpdateProblemVisitNumber_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UpdateProblemVisitNumberReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ProblemServerService).UpdateProblemVisitNumber(ctx, reqbody.(*UpdateProblemVisitNumberReq))
 	}
 
 	var rsp interface{}
@@ -219,6 +279,18 @@ var ProblemServerServer_ServiceDesc = server.ServiceDesc{
 			Func: ProblemServerService_UpdateProblemStatus_Handler,
 		},
 		{
+			Name: "/oj.problem.ProblemServer/QueryProblemList",
+			Func: ProblemServerService_QueryProblemList_Handler,
+		},
+		{
+			Name: "/oj.problem.ProblemServer/QueryProblemName",
+			Func: ProblemServerService_QueryProblemName_Handler,
+		},
+		{
+			Name: "/oj.problem.ProblemServer/updateProblemVisitNumber",
+			Func: ProblemServerService_UpdateProblemVisitNumber_Handler,
+		},
+		{
 			Name: "/oj.problem.ProblemServer/QueryProblemDataList",
 			Func: ProblemServerService_QueryProblemDataList_Handler,
 		},
@@ -271,6 +343,21 @@ func (s *UnimplementedProblemServer) UpdateProblemStatus(ctx context.Context, re
 	return nil, errors.New("rpc UpdateProblemStatus of service ProblemServer is not implemented")
 }
 
+// QueryProblemList QueryProblemList 查询题目列表
+func (s *UnimplementedProblemServer) QueryProblemList(ctx context.Context, req *QueryProblemListReq) (*QueryProblemListRsp, error) {
+	return nil, errors.New("rpc QueryProblemList of service ProblemServer is not implemented")
+}
+
+// QueryProblemName QueryProblemName 查询题目名称
+func (s *UnimplementedProblemServer) QueryProblemName(ctx context.Context, req *QueryProblemNameReq) (*QueryProblemListRsp, error) {
+	return nil, errors.New("rpc QueryProblemName of service ProblemServer is not implemented")
+}
+
+// UpdateProblemVisitNumber updateProblemVisitNumber 更新题目访问数据
+func (s *UnimplementedProblemServer) UpdateProblemVisitNumber(ctx context.Context, req *UpdateProblemVisitNumberReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc UpdateProblemVisitNumber of service ProblemServer is not implemented")
+}
+
 // QueryProblemDataList QueryProblemDataList 查询题目样例
 func (s *UnimplementedProblemServer) QueryProblemDataList(ctx context.Context, req *QueryProblemDataListReq) (*QueryProblemDataListRsp, error) {
 	return nil, errors.New("rpc QueryProblemDataList of service ProblemServer is not implemented")
@@ -315,6 +402,12 @@ type ProblemServerClientProxy interface {
 	AddProblem(ctx context.Context, req *AddProblemReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// UpdateProblemStatus UpdateProblemStatus 更新题目状态
 	UpdateProblemStatus(ctx context.Context, req *UpdateProblemStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// QueryProblemList QueryProblemList 查询题目列表
+	QueryProblemList(ctx context.Context, req *QueryProblemListReq, opts ...client.Option) (rsp *QueryProblemListRsp, err error)
+	// QueryProblemName QueryProblemName 查询题目名称
+	QueryProblemName(ctx context.Context, req *QueryProblemNameReq, opts ...client.Option) (rsp *QueryProblemListRsp, err error)
+	// UpdateProblemVisitNumber updateProblemVisitNumber 更新题目访问数据
+	UpdateProblemVisitNumber(ctx context.Context, req *UpdateProblemVisitNumberReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryProblemDataList QueryProblemDataList 查询题目样例
 	QueryProblemDataList(ctx context.Context, req *QueryProblemDataListReq, opts ...client.Option) (rsp *QueryProblemDataListRsp, err error)
 	// QueryProblemData QueryProblemData 查询题目样例数据
@@ -387,6 +480,66 @@ func (c *ProblemServerClientProxyImpl) UpdateProblemStatus(ctx context.Context, 
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("ProblemServer")
 	msg.WithCalleeMethod("UpdateProblemStatus")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ProblemServerClientProxyImpl) QueryProblemList(ctx context.Context, req *QueryProblemListReq, opts ...client.Option) (*QueryProblemListRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ProblemServer/QueryProblemList")
+	msg.WithCalleeServiceName(ProblemServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ProblemServer")
+	msg.WithCalleeMethod("QueryProblemList")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryProblemListRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ProblemServerClientProxyImpl) QueryProblemName(ctx context.Context, req *QueryProblemNameReq, opts ...client.Option) (*QueryProblemListRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ProblemServer/QueryProblemName")
+	msg.WithCalleeServiceName(ProblemServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ProblemServer")
+	msg.WithCalleeMethod("QueryProblemName")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryProblemListRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ProblemServerClientProxyImpl) UpdateProblemVisitNumber(ctx context.Context, req *UpdateProblemVisitNumberReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ProblemServer/updateProblemVisitNumber")
+	msg.WithCalleeServiceName(ProblemServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ProblemServer")
+	msg.WithCalleeMethod("UpdateProblemVisitNumber")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)

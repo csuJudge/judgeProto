@@ -46,7 +46,7 @@ func (m *MockNewsServerService) ISGOMOCK() struct{} {
 }
 
 // AddNews mocks base method.
-func (m *MockNewsServerService) AddNews(ctx context.Context, req *AddReq) (*CommonRsp, error) {
+func (m *MockNewsServerService) AddNews(ctx context.Context, req *AddNewsReq) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddNews", ctx, req)
 	ret0, _ := ret[0].(*CommonRsp)
@@ -179,7 +179,7 @@ func (m *MockNewsServerClientProxy) ISGOMOCK() struct{} {
 }
 
 // AddNews mocks base method.
-func (m *MockNewsServerClientProxy) AddNews(ctx context.Context, req *AddReq, opts ...client.Option) (*CommonRsp, error) {
+func (m *MockNewsServerClientProxy) AddNews(ctx context.Context, req *AddNewsReq, opts ...client.Option) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {

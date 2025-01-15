@@ -23,6 +23,12 @@ type SolutionServerService interface {
 	CountUserProblemSolution(ctx context.Context, req *CountUserProblemSolutionReq) (*CountUserProblemSolutionRsp, error)
 	// RejudgeSolution RejudgeSolution 重判
 	RejudgeSolution(ctx context.Context, req *RejudgeSolutionReq) (*CommonRsp, error)
+	// QueryRuntimeInfo QueryRuntimeInfo 查询信息
+	QueryRuntimeInfo(ctx context.Context, req *QueryRuntimeInfoReq) (*QueryRuntimeInfoRsp, error)
+	// QuerySolutionResult QuerySolutionResult 查询提交结果
+	QuerySolutionResult(ctx context.Context, req *QuerySolutionResultReq) (*QuerySolutionResultRsp, error)
+	// QuerySourceCode QuerySourceCode 查询源代码
+	QuerySourceCode(ctx context.Context, req *QuerySourceCodeReq) (*QuerySourceCodeRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -61,6 +67,60 @@ func SolutionServerService_RejudgeSolution_Handler(svr interface{}, ctx context.
 	return rsp, nil
 }
 
+func SolutionServerService_QueryRuntimeInfo_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryRuntimeInfoReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryRuntimeInfo(ctx, reqbody.(*QueryRuntimeInfoReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func SolutionServerService_QuerySolutionResult_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QuerySolutionResultReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QuerySolutionResult(ctx, reqbody.(*QuerySolutionResultReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func SolutionServerService_QuerySourceCode_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QuerySourceCodeReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QuerySourceCode(ctx, reqbody.(*QuerySourceCodeReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -73,6 +133,18 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/RejudgeSolution",
 			Func: SolutionServerService_RejudgeSolution_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryRuntimeInfo",
+			Func: SolutionServerService_QueryRuntimeInfo_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QuerySolutionResult",
+			Func: SolutionServerService_QuerySolutionResult_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QuerySourceCode",
+			Func: SolutionServerService_QuerySourceCode_Handler,
 		},
 	},
 }
@@ -98,6 +170,21 @@ func (s *UnimplementedSolutionServer) RejudgeSolution(ctx context.Context, req *
 	return nil, errors.New("rpc RejudgeSolution of service SolutionServer is not implemented")
 }
 
+// QueryRuntimeInfo QueryRuntimeInfo 查询信息
+func (s *UnimplementedSolutionServer) QueryRuntimeInfo(ctx context.Context, req *QueryRuntimeInfoReq) (*QueryRuntimeInfoRsp, error) {
+	return nil, errors.New("rpc QueryRuntimeInfo of service SolutionServer is not implemented")
+}
+
+// QuerySolutionResult QuerySolutionResult 查询提交结果
+func (s *UnimplementedSolutionServer) QuerySolutionResult(ctx context.Context, req *QuerySolutionResultReq) (*QuerySolutionResultRsp, error) {
+	return nil, errors.New("rpc QuerySolutionResult of service SolutionServer is not implemented")
+}
+
+// QuerySourceCode QuerySourceCode 查询源代码
+func (s *UnimplementedSolutionServer) QuerySourceCode(ctx context.Context, req *QuerySourceCodeReq) (*QuerySourceCodeRsp, error) {
+	return nil, errors.New("rpc QuerySourceCode of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -110,6 +197,12 @@ type SolutionServerClientProxy interface {
 	CountUserProblemSolution(ctx context.Context, req *CountUserProblemSolutionReq, opts ...client.Option) (rsp *CountUserProblemSolutionRsp, err error)
 	// RejudgeSolution RejudgeSolution 重判
 	RejudgeSolution(ctx context.Context, req *RejudgeSolutionReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// QueryRuntimeInfo QueryRuntimeInfo 查询信息
+	QueryRuntimeInfo(ctx context.Context, req *QueryRuntimeInfoReq, opts ...client.Option) (rsp *QueryRuntimeInfoRsp, err error)
+	// QuerySolutionResult QuerySolutionResult 查询提交结果
+	QuerySolutionResult(ctx context.Context, req *QuerySolutionResultReq, opts ...client.Option) (rsp *QuerySolutionResultRsp, err error)
+	// QuerySourceCode QuerySourceCode 查询源代码
+	QuerySourceCode(ctx context.Context, req *QuerySourceCodeReq, opts ...client.Option) (rsp *QuerySourceCodeRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -155,6 +248,66 @@ func (c *SolutionServerClientProxyImpl) RejudgeSolution(ctx context.Context, req
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryRuntimeInfo(ctx context.Context, req *QueryRuntimeInfoReq, opts ...client.Option) (*QueryRuntimeInfoRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryRuntimeInfo")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryRuntimeInfo")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryRuntimeInfoRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QuerySolutionResult(ctx context.Context, req *QuerySolutionResultReq, opts ...client.Option) (*QuerySolutionResultRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QuerySolutionResult")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QuerySolutionResult")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QuerySolutionResultRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QuerySourceCode(ctx context.Context, req *QuerySourceCodeReq, opts ...client.Option) (*QuerySourceCodeRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QuerySourceCode")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QuerySourceCode")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QuerySourceCodeRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
