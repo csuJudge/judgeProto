@@ -16,6 +16,43 @@ service SolutionServer {
     rpc QuerySourceCode(QuerySourceCodeReq) returns (QuerySourceCodeRsp) {}
     // QueryLatestCode 查询最新的代码
     rpc QueryLatestCode(QueryLatestCodeReq) returns (QueryLatestCodeRsp) {}
+    // QuerySimList 查询相似度列表
+    rpc QuerySimList(QuerySimListReq) returns (QuerySimListRsp) {}
+    // QuerySimSolutionData 查询相似的代码数据
+    rpc QuerySimSolutionData(QuerySimSolutionDataReq) returns (QuerySimSolutionDataRsp) {}
+}
+
+message QuerySimListReq {
+    int32 contestID = 1;  //  作业编号
+    int32 page      = 2;  // 页
+    int32 limit     = 3;  // 页大小
+}
+
+message QuerySimListRsp {
+    string message   = 1;  // 返回信息
+    int64 code       = 2;  // 返回码
+    repeated Sim sim = 3;  // 相似度列表
+    int32 count      = 4;  // 总数
+}
+
+message QuerySimSolutionDataReq {
+    int32 solutionID    = 1;  // 提交编号
+    int32 simSolutionID = 2;  // 相似的提交编号
+}
+
+message QuerySimSolutionDataRsp {
+    string message       = 1;  // 返回信息
+    int64 code           = 2;  // 返回码
+    Solution solution    = 3;  // 提交
+    Solution simSolution = 4;  // 相似的对比提交
+}
+
+message Sim {
+    string problemName  = 1;  // 题目名称
+    int32 solutionID    = 2;  // 提交编号
+    int32 simSolutionID = 3;  // 相似的提交编号
+    string userName     = 4;  // 用户名
+    int32 simScore      = 5;  // 相似度得分
 }
 
 message QueryLatestCodeReq {

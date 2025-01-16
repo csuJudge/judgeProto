@@ -78,6 +78,6 @@ message Knowledge {
     string name       = 2;  // 知识点名称
     string creator    = 3;  // 创建者
     string createTime = 4;  // 创建时间
-    string enable     = 5;  // 状态
-    string weight     = 6;  // 权重
+    int32 enable      = 5;  // 状态
+    int32 weight      = 6;  // 权重
 }

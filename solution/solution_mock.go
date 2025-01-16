@@ -90,6 +90,36 @@ func (mr *MockSolutionServerServiceMockRecorder) QueryRuntimeInfo(ctx, req any) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryRuntimeInfo", reflect.TypeOf((*MockSolutionServerService)(nil).QueryRuntimeInfo), ctx, req)
 }
 
+// QuerySimList mocks base method.
+func (m *MockSolutionServerService) QuerySimList(ctx context.Context, req *QuerySimListReq) (*QuerySimListRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuerySimList", ctx, req)
+	ret0, _ := ret[0].(*QuerySimListRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuerySimList indicates an expected call of QuerySimList.
+func (mr *MockSolutionServerServiceMockRecorder) QuerySimList(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySimList", reflect.TypeOf((*MockSolutionServerService)(nil).QuerySimList), ctx, req)
+}
+
+// QuerySimSolutionData mocks base method.
+func (m *MockSolutionServerService) QuerySimSolutionData(ctx context.Context, req *QuerySimSolutionDataReq) (*QuerySimSolutionDataRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuerySimSolutionData", ctx, req)
+	ret0, _ := ret[0].(*QuerySimSolutionDataRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuerySimSolutionData indicates an expected call of QuerySimSolutionData.
+func (mr *MockSolutionServerServiceMockRecorder) QuerySimSolutionData(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySimSolutionData", reflect.TypeOf((*MockSolutionServerService)(nil).QuerySimSolutionData), ctx, req)
+}
+
 // QuerySolutionResult mocks base method.
 func (m *MockSolutionServerService) QuerySolutionResult(ctx context.Context, req *QuerySolutionResultReq) (*QuerySolutionResultRsp, error) {
 	m.ctrl.T.Helper()
@@ -221,6 +251,46 @@ func (mr *MockSolutionServerClientProxyMockRecorder) QueryRuntimeInfo(ctx, req a
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryRuntimeInfo", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryRuntimeInfo), varargs...)
+}
+
+// QuerySimList mocks base method.
+func (m *MockSolutionServerClientProxy) QuerySimList(ctx context.Context, req *QuerySimListReq, opts ...client.Option) (*QuerySimListRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QuerySimList", varargs...)
+	ret0, _ := ret[0].(*QuerySimListRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuerySimList indicates an expected call of QuerySimList.
+func (mr *MockSolutionServerClientProxyMockRecorder) QuerySimList(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySimList", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QuerySimList), varargs...)
+}
+
+// QuerySimSolutionData mocks base method.
+func (m *MockSolutionServerClientProxy) QuerySimSolutionData(ctx context.Context, req *QuerySimSolutionDataReq, opts ...client.Option) (*QuerySimSolutionDataRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QuerySimSolutionData", varargs...)
+	ret0, _ := ret[0].(*QuerySimSolutionDataRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuerySimSolutionData indicates an expected call of QuerySimSolutionData.
+func (mr *MockSolutionServerClientProxyMockRecorder) QuerySimSolutionData(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySimSolutionData", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QuerySimSolutionData), varargs...)
 }
 
 // QuerySolutionResult mocks base method.

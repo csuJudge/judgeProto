@@ -31,6 +31,10 @@ type SolutionServerService interface {
 	QuerySourceCode(ctx context.Context, req *QuerySourceCodeReq) (*QuerySourceCodeRsp, error)
 	// QueryLatestCode QueryLatestCode 查询最新的代码
 	QueryLatestCode(ctx context.Context, req *QueryLatestCodeReq) (*QueryLatestCodeRsp, error)
+	// QuerySimList QuerySimList 查询相似度列表
+	QuerySimList(ctx context.Context, req *QuerySimListReq) (*QuerySimListRsp, error)
+	// QuerySimSolutionData QuerySimSolutionData 查询相似的代码数据
+	QuerySimSolutionData(ctx context.Context, req *QuerySimSolutionDataReq) (*QuerySimSolutionDataRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -141,6 +145,42 @@ func SolutionServerService_QueryLatestCode_Handler(svr interface{}, ctx context.
 	return rsp, nil
 }
 
+func SolutionServerService_QuerySimList_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QuerySimListReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QuerySimList(ctx, reqbody.(*QuerySimListReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func SolutionServerService_QuerySimSolutionData_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QuerySimSolutionDataReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QuerySimSolutionData(ctx, reqbody.(*QuerySimSolutionDataReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -169,6 +209,14 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/QueryLatestCode",
 			Func: SolutionServerService_QueryLatestCode_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QuerySimList",
+			Func: SolutionServerService_QuerySimList_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QuerySimSolutionData",
+			Func: SolutionServerService_QuerySimSolutionData_Handler,
 		},
 	},
 }
@@ -214,6 +262,16 @@ func (s *UnimplementedSolutionServer) QueryLatestCode(ctx context.Context, req *
 	return nil, errors.New("rpc QueryLatestCode of service SolutionServer is not implemented")
 }
 
+// QuerySimList QuerySimList 查询相似度列表
+func (s *UnimplementedSolutionServer) QuerySimList(ctx context.Context, req *QuerySimListReq) (*QuerySimListRsp, error) {
+	return nil, errors.New("rpc QuerySimList of service SolutionServer is not implemented")
+}
+
+// QuerySimSolutionData QuerySimSolutionData 查询相似的代码数据
+func (s *UnimplementedSolutionServer) QuerySimSolutionData(ctx context.Context, req *QuerySimSolutionDataReq) (*QuerySimSolutionDataRsp, error) {
+	return nil, errors.New("rpc QuerySimSolutionData of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -234,6 +292,10 @@ type SolutionServerClientProxy interface {
 	QuerySourceCode(ctx context.Context, req *QuerySourceCodeReq, opts ...client.Option) (rsp *QuerySourceCodeRsp, err error)
 	// QueryLatestCode QueryLatestCode 查询最新的代码
 	QueryLatestCode(ctx context.Context, req *QueryLatestCodeReq, opts ...client.Option) (rsp *QueryLatestCodeRsp, err error)
+	// QuerySimList QuerySimList 查询相似度列表
+	QuerySimList(ctx context.Context, req *QuerySimListReq, opts ...client.Option) (rsp *QuerySimListRsp, err error)
+	// QuerySimSolutionData QuerySimSolutionData 查询相似的代码数据
+	QuerySimSolutionData(ctx context.Context, req *QuerySimSolutionDataReq, opts ...client.Option) (rsp *QuerySimSolutionDataRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -359,6 +421,46 @@ func (c *SolutionServerClientProxyImpl) QueryLatestCode(ctx context.Context, req
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryLatestCodeRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QuerySimList(ctx context.Context, req *QuerySimListReq, opts ...client.Option) (*QuerySimListRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QuerySimList")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QuerySimList")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QuerySimListRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QuerySimSolutionData(ctx context.Context, req *QuerySimSolutionDataReq, opts ...client.Option) (*QuerySimSolutionDataRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QuerySimSolutionData")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QuerySimSolutionData")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QuerySimSolutionDataRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
