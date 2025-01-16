@@ -30,7 +30,7 @@ message QuerySimListReq {
 
 message QuerySimListRsp {
     string message   = 1;  // 返回信息
-    int64 code       = 2;  // 返回码
+    int32 code       = 2;  // 返回码
     repeated Sim sim = 3;  // 相似度列表
     int32 count      = 4;  // 总数
 }
@@ -42,7 +42,7 @@ message QuerySimSolutionDataReq {
 
 message QuerySimSolutionDataRsp {
     string message       = 1;  // 返回信息
-    int64 code           = 2;  // 返回码
+    int32 code           = 2;  // 返回码
     Solution solution    = 3;  // 提交
     Solution simSolution = 4;  // 相似的对比提交
 }
@@ -62,7 +62,7 @@ message QueryLatestCodeReq {
 
 message QueryLatestCodeRsp {
     string message = 1;  // 返回信息
-    int64 code     = 2;  // 返回码
+    int32 code     = 2;  // 返回码
     Code lastCode  = 3;  // 最新的代码
 }
 
@@ -74,7 +74,7 @@ message QuerySourceCodeReq {
 
 message QuerySourceCodeRsp {
     string message    = 1;  // 返回信息
-    int64 code        = 2;  // 返回码
+    int32 code        = 2;  // 返回码
     Solution solution = 3;  // 提交信息
 }
 
@@ -84,7 +84,7 @@ message QuerySolutionResultReq {
 
 message QuerySolutionResultRsp {
     string message       = 1;  // 返回信息
-    int64 code           = 2;  // 返回码
+    int32 code           = 2;  // 返回码
     int32 result         = 3;  // 结果编号
     string resultMessage = 4;  // 信息
 }
@@ -97,7 +97,7 @@ message QueryRuntimeInfoReq {
 
 message QueryRuntimeInfoRsp {
     string message          = 1;  // 返回信息
-    int64 code              = 2;  // 返回码
+    int32 code              = 2;  // 返回码
     string runtimeInfo      = 3;  // 运行信息
     int32 compileInfoLength = 4;  //  编译信息的长度
 }
@@ -110,7 +110,7 @@ message RejudgeSolutionReq {
 
 message CommonRsp {
     string message = 1;  // 返回信息
-    int64 code     = 2;  // 返回码
+    int32 code     = 2;  // 返回码
 }
 
 message CountUserProblemSolutionReq {

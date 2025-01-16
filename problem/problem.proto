@@ -47,7 +47,7 @@ message QueryProblemListReq {
 
 message QueryProblemListRsp {
     string message           = 1;  // 返回信息
-    int64 code               = 2;  // 返回码
+    int32 code               = 2;  // 返回码
     repeated Problem problem = 3;  // 问题列表
     int32 count              = 4;  // 总数
 }
@@ -58,7 +58,7 @@ message QueryContestProblemReq {
 
 message QueryContestProblemReqRsp {
     string message                   = 1;  // 返回信息
-    int64 code                       = 2;  // 返回码
+    int32 code                       = 2;  // 返回码
     repeated ContestProblem problems = 3;  //  作业的题目列表
 }
 
@@ -91,7 +91,7 @@ message UpdateProblemDataReq {
 
 message CommonRsp {
     string message = 1;  // 返回信息
-    int64 code     = 2;  // 返回码
+    int32 code     = 2;  // 返回码
 }
 
 message AddProblemDataReq {
@@ -106,7 +106,7 @@ message QueryProblemDataReq {
 
 message QueryProblemDataRsp {
     string message = 1;  // 返回信息
-    int64 code     = 2;  // 返回码
+    int32 code     = 2;  // 返回码
     string input   = 3;  // 输入
     string output  = 4;  // 输出
 }
@@ -117,7 +117,7 @@ message QueryProblemDataListReq {
 
 message QueryProblemDataListRsp {
     string message         = 1;  // 返回信息
-    int64 code             = 2;  // 返回码
+    int32 code             = 2;  // 返回码
     repeated Sample sample = 3;  // 样例列表
 }
 
@@ -135,7 +135,7 @@ message QueryProblemReq {
 
 message QueryProblemRsp {
     string message  = 1;  // 返回信息
-    int64 code      = 2;  // 返回码
+    int32 code      = 2;  // 返回码
     Problem problem = 3;  // 问题
 }
 

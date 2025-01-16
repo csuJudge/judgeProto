@@ -25,6 +25,8 @@ type UserServerService interface {
 	UpdateUserPassword(ctx context.Context, req *UpdateUserPasswordReq) (*CommonRsp, error)
 	// UpdateUserStatus UpdateUserStatus 查询用户状态
 	UpdateUserStatus(ctx context.Context, req *UpdateUserStatusReq) (*CommonRsp, error)
+	// QueryUserInfo QueryUserInfo 查询用户信息
+	QueryUserInfo(ctx context.Context, req *QueryUserInfoReq) (*QueryUserInfoRsp, error)
 }
 
 func UserServerService_QueryUserPrivilege_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -81,6 +83,24 @@ func UserServerService_UpdateUserStatus_Handler(svr interface{}, ctx context.Con
 	return rsp, nil
 }
 
+func UserServerService_QueryUserInfo_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryUserInfoReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(UserServerService).QueryUserInfo(ctx, reqbody.(*QueryUserInfoReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // UserServerServer_ServiceDesc descriptor for server.RegisterService.
 var UserServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.user.UserServer",
@@ -97,6 +117,10 @@ var UserServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.user.UserServer/UpdateUserStatus",
 			Func: UserServerService_UpdateUserStatus_Handler,
+		},
+		{
+			Name: "/oj.user.UserServer/QueryUserInfo",
+			Func: UserServerService_QueryUserInfo_Handler,
 		},
 	},
 }
@@ -127,6 +151,11 @@ func (s *UnimplementedUserServer) UpdateUserStatus(ctx context.Context, req *Upd
 	return nil, errors.New("rpc UpdateUserStatus of service UserServer is not implemented")
 }
 
+// QueryUserInfo QueryUserInfo 查询用户信息
+func (s *UnimplementedUserServer) QueryUserInfo(ctx context.Context, req *QueryUserInfoReq) (*QueryUserInfoRsp, error) {
+	return nil, errors.New("rpc QueryUserInfo of service UserServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -141,6 +170,8 @@ type UserServerClientProxy interface {
 	UpdateUserPassword(ctx context.Context, req *UpdateUserPasswordReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// UpdateUserStatus UpdateUserStatus 查询用户状态
 	UpdateUserStatus(ctx context.Context, req *UpdateUserStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// QueryUserInfo QueryUserInfo 查询用户信息
+	QueryUserInfo(ctx context.Context, req *QueryUserInfoReq, opts ...client.Option) (rsp *QueryUserInfoRsp, err error)
 }
 
 type UserServerClientProxyImpl struct {
@@ -206,6 +237,26 @@ func (c *UserServerClientProxyImpl) UpdateUserStatus(ctx context.Context, req *U
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *UserServerClientProxyImpl) QueryUserInfo(ctx context.Context, req *QueryUserInfoReq, opts ...client.Option) (*QueryUserInfoRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.user.UserServer/QueryUserInfo")
+	msg.WithCalleeServiceName(UserServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("UserServer")
+	msg.WithCalleeMethod("QueryUserInfo")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryUserInfoRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

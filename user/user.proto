@@ -10,6 +10,18 @@ service UserServer {
     rpc UpdateUserPassword(UpdateUserPasswordReq) returns (CommonRsp) {}
     // UpdateUserStatus 查询用户状态
     rpc UpdateUserStatus(UpdateUserStatusReq) returns (CommonRsp) {}
+    // QueryUserInfo 查询用户信息
+    rpc QueryUserInfo(QueryUserInfoReq) returns (QueryUserInfoRsp) {}
+}
+
+message QueryUserInfoReq {
+    int32 userID = 1;  // 用户主键
+}
+
+message QueryUserInfoRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+    User user      = 3;  // 用户信息
 }
 
 message UpdateUserPasswordReq {
@@ -29,12 +41,27 @@ message QueryUserPrivilegeReq {
 }
 
 message QueryUserPrivilegeRsp {
-    int32 privilege = 1;  // 用户权限
-    string message  = 2;  // 返回信息
-    int32 code      = 3;  // 返回码
+    string message  = 1;  // 返回信息
+    int32 code      = 2;  // 返回码
+    int32 privilege = 3;  // 用户权限
 }
 
 message CommonRsp {
     string message = 1;  // 返回信息
-    int64 code     = 2;  // 返回码
+    int32 code     = 2;  // 返回码
+}
+
+message User {
+    int32 userID        = 1;   // 用户编号
+    string userName     = 2;   // 用户名称
+    string userEmail    = 3;   // 用户邮箱
+    string userPhone    = 4;   // 用户电话
+    string userClass    = 5;   // 用户班级
+    int32 userPrivilege = 6;   // 用户权限
+    string loginTime    = 7;   // 上次登录时间
+    string loginIP      = 8;   // 上次登录的IP
+    int32 submitCount   = 9;   // 提交的数量
+    int32 solvedCount   = 10;  // 解决的数量
+    string userNumber   = 11;  // 学工号
+    int32 enable        = 12;  // 是否可用
 }

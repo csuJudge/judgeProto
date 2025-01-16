@@ -22,7 +22,7 @@ service NewsServer {
 
 message QueryNewsByPageSizeRsp {
     string message     = 1;  // 返回信息
-    int64 code         = 2;  // 返回码
+    int32 code         = 2;  // 返回码
     repeated News news = 3;  // 公告的集合
     int32 count        = 4;  // 总数
 }
@@ -33,7 +33,7 @@ message QueryNewsReq {
 
 message QueryNewsReqRsp {
     string message = 1;  // 返回信息
-    int64 code     = 2;  // 返回码
+    int32 code     = 2;  // 返回码
     News news      = 3;  // 公告
 }
 
@@ -79,5 +79,5 @@ message UpdateNewsReq {
 
 message CommonRsp {
     string message = 1;  // 返回信息
-    int64 code     = 2;  // 返回码
+    int32 code     = 2;  // 返回码
 }

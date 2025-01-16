@@ -45,6 +45,21 @@ func (m *MockUserServerService) ISGOMOCK() struct{} {
 	return struct{}{}
 }
 
+// QueryUserInfo mocks base method.
+func (m *MockUserServerService) QueryUserInfo(ctx context.Context, req *QueryUserInfoReq) (*QueryUserInfoRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryUserInfo", ctx, req)
+	ret0, _ := ret[0].(*QueryUserInfoRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserInfo indicates an expected call of QueryUserInfo.
+func (mr *MockUserServerServiceMockRecorder) QueryUserInfo(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserInfo", reflect.TypeOf((*MockUserServerService)(nil).QueryUserInfo), ctx, req)
+}
+
 // QueryUserPrivilege mocks base method.
 func (m *MockUserServerService) QueryUserPrivilege(ctx context.Context, req *QueryUserPrivilegeReq) (*QueryUserPrivilegeRsp, error) {
 	m.ctrl.T.Helper()
@@ -116,6 +131,26 @@ func (m *MockUserServerClientProxy) EXPECT() *MockUserServerClientProxyMockRecor
 // ISGOMOCK indicates that this struct is a gomock mock.
 func (m *MockUserServerClientProxy) ISGOMOCK() struct{} {
 	return struct{}{}
+}
+
+// QueryUserInfo mocks base method.
+func (m *MockUserServerClientProxy) QueryUserInfo(ctx context.Context, req *QueryUserInfoReq, opts ...client.Option) (*QueryUserInfoRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryUserInfo", varargs...)
+	ret0, _ := ret[0].(*QueryUserInfoRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserInfo indicates an expected call of QueryUserInfo.
+func (mr *MockUserServerClientProxyMockRecorder) QueryUserInfo(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserInfo", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryUserInfo), varargs...)
 }
 
 // QueryUserPrivilege mocks base method.
