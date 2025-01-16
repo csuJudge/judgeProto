@@ -29,6 +29,8 @@ type SolutionServerService interface {
 	QuerySolutionResult(ctx context.Context, req *QuerySolutionResultReq) (*QuerySolutionResultRsp, error)
 	// QuerySourceCode QuerySourceCode 查询源代码
 	QuerySourceCode(ctx context.Context, req *QuerySourceCodeReq) (*QuerySourceCodeRsp, error)
+	// QueryLatestCode QueryLatestCode 查询最新的代码
+	QueryLatestCode(ctx context.Context, req *QueryLatestCodeReq) (*QueryLatestCodeRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -121,6 +123,24 @@ func SolutionServerService_QuerySourceCode_Handler(svr interface{}, ctx context.
 	return rsp, nil
 }
 
+func SolutionServerService_QueryLatestCode_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryLatestCodeReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryLatestCode(ctx, reqbody.(*QueryLatestCodeReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -145,6 +165,10 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/QuerySourceCode",
 			Func: SolutionServerService_QuerySourceCode_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryLatestCode",
+			Func: SolutionServerService_QueryLatestCode_Handler,
 		},
 	},
 }
@@ -185,6 +209,11 @@ func (s *UnimplementedSolutionServer) QuerySourceCode(ctx context.Context, req *
 	return nil, errors.New("rpc QuerySourceCode of service SolutionServer is not implemented")
 }
 
+// QueryLatestCode QueryLatestCode 查询最新的代码
+func (s *UnimplementedSolutionServer) QueryLatestCode(ctx context.Context, req *QueryLatestCodeReq) (*QueryLatestCodeRsp, error) {
+	return nil, errors.New("rpc QueryLatestCode of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -203,6 +232,8 @@ type SolutionServerClientProxy interface {
 	QuerySolutionResult(ctx context.Context, req *QuerySolutionResultReq, opts ...client.Option) (rsp *QuerySolutionResultRsp, err error)
 	// QuerySourceCode QuerySourceCode 查询源代码
 	QuerySourceCode(ctx context.Context, req *QuerySourceCodeReq, opts ...client.Option) (rsp *QuerySourceCodeRsp, err error)
+	// QueryLatestCode QueryLatestCode 查询最新的代码
+	QueryLatestCode(ctx context.Context, req *QueryLatestCodeReq, opts ...client.Option) (rsp *QueryLatestCodeRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -308,6 +339,26 @@ func (c *SolutionServerClientProxyImpl) QuerySourceCode(ctx context.Context, req
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QuerySourceCodeRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryLatestCode(ctx context.Context, req *QueryLatestCodeReq, opts ...client.Option) (*QueryLatestCodeRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryLatestCode")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryLatestCode")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryLatestCodeRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

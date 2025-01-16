@@ -49,6 +49,7 @@ message QueryProblemListRsp {
     string message           = 1;  // 返回信息
     int64 code               = 2;  // 返回码
     repeated Problem problem = 3;  // 问题列表
+    int32 count              = 4;  // 总数
 }
 
 message QueryContestProblemReq {

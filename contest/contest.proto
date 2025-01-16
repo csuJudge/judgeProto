@@ -29,6 +29,7 @@ message QueryContestListRsp {
     string message            = 1;  // 返回信息
     int64 code                = 2;  // 返回码
     repeated Contest contests = 3;  // 作业集合
+    int32 count               = 4;  // 总数
 }
 
 message QueryContestReq {

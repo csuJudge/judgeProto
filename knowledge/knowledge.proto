@@ -5,7 +5,7 @@ package oj.knowledge;
 
 service KnowledgeServer {
     // QueryKnowledge 查询知识点
-    rpc QueryKnowledge(QueryKnowledgeReq) returns (QueryKnowledgeRsp) {}
+    rpc QueryKnowledge(EmptyReq) returns (QueryKnowledgeRsp) {}
     // AddKnowledge 添加知识点
     rpc AddKnowledge(AddKnowledgeReq) returns (CommonRsp) {}
     // QueryProblemKnowledge 查询题目的知识点
@@ -16,6 +16,11 @@ service KnowledgeServer {
     rpc UpdateKnowledgeStatus(UpdateKnowledgeStatusReq) returns (CommonRsp) {}
     // UpdateKnowledgeWeight 更新知识点优先级
     rpc UpdateKnowledgeWeight(UpdateKnowledgeWeightReq) returns (CommonRsp) {}
+    // QueryKnowledgePageSize 查询知识点
+    rpc QueryKnowledgePageSize(QueryKnowledgePageSizeReq) returns (QueryKnowledgeRsp) {}
+}
+
+message EmptyReq {
 }
 
 message UpdateKnowledgeWeightReq {
@@ -37,7 +42,7 @@ message UpdateKnowledgeReq {
     int32 userID      = 3;  // 用户主键
 }
 
-message QueryKnowledgeReq {
+message QueryKnowledgePageSizeReq {
     int32 page  = 1;  // 页
     int32 limit = 2;  // 页大小
 }

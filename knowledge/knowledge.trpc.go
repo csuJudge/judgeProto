@@ -20,7 +20,7 @@ import (
 // KnowledgeServerService defines service.
 type KnowledgeServerService interface {
 	// QueryKnowledge QueryKnowledge 查询知识点
-	QueryKnowledge(ctx context.Context, req *QueryKnowledgeReq) (*QueryKnowledgeRsp, error)
+	QueryKnowledge(ctx context.Context, req *EmptyReq) (*QueryKnowledgeRsp, error)
 	// AddKnowledge AddKnowledge 添加知识点
 	AddKnowledge(ctx context.Context, req *AddKnowledgeReq) (*CommonRsp, error)
 	// QueryProblemKnowledge QueryProblemKnowledge 查询题目的知识点
@@ -31,16 +31,18 @@ type KnowledgeServerService interface {
 	UpdateKnowledgeStatus(ctx context.Context, req *UpdateKnowledgeStatusReq) (*CommonRsp, error)
 	// UpdateKnowledgeWeight UpdateKnowledgeWeight 更新知识点优先级
 	UpdateKnowledgeWeight(ctx context.Context, req *UpdateKnowledgeWeightReq) (*CommonRsp, error)
+	// QueryKnowledgePageSize QueryKnowledgePageSize 查询知识点
+	QueryKnowledgePageSize(ctx context.Context, req *QueryKnowledgePageSizeReq) (*QueryKnowledgeRsp, error)
 }
 
 func KnowledgeServerService_QueryKnowledge_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &QueryKnowledgeReq{}
+	req := &EmptyReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(KnowledgeServerService).QueryKnowledge(ctx, reqbody.(*QueryKnowledgeReq))
+		return svr.(KnowledgeServerService).QueryKnowledge(ctx, reqbody.(*EmptyReq))
 	}
 
 	var rsp interface{}
@@ -141,6 +143,24 @@ func KnowledgeServerService_UpdateKnowledgeWeight_Handler(svr interface{}, ctx c
 	return rsp, nil
 }
 
+func KnowledgeServerService_QueryKnowledgePageSize_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryKnowledgePageSizeReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).QueryKnowledgePageSize(ctx, reqbody.(*QueryKnowledgePageSizeReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // KnowledgeServerServer_ServiceDesc descriptor for server.RegisterService.
 var KnowledgeServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.knowledge.KnowledgeServer",
@@ -170,6 +190,10 @@ var KnowledgeServerServer_ServiceDesc = server.ServiceDesc{
 			Name: "/oj.knowledge.KnowledgeServer/UpdateKnowledgeWeight",
 			Func: KnowledgeServerService_UpdateKnowledgeWeight_Handler,
 		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/QueryKnowledgePageSize",
+			Func: KnowledgeServerService_QueryKnowledgePageSize_Handler,
+		},
 	},
 }
 
@@ -185,7 +209,7 @@ func RegisterKnowledgeServerService(s server.Service, svr KnowledgeServerService
 type UnimplementedKnowledgeServer struct{}
 
 // QueryKnowledge QueryKnowledge 查询知识点
-func (s *UnimplementedKnowledgeServer) QueryKnowledge(ctx context.Context, req *QueryKnowledgeReq) (*QueryKnowledgeRsp, error) {
+func (s *UnimplementedKnowledgeServer) QueryKnowledge(ctx context.Context, req *EmptyReq) (*QueryKnowledgeRsp, error) {
 	return nil, errors.New("rpc QueryKnowledge of service KnowledgeServer is not implemented")
 }
 
@@ -214,6 +238,11 @@ func (s *UnimplementedKnowledgeServer) UpdateKnowledgeWeight(ctx context.Context
 	return nil, errors.New("rpc UpdateKnowledgeWeight of service KnowledgeServer is not implemented")
 }
 
+// QueryKnowledgePageSize QueryKnowledgePageSize 查询知识点
+func (s *UnimplementedKnowledgeServer) QueryKnowledgePageSize(ctx context.Context, req *QueryKnowledgePageSizeReq) (*QueryKnowledgeRsp, error) {
+	return nil, errors.New("rpc QueryKnowledgePageSize of service KnowledgeServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -223,7 +252,7 @@ func (s *UnimplementedKnowledgeServer) UpdateKnowledgeWeight(ctx context.Context
 // KnowledgeServerClientProxy defines service client proxy
 type KnowledgeServerClientProxy interface {
 	// QueryKnowledge QueryKnowledge 查询知识点
-	QueryKnowledge(ctx context.Context, req *QueryKnowledgeReq, opts ...client.Option) (rsp *QueryKnowledgeRsp, err error)
+	QueryKnowledge(ctx context.Context, req *EmptyReq, opts ...client.Option) (rsp *QueryKnowledgeRsp, err error)
 	// AddKnowledge AddKnowledge 添加知识点
 	AddKnowledge(ctx context.Context, req *AddKnowledgeReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryProblemKnowledge QueryProblemKnowledge 查询题目的知识点
@@ -234,6 +263,8 @@ type KnowledgeServerClientProxy interface {
 	UpdateKnowledgeStatus(ctx context.Context, req *UpdateKnowledgeStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// UpdateKnowledgeWeight UpdateKnowledgeWeight 更新知识点优先级
 	UpdateKnowledgeWeight(ctx context.Context, req *UpdateKnowledgeWeightReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// QueryKnowledgePageSize QueryKnowledgePageSize 查询知识点
+	QueryKnowledgePageSize(ctx context.Context, req *QueryKnowledgePageSizeReq, opts ...client.Option) (rsp *QueryKnowledgeRsp, err error)
 }
 
 type KnowledgeServerClientProxyImpl struct {
@@ -245,7 +276,7 @@ var NewKnowledgeServerClientProxy = func(opts ...client.Option) KnowledgeServerC
 	return &KnowledgeServerClientProxyImpl{client: client.DefaultClient, opts: opts}
 }
 
-func (c *KnowledgeServerClientProxyImpl) QueryKnowledge(ctx context.Context, req *QueryKnowledgeReq, opts ...client.Option) (*QueryKnowledgeRsp, error) {
+func (c *KnowledgeServerClientProxyImpl) QueryKnowledge(ctx context.Context, req *EmptyReq, opts ...client.Option) (*QueryKnowledgeRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/QueryKnowledge")
@@ -359,6 +390,26 @@ func (c *KnowledgeServerClientProxyImpl) UpdateKnowledgeWeight(ctx context.Conte
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) QueryKnowledgePageSize(ctx context.Context, req *QueryKnowledgePageSizeReq, opts ...client.Option) (*QueryKnowledgeRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/QueryKnowledgePageSize")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("QueryKnowledgePageSize")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryKnowledgeRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

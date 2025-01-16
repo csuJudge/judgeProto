@@ -61,7 +61,7 @@ func (mr *MockKnowledgeServerServiceMockRecorder) AddKnowledge(ctx, req any) *go
 }
 
 // QueryKnowledge mocks base method.
-func (m *MockKnowledgeServerService) QueryKnowledge(ctx context.Context, req *QueryKnowledgeReq) (*QueryKnowledgeRsp, error) {
+func (m *MockKnowledgeServerService) QueryKnowledge(ctx context.Context, req *EmptyReq) (*QueryKnowledgeRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryKnowledge", ctx, req)
 	ret0, _ := ret[0].(*QueryKnowledgeRsp)
@@ -73,6 +73,21 @@ func (m *MockKnowledgeServerService) QueryKnowledge(ctx context.Context, req *Qu
 func (mr *MockKnowledgeServerServiceMockRecorder) QueryKnowledge(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryKnowledge", reflect.TypeOf((*MockKnowledgeServerService)(nil).QueryKnowledge), ctx, req)
+}
+
+// QueryKnowledgePageSize mocks base method.
+func (m *MockKnowledgeServerService) QueryKnowledgePageSize(ctx context.Context, req *QueryKnowledgePageSizeReq) (*QueryKnowledgeRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryKnowledgePageSize", ctx, req)
+	ret0, _ := ret[0].(*QueryKnowledgeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryKnowledgePageSize indicates an expected call of QueryKnowledgePageSize.
+func (mr *MockKnowledgeServerServiceMockRecorder) QueryKnowledgePageSize(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryKnowledgePageSize", reflect.TypeOf((*MockKnowledgeServerService)(nil).QueryKnowledgePageSize), ctx, req)
 }
 
 // QueryProblemKnowledge mocks base method.
@@ -184,7 +199,7 @@ func (mr *MockKnowledgeServerClientProxyMockRecorder) AddKnowledge(ctx, req any,
 }
 
 // QueryKnowledge mocks base method.
-func (m *MockKnowledgeServerClientProxy) QueryKnowledge(ctx context.Context, req *QueryKnowledgeReq, opts ...client.Option) (*QueryKnowledgeRsp, error) {
+func (m *MockKnowledgeServerClientProxy) QueryKnowledge(ctx context.Context, req *EmptyReq, opts ...client.Option) (*QueryKnowledgeRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
@@ -201,6 +216,26 @@ func (mr *MockKnowledgeServerClientProxyMockRecorder) QueryKnowledge(ctx, req an
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryKnowledge", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).QueryKnowledge), varargs...)
+}
+
+// QueryKnowledgePageSize mocks base method.
+func (m *MockKnowledgeServerClientProxy) QueryKnowledgePageSize(ctx context.Context, req *QueryKnowledgePageSizeReq, opts ...client.Option) (*QueryKnowledgeRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryKnowledgePageSize", varargs...)
+	ret0, _ := ret[0].(*QueryKnowledgeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryKnowledgePageSize indicates an expected call of QueryKnowledgePageSize.
+func (mr *MockKnowledgeServerClientProxyMockRecorder) QueryKnowledgePageSize(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryKnowledgePageSize", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).QueryKnowledgePageSize), varargs...)
 }
 
 // QueryProblemKnowledge mocks base method.
