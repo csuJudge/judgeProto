@@ -30,7 +30,7 @@ type NewsServerService interface {
 	// QueryNewsByPageSize QueryNewsByPageSize 分页查询公告
 	QueryNewsByPageSize(ctx context.Context, req *QueryNewsByPageSizeReq) (*QueryNewsByPageSizeRsp, error)
 	// QueryNews QueryNews 查询公告
-	QueryNews(ctx context.Context, req *QueryNewsReq) (*QueryNewsReqRsp, error)
+	QueryNews(ctx context.Context, req *QueryNewsReq) (*QueryNewsRsp, error)
 	// QueryAllNews QueryAllNews 分页所有查询公告
 	QueryAllNews(ctx context.Context, req *QueryNewsByPageSizeReq) (*QueryNewsByPageSizeRsp, error)
 }
@@ -234,7 +234,7 @@ func (s *UnimplementedNewsServer) QueryNewsByPageSize(ctx context.Context, req *
 }
 
 // QueryNews QueryNews 查询公告
-func (s *UnimplementedNewsServer) QueryNews(ctx context.Context, req *QueryNewsReq) (*QueryNewsReqRsp, error) {
+func (s *UnimplementedNewsServer) QueryNews(ctx context.Context, req *QueryNewsReq) (*QueryNewsRsp, error) {
 	return nil, errors.New("rpc QueryNews of service NewsServer is not implemented")
 }
 
@@ -262,7 +262,7 @@ type NewsServerClientProxy interface {
 	// QueryNewsByPageSize QueryNewsByPageSize 分页查询公告
 	QueryNewsByPageSize(ctx context.Context, req *QueryNewsByPageSizeReq, opts ...client.Option) (rsp *QueryNewsByPageSizeRsp, err error)
 	// QueryNews QueryNews 查询公告
-	QueryNews(ctx context.Context, req *QueryNewsReq, opts ...client.Option) (rsp *QueryNewsReqRsp, err error)
+	QueryNews(ctx context.Context, req *QueryNewsReq, opts ...client.Option) (rsp *QueryNewsRsp, err error)
 	// QueryAllNews QueryAllNews 分页所有查询公告
 	QueryAllNews(ctx context.Context, req *QueryNewsByPageSizeReq, opts ...client.Option) (rsp *QueryNewsByPageSizeRsp, err error)
 }
@@ -376,7 +376,7 @@ func (c *NewsServerClientProxyImpl) QueryNewsByPageSize(ctx context.Context, req
 	return rsp, nil
 }
 
-func (c *NewsServerClientProxyImpl) QueryNews(ctx context.Context, req *QueryNewsReq, opts ...client.Option) (*QueryNewsReqRsp, error) {
+func (c *NewsServerClientProxyImpl) QueryNews(ctx context.Context, req *QueryNewsReq, opts ...client.Option) (*QueryNewsRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.news.NewsServer/QueryNews")
@@ -389,7 +389,7 @@ func (c *NewsServerClientProxyImpl) QueryNews(ctx context.Context, req *QueryNew
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &QueryNewsReqRsp{}
+	rsp := &QueryNewsRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

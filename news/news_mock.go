@@ -76,10 +76,10 @@ func (mr *MockNewsServerServiceMockRecorder) QueryAllNews(ctx, req any) *gomock.
 }
 
 // QueryNews mocks base method.
-func (m *MockNewsServerService) QueryNews(ctx context.Context, req *QueryNewsReq) (*QueryNewsReqRsp, error) {
+func (m *MockNewsServerService) QueryNews(ctx context.Context, req *QueryNewsReq) (*QueryNewsRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryNews", ctx, req)
-	ret0, _ := ret[0].(*QueryNewsReqRsp)
+	ret0, _ := ret[0].(*QueryNewsRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -219,14 +219,14 @@ func (mr *MockNewsServerClientProxyMockRecorder) QueryAllNews(ctx, req any, opts
 }
 
 // QueryNews mocks base method.
-func (m *MockNewsServerClientProxy) QueryNews(ctx context.Context, req *QueryNewsReq, opts ...client.Option) (*QueryNewsReqRsp, error) {
+func (m *MockNewsServerClientProxy) QueryNews(ctx context.Context, req *QueryNewsReq, opts ...client.Option) (*QueryNewsRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "QueryNews", varargs...)
-	ret0, _ := ret[0].(*QueryNewsReqRsp)
+	ret0, _ := ret[0].(*QueryNewsRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

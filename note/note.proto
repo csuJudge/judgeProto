@@ -12,6 +12,7 @@ service NoteServer {
 
 message QueryNoteReq {
     int32 problemID = 1;  // 题目编号
+    int32 userID    = 2;  // 用户编号
 }
 
 message QueryNoteRsp {

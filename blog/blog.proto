@@ -1,0 +1,88 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto/blog";
+
+package oj.blog;
+
+service BlogServer {
+    // AddBlog 添加博客
+    rpc AddBlog(AddBlogReq) returns (CommonRsp) {}
+    // UpdateBlog 更新博客
+    rpc UpdateBlog(UpdateBlogReq) returns (CommonRsp) {}
+    // UpdateBlogStatus 更新博客状态
+    rpc UpdateBlogStatus(UpdateBlogStatusReq) returns (CommonRsp) {}
+    // QueryMyBlog 查询我的博客
+    rpc QueryMyBlog(QueryMyBlogReq) returns (QueryMyBlogRsp) {}
+    // QueryBlogByPageSize 分页查询博客
+    rpc QueryBlogByPageSize(QueryBlogByPageSizeReq) returns (QueryBlogByPageSizeRsp) {}
+    // QueryBlog 查询博客
+    rpc QueryBlog(QueryBlogReq) returns (QueryBlogRsp) {}
+    // QueryAllBlog 分页所有查询博客
+    rpc QueryAllBlog(QueryBlogByPageSizeReq) returns (QueryBlogByPageSizeRsp) {}
+}
+
+message QueryMyBlogReq {
+    int32 page   = 1;  // 页
+    int32 limit  = 2;  // 页大小
+    int32 userID = 3;  //  用户主键
+}
+
+message QueryMyBlogRsp {
+    string message      = 1;  // 返回信息
+    int32 code          = 2;  // 返回码
+    repeated Blog blogs = 3;  // 博客的集合
+}
+
+message QueryBlogByPageSizeRsp {
+    string message      = 1;  // 返回信息
+    int32 code          = 2;  // 返回码
+    repeated Blog blogs = 3;  // 博客的集合
+    int32 count         = 4;  // 总数
+}
+
+message QueryBlogReq {
+    int32 blogID = 1;  // 博客的主键
+}
+
+message QueryBlogRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+    Blog blog      = 3;  // 博客
+}
+
+message Blog {
+    int32 blogID       = 1;  // 博客主键
+    string blogName    = 2;  // 博客名称
+    string blogContent = 3;  // 博客内容
+    string creator     = 4;  // 创建者
+    string createdTime = 5;  // 创建时间
+    int32 enable       = 6;  // 是否可用
+}
+
+message QueryBlogByPageSizeReq {
+    int32 page  = 1;  // 页
+    int32 limit = 2;  // 页大小
+}
+
+message UpdateBlogStatusReq {
+    int32 userID = 1;  // 用户主键
+    int32 blogID = 2;  // 博客主键
+    int32 status = 3;  // 状态
+}
+
+message AddBlogReq {
+    string name    = 1;  // 博客名
+    string content = 2;  // 内容
+    int32 userID   = 3;  // 用户编号
+}
+
+message UpdateBlogReq {
+    int32 userID   = 1;  // 用户主键
+    int32 blogID   = 2;  // 博客主键
+    string name    = 3;  // 名称
+    string content = 4;  // 内容
+}
+
+message CommonRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+}

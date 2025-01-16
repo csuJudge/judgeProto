@@ -15,7 +15,7 @@ service NewsServer {
     // QueryNewsByPageSize 分页查询公告
     rpc QueryNewsByPageSize(QueryNewsByPageSizeReq) returns (QueryNewsByPageSizeRsp) {}
     // QueryNews 查询公告
-    rpc QueryNews(QueryNewsReq) returns (QueryNewsReqRsp) {}
+    rpc QueryNews(QueryNewsReq) returns (QueryNewsRsp) {}
     // QueryAllNews 分页所有查询公告
     rpc QueryAllNews(QueryNewsByPageSizeReq) returns (QueryNewsByPageSizeRsp) {}
 }
@@ -31,7 +31,7 @@ message QueryNewsReq {
     int32 newsID = 1;  // 公告的主键
 }
 
-message QueryNewsReqRsp {
+message QueryNewsRsp {
     string message = 1;  // 返回信息
     int32 code     = 2;  // 返回码
     News news      = 3;  // 公告
