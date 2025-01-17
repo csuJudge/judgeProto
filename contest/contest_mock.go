@@ -17,36 +17,51 @@ import (
 	client "trpc.group/trpc-go/trpc-go/client"
 )
 
-// MockNewsServerService is a mock of NewsServerService interface.
-type MockNewsServerService struct {
+// MockContestServerService is a mock of ContestServerService interface.
+type MockContestServerService struct {
 	ctrl     *gomock.Controller
-	recorder *MockNewsServerServiceMockRecorder
+	recorder *MockContestServerServiceMockRecorder
 }
 
-// MockNewsServerServiceMockRecorder is the mock recorder for MockNewsServerService.
-type MockNewsServerServiceMockRecorder struct {
-	mock *MockNewsServerService
+// MockContestServerServiceMockRecorder is the mock recorder for MockContestServerService.
+type MockContestServerServiceMockRecorder struct {
+	mock *MockContestServerService
 }
 
-// NewMockNewsServerService creates a new mock instance.
-func NewMockNewsServerService(ctrl *gomock.Controller) *MockNewsServerService {
-	mock := &MockNewsServerService{ctrl: ctrl}
-	mock.recorder = &MockNewsServerServiceMockRecorder{mock}
+// NewMockContestServerService creates a new mock instance.
+func NewMockContestServerService(ctrl *gomock.Controller) *MockContestServerService {
+	mock := &MockContestServerService{ctrl: ctrl}
+	mock.recorder = &MockContestServerServiceMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockNewsServerService) EXPECT() *MockNewsServerServiceMockRecorder {
+func (m *MockContestServerService) EXPECT() *MockContestServerServiceMockRecorder {
 	return m.recorder
 }
 
 // ISGOMOCK indicates that this struct is a gomock mock.
-func (m *MockNewsServerService) ISGOMOCK() struct{} {
+func (m *MockContestServerService) ISGOMOCK() struct{} {
 	return struct{}{}
 }
 
+// AddContest mocks base method.
+func (m *MockContestServerService) AddContest(ctx context.Context, req *AddContestReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddContest", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddContest indicates an expected call of AddContest.
+func (mr *MockContestServerServiceMockRecorder) AddContest(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddContest", reflect.TypeOf((*MockContestServerService)(nil).AddContest), ctx, req)
+}
+
 // QueryContest mocks base method.
-func (m *MockNewsServerService) QueryContest(ctx context.Context, req *QueryContestReq) (*QueryContestRsp, error) {
+func (m *MockContestServerService) QueryContest(ctx context.Context, req *QueryContestReq) (*QueryContestRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryContest", ctx, req)
 	ret0, _ := ret[0].(*QueryContestRsp)
@@ -55,13 +70,13 @@ func (m *MockNewsServerService) QueryContest(ctx context.Context, req *QueryCont
 }
 
 // QueryContest indicates an expected call of QueryContest.
-func (mr *MockNewsServerServiceMockRecorder) QueryContest(ctx, req any) *gomock.Call {
+func (mr *MockContestServerServiceMockRecorder) QueryContest(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContest", reflect.TypeOf((*MockNewsServerService)(nil).QueryContest), ctx, req)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContest", reflect.TypeOf((*MockContestServerService)(nil).QueryContest), ctx, req)
 }
 
 // QueryContestList mocks base method.
-func (m *MockNewsServerService) QueryContestList(ctx context.Context, req *QueryContestListReq) (*QueryContestListRsp, error) {
+func (m *MockContestServerService) QueryContestList(ctx context.Context, req *QueryContestListReq) (*QueryContestListRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryContestList", ctx, req)
 	ret0, _ := ret[0].(*QueryContestListRsp)
@@ -70,13 +85,28 @@ func (m *MockNewsServerService) QueryContestList(ctx context.Context, req *Query
 }
 
 // QueryContestList indicates an expected call of QueryContestList.
-func (mr *MockNewsServerServiceMockRecorder) QueryContestList(ctx, req any) *gomock.Call {
+func (mr *MockContestServerServiceMockRecorder) QueryContestList(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestList", reflect.TypeOf((*MockNewsServerService)(nil).QueryContestList), ctx, req)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestList", reflect.TypeOf((*MockContestServerService)(nil).QueryContestList), ctx, req)
+}
+
+// UpdateContest mocks base method.
+func (m *MockContestServerService) UpdateContest(ctx context.Context, req *UpdateContestReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateContest", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateContest indicates an expected call of UpdateContest.
+func (mr *MockContestServerServiceMockRecorder) UpdateContest(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateContest", reflect.TypeOf((*MockContestServerService)(nil).UpdateContest), ctx, req)
 }
 
 // UpdateContestStatus mocks base method.
-func (m *MockNewsServerService) UpdateContestStatus(ctx context.Context, req *UpdateContestStatusReq) (*CommonRsp, error) {
+func (m *MockContestServerService) UpdateContestStatus(ctx context.Context, req *UpdateContestStatusReq) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateContestStatus", ctx, req)
 	ret0, _ := ret[0].(*CommonRsp)
@@ -85,41 +115,61 @@ func (m *MockNewsServerService) UpdateContestStatus(ctx context.Context, req *Up
 }
 
 // UpdateContestStatus indicates an expected call of UpdateContestStatus.
-func (mr *MockNewsServerServiceMockRecorder) UpdateContestStatus(ctx, req any) *gomock.Call {
+func (mr *MockContestServerServiceMockRecorder) UpdateContestStatus(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateContestStatus", reflect.TypeOf((*MockNewsServerService)(nil).UpdateContestStatus), ctx, req)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateContestStatus", reflect.TypeOf((*MockContestServerService)(nil).UpdateContestStatus), ctx, req)
 }
 
-// MockNewsServerClientProxy is a mock of NewsServerClientProxy interface.
-type MockNewsServerClientProxy struct {
+// MockContestServerClientProxy is a mock of ContestServerClientProxy interface.
+type MockContestServerClientProxy struct {
 	ctrl     *gomock.Controller
-	recorder *MockNewsServerClientProxyMockRecorder
+	recorder *MockContestServerClientProxyMockRecorder
 }
 
-// MockNewsServerClientProxyMockRecorder is the mock recorder for MockNewsServerClientProxy.
-type MockNewsServerClientProxyMockRecorder struct {
-	mock *MockNewsServerClientProxy
+// MockContestServerClientProxyMockRecorder is the mock recorder for MockContestServerClientProxy.
+type MockContestServerClientProxyMockRecorder struct {
+	mock *MockContestServerClientProxy
 }
 
-// NewMockNewsServerClientProxy creates a new mock instance.
-func NewMockNewsServerClientProxy(ctrl *gomock.Controller) *MockNewsServerClientProxy {
-	mock := &MockNewsServerClientProxy{ctrl: ctrl}
-	mock.recorder = &MockNewsServerClientProxyMockRecorder{mock}
+// NewMockContestServerClientProxy creates a new mock instance.
+func NewMockContestServerClientProxy(ctrl *gomock.Controller) *MockContestServerClientProxy {
+	mock := &MockContestServerClientProxy{ctrl: ctrl}
+	mock.recorder = &MockContestServerClientProxyMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockNewsServerClientProxy) EXPECT() *MockNewsServerClientProxyMockRecorder {
+func (m *MockContestServerClientProxy) EXPECT() *MockContestServerClientProxyMockRecorder {
 	return m.recorder
 }
 
 // ISGOMOCK indicates that this struct is a gomock mock.
-func (m *MockNewsServerClientProxy) ISGOMOCK() struct{} {
+func (m *MockContestServerClientProxy) ISGOMOCK() struct{} {
 	return struct{}{}
 }
 
+// AddContest mocks base method.
+func (m *MockContestServerClientProxy) AddContest(ctx context.Context, req *AddContestReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AddContest", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddContest indicates an expected call of AddContest.
+func (mr *MockContestServerClientProxyMockRecorder) AddContest(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddContest", reflect.TypeOf((*MockContestServerClientProxy)(nil).AddContest), varargs...)
+}
+
 // QueryContest mocks base method.
-func (m *MockNewsServerClientProxy) QueryContest(ctx context.Context, req *QueryContestReq, opts ...client.Option) (*QueryContestRsp, error) {
+func (m *MockContestServerClientProxy) QueryContest(ctx context.Context, req *QueryContestReq, opts ...client.Option) (*QueryContestRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
@@ -132,14 +182,14 @@ func (m *MockNewsServerClientProxy) QueryContest(ctx context.Context, req *Query
 }
 
 // QueryContest indicates an expected call of QueryContest.
-func (mr *MockNewsServerClientProxyMockRecorder) QueryContest(ctx, req any, opts ...any) *gomock.Call {
+func (mr *MockContestServerClientProxyMockRecorder) QueryContest(ctx, req any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContest", reflect.TypeOf((*MockNewsServerClientProxy)(nil).QueryContest), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContest", reflect.TypeOf((*MockContestServerClientProxy)(nil).QueryContest), varargs...)
 }
 
 // QueryContestList mocks base method.
-func (m *MockNewsServerClientProxy) QueryContestList(ctx context.Context, req *QueryContestListReq, opts ...client.Option) (*QueryContestListRsp, error) {
+func (m *MockContestServerClientProxy) QueryContestList(ctx context.Context, req *QueryContestListReq, opts ...client.Option) (*QueryContestListRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
@@ -152,14 +202,34 @@ func (m *MockNewsServerClientProxy) QueryContestList(ctx context.Context, req *Q
 }
 
 // QueryContestList indicates an expected call of QueryContestList.
-func (mr *MockNewsServerClientProxyMockRecorder) QueryContestList(ctx, req any, opts ...any) *gomock.Call {
+func (mr *MockContestServerClientProxyMockRecorder) QueryContestList(ctx, req any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestList", reflect.TypeOf((*MockNewsServerClientProxy)(nil).QueryContestList), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestList", reflect.TypeOf((*MockContestServerClientProxy)(nil).QueryContestList), varargs...)
+}
+
+// UpdateContest mocks base method.
+func (m *MockContestServerClientProxy) UpdateContest(ctx context.Context, req *UpdateContestReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateContest", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateContest indicates an expected call of UpdateContest.
+func (mr *MockContestServerClientProxyMockRecorder) UpdateContest(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateContest", reflect.TypeOf((*MockContestServerClientProxy)(nil).UpdateContest), varargs...)
 }
 
 // UpdateContestStatus mocks base method.
-func (m *MockNewsServerClientProxy) UpdateContestStatus(ctx context.Context, req *UpdateContestStatusReq, opts ...client.Option) (*CommonRsp, error) {
+func (m *MockContestServerClientProxy) UpdateContestStatus(ctx context.Context, req *UpdateContestStatusReq, opts ...client.Option) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
@@ -172,8 +242,8 @@ func (m *MockNewsServerClientProxy) UpdateContestStatus(ctx context.Context, req
 }
 
 // UpdateContestStatus indicates an expected call of UpdateContestStatus.
-func (mr *MockNewsServerClientProxyMockRecorder) UpdateContestStatus(ctx, req any, opts ...any) *gomock.Call {
+func (mr *MockContestServerClientProxyMockRecorder) UpdateContestStatus(ctx, req any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateContestStatus", reflect.TypeOf((*MockNewsServerClientProxy)(nil).UpdateContestStatus), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateContestStatus", reflect.TypeOf((*MockContestServerClientProxy)(nil).UpdateContestStatus), varargs...)
 }
