@@ -36,7 +36,7 @@ message QueryBlogByPageSizeRsp {
     string message      = 1;  // 返回信息
     int32 code          = 2;  // 返回码
     repeated Blog blogs = 3;  // 博客的集合
-    int32 count         = 4;  // 总数
+    int32 total         = 4;  // 总数
 }
 
 message QueryBlogReq {

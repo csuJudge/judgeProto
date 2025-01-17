@@ -60,8 +60,8 @@ message User {
     int32 userPrivilege = 6;   // 用户权限
     string loginTime    = 7;   // 上次登录时间
     string loginIP      = 8;   // 上次登录的IP
-    int32 submitCount   = 9;   // 提交的数量
-    int32 solvedCount   = 10;  // 解决的数量
+    int32 submittotal   = 9;   // 提交的数量
+    int32 solvedtotal   = 10;  // 解决的数量
     string userNumber   = 11;  // 学工号
     int32 enable        = 12;  // 是否可用
 }

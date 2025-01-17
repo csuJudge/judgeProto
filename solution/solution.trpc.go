@@ -35,6 +35,8 @@ type SolutionServerService interface {
 	QuerySimList(ctx context.Context, req *QuerySimListReq) (*QuerySimListRsp, error)
 	// QuerySimSolutionData QuerySimSolutionData 查询相似的代码数据
 	QuerySimSolutionData(ctx context.Context, req *QuerySimSolutionDataReq) (*QuerySimSolutionDataRsp, error)
+	// AddSolution AddSolution 添加提交数据
+	AddSolution(ctx context.Context, req *AddSolutionReq) (*CommonRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -181,6 +183,24 @@ func SolutionServerService_QuerySimSolutionData_Handler(svr interface{}, ctx con
 	return rsp, nil
 }
 
+func SolutionServerService_AddSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &AddSolutionReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).AddSolution(ctx, reqbody.(*AddSolutionReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -217,6 +237,10 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/QuerySimSolutionData",
 			Func: SolutionServerService_QuerySimSolutionData_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/AddSolution",
+			Func: SolutionServerService_AddSolution_Handler,
 		},
 	},
 }
@@ -272,6 +296,11 @@ func (s *UnimplementedSolutionServer) QuerySimSolutionData(ctx context.Context, 
 	return nil, errors.New("rpc QuerySimSolutionData of service SolutionServer is not implemented")
 }
 
+// AddSolution AddSolution 添加提交数据
+func (s *UnimplementedSolutionServer) AddSolution(ctx context.Context, req *AddSolutionReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc AddSolution of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -296,6 +325,8 @@ type SolutionServerClientProxy interface {
 	QuerySimList(ctx context.Context, req *QuerySimListReq, opts ...client.Option) (rsp *QuerySimListRsp, err error)
 	// QuerySimSolutionData QuerySimSolutionData 查询相似的代码数据
 	QuerySimSolutionData(ctx context.Context, req *QuerySimSolutionDataReq, opts ...client.Option) (rsp *QuerySimSolutionDataRsp, err error)
+	// AddSolution AddSolution 添加提交数据
+	AddSolution(ctx context.Context, req *AddSolutionReq, opts ...client.Option) (rsp *CommonRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -461,6 +492,26 @@ func (c *SolutionServerClientProxyImpl) QuerySimSolutionData(ctx context.Context
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QuerySimSolutionDataRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) AddSolution(ctx context.Context, req *AddSolutionReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/AddSolution")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("AddSolution")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

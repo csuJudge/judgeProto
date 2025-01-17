@@ -45,6 +45,21 @@ func (m *MockSolutionServerService) ISGOMOCK() struct{} {
 	return struct{}{}
 }
 
+// AddSolution mocks base method.
+func (m *MockSolutionServerService) AddSolution(ctx context.Context, req *AddSolutionReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddSolution", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddSolution indicates an expected call of AddSolution.
+func (mr *MockSolutionServerServiceMockRecorder) AddSolution(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddSolution", reflect.TypeOf((*MockSolutionServerService)(nil).AddSolution), ctx, req)
+}
+
 // CountUserProblemSolution mocks base method.
 func (m *MockSolutionServerService) CountUserProblemSolution(ctx context.Context, req *CountUserProblemSolutionReq) (*CountUserProblemSolutionRsp, error) {
 	m.ctrl.T.Helper()
@@ -191,6 +206,26 @@ func (m *MockSolutionServerClientProxy) EXPECT() *MockSolutionServerClientProxyM
 // ISGOMOCK indicates that this struct is a gomock mock.
 func (m *MockSolutionServerClientProxy) ISGOMOCK() struct{} {
 	return struct{}{}
+}
+
+// AddSolution mocks base method.
+func (m *MockSolutionServerClientProxy) AddSolution(ctx context.Context, req *AddSolutionReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AddSolution", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddSolution indicates an expected call of AddSolution.
+func (mr *MockSolutionServerClientProxyMockRecorder) AddSolution(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).AddSolution), varargs...)
 }
 
 // CountUserProblemSolution mocks base method.

@@ -20,6 +20,19 @@ service SolutionServer {
     rpc QuerySimList(QuerySimListReq) returns (QuerySimListRsp) {}
     // QuerySimSolutionData 查询相似的代码数据
     rpc QuerySimSolutionData(QuerySimSolutionDataReq) returns (QuerySimSolutionDataRsp) {}
+    // AddSolution 添加提交数据
+    rpc AddSolution(AddSolutionReq) returns (CommonRsp) {}
+}
+
+message AddSolutionReq {
+    int32 problemID  = 1;  // 题目编号
+    int32 userID     = 2;  // 用户编号
+    int32 language   = 3;  // 语言
+    int32 contestID  = 4;  // 考试编号
+    string userCode  = 5;  // 用户代码
+    string input     = 6;  // 输入
+    string keyAction = 7;  // 击键行为
+    int32 type       = 8;  // 类型
 }
 
 message QuerySimListReq {
@@ -32,7 +45,7 @@ message QuerySimListRsp {
     string message   = 1;  // 返回信息
     int32 code       = 2;  // 返回码
     repeated Sim sim = 3;  // 相似度列表
-    int32 count      = 4;  // 总数
+    int32 total      = 4;  // 总数
 }
 
 message QuerySimSolutionDataReq {
