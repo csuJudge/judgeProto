@@ -1,0 +1,46 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto/school";
+
+package oj.school;
+
+service CourseServer {
+    // AddCourse 添加课程
+    rpc AddCourse(AddCourseReq) returns (CommonRsp) {}
+}
+
+service ClassServer {
+    // QueryUserClass 查询用户的班级
+    rpc QueryUserClass(QueryUserClassReq) returns (QueryUserClassRsp) {}
+}
+
+service TermServer {
+    // AddTerm 添加学期
+    rpc AddTerm(AddTermReq) returns (CommonRsp) {}
+}
+
+message QueryUserClassReq {
+    int32 userID = 1;
+}
+
+message QueryUserClassRsp {
+    string message   = 1;  // 返回信息
+    int32 code       = 2;  // 返回码
+    string userClass = 3;  // 用户的班级
+}
+
+message AddTermReq {
+    string name        = 1;  // 名称
+    int32 userID       = 2;  // 用户编号
+    string description = 3;  // 描述
+}
+
+message AddCourseReq {
+    string name        = 1;  // 名称
+    int32 userID       = 2;  // 用户编号
+    string description = 3;  // 描述
+}
+
+message CommonRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+}

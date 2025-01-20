@@ -14,6 +14,19 @@ service ContestServer {
     rpc AddContest(AddContestReq) returns (CommonRsp) {}
     // UpdateContest 更新作业
     rpc UpdateContest(UpdateContestReq) returns (CommonRsp) {}
+    // QueryContestPrivilegeInfo 查询作业的权限信息
+    rpc QueryContestPrivilegeInfo(QueryContestPrivilegeInfoReq) returns (QueryContestPrivilegeInfoRsp) {}
+}
+
+message QueryContestPrivilegeInfoReq {
+    int32 userID = 1;  // 用户编号
+}
+
+message QueryContestPrivilegeInfoRsp {
+    string contestProblem = 1;  // 查询作业的问题
+    string contestUser    = 2;  // 查询作业的用户
+    int32 private         = 3;  // 作业的可见度
+    string contestClass   = 4;  // 查询作业的班级
 }
 
 message AddContestReq {

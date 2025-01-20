@@ -90,6 +90,21 @@ func (mr *MockContestServerServiceMockRecorder) QueryContestList(ctx, req any) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestList", reflect.TypeOf((*MockContestServerService)(nil).QueryContestList), ctx, req)
 }
 
+// QueryContestPrivilegeInfo mocks base method.
+func (m *MockContestServerService) QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestPrivilegeInfoReq) (*QueryContestPrivilegeInfoRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryContestPrivilegeInfo", ctx, req)
+	ret0, _ := ret[0].(*QueryContestPrivilegeInfoRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestPrivilegeInfo indicates an expected call of QueryContestPrivilegeInfo.
+func (mr *MockContestServerServiceMockRecorder) QueryContestPrivilegeInfo(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestPrivilegeInfo", reflect.TypeOf((*MockContestServerService)(nil).QueryContestPrivilegeInfo), ctx, req)
+}
+
 // UpdateContest mocks base method.
 func (m *MockContestServerService) UpdateContest(ctx context.Context, req *UpdateContestReq) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
@@ -206,6 +221,26 @@ func (mr *MockContestServerClientProxyMockRecorder) QueryContestList(ctx, req an
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestList", reflect.TypeOf((*MockContestServerClientProxy)(nil).QueryContestList), varargs...)
+}
+
+// QueryContestPrivilegeInfo mocks base method.
+func (m *MockContestServerClientProxy) QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestPrivilegeInfoReq, opts ...client.Option) (*QueryContestPrivilegeInfoRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryContestPrivilegeInfo", varargs...)
+	ret0, _ := ret[0].(*QueryContestPrivilegeInfoRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestPrivilegeInfo indicates an expected call of QueryContestPrivilegeInfo.
+func (mr *MockContestServerClientProxyMockRecorder) QueryContestPrivilegeInfo(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestPrivilegeInfo", reflect.TypeOf((*MockContestServerClientProxy)(nil).QueryContestPrivilegeInfo), varargs...)
 }
 
 // UpdateContest mocks base method.
