@@ -30,7 +30,7 @@ type UserServerService interface {
 	// AddUser AddUser 添加用户
 	AddUser(ctx context.Context, req *AddUserReq) (*CommonRsp, error)
 	// QueryUserRank QueryUserRank 查询用户排名
-	QueryUserRank(ctx context.Context, req *QueryUserReq) (*QueryUserRankRsp, error)
+	QueryUserRank(ctx context.Context, req *QueryUserRankReq) (*QueryUserRankRsp, error)
 	// QueryAllUser QueryAllUser 查询所有用户
 	QueryAllUser(ctx context.Context, req *QueryUserReq) (*QueryAllUserRsp, error)
 	// UpdateUser UpdateUser 更新用户
@@ -136,13 +136,13 @@ func UserServerService_AddUser_Handler(svr interface{}, ctx context.Context, f s
 }
 
 func UserServerService_QueryUserRank_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &QueryUserReq{}
+	req := &QueryUserRankReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(UserServerService).QueryUserRank(ctx, reqbody.(*QueryUserReq))
+		return svr.(UserServerService).QueryUserRank(ctx, reqbody.(*QueryUserRankReq))
 	}
 
 	var rsp interface{}
@@ -354,7 +354,7 @@ func (s *UnimplementedUserServer) AddUser(ctx context.Context, req *AddUserReq) 
 }
 
 // QueryUserRank QueryUserRank 查询用户排名
-func (s *UnimplementedUserServer) QueryUserRank(ctx context.Context, req *QueryUserReq) (*QueryUserRankRsp, error) {
+func (s *UnimplementedUserServer) QueryUserRank(ctx context.Context, req *QueryUserRankReq) (*QueryUserRankRsp, error) {
 	return nil, errors.New("rpc QueryUserRank of service UserServer is not implemented")
 }
 
@@ -407,7 +407,7 @@ type UserServerClientProxy interface {
 	// AddUser AddUser 添加用户
 	AddUser(ctx context.Context, req *AddUserReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryUserRank QueryUserRank 查询用户排名
-	QueryUserRank(ctx context.Context, req *QueryUserReq, opts ...client.Option) (rsp *QueryUserRankRsp, err error)
+	QueryUserRank(ctx context.Context, req *QueryUserRankReq, opts ...client.Option) (rsp *QueryUserRankRsp, err error)
 	// QueryAllUser QueryAllUser 查询所有用户
 	QueryAllUser(ctx context.Context, req *QueryUserReq, opts ...client.Option) (rsp *QueryAllUserRsp, err error)
 	// UpdateUser UpdateUser 更新用户
@@ -531,7 +531,7 @@ func (c *UserServerClientProxyImpl) AddUser(ctx context.Context, req *AddUserReq
 	return rsp, nil
 }
 
-func (c *UserServerClientProxyImpl) QueryUserRank(ctx context.Context, req *QueryUserReq, opts ...client.Option) (*QueryUserRankRsp, error) {
+func (c *UserServerClientProxyImpl) QueryUserRank(ctx context.Context, req *QueryUserRankReq, opts ...client.Option) (*QueryUserRankRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.user.UserServer/QueryUserRank")

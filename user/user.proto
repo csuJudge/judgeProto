@@ -15,7 +15,7 @@ service UserServer {
     // AddUser 添加用户
     rpc AddUser(AddUserReq) returns (CommonRsp) {}
     // QueryUserRank 查询用户排名
-    rpc QueryUserRank(QueryUserReq) returns (QueryUserRankRsp) {}
+    rpc QueryUserRank(QueryUserRankReq) returns (QueryUserRankRsp) {}
     // QueryAllUser 查询所有用户
     rpc QueryAllUser(QueryUserReq) returns (QueryAllUserRsp) {}
     // UpdateUser 更新用户
@@ -83,10 +83,17 @@ message QueryAllUserRsp {
     repeated User users = 3;  // 用户列表
 }
 
-message QueryUserReq {
+message QueryUserRankReq {
     int32 page   = 1;  // 页
     int32 limit  = 2;  // 页大小
     int32 userID = 3;  // 用户编号
+}
+
+message QueryUserReq {
+    int32 page    = 1;  // 页
+    int32 limit   = 2;  // 页大小
+    string name   = 3;  // 姓名
+    string number = 4;  // 学号
 }
 
 message UserRank {

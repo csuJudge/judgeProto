@@ -1,0 +1,75 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto/source";
+
+package oj.source;
+
+service SourceServer {
+    // QuerySource 查询来源
+    rpc QuerySource(EmptyReq) returns (QuerySourceRsp) {}
+    // AddSource 添加来源
+    rpc AddSource(AddSourceReq) returns (CommonRsp) {}
+    // QueryProblemSource 查询题目的来源
+    rpc QueryProblemSource(QueryProblemSourceReq) returns (QueryProblemSourceRsp) {}
+    // UpdateSource 更新来源
+    rpc UpdateSource(UpdateSourceReq) returns (CommonRsp) {}
+    // UpdateSourceStatus 更新来源状态
+    rpc UpdateSourceStatus(UpdateSourceStatusReq) returns (CommonRsp) {}
+    // QuerySourcePageSize 查询来源
+    rpc QuerySourcePageSize(QuerySourcePageSizeReq) returns (QuerySourceRsp) {}
+}
+
+message EmptyReq {
+}
+
+message UpdateSourceStatusReq {
+    int32 userID   = 1;  // 用户主键
+    int32 sourceID = 2;  // 来源主键
+    int32 status   = 3;  // 状态
+}
+
+message UpdateSourceReq {
+    int32 sourceID = 1;  // 来源主键
+    string name    = 2;  // 来源名称
+    int32 userID   = 3;  // 用户主键
+}
+
+message QuerySourcePageSizeReq {
+    int32 page  = 1;  // 页
+    int32 limit = 2;  // 页大小
+}
+
+message QuerySourceRsp {
+    string message         = 1;  // 返回信息
+    int32 code             = 2;  // 返回码
+    repeated Source source = 3;  // 来源
+    int32 total            = 4;  // 总数
+}
+
+message AddSourceReq {
+    string name  = 1;  // 来源名称
+    int32 userID = 2;  // 用户主键
+}
+
+message CommonRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+}
+
+message QueryProblemSourceReq {
+    int32 problemID = 1;  // 问题编号
+}
+
+message QueryProblemSourceRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+    string sources = 3;  // 来源的字符串集合
+}
+
+message Source {
+    int32 id          = 1;  // 来源主键
+    string name       = 2;  // 来源名称
+    string creator    = 3;  // 创建者
+    string createTime = 4;  // 创建时间
+    int32 enable      = 5;  // 状态
+    int32 weight      = 6;  // 权重
+}

@@ -151,7 +151,7 @@ func (mr *MockUserServerServiceMockRecorder) QueryUserPrivilege(ctx, req any) *g
 }
 
 // QueryUserRank mocks base method.
-func (m *MockUserServerService) QueryUserRank(ctx context.Context, req *QueryUserReq) (*QueryUserRankRsp, error) {
+func (m *MockUserServerService) QueryUserRank(ctx context.Context, req *QueryUserRankReq) (*QueryUserRankRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryUserRank", ctx, req)
 	ret0, _ := ret[0].(*QueryUserRankRsp)
@@ -394,7 +394,7 @@ func (mr *MockUserServerClientProxyMockRecorder) QueryUserPrivilege(ctx, req any
 }
 
 // QueryUserRank mocks base method.
-func (m *MockUserServerClientProxy) QueryUserRank(ctx context.Context, req *QueryUserReq, opts ...client.Option) (*QueryUserRankRsp, error) {
+func (m *MockUserServerClientProxy) QueryUserRank(ctx context.Context, req *QueryUserRankReq, opts ...client.Option) (*QueryUserRankRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
