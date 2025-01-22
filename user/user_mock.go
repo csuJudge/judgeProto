@@ -45,6 +45,81 @@ func (m *MockUserServerService) ISGOMOCK() struct{} {
 	return struct{}{}
 }
 
+// AddUser mocks base method.
+func (m *MockUserServerService) AddUser(ctx context.Context, req *AddUserReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddUser", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddUser indicates an expected call of AddUser.
+func (mr *MockUserServerServiceMockRecorder) AddUser(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddUser", reflect.TypeOf((*MockUserServerService)(nil).AddUser), ctx, req)
+}
+
+// IsLogin mocks base method.
+func (m *MockUserServerService) IsLogin(ctx context.Context, req *IsLoginReq) (*IsLoginRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IsLogin", ctx, req)
+	ret0, _ := ret[0].(*IsLoginRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IsLogin indicates an expected call of IsLogin.
+func (mr *MockUserServerServiceMockRecorder) IsLogin(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsLogin", reflect.TypeOf((*MockUserServerService)(nil).IsLogin), ctx, req)
+}
+
+// Login mocks base method.
+func (m *MockUserServerService) Login(ctx context.Context, req *LoginReq) (*LoginRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Login", ctx, req)
+	ret0, _ := ret[0].(*LoginRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Login indicates an expected call of Login.
+func (mr *MockUserServerServiceMockRecorder) Login(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Login", reflect.TypeOf((*MockUserServerService)(nil).Login), ctx, req)
+}
+
+// QueryAllUser mocks base method.
+func (m *MockUserServerService) QueryAllUser(ctx context.Context, req *QueryUserReq) (*QueryAllUserRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryAllUser", ctx, req)
+	ret0, _ := ret[0].(*QueryAllUserRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryAllUser indicates an expected call of QueryAllUser.
+func (mr *MockUserServerServiceMockRecorder) QueryAllUser(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllUser", reflect.TypeOf((*MockUserServerService)(nil).QueryAllUser), ctx, req)
+}
+
+// QueryTeacher mocks base method.
+func (m *MockUserServerService) QueryTeacher(ctx context.Context, req *QueryTeacherReq) (*QueryAllUserRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryTeacher", ctx, req)
+	ret0, _ := ret[0].(*QueryAllUserRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryTeacher indicates an expected call of QueryTeacher.
+func (mr *MockUserServerServiceMockRecorder) QueryTeacher(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryTeacher", reflect.TypeOf((*MockUserServerService)(nil).QueryTeacher), ctx, req)
+}
+
 // QueryUserInfo mocks base method.
 func (m *MockUserServerService) QueryUserInfo(ctx context.Context, req *QueryUserInfoReq) (*QueryUserInfoRsp, error) {
 	m.ctrl.T.Helper()
@@ -73,6 +148,51 @@ func (m *MockUserServerService) QueryUserPrivilege(ctx context.Context, req *Que
 func (mr *MockUserServerServiceMockRecorder) QueryUserPrivilege(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserPrivilege", reflect.TypeOf((*MockUserServerService)(nil).QueryUserPrivilege), ctx, req)
+}
+
+// QueryUserRank mocks base method.
+func (m *MockUserServerService) QueryUserRank(ctx context.Context, req *QueryUserReq) (*QueryUserRankRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryUserRank", ctx, req)
+	ret0, _ := ret[0].(*QueryUserRankRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserRank indicates an expected call of QueryUserRank.
+func (mr *MockUserServerServiceMockRecorder) QueryUserRank(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserRank", reflect.TypeOf((*MockUserServerService)(nil).QueryUserRank), ctx, req)
+}
+
+// UpdateMyInfo mocks base method.
+func (m *MockUserServerService) UpdateMyInfo(ctx context.Context, req *UpdateMyInfoReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateMyInfo", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateMyInfo indicates an expected call of UpdateMyInfo.
+func (mr *MockUserServerServiceMockRecorder) UpdateMyInfo(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateMyInfo", reflect.TypeOf((*MockUserServerService)(nil).UpdateMyInfo), ctx, req)
+}
+
+// UpdateUser mocks base method.
+func (m *MockUserServerService) UpdateUser(ctx context.Context, req *UpdateUserReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateUser", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateUser indicates an expected call of UpdateUser.
+func (mr *MockUserServerServiceMockRecorder) UpdateUser(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateUser", reflect.TypeOf((*MockUserServerService)(nil).UpdateUser), ctx, req)
 }
 
 // UpdateUserPassword mocks base method.
@@ -133,6 +253,106 @@ func (m *MockUserServerClientProxy) ISGOMOCK() struct{} {
 	return struct{}{}
 }
 
+// AddUser mocks base method.
+func (m *MockUserServerClientProxy) AddUser(ctx context.Context, req *AddUserReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AddUser", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddUser indicates an expected call of AddUser.
+func (mr *MockUserServerClientProxyMockRecorder) AddUser(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddUser", reflect.TypeOf((*MockUserServerClientProxy)(nil).AddUser), varargs...)
+}
+
+// IsLogin mocks base method.
+func (m *MockUserServerClientProxy) IsLogin(ctx context.Context, req *IsLoginReq, opts ...client.Option) (*IsLoginRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "IsLogin", varargs...)
+	ret0, _ := ret[0].(*IsLoginRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IsLogin indicates an expected call of IsLogin.
+func (mr *MockUserServerClientProxyMockRecorder) IsLogin(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsLogin", reflect.TypeOf((*MockUserServerClientProxy)(nil).IsLogin), varargs...)
+}
+
+// Login mocks base method.
+func (m *MockUserServerClientProxy) Login(ctx context.Context, req *LoginReq, opts ...client.Option) (*LoginRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "Login", varargs...)
+	ret0, _ := ret[0].(*LoginRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Login indicates an expected call of Login.
+func (mr *MockUserServerClientProxyMockRecorder) Login(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Login", reflect.TypeOf((*MockUserServerClientProxy)(nil).Login), varargs...)
+}
+
+// QueryAllUser mocks base method.
+func (m *MockUserServerClientProxy) QueryAllUser(ctx context.Context, req *QueryUserReq, opts ...client.Option) (*QueryAllUserRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryAllUser", varargs...)
+	ret0, _ := ret[0].(*QueryAllUserRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryAllUser indicates an expected call of QueryAllUser.
+func (mr *MockUserServerClientProxyMockRecorder) QueryAllUser(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllUser", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryAllUser), varargs...)
+}
+
+// QueryTeacher mocks base method.
+func (m *MockUserServerClientProxy) QueryTeacher(ctx context.Context, req *QueryTeacherReq, opts ...client.Option) (*QueryAllUserRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryTeacher", varargs...)
+	ret0, _ := ret[0].(*QueryAllUserRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryTeacher indicates an expected call of QueryTeacher.
+func (mr *MockUserServerClientProxyMockRecorder) QueryTeacher(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryTeacher", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryTeacher), varargs...)
+}
+
 // QueryUserInfo mocks base method.
 func (m *MockUserServerClientProxy) QueryUserInfo(ctx context.Context, req *QueryUserInfoReq, opts ...client.Option) (*QueryUserInfoRsp, error) {
 	m.ctrl.T.Helper()
@@ -171,6 +391,66 @@ func (mr *MockUserServerClientProxyMockRecorder) QueryUserPrivilege(ctx, req any
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserPrivilege", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryUserPrivilege), varargs...)
+}
+
+// QueryUserRank mocks base method.
+func (m *MockUserServerClientProxy) QueryUserRank(ctx context.Context, req *QueryUserReq, opts ...client.Option) (*QueryUserRankRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryUserRank", varargs...)
+	ret0, _ := ret[0].(*QueryUserRankRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserRank indicates an expected call of QueryUserRank.
+func (mr *MockUserServerClientProxyMockRecorder) QueryUserRank(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserRank", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryUserRank), varargs...)
+}
+
+// UpdateMyInfo mocks base method.
+func (m *MockUserServerClientProxy) UpdateMyInfo(ctx context.Context, req *UpdateMyInfoReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateMyInfo", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateMyInfo indicates an expected call of UpdateMyInfo.
+func (mr *MockUserServerClientProxyMockRecorder) UpdateMyInfo(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateMyInfo", reflect.TypeOf((*MockUserServerClientProxy)(nil).UpdateMyInfo), varargs...)
+}
+
+// UpdateUser mocks base method.
+func (m *MockUserServerClientProxy) UpdateUser(ctx context.Context, req *UpdateUserReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateUser", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateUser indicates an expected call of UpdateUser.
+func (mr *MockUserServerClientProxyMockRecorder) UpdateUser(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateUser", reflect.TypeOf((*MockUserServerClientProxy)(nil).UpdateUser), varargs...)
 }
 
 // UpdateUserPassword mocks base method.
