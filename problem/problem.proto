@@ -63,8 +63,7 @@ message QueryProblemListReq {
     int32 page   = 1;  // 页
     int32 limit  = 2;  // 页大小
     int32 userID = 3;  // 用户编号
-    string name = 4; // 题目名称
-    int32 problemID = 5; // 题目编号
+    string condition = 4; // 条件（名称或者编号）
 }
 
 message QueryProblemListRsp {
