@@ -193,6 +193,10 @@ message Problem {
     string knowledges        = 13;  // 知识点
     int32 enable             = 14;  // 状态
     int32 difficulty         = 15;  // 难度
+    string creator = 16; // 提交者
+    string updateTime = 17; // 修改时间
+    string createdTime = 18; // 创建时间
+    string updatedBy = 19; // 更新者
 }
 
 message AddProblemReq {
