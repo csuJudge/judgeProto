@@ -57,6 +57,7 @@ message LoginReq {
     string password = 2;  // 密码
     string name     = 3;  // 用户名
     int32 loginType = 4;  // 登录方式
+    string ip = 5; // 登录的ip
 }
 
 message LoginRsp {
