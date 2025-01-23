@@ -181,10 +181,10 @@ func (mr *MockProblemServerServiceMockRecorder) QueryProblemList(ctx, req any) *
 }
 
 // QueryProblemName mocks base method.
-func (m *MockProblemServerService) QueryProblemName(ctx context.Context, req *QueryProblemNameReq) (*QueryProblemListRsp, error) {
+func (m *MockProblemServerService) QueryProblemName(ctx context.Context, req *QueryProblemNameReq) (*QueryAllProblemRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryProblemName", ctx, req)
-	ret0, _ := ret[0].(*QueryProblemListRsp)
+	ret0, _ := ret[0].(*QueryAllProblemRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -464,14 +464,14 @@ func (mr *MockProblemServerClientProxyMockRecorder) QueryProblemList(ctx, req an
 }
 
 // QueryProblemName mocks base method.
-func (m *MockProblemServerClientProxy) QueryProblemName(ctx context.Context, req *QueryProblemNameReq, opts ...client.Option) (*QueryProblemListRsp, error) {
+func (m *MockProblemServerClientProxy) QueryProblemName(ctx context.Context, req *QueryProblemNameReq, opts ...client.Option) (*QueryAllProblemRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "QueryProblemName", varargs...)
-	ret0, _ := ret[0].(*QueryProblemListRsp)
+	ret0, _ := ret[0].(*QueryAllProblemRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

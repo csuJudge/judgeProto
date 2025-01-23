@@ -32,7 +32,7 @@ type ProblemServerService interface {
 	// QueryAllProblem QueryAllProblem 查询所有题目列表
 	QueryAllProblem(ctx context.Context, req *QueryProblemListReq) (*QueryAllProblemRsp, error)
 	// QueryProblemName QueryProblemName 查询题目名称
-	QueryProblemName(ctx context.Context, req *QueryProblemNameReq) (*QueryProblemListRsp, error)
+	QueryProblemName(ctx context.Context, req *QueryProblemNameReq) (*QueryAllProblemRsp, error)
 	// UpdateProblemVisitNumber UpdateProblemVisitNumber 更新题目访问数据
 	UpdateProblemVisitNumber(ctx context.Context, req *UpdateProblemVisitNumberReq) (*CommonRsp, error)
 	// QueryProblemDataList QueryProblemDataList 查询题目样例
@@ -407,7 +407,7 @@ func (s *UnimplementedProblemServer) QueryAllProblem(ctx context.Context, req *Q
 }
 
 // QueryProblemName QueryProblemName 查询题目名称
-func (s *UnimplementedProblemServer) QueryProblemName(ctx context.Context, req *QueryProblemNameReq) (*QueryProblemListRsp, error) {
+func (s *UnimplementedProblemServer) QueryProblemName(ctx context.Context, req *QueryProblemNameReq) (*QueryAllProblemRsp, error) {
 	return nil, errors.New("rpc QueryProblemName of service ProblemServer is not implemented")
 }
 
@@ -467,7 +467,7 @@ type ProblemServerClientProxy interface {
 	// QueryAllProblem QueryAllProblem 查询所有题目列表
 	QueryAllProblem(ctx context.Context, req *QueryProblemListReq, opts ...client.Option) (rsp *QueryAllProblemRsp, err error)
 	// QueryProblemName QueryProblemName 查询题目名称
-	QueryProblemName(ctx context.Context, req *QueryProblemNameReq, opts ...client.Option) (rsp *QueryProblemListRsp, err error)
+	QueryProblemName(ctx context.Context, req *QueryProblemNameReq, opts ...client.Option) (rsp *QueryAllProblemRsp, err error)
 	// UpdateProblemVisitNumber UpdateProblemVisitNumber 更新题目访问数据
 	UpdateProblemVisitNumber(ctx context.Context, req *UpdateProblemVisitNumberReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryProblemDataList QueryProblemDataList 查询题目样例
@@ -613,7 +613,7 @@ func (c *ProblemServerClientProxyImpl) QueryAllProblem(ctx context.Context, req 
 	return rsp, nil
 }
 
-func (c *ProblemServerClientProxyImpl) QueryProblemName(ctx context.Context, req *QueryProblemNameReq, opts ...client.Option) (*QueryProblemListRsp, error) {
+func (c *ProblemServerClientProxyImpl) QueryProblemName(ctx context.Context, req *QueryProblemNameReq, opts ...client.Option) (*QueryAllProblemRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.problem.ProblemServer/QueryProblemName")
@@ -626,7 +626,7 @@ func (c *ProblemServerClientProxyImpl) QueryProblemName(ctx context.Context, req
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &QueryProblemListRsp{}
+	rsp := &QueryAllProblemRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

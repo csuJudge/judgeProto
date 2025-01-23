@@ -17,7 +17,7 @@ service ProblemServer {
     // QueryAllProblem 查询所有题目列表
     rpc QueryAllProblem(QueryProblemListReq) returns (QueryAllProblemRsp) {}
     // QueryProblemName 查询题目名称
-    rpc QueryProblemName(QueryProblemNameReq) returns (QueryProblemListRsp) {}
+    rpc QueryProblemName(QueryProblemNameReq) returns (QueryAllProblemRsp) {}
     // UpdateProblemVisitNumber 更新题目访问数据
     rpc UpdateProblemVisitNumber(updateProblemVisitNumberReq) returns (CommonRsp) {}
     // QueryProblemDataList 查询题目样例
