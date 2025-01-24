@@ -37,6 +37,8 @@ type SolutionServerService interface {
 	QuerySimSolutionData(ctx context.Context, req *QuerySimSolutionDataReq) (*QuerySimSolutionDataRsp, error)
 	// AddSolution AddSolution 添加提交数据
 	AddSolution(ctx context.Context, req *AddSolutionReq) (*CommonRsp, error)
+	// QueryUserProblemSolution QueryUserProblemSolution 查询用户题目的提交数据
+	QueryUserProblemSolution(ctx context.Context, req *QueryUserProblemSolutionReq) (*QueryUserProblemSolutionRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -201,6 +203,24 @@ func SolutionServerService_AddSolution_Handler(svr interface{}, ctx context.Cont
 	return rsp, nil
 }
 
+func SolutionServerService_QueryUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryUserProblemSolutionReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryUserProblemSolution(ctx, reqbody.(*QueryUserProblemSolutionReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -241,6 +261,10 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/AddSolution",
 			Func: SolutionServerService_AddSolution_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryUserProblemSolution",
+			Func: SolutionServerService_QueryUserProblemSolution_Handler,
 		},
 	},
 }
@@ -301,6 +325,11 @@ func (s *UnimplementedSolutionServer) AddSolution(ctx context.Context, req *AddS
 	return nil, errors.New("rpc AddSolution of service SolutionServer is not implemented")
 }
 
+// QueryUserProblemSolution QueryUserProblemSolution 查询用户题目的提交数据
+func (s *UnimplementedSolutionServer) QueryUserProblemSolution(ctx context.Context, req *QueryUserProblemSolutionReq) (*QueryUserProblemSolutionRsp, error) {
+	return nil, errors.New("rpc QueryUserProblemSolution of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -327,6 +356,8 @@ type SolutionServerClientProxy interface {
 	QuerySimSolutionData(ctx context.Context, req *QuerySimSolutionDataReq, opts ...client.Option) (rsp *QuerySimSolutionDataRsp, err error)
 	// AddSolution AddSolution 添加提交数据
 	AddSolution(ctx context.Context, req *AddSolutionReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// QueryUserProblemSolution QueryUserProblemSolution 查询用户题目的提交数据
+	QueryUserProblemSolution(ctx context.Context, req *QueryUserProblemSolutionReq, opts ...client.Option) (rsp *QueryUserProblemSolutionRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -512,6 +543,26 @@ func (c *SolutionServerClientProxyImpl) AddSolution(ctx context.Context, req *Ad
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryUserProblemSolution(ctx context.Context, req *QueryUserProblemSolutionReq, opts ...client.Option) (*QueryUserProblemSolutionRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryUserProblemSolution")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryUserProblemSolution")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryUserProblemSolutionRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

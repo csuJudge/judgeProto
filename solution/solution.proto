@@ -22,6 +22,20 @@ service SolutionServer {
     rpc QuerySimSolutionData(QuerySimSolutionDataReq) returns (QuerySimSolutionDataRsp) {}
     // AddSolution 添加提交数据
     rpc AddSolution(AddSolutionReq) returns (CommonRsp) {}
+    // QueryUserProblemSolution 查询用户题目的提交数据
+    rpc QueryUserProblemSolution(QueryUserProblemSolutionReq) returns (QueryUserProblemSolutionRsp) {}
+}
+
+message QueryUserProblemSolutionReq {
+    int32 userID    = 1;  // 用户编号
+    string problems = 2;  // 题目编号集合
+}
+
+message QueryUserProblemSolutionRsp {
+    string message          = 1;  // 返回信息
+    int32 code              = 2;  // 返回码
+    string acceptProblems   = 3;  // 正确的题目
+    string unAcceptProblems = 4;  // 不正确的题目
 }
 
 message AddSolutionReq {
