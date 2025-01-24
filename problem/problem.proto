@@ -164,11 +164,12 @@ message QueryProblemRsp {
 
 message ProblemList {
     int32 problemID  = 1;  // 题目编号
-    int32 solved     = 2;  // 解决数
-    int32 submission = 3;  // 提交数
-    int32 difficulty = 4;  // 难度
-    float passRate   = 5;  // 通过率
-    int32 isDone     = 6;  // 是否做完
+    string name      = 2;  // 题目名称
+    int32 solved     = 3;  // 解决数
+    int32 submission = 4;  // 提交数
+    int32 difficulty = 5;  // 难度
+    float passRate   = 6;  // 通过率
+    int32 isDone     = 7;  // 是否做完
 }
 
 message QueryAllProblemRsp {
