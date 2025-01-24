@@ -60,10 +60,11 @@ message QueryProblemNameReq {
 }
 
 message QueryProblemListReq {
-    int32 page   = 1;  // 页
-    int32 limit  = 2;  // 页大小
-    int32 userID = 3;  // 用户编号
-    string condition = 4; // 条件（名称或者编号）
+    int32 page       = 1;  // 页
+    int32 limit      = 2;  // 页大小
+    int32 userID     = 3;  // 用户编号
+    string condition = 4;  // 条件（名称或者编号）
+    string knowledge = 5;  // 知识点
 }
 
 message QueryProblemListRsp {
@@ -193,10 +194,10 @@ message Problem {
     string knowledges        = 13;  // 知识点
     int32 enable             = 14;  // 状态
     int32 difficulty         = 15;  // 难度
-    string creator = 16; // 提交者
-    string updateTime = 17; // 修改时间
-    string createdTime = 18; // 创建时间
-    string updatedBy = 19; // 更新者
+    string creator           = 16;  // 提交者
+    string updateTime        = 17;  // 修改时间
+    string createdTime       = 18;  // 创建时间
+    string updatedBy         = 19;  // 更新者
 }
 
 message AddProblemReq {
