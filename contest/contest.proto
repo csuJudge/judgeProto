@@ -88,7 +88,7 @@ message QueryContestRsp {
     string message  = 1;  // 返回信息
     int32 code      = 2;  // 返回码
     Contest contest = 3;  // 作业
-    int32 see       = 4;  // 是否可见
+    bool see        = 4;  // 是否可见
 }
 
 message Contest {
