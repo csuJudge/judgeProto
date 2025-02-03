@@ -21,9 +21,44 @@ service SolutionServer {
     // QuerySimSolutionData 查询相似的代码数据
     rpc QuerySimSolutionData(QuerySimSolutionDataReq) returns (QuerySimSolutionDataRsp) {}
     // AddSolution 添加提交数据
-    rpc AddSolution(AddSolutionReq) returns (CommonRsp) {}
+    rpc AddSolution(AddSolutionReq) returns (AddSolutionRsp) {}
     // QueryUserProblemSolution 查询用户题目的提交数据
     rpc QueryUserProblemSolution(QueryUserProblemSolutionReq) returns (QueryUserProblemSolutionRsp) {}
+    // QuerySolution 查询提交数据
+    rpc QuerySolution(QuerySolutionReq) returns (QuerySolutionRsp) {}
+    // AddTestSolution 测试
+    rpc AddTestSolution(AddSolutionReq) returns (AddSolutionRsp) {}
+}
+
+message AddSolutionRsp {
+    string message   = 1;  // 返回信息
+    int32 code       = 2;  // 返回码
+    int32 solutionID = 3;  // 提交编号
+}
+
+message QuerySolutionReq {
+    int32 contestID = 1;  // 作业编号
+    int32 page      = 2;  // 页
+    int32 limit     = 3;  // 页大小
+}
+
+message QuerySolutionRsp {
+    int32 solutionID      = 1;   // 提交编号
+    int32 problemID       = 2;   // 题目编号
+    int32 result          = 3;   // 结果
+    double passRate       = 4;   // 通过率
+    int32 memory          = 5;   // 内存
+    int32 timeLimit       = 6;   // 时间限制
+    int32 language        = 7;   // 代码长度
+    int32 codeLength      = 8;   // 代码长度
+    string creator        = 9;   // 提交者
+    string creatTime      = 10;  // 提交时间
+    bool isSeeRuntimeInfo = 11;  // 是否可见运行信息
+    string userCode       = 12;  // 用户提交的代码
+    int32 creatorID       = 13;  // 提交者编号
+    bool codeView         = 14;  // 代码是否可见
+    string problemName    = 15;  // 题目名称
+    string userNumber     = 16;  // 用户学号
 }
 
 message QueryUserProblemSolutionReq {
@@ -47,6 +82,7 @@ message AddSolutionReq {
     string input     = 6;  // 输入
     string keyAction = 7;  // 击键行为
     int32 type       = 8;  // 类型
+    string ip        = 9;  // ip信息
 }
 
 message QuerySimListReq {

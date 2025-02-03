@@ -46,10 +46,10 @@ func (m *MockSolutionServerService) ISGOMOCK() struct{} {
 }
 
 // AddSolution mocks base method.
-func (m *MockSolutionServerService) AddSolution(ctx context.Context, req *AddSolutionReq) (*CommonRsp, error) {
+func (m *MockSolutionServerService) AddSolution(ctx context.Context, req *AddSolutionReq) (*AddSolutionRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddSolution", ctx, req)
-	ret0, _ := ret[0].(*CommonRsp)
+	ret0, _ := ret[0].(*AddSolutionRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -58,6 +58,21 @@ func (m *MockSolutionServerService) AddSolution(ctx context.Context, req *AddSol
 func (mr *MockSolutionServerServiceMockRecorder) AddSolution(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddSolution", reflect.TypeOf((*MockSolutionServerService)(nil).AddSolution), ctx, req)
+}
+
+// AddTestSolution mocks base method.
+func (m *MockSolutionServerService) AddTestSolution(ctx context.Context, req *AddSolutionReq) (*AddSolutionRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddTestSolution", ctx, req)
+	ret0, _ := ret[0].(*AddSolutionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddTestSolution indicates an expected call of AddTestSolution.
+func (mr *MockSolutionServerServiceMockRecorder) AddTestSolution(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddTestSolution", reflect.TypeOf((*MockSolutionServerService)(nil).AddTestSolution), ctx, req)
 }
 
 // CountUserProblemSolution mocks base method.
@@ -133,6 +148,21 @@ func (m *MockSolutionServerService) QuerySimSolutionData(ctx context.Context, re
 func (mr *MockSolutionServerServiceMockRecorder) QuerySimSolutionData(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySimSolutionData", reflect.TypeOf((*MockSolutionServerService)(nil).QuerySimSolutionData), ctx, req)
+}
+
+// QuerySolution mocks base method.
+func (m *MockSolutionServerService) QuerySolution(ctx context.Context, req *QuerySolutionReq) (*QuerySolutionRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuerySolution", ctx, req)
+	ret0, _ := ret[0].(*QuerySolutionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuerySolution indicates an expected call of QuerySolution.
+func (mr *MockSolutionServerServiceMockRecorder) QuerySolution(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySolution", reflect.TypeOf((*MockSolutionServerService)(nil).QuerySolution), ctx, req)
 }
 
 // QuerySolutionResult mocks base method.
@@ -224,14 +254,14 @@ func (m *MockSolutionServerClientProxy) ISGOMOCK() struct{} {
 }
 
 // AddSolution mocks base method.
-func (m *MockSolutionServerClientProxy) AddSolution(ctx context.Context, req *AddSolutionReq, opts ...client.Option) (*CommonRsp, error) {
+func (m *MockSolutionServerClientProxy) AddSolution(ctx context.Context, req *AddSolutionReq, opts ...client.Option) (*AddSolutionRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "AddSolution", varargs...)
-	ret0, _ := ret[0].(*CommonRsp)
+	ret0, _ := ret[0].(*AddSolutionRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -241,6 +271,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) AddSolution(ctx, req any, o
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).AddSolution), varargs...)
+}
+
+// AddTestSolution mocks base method.
+func (m *MockSolutionServerClientProxy) AddTestSolution(ctx context.Context, req *AddSolutionReq, opts ...client.Option) (*AddSolutionRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AddTestSolution", varargs...)
+	ret0, _ := ret[0].(*AddSolutionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddTestSolution indicates an expected call of AddTestSolution.
+func (mr *MockSolutionServerClientProxyMockRecorder) AddTestSolution(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddTestSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).AddTestSolution), varargs...)
 }
 
 // CountUserProblemSolution mocks base method.
@@ -341,6 +391,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) QuerySimSolutionData(ctx, r
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySimSolutionData", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QuerySimSolutionData), varargs...)
+}
+
+// QuerySolution mocks base method.
+func (m *MockSolutionServerClientProxy) QuerySolution(ctx context.Context, req *QuerySolutionReq, opts ...client.Option) (*QuerySolutionRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QuerySolution", varargs...)
+	ret0, _ := ret[0].(*QuerySolutionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuerySolution indicates an expected call of QuerySolution.
+func (mr *MockSolutionServerClientProxyMockRecorder) QuerySolution(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuerySolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QuerySolution), varargs...)
 }
 
 // QuerySolutionResult mocks base method.
