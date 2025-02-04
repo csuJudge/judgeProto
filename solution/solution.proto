@@ -64,6 +64,11 @@ message QuerySolutionReq {
     int32 contestID = 1;  // 作业编号
     int32 page      = 2;  // 页
     int32 limit     = 3;  // 页大小
+    int32 userID    = 4;  // 用户编号
+    int32 result    = 5;  // 结果
+    string user     = 6;  // 姓名 or 学号
+    int32 language  = 7;  // 语言
+    int32 problemID = 8;  // 题目编号
 }
 
 message QuerySolutionRsp {

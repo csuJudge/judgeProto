@@ -11,11 +11,38 @@ service CourseServer {
 service ClassServer {
     // QueryUserClass 查询用户的班级
     rpc QueryUserClass(QueryUserClassReq) returns (QueryUserClassRsp) {}
+    // AddClass 添加班级
+    rpc AddClass(AddClassReq) returns (CommonRsp) {}
+    // UpdateClass 更新班级
+    rpc UpdateClass(UpdateClassReq) returns (CommonRsp) {}
+    // UpdateClassStatus 更新班级状态
+    rpc UpdateClassStatus(UpdateClassStatusReq) returns (CommonRsp) {}
 }
 
 service TermServer {
     // AddTerm 添加学期
     rpc AddTerm(AddTermReq) returns (CommonRsp) {}
+}
+
+message UpdateClassStatusReq {
+    int32 userID = 1;  // 用户主键
+    int32 clasID = 2;  // 班级主键
+    int32 status = 3;  // 状态
+}
+
+message UpdateClassReq {
+    int32 userID       = 1;  // 更新者
+    int32 teacher      = 2;  // 老师
+    string name        = 3;  // 班级名
+    string description = 4;  // 班级描述
+    int32 classID      = 5;  // 班级编号
+}
+
+message AddClassReq {
+    int32 userID       = 1;  // 创建者
+    int32 teacher      = 2;  // 老师
+    string name        = 3;  // 班级名
+    string description = 4;  // 班级描述
 }
 
 message QueryUserClassReq {

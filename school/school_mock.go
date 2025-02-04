@@ -88,6 +88,21 @@ func (m *MockClassServerService) ISGOMOCK() struct{} {
 	return struct{}{}
 }
 
+// AddClass mocks base method.
+func (m *MockClassServerService) AddClass(ctx context.Context, req *AddClassReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddClass", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddClass indicates an expected call of AddClass.
+func (mr *MockClassServerServiceMockRecorder) AddClass(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddClass", reflect.TypeOf((*MockClassServerService)(nil).AddClass), ctx, req)
+}
+
 // QueryUserClass mocks base method.
 func (m *MockClassServerService) QueryUserClass(ctx context.Context, req *QueryUserClassReq) (*QueryUserClassRsp, error) {
 	m.ctrl.T.Helper()
@@ -101,6 +116,36 @@ func (m *MockClassServerService) QueryUserClass(ctx context.Context, req *QueryU
 func (mr *MockClassServerServiceMockRecorder) QueryUserClass(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserClass", reflect.TypeOf((*MockClassServerService)(nil).QueryUserClass), ctx, req)
+}
+
+// UpdateClass mocks base method.
+func (m *MockClassServerService) UpdateClass(ctx context.Context, req *UpdateClassReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateClass", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateClass indicates an expected call of UpdateClass.
+func (mr *MockClassServerServiceMockRecorder) UpdateClass(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateClass", reflect.TypeOf((*MockClassServerService)(nil).UpdateClass), ctx, req)
+}
+
+// UpdateClassStatus mocks base method.
+func (m *MockClassServerService) UpdateClassStatus(ctx context.Context, req *UpdateClassStatusReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateClassStatus", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateClassStatus indicates an expected call of UpdateClassStatus.
+func (mr *MockClassServerServiceMockRecorder) UpdateClassStatus(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateClassStatus", reflect.TypeOf((*MockClassServerService)(nil).UpdateClassStatus), ctx, req)
 }
 
 // MockTermServerService is a mock of TermServerService interface.
@@ -222,6 +267,26 @@ func (m *MockClassServerClientProxy) ISGOMOCK() struct{} {
 	return struct{}{}
 }
 
+// AddClass mocks base method.
+func (m *MockClassServerClientProxy) AddClass(ctx context.Context, req *AddClassReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AddClass", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddClass indicates an expected call of AddClass.
+func (mr *MockClassServerClientProxyMockRecorder) AddClass(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddClass", reflect.TypeOf((*MockClassServerClientProxy)(nil).AddClass), varargs...)
+}
+
 // QueryUserClass mocks base method.
 func (m *MockClassServerClientProxy) QueryUserClass(ctx context.Context, req *QueryUserClassReq, opts ...client.Option) (*QueryUserClassRsp, error) {
 	m.ctrl.T.Helper()
@@ -240,6 +305,46 @@ func (mr *MockClassServerClientProxyMockRecorder) QueryUserClass(ctx, req any, o
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserClass", reflect.TypeOf((*MockClassServerClientProxy)(nil).QueryUserClass), varargs...)
+}
+
+// UpdateClass mocks base method.
+func (m *MockClassServerClientProxy) UpdateClass(ctx context.Context, req *UpdateClassReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateClass", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateClass indicates an expected call of UpdateClass.
+func (mr *MockClassServerClientProxyMockRecorder) UpdateClass(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateClass", reflect.TypeOf((*MockClassServerClientProxy)(nil).UpdateClass), varargs...)
+}
+
+// UpdateClassStatus mocks base method.
+func (m *MockClassServerClientProxy) UpdateClassStatus(ctx context.Context, req *UpdateClassStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateClassStatus", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateClassStatus indicates an expected call of UpdateClassStatus.
+func (mr *MockClassServerClientProxyMockRecorder) UpdateClassStatus(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateClassStatus", reflect.TypeOf((*MockClassServerClientProxy)(nil).UpdateClassStatus), varargs...)
 }
 
 // MockTermServerClientProxy is a mock of TermServerClientProxy interface.

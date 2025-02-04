@@ -64,6 +64,12 @@ func RegisterCourseServerService(s server.Service, svr CourseServerService) {
 type ClassServerService interface {
 	// QueryUserClass QueryUserClass 查询用户的班级
 	QueryUserClass(ctx context.Context, req *QueryUserClassReq) (*QueryUserClassRsp, error)
+	// AddClass AddClass 添加班级
+	AddClass(ctx context.Context, req *AddClassReq) (*CommonRsp, error)
+	// UpdateClass UpdateClass 更新班级
+	UpdateClass(ctx context.Context, req *UpdateClassReq) (*CommonRsp, error)
+	// UpdateClassStatus UpdateClassStatus 更新班级状态
+	UpdateClassStatus(ctx context.Context, req *UpdateClassStatusReq) (*CommonRsp, error)
 }
 
 func ClassServerService_QueryUserClass_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -84,6 +90,60 @@ func ClassServerService_QueryUserClass_Handler(svr interface{}, ctx context.Cont
 	return rsp, nil
 }
 
+func ClassServerService_AddClass_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &AddClassReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ClassServerService).AddClass(ctx, reqbody.(*AddClassReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ClassServerService_UpdateClass_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UpdateClassReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ClassServerService).UpdateClass(ctx, reqbody.(*UpdateClassReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ClassServerService_UpdateClassStatus_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UpdateClassStatusReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ClassServerService).UpdateClassStatus(ctx, reqbody.(*UpdateClassStatusReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // ClassServerServer_ServiceDesc descriptor for server.RegisterService.
 var ClassServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.school.ClassServer",
@@ -92,6 +152,18 @@ var ClassServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.school.ClassServer/QueryUserClass",
 			Func: ClassServerService_QueryUserClass_Handler,
+		},
+		{
+			Name: "/oj.school.ClassServer/AddClass",
+			Func: ClassServerService_AddClass_Handler,
+		},
+		{
+			Name: "/oj.school.ClassServer/UpdateClass",
+			Func: ClassServerService_UpdateClass_Handler,
+		},
+		{
+			Name: "/oj.school.ClassServer/UpdateClassStatus",
+			Func: ClassServerService_UpdateClassStatus_Handler,
 		},
 	},
 }
@@ -162,6 +234,21 @@ func (s *UnimplementedClassServer) QueryUserClass(ctx context.Context, req *Quer
 	return nil, errors.New("rpc QueryUserClass of service ClassServer is not implemented")
 }
 
+// AddClass AddClass 添加班级
+func (s *UnimplementedClassServer) AddClass(ctx context.Context, req *AddClassReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc AddClass of service ClassServer is not implemented")
+}
+
+// UpdateClass UpdateClass 更新班级
+func (s *UnimplementedClassServer) UpdateClass(ctx context.Context, req *UpdateClassReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc UpdateClass of service ClassServer is not implemented")
+}
+
+// UpdateClassStatus UpdateClassStatus 更新班级状态
+func (s *UnimplementedClassServer) UpdateClassStatus(ctx context.Context, req *UpdateClassStatusReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc UpdateClassStatus of service ClassServer is not implemented")
+}
+
 type UnimplementedTermServer struct{}
 
 // AddTerm AddTerm 添加学期
@@ -214,6 +301,12 @@ func (c *CourseServerClientProxyImpl) AddCourse(ctx context.Context, req *AddCou
 type ClassServerClientProxy interface {
 	// QueryUserClass QueryUserClass 查询用户的班级
 	QueryUserClass(ctx context.Context, req *QueryUserClassReq, opts ...client.Option) (rsp *QueryUserClassRsp, err error)
+	// AddClass AddClass 添加班级
+	AddClass(ctx context.Context, req *AddClassReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// UpdateClass UpdateClass 更新班级
+	UpdateClass(ctx context.Context, req *UpdateClassReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// UpdateClassStatus UpdateClassStatus 更新班级状态
+	UpdateClassStatus(ctx context.Context, req *UpdateClassStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
 }
 
 type ClassServerClientProxyImpl struct {
@@ -239,6 +332,66 @@ func (c *ClassServerClientProxyImpl) QueryUserClass(ctx context.Context, req *Qu
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryUserClassRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ClassServerClientProxyImpl) AddClass(ctx context.Context, req *AddClassReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.school.ClassServer/AddClass")
+	msg.WithCalleeServiceName(ClassServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ClassServer")
+	msg.WithCalleeMethod("AddClass")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ClassServerClientProxyImpl) UpdateClass(ctx context.Context, req *UpdateClassReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.school.ClassServer/UpdateClass")
+	msg.WithCalleeServiceName(ClassServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ClassServer")
+	msg.WithCalleeMethod("UpdateClass")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ClassServerClientProxyImpl) UpdateClassStatus(ctx context.Context, req *UpdateClassStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.school.ClassServer/UpdateClassStatus")
+	msg.WithCalleeServiceName(ClassServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ClassServer")
+	msg.WithCalleeMethod("UpdateClassStatus")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
