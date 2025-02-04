@@ -3,6 +3,14 @@ option go_package = "github.com/csuJudge/judgeProto/solution";
 
 package oj.solution;
 
+service CodeServer {
+    rpc AddCode(AddCodeReq) returns (CommonRsp) {}
+}
+
+service KeyActionServer {
+    rpc AddKeyAction(AddKeyActionReq) returns (CommonRsp) {}
+}
+
 service SolutionServer {
     // CountUserProblemSolution 计算用户题目的提交次数
     rpc CountUserProblemSolution(CountUserProblemSolutionReq) returns (CountUserProblemSolutionRsp) {}
@@ -28,6 +36,22 @@ service SolutionServer {
     rpc QuerySolution(QuerySolutionReq) returns (QuerySolutionRsp) {}
     // AddTestSolution 测试
     rpc AddTestSolution(AddSolutionReq) returns (AddSolutionRsp) {}
+}
+
+message AddCodeReq {
+    int32 problemID = 1;  // 问题编号
+    int32 language  = 2;  // 语言类型
+    int32 userID    = 3;  // 用户编号
+    string code     = 4;  // 代码
+    string codeName = 5;  // 代码名称
+}
+
+message AddKeyActionReq {
+    int32 problemID  = 1;  // 问题编号
+    int32 language   = 2;  // 语言类型
+    int32 userID     = 3;  // 用户编号
+    string action    = 4;  // 击键行为
+    string startTime = 5;  // 开始时间
 }
 
 message AddSolutionRsp {

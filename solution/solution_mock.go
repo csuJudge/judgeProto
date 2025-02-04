@@ -17,6 +17,92 @@ import (
 	client "trpc.group/trpc-go/trpc-go/client"
 )
 
+// MockCodeServerService is a mock of CodeServerService interface.
+type MockCodeServerService struct {
+	ctrl     *gomock.Controller
+	recorder *MockCodeServerServiceMockRecorder
+}
+
+// MockCodeServerServiceMockRecorder is the mock recorder for MockCodeServerService.
+type MockCodeServerServiceMockRecorder struct {
+	mock *MockCodeServerService
+}
+
+// NewMockCodeServerService creates a new mock instance.
+func NewMockCodeServerService(ctrl *gomock.Controller) *MockCodeServerService {
+	mock := &MockCodeServerService{ctrl: ctrl}
+	mock.recorder = &MockCodeServerServiceMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockCodeServerService) EXPECT() *MockCodeServerServiceMockRecorder {
+	return m.recorder
+}
+
+// ISGOMOCK indicates that this struct is a gomock mock.
+func (m *MockCodeServerService) ISGOMOCK() struct{} {
+	return struct{}{}
+}
+
+// AddCode mocks base method.
+func (m *MockCodeServerService) AddCode(ctx context.Context, req *AddCodeReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddCode", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddCode indicates an expected call of AddCode.
+func (mr *MockCodeServerServiceMockRecorder) AddCode(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddCode", reflect.TypeOf((*MockCodeServerService)(nil).AddCode), ctx, req)
+}
+
+// MockKeyActionServerService is a mock of KeyActionServerService interface.
+type MockKeyActionServerService struct {
+	ctrl     *gomock.Controller
+	recorder *MockKeyActionServerServiceMockRecorder
+}
+
+// MockKeyActionServerServiceMockRecorder is the mock recorder for MockKeyActionServerService.
+type MockKeyActionServerServiceMockRecorder struct {
+	mock *MockKeyActionServerService
+}
+
+// NewMockKeyActionServerService creates a new mock instance.
+func NewMockKeyActionServerService(ctrl *gomock.Controller) *MockKeyActionServerService {
+	mock := &MockKeyActionServerService{ctrl: ctrl}
+	mock.recorder = &MockKeyActionServerServiceMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockKeyActionServerService) EXPECT() *MockKeyActionServerServiceMockRecorder {
+	return m.recorder
+}
+
+// ISGOMOCK indicates that this struct is a gomock mock.
+func (m *MockKeyActionServerService) ISGOMOCK() struct{} {
+	return struct{}{}
+}
+
+// AddKeyAction mocks base method.
+func (m *MockKeyActionServerService) AddKeyAction(ctx context.Context, req *AddKeyActionReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddKeyAction", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddKeyAction indicates an expected call of AddKeyAction.
+func (mr *MockKeyActionServerServiceMockRecorder) AddKeyAction(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddKeyAction", reflect.TypeOf((*MockKeyActionServerService)(nil).AddKeyAction), ctx, req)
+}
+
 // MockSolutionServerService is a mock of SolutionServerService interface.
 type MockSolutionServerService struct {
 	ctrl     *gomock.Controller
@@ -223,6 +309,102 @@ func (m *MockSolutionServerService) RejudgeSolution(ctx context.Context, req *Re
 func (mr *MockSolutionServerServiceMockRecorder) RejudgeSolution(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RejudgeSolution", reflect.TypeOf((*MockSolutionServerService)(nil).RejudgeSolution), ctx, req)
+}
+
+// MockCodeServerClientProxy is a mock of CodeServerClientProxy interface.
+type MockCodeServerClientProxy struct {
+	ctrl     *gomock.Controller
+	recorder *MockCodeServerClientProxyMockRecorder
+}
+
+// MockCodeServerClientProxyMockRecorder is the mock recorder for MockCodeServerClientProxy.
+type MockCodeServerClientProxyMockRecorder struct {
+	mock *MockCodeServerClientProxy
+}
+
+// NewMockCodeServerClientProxy creates a new mock instance.
+func NewMockCodeServerClientProxy(ctrl *gomock.Controller) *MockCodeServerClientProxy {
+	mock := &MockCodeServerClientProxy{ctrl: ctrl}
+	mock.recorder = &MockCodeServerClientProxyMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockCodeServerClientProxy) EXPECT() *MockCodeServerClientProxyMockRecorder {
+	return m.recorder
+}
+
+// ISGOMOCK indicates that this struct is a gomock mock.
+func (m *MockCodeServerClientProxy) ISGOMOCK() struct{} {
+	return struct{}{}
+}
+
+// AddCode mocks base method.
+func (m *MockCodeServerClientProxy) AddCode(ctx context.Context, req *AddCodeReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AddCode", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddCode indicates an expected call of AddCode.
+func (mr *MockCodeServerClientProxyMockRecorder) AddCode(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddCode", reflect.TypeOf((*MockCodeServerClientProxy)(nil).AddCode), varargs...)
+}
+
+// MockKeyActionServerClientProxy is a mock of KeyActionServerClientProxy interface.
+type MockKeyActionServerClientProxy struct {
+	ctrl     *gomock.Controller
+	recorder *MockKeyActionServerClientProxyMockRecorder
+}
+
+// MockKeyActionServerClientProxyMockRecorder is the mock recorder for MockKeyActionServerClientProxy.
+type MockKeyActionServerClientProxyMockRecorder struct {
+	mock *MockKeyActionServerClientProxy
+}
+
+// NewMockKeyActionServerClientProxy creates a new mock instance.
+func NewMockKeyActionServerClientProxy(ctrl *gomock.Controller) *MockKeyActionServerClientProxy {
+	mock := &MockKeyActionServerClientProxy{ctrl: ctrl}
+	mock.recorder = &MockKeyActionServerClientProxyMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockKeyActionServerClientProxy) EXPECT() *MockKeyActionServerClientProxyMockRecorder {
+	return m.recorder
+}
+
+// ISGOMOCK indicates that this struct is a gomock mock.
+func (m *MockKeyActionServerClientProxy) ISGOMOCK() struct{} {
+	return struct{}{}
+}
+
+// AddKeyAction mocks base method.
+func (m *MockKeyActionServerClientProxy) AddKeyAction(ctx context.Context, req *AddKeyActionReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AddKeyAction", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddKeyAction indicates an expected call of AddKeyAction.
+func (mr *MockKeyActionServerClientProxyMockRecorder) AddKeyAction(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddKeyAction", reflect.TypeOf((*MockKeyActionServerClientProxy)(nil).AddKeyAction), varargs...)
 }
 
 // MockSolutionServerClientProxy is a mock of SolutionServerClientProxy interface.
