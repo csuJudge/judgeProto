@@ -17,11 +17,85 @@ service ClassServer {
     rpc UpdateClass(UpdateClassReq) returns (CommonRsp) {}
     // UpdateClassStatus 更新班级状态
     rpc UpdateClassStatus(UpdateClassStatusReq) returns (CommonRsp) {}
+    // UpdateClassUser 更新班级的人
+    rpc UpdateClassUser(UpdateClassUserReq) returns (CommonRsp) {}
+    // QueryClassUser 查询班级用户
+    rpc QueryClassUser(QueryClassUserReq) returns (QueryClassUserRsp) {}
+    // QueryClassPageSize 分页查询班级
+    rpc QueryClassPageSize(QueryClassPageSizeReq) returns (QueryClassPageSizeRsp) {}
+    // QueryClass 查询班级
+    rpc QueryClass(QueryClassReq) returns (QueryClassRsp) {}
 }
 
 service TermServer {
     // AddTerm 添加学期
     rpc AddTerm(AddTermReq) returns (CommonRsp) {}
+}
+
+message QueryClassPageSizeReq {
+    int32 page  = 1;  // 页
+    int32 limit = 2;  // 页大小
+}
+
+message QueryClassReq {
+    int32 classID = 1;  // 班级主键
+}
+
+message Class {
+    int32 createdBy    = 1;  // 创建者主键
+    string creator     = 2;  // 创建者
+    int32 teacherID    = 3;  // 老师主键
+    string teacherName = 4;  // 老师名称
+    string name        = 5;  // 班级名
+    string description = 6;  // 班级描述
+    int32 classID      = 7;  // 班级编号
+}
+
+message QueryClassRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+    Class class    = 3;  // 班级
+}
+
+message QueryClassPageSizeRsp {
+    string message       = 1;  // 返回信息
+    int32 code           = 2;  // 返回码
+    repeated Class class = 3;  // 班级
+    int32 total          = 4;  // 总数
+}
+
+message QueryClassUserReq {
+    int32 classID = 1;  // 班级编号
+    int32 page    = 2;  // 页
+    int32 limit   = 3;  // 页大小
+}
+
+message QueryClassUserRsp {
+    string message      = 1;  // 返回信息
+    int32 code          = 2;  // 返回码
+    int32 total         = 3;  // 总数
+    repeated User users = 4;  // 班级的用户
+}
+
+message User {
+    int32 userID        = 1;   // 用户编号
+    string userName     = 2;   // 用户名称
+    string userEmail    = 3;   // 用户邮箱
+    string userPhone    = 4;   // 用户电话
+    string userClass    = 5;   // 用户班级
+    int32 userPrivilege = 6;   // 用户权限
+    string loginTime    = 7;   // 上次登录时间
+    string loginIP      = 8;   // 上次登录的IP
+    int32 submitCount   = 9;   // 提交的数量
+    int32 solvedCount   = 10;  // 解决的数量
+    string userNumber   = 11;  // 学工号
+    int32 enable        = 12;  // 是否可用
+}
+
+message UpdateClassUserReq {
+    int32 classID = 1;  // 班级编号
+    string user   = 2;  // 班级人员
+    int32 userID  = 3;  // 用户主键
 }
 
 message UpdateClassStatusReq {

@@ -103,6 +103,51 @@ func (mr *MockClassServerServiceMockRecorder) AddClass(ctx, req any) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddClass", reflect.TypeOf((*MockClassServerService)(nil).AddClass), ctx, req)
 }
 
+// QueryClass mocks base method.
+func (m *MockClassServerService) QueryClass(ctx context.Context, req *QueryClassReq) (*QueryClassRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryClass", ctx, req)
+	ret0, _ := ret[0].(*QueryClassRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryClass indicates an expected call of QueryClass.
+func (mr *MockClassServerServiceMockRecorder) QueryClass(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClass", reflect.TypeOf((*MockClassServerService)(nil).QueryClass), ctx, req)
+}
+
+// QueryClassPageSize mocks base method.
+func (m *MockClassServerService) QueryClassPageSize(ctx context.Context, req *QueryClassPageSizeReq) (*QueryClassPageSizeRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryClassPageSize", ctx, req)
+	ret0, _ := ret[0].(*QueryClassPageSizeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryClassPageSize indicates an expected call of QueryClassPageSize.
+func (mr *MockClassServerServiceMockRecorder) QueryClassPageSize(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassPageSize", reflect.TypeOf((*MockClassServerService)(nil).QueryClassPageSize), ctx, req)
+}
+
+// QueryClassUser mocks base method.
+func (m *MockClassServerService) QueryClassUser(ctx context.Context, req *QueryClassUserReq) (*QueryClassUserRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryClassUser", ctx, req)
+	ret0, _ := ret[0].(*QueryClassUserRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryClassUser indicates an expected call of QueryClassUser.
+func (mr *MockClassServerServiceMockRecorder) QueryClassUser(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassUser", reflect.TypeOf((*MockClassServerService)(nil).QueryClassUser), ctx, req)
+}
+
 // QueryUserClass mocks base method.
 func (m *MockClassServerService) QueryUserClass(ctx context.Context, req *QueryUserClassReq) (*QueryUserClassRsp, error) {
 	m.ctrl.T.Helper()
@@ -146,6 +191,21 @@ func (m *MockClassServerService) UpdateClassStatus(ctx context.Context, req *Upd
 func (mr *MockClassServerServiceMockRecorder) UpdateClassStatus(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateClassStatus", reflect.TypeOf((*MockClassServerService)(nil).UpdateClassStatus), ctx, req)
+}
+
+// UpdateClassUser mocks base method.
+func (m *MockClassServerService) UpdateClassUser(ctx context.Context, req *UpdateClassUserReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateClassUser", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateClassUser indicates an expected call of UpdateClassUser.
+func (mr *MockClassServerServiceMockRecorder) UpdateClassUser(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateClassUser", reflect.TypeOf((*MockClassServerService)(nil).UpdateClassUser), ctx, req)
 }
 
 // MockTermServerService is a mock of TermServerService interface.
@@ -287,6 +347,66 @@ func (mr *MockClassServerClientProxyMockRecorder) AddClass(ctx, req any, opts ..
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddClass", reflect.TypeOf((*MockClassServerClientProxy)(nil).AddClass), varargs...)
 }
 
+// QueryClass mocks base method.
+func (m *MockClassServerClientProxy) QueryClass(ctx context.Context, req *QueryClassReq, opts ...client.Option) (*QueryClassRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryClass", varargs...)
+	ret0, _ := ret[0].(*QueryClassRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryClass indicates an expected call of QueryClass.
+func (mr *MockClassServerClientProxyMockRecorder) QueryClass(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClass", reflect.TypeOf((*MockClassServerClientProxy)(nil).QueryClass), varargs...)
+}
+
+// QueryClassPageSize mocks base method.
+func (m *MockClassServerClientProxy) QueryClassPageSize(ctx context.Context, req *QueryClassPageSizeReq, opts ...client.Option) (*QueryClassPageSizeRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryClassPageSize", varargs...)
+	ret0, _ := ret[0].(*QueryClassPageSizeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryClassPageSize indicates an expected call of QueryClassPageSize.
+func (mr *MockClassServerClientProxyMockRecorder) QueryClassPageSize(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassPageSize", reflect.TypeOf((*MockClassServerClientProxy)(nil).QueryClassPageSize), varargs...)
+}
+
+// QueryClassUser mocks base method.
+func (m *MockClassServerClientProxy) QueryClassUser(ctx context.Context, req *QueryClassUserReq, opts ...client.Option) (*QueryClassUserRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryClassUser", varargs...)
+	ret0, _ := ret[0].(*QueryClassUserRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryClassUser indicates an expected call of QueryClassUser.
+func (mr *MockClassServerClientProxyMockRecorder) QueryClassUser(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassUser", reflect.TypeOf((*MockClassServerClientProxy)(nil).QueryClassUser), varargs...)
+}
+
 // QueryUserClass mocks base method.
 func (m *MockClassServerClientProxy) QueryUserClass(ctx context.Context, req *QueryUserClassReq, opts ...client.Option) (*QueryUserClassRsp, error) {
 	m.ctrl.T.Helper()
@@ -345,6 +465,26 @@ func (mr *MockClassServerClientProxyMockRecorder) UpdateClassStatus(ctx, req any
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateClassStatus", reflect.TypeOf((*MockClassServerClientProxy)(nil).UpdateClassStatus), varargs...)
+}
+
+// UpdateClassUser mocks base method.
+func (m *MockClassServerClientProxy) UpdateClassUser(ctx context.Context, req *UpdateClassUserReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateClassUser", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateClassUser indicates an expected call of UpdateClassUser.
+func (mr *MockClassServerClientProxyMockRecorder) UpdateClassUser(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateClassUser", reflect.TypeOf((*MockClassServerClientProxy)(nil).UpdateClassUser), varargs...)
 }
 
 // MockTermServerClientProxy is a mock of TermServerClientProxy interface.
