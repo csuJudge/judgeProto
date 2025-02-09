@@ -61,10 +61,10 @@ func (mr *MockBlogServerServiceMockRecorder) AddBlog(ctx, req any) *gomock.Call 
 }
 
 // QueryAllBlog mocks base method.
-func (m *MockBlogServerService) QueryAllBlog(ctx context.Context, req *QueryBlogByPageSizeReq) (*QueryBlogByPageSizeRsp, error) {
+func (m *MockBlogServerService) QueryAllBlog(ctx context.Context, req *QueryBlogPageSizeReq) (*QueryBlogPageSizeRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryAllBlog", ctx, req)
-	ret0, _ := ret[0].(*QueryBlogByPageSizeRsp)
+	ret0, _ := ret[0].(*QueryBlogPageSizeRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -90,26 +90,26 @@ func (mr *MockBlogServerServiceMockRecorder) QueryBlog(ctx, req any) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryBlog", reflect.TypeOf((*MockBlogServerService)(nil).QueryBlog), ctx, req)
 }
 
-// QueryBlogByPageSize mocks base method.
-func (m *MockBlogServerService) QueryBlogByPageSize(ctx context.Context, req *QueryBlogByPageSizeReq) (*QueryBlogByPageSizeRsp, error) {
+// QueryBlogPageSize mocks base method.
+func (m *MockBlogServerService) QueryBlogPageSize(ctx context.Context, req *QueryBlogPageSizeReq) (*QueryBlogPageSizeRsp, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "QueryBlogByPageSize", ctx, req)
-	ret0, _ := ret[0].(*QueryBlogByPageSizeRsp)
+	ret := m.ctrl.Call(m, "QueryBlogPageSize", ctx, req)
+	ret0, _ := ret[0].(*QueryBlogPageSizeRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// QueryBlogByPageSize indicates an expected call of QueryBlogByPageSize.
-func (mr *MockBlogServerServiceMockRecorder) QueryBlogByPageSize(ctx, req any) *gomock.Call {
+// QueryBlogPageSize indicates an expected call of QueryBlogPageSize.
+func (mr *MockBlogServerServiceMockRecorder) QueryBlogPageSize(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryBlogByPageSize", reflect.TypeOf((*MockBlogServerService)(nil).QueryBlogByPageSize), ctx, req)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryBlogPageSize", reflect.TypeOf((*MockBlogServerService)(nil).QueryBlogPageSize), ctx, req)
 }
 
 // QueryMyBlog mocks base method.
-func (m *MockBlogServerService) QueryMyBlog(ctx context.Context, req *QueryMyBlogReq) (*QueryMyBlogRsp, error) {
+func (m *MockBlogServerService) QueryMyBlog(ctx context.Context, req *QueryBlogPageSizeReq) (*QueryBlogPageSizeRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryMyBlog", ctx, req)
-	ret0, _ := ret[0].(*QueryMyBlogRsp)
+	ret0, _ := ret[0].(*QueryBlogPageSizeRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -199,14 +199,14 @@ func (mr *MockBlogServerClientProxyMockRecorder) AddBlog(ctx, req any, opts ...a
 }
 
 // QueryAllBlog mocks base method.
-func (m *MockBlogServerClientProxy) QueryAllBlog(ctx context.Context, req *QueryBlogByPageSizeReq, opts ...client.Option) (*QueryBlogByPageSizeRsp, error) {
+func (m *MockBlogServerClientProxy) QueryAllBlog(ctx context.Context, req *QueryBlogPageSizeReq, opts ...client.Option) (*QueryBlogPageSizeRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "QueryAllBlog", varargs...)
-	ret0, _ := ret[0].(*QueryBlogByPageSizeRsp)
+	ret0, _ := ret[0].(*QueryBlogPageSizeRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -238,35 +238,35 @@ func (mr *MockBlogServerClientProxyMockRecorder) QueryBlog(ctx, req any, opts ..
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryBlog", reflect.TypeOf((*MockBlogServerClientProxy)(nil).QueryBlog), varargs...)
 }
 
-// QueryBlogByPageSize mocks base method.
-func (m *MockBlogServerClientProxy) QueryBlogByPageSize(ctx context.Context, req *QueryBlogByPageSizeReq, opts ...client.Option) (*QueryBlogByPageSizeRsp, error) {
+// QueryBlogPageSize mocks base method.
+func (m *MockBlogServerClientProxy) QueryBlogPageSize(ctx context.Context, req *QueryBlogPageSizeReq, opts ...client.Option) (*QueryBlogPageSizeRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "QueryBlogByPageSize", varargs...)
-	ret0, _ := ret[0].(*QueryBlogByPageSizeRsp)
+	ret := m.ctrl.Call(m, "QueryBlogPageSize", varargs...)
+	ret0, _ := ret[0].(*QueryBlogPageSizeRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// QueryBlogByPageSize indicates an expected call of QueryBlogByPageSize.
-func (mr *MockBlogServerClientProxyMockRecorder) QueryBlogByPageSize(ctx, req any, opts ...any) *gomock.Call {
+// QueryBlogPageSize indicates an expected call of QueryBlogPageSize.
+func (mr *MockBlogServerClientProxyMockRecorder) QueryBlogPageSize(ctx, req any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryBlogByPageSize", reflect.TypeOf((*MockBlogServerClientProxy)(nil).QueryBlogByPageSize), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryBlogPageSize", reflect.TypeOf((*MockBlogServerClientProxy)(nil).QueryBlogPageSize), varargs...)
 }
 
 // QueryMyBlog mocks base method.
-func (m *MockBlogServerClientProxy) QueryMyBlog(ctx context.Context, req *QueryMyBlogReq, opts ...client.Option) (*QueryMyBlogRsp, error) {
+func (m *MockBlogServerClientProxy) QueryMyBlog(ctx context.Context, req *QueryBlogPageSizeReq, opts ...client.Option) (*QueryBlogPageSizeRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "QueryMyBlog", varargs...)
-	ret0, _ := ret[0].(*QueryMyBlogRsp)
+	ret0, _ := ret[0].(*QueryBlogPageSizeRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

@@ -11,28 +11,16 @@ service BlogServer {
     // UpdateBlogStatus 更新博客状态
     rpc UpdateBlogStatus(UpdateBlogStatusReq) returns (CommonRsp) {}
     // QueryMyBlog 查询我的博客
-    rpc QueryMyBlog(QueryMyBlogReq) returns (QueryMyBlogRsp) {}
-    // QueryBlogByPageSize 分页查询博客
-    rpc QueryBlogByPageSize(QueryBlogByPageSizeReq) returns (QueryBlogByPageSizeRsp) {}
+    rpc QueryMyBlog(QueryBlogPageSizeReq) returns (QueryBlogPageSizeRsp) {}
+    // QueryBlogPageSize 分页查询博客
+    rpc QueryBlogPageSize(QueryBlogPageSizeReq) returns (QueryBlogPageSizeRsp) {}
     // QueryBlog 查询博客
     rpc QueryBlog(QueryBlogReq) returns (QueryBlogRsp) {}
     // QueryAllBlog 分页所有查询博客
-    rpc QueryAllBlog(QueryBlogByPageSizeReq) returns (QueryBlogByPageSizeRsp) {}
+    rpc QueryAllBlog(QueryBlogPageSizeReq) returns (QueryBlogPageSizeRsp) {}
 }
 
-message QueryMyBlogReq {
-    int32 page   = 1;  // 页
-    int32 limit  = 2;  // 页大小
-    int32 userID = 3;  //  用户主键
-}
-
-message QueryMyBlogRsp {
-    string message      = 1;  // 返回信息
-    int32 code          = 2;  // 返回码
-    repeated Blog blogs = 3;  // 博客的集合
-}
-
-message QueryBlogByPageSizeRsp {
+message QueryBlogPageSizeRsp {
     string message      = 1;  // 返回信息
     int32 code          = 2;  // 返回码
     repeated Blog blogs = 3;  // 博客的集合
@@ -58,9 +46,10 @@ message Blog {
     int32 enable       = 6;  // 是否可用
 }
 
-message QueryBlogByPageSizeReq {
-    int32 page  = 1;  // 页
-    int32 limit = 2;  // 页大小
+message QueryBlogPageSizeReq {
+    int32 page   = 1;  // 页
+    int32 limit  = 2;  // 页大小
+    int32 userID = 3;  // 用户主键
 }
 
 message UpdateBlogStatusReq {

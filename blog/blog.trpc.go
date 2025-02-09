@@ -26,13 +26,13 @@ type BlogServerService interface {
 	// UpdateBlogStatus UpdateBlogStatus 更新博客状态
 	UpdateBlogStatus(ctx context.Context, req *UpdateBlogStatusReq) (*CommonRsp, error)
 	// QueryMyBlog QueryMyBlog 查询我的博客
-	QueryMyBlog(ctx context.Context, req *QueryMyBlogReq) (*QueryMyBlogRsp, error)
-	// QueryBlogByPageSize QueryBlogByPageSize 分页查询博客
-	QueryBlogByPageSize(ctx context.Context, req *QueryBlogByPageSizeReq) (*QueryBlogByPageSizeRsp, error)
+	QueryMyBlog(ctx context.Context, req *QueryBlogPageSizeReq) (*QueryBlogPageSizeRsp, error)
+	// QueryBlogPageSize QueryBlogPageSize 分页查询博客
+	QueryBlogPageSize(ctx context.Context, req *QueryBlogPageSizeReq) (*QueryBlogPageSizeRsp, error)
 	// QueryBlog QueryBlog 查询博客
 	QueryBlog(ctx context.Context, req *QueryBlogReq) (*QueryBlogRsp, error)
 	// QueryAllBlog QueryAllBlog 分页所有查询博客
-	QueryAllBlog(ctx context.Context, req *QueryBlogByPageSizeReq) (*QueryBlogByPageSizeRsp, error)
+	QueryAllBlog(ctx context.Context, req *QueryBlogPageSizeReq) (*QueryBlogPageSizeRsp, error)
 }
 
 func BlogServerService_AddBlog_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -90,13 +90,13 @@ func BlogServerService_UpdateBlogStatus_Handler(svr interface{}, ctx context.Con
 }
 
 func BlogServerService_QueryMyBlog_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &QueryMyBlogReq{}
+	req := &QueryBlogPageSizeReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(BlogServerService).QueryMyBlog(ctx, reqbody.(*QueryMyBlogReq))
+		return svr.(BlogServerService).QueryMyBlog(ctx, reqbody.(*QueryBlogPageSizeReq))
 	}
 
 	var rsp interface{}
@@ -107,14 +107,14 @@ func BlogServerService_QueryMyBlog_Handler(svr interface{}, ctx context.Context,
 	return rsp, nil
 }
 
-func BlogServerService_QueryBlogByPageSize_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &QueryBlogByPageSizeReq{}
+func BlogServerService_QueryBlogPageSize_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryBlogPageSizeReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(BlogServerService).QueryBlogByPageSize(ctx, reqbody.(*QueryBlogByPageSizeReq))
+		return svr.(BlogServerService).QueryBlogPageSize(ctx, reqbody.(*QueryBlogPageSizeReq))
 	}
 
 	var rsp interface{}
@@ -144,13 +144,13 @@ func BlogServerService_QueryBlog_Handler(svr interface{}, ctx context.Context, f
 }
 
 func BlogServerService_QueryAllBlog_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &QueryBlogByPageSizeReq{}
+	req := &QueryBlogPageSizeReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(BlogServerService).QueryAllBlog(ctx, reqbody.(*QueryBlogByPageSizeReq))
+		return svr.(BlogServerService).QueryAllBlog(ctx, reqbody.(*QueryBlogPageSizeReq))
 	}
 
 	var rsp interface{}
@@ -183,8 +183,8 @@ var BlogServerServer_ServiceDesc = server.ServiceDesc{
 			Func: BlogServerService_QueryMyBlog_Handler,
 		},
 		{
-			Name: "/oj.blog.BlogServer/QueryBlogByPageSize",
-			Func: BlogServerService_QueryBlogByPageSize_Handler,
+			Name: "/oj.blog.BlogServer/QueryBlogPageSize",
+			Func: BlogServerService_QueryBlogPageSize_Handler,
 		},
 		{
 			Name: "/oj.blog.BlogServer/QueryBlog",
@@ -224,13 +224,13 @@ func (s *UnimplementedBlogServer) UpdateBlogStatus(ctx context.Context, req *Upd
 }
 
 // QueryMyBlog QueryMyBlog 查询我的博客
-func (s *UnimplementedBlogServer) QueryMyBlog(ctx context.Context, req *QueryMyBlogReq) (*QueryMyBlogRsp, error) {
+func (s *UnimplementedBlogServer) QueryMyBlog(ctx context.Context, req *QueryBlogPageSizeReq) (*QueryBlogPageSizeRsp, error) {
 	return nil, errors.New("rpc QueryMyBlog of service BlogServer is not implemented")
 }
 
-// QueryBlogByPageSize QueryBlogByPageSize 分页查询博客
-func (s *UnimplementedBlogServer) QueryBlogByPageSize(ctx context.Context, req *QueryBlogByPageSizeReq) (*QueryBlogByPageSizeRsp, error) {
-	return nil, errors.New("rpc QueryBlogByPageSize of service BlogServer is not implemented")
+// QueryBlogPageSize QueryBlogPageSize 分页查询博客
+func (s *UnimplementedBlogServer) QueryBlogPageSize(ctx context.Context, req *QueryBlogPageSizeReq) (*QueryBlogPageSizeRsp, error) {
+	return nil, errors.New("rpc QueryBlogPageSize of service BlogServer is not implemented")
 }
 
 // QueryBlog QueryBlog 查询博客
@@ -239,7 +239,7 @@ func (s *UnimplementedBlogServer) QueryBlog(ctx context.Context, req *QueryBlogR
 }
 
 // QueryAllBlog QueryAllBlog 分页所有查询博客
-func (s *UnimplementedBlogServer) QueryAllBlog(ctx context.Context, req *QueryBlogByPageSizeReq) (*QueryBlogByPageSizeRsp, error) {
+func (s *UnimplementedBlogServer) QueryAllBlog(ctx context.Context, req *QueryBlogPageSizeReq) (*QueryBlogPageSizeRsp, error) {
 	return nil, errors.New("rpc QueryAllBlog of service BlogServer is not implemented")
 }
 
@@ -258,13 +258,13 @@ type BlogServerClientProxy interface {
 	// UpdateBlogStatus UpdateBlogStatus 更新博客状态
 	UpdateBlogStatus(ctx context.Context, req *UpdateBlogStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryMyBlog QueryMyBlog 查询我的博客
-	QueryMyBlog(ctx context.Context, req *QueryMyBlogReq, opts ...client.Option) (rsp *QueryMyBlogRsp, err error)
-	// QueryBlogByPageSize QueryBlogByPageSize 分页查询博客
-	QueryBlogByPageSize(ctx context.Context, req *QueryBlogByPageSizeReq, opts ...client.Option) (rsp *QueryBlogByPageSizeRsp, err error)
+	QueryMyBlog(ctx context.Context, req *QueryBlogPageSizeReq, opts ...client.Option) (rsp *QueryBlogPageSizeRsp, err error)
+	// QueryBlogPageSize QueryBlogPageSize 分页查询博客
+	QueryBlogPageSize(ctx context.Context, req *QueryBlogPageSizeReq, opts ...client.Option) (rsp *QueryBlogPageSizeRsp, err error)
 	// QueryBlog QueryBlog 查询博客
 	QueryBlog(ctx context.Context, req *QueryBlogReq, opts ...client.Option) (rsp *QueryBlogRsp, err error)
 	// QueryAllBlog QueryAllBlog 分页所有查询博客
-	QueryAllBlog(ctx context.Context, req *QueryBlogByPageSizeReq, opts ...client.Option) (rsp *QueryBlogByPageSizeRsp, err error)
+	QueryAllBlog(ctx context.Context, req *QueryBlogPageSizeReq, opts ...client.Option) (rsp *QueryBlogPageSizeRsp, err error)
 }
 
 type BlogServerClientProxyImpl struct {
@@ -336,7 +336,7 @@ func (c *BlogServerClientProxyImpl) UpdateBlogStatus(ctx context.Context, req *U
 	return rsp, nil
 }
 
-func (c *BlogServerClientProxyImpl) QueryMyBlog(ctx context.Context, req *QueryMyBlogReq, opts ...client.Option) (*QueryMyBlogRsp, error) {
+func (c *BlogServerClientProxyImpl) QueryMyBlog(ctx context.Context, req *QueryBlogPageSizeReq, opts ...client.Option) (*QueryBlogPageSizeRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.blog.BlogServer/QueryMyBlog")
@@ -349,27 +349,27 @@ func (c *BlogServerClientProxyImpl) QueryMyBlog(ctx context.Context, req *QueryM
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &QueryMyBlogRsp{}
+	rsp := &QueryBlogPageSizeRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
 	return rsp, nil
 }
 
-func (c *BlogServerClientProxyImpl) QueryBlogByPageSize(ctx context.Context, req *QueryBlogByPageSizeReq, opts ...client.Option) (*QueryBlogByPageSizeRsp, error) {
+func (c *BlogServerClientProxyImpl) QueryBlogPageSize(ctx context.Context, req *QueryBlogPageSizeReq, opts ...client.Option) (*QueryBlogPageSizeRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/oj.blog.BlogServer/QueryBlogByPageSize")
+	msg.WithClientRPCName("/oj.blog.BlogServer/QueryBlogPageSize")
 	msg.WithCalleeServiceName(BlogServerServer_ServiceDesc.ServiceName)
 	msg.WithCalleeApp("")
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("BlogServer")
-	msg.WithCalleeMethod("QueryBlogByPageSize")
+	msg.WithCalleeMethod("QueryBlogPageSize")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &QueryBlogByPageSizeRsp{}
+	rsp := &QueryBlogPageSizeRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
@@ -396,7 +396,7 @@ func (c *BlogServerClientProxyImpl) QueryBlog(ctx context.Context, req *QueryBlo
 	return rsp, nil
 }
 
-func (c *BlogServerClientProxyImpl) QueryAllBlog(ctx context.Context, req *QueryBlogByPageSizeReq, opts ...client.Option) (*QueryBlogByPageSizeRsp, error) {
+func (c *BlogServerClientProxyImpl) QueryAllBlog(ctx context.Context, req *QueryBlogPageSizeReq, opts ...client.Option) (*QueryBlogPageSizeRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.blog.BlogServer/QueryAllBlog")
@@ -409,7 +409,7 @@ func (c *BlogServerClientProxyImpl) QueryAllBlog(ctx context.Context, req *Query
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &QueryBlogByPageSizeRsp{}
+	rsp := &QueryBlogPageSizeRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
