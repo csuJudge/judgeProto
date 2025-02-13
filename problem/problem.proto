@@ -223,6 +223,67 @@ service ObjectiveServer {
     rpc UpdateObjective(UpdateObjectiveReq) returns (CommonRsp) {}
     // UpdateObjectiveStatus 更新客观题状态
     rpc UpdateObjectiveStatus(UpdateObjectiveStatusReq) returns (CommonRsp) {}
+    // QueryObjective 查询客观题
+    rpc QueryObjective(QueryObjectiveReq) returns (QueryObjectiveRsp) {}
+    // QueryAllCompletion 查询客观题
+    rpc QueryAllCompletion(QueryCompletionListReq) returns (QueryCompletionListRsp) {}
+    // QueryCompletionList 分页查询客观题
+    rpc QueryCompletionList(QueryCompletionListReq) returns (QueryCompletionListRsp) {}
+    // IsCorrectCompletion 是否客观题错误
+    rpc IsCorrectCompletion(IsCorrectCompletionReq) returns (IsCorrectCompletionRsp) {}
+}
+
+message QueryCompletionListRsp {
+    string message                = 1;  // 返回信息
+    int32 code                    = 2;  // 返回码
+    repeated Objective objectives = 3;  // 客观题集合
+    int32 total                   = 4;  // 总数
+}
+
+message QueryCompletionListReq {
+    int32 userID = 1;  // 用户主键
+    int32 page   = 2;  // 页
+    int32 limit  = 3;  // 页大小
+}
+
+message IsCorrectCompletionRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+    int32 isRight  = 3;  // 是否正确
+}
+
+message IsCorrectCompletionReq {
+    int32 userID      = 1;  // 用户主键
+    int32 objectiveID = 2;  // 客观题主键
+    string answer     = 3;  // 答案
+}
+
+message QueryObjectiveReq {
+    int32 userID      = 1;  // 用户主键
+    int32 objectiveID = 2;  // 客观题主键
+}
+
+message Option {
+    int32 optionID = 1;  // 选项主键
+    string content = 2;  // 内容
+}
+
+message Objective {
+    int32 objectiveID       = 1;  // 客观题主键
+    string content          = 2;  // 名称
+    string name             = 3;  // 出题人
+    string creator          = 4;  // 题目类型
+    string answer           = 5;  // 答案
+    string updateTime       = 6;  // 更新时间
+    string createTime       = 7;  // 创建时间
+    int32 enable            = 8;  // 是否可用
+    repeated Option options = 9;  // 选项
+}
+
+message QueryObjectiveRsp {
+    string message      = 1;  // 返回信息
+    int32 code          = 2;  // 返回码
+    Objective objective = 3;  // 客观题
 }
 
 message AddObjectiveReq {

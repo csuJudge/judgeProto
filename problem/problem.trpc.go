@@ -372,6 +372,193 @@ func RegisterProblemServerService(s server.Service, svr ProblemServerService) {
 	}
 }
 
+// ObjectiveServerService defines service.
+type ObjectiveServerService interface {
+	// AddObjective AddObjective 添加客观题
+	AddObjective(ctx context.Context, req *AddObjectiveReq) (*CommonRsp, error)
+	// UpdateObjective UpdateObjective 更新客观题
+	UpdateObjective(ctx context.Context, req *UpdateObjectiveReq) (*CommonRsp, error)
+	// UpdateObjectiveStatus UpdateObjectiveStatus 更新客观题状态
+	UpdateObjectiveStatus(ctx context.Context, req *UpdateObjectiveStatusReq) (*CommonRsp, error)
+	// QueryObjective QueryObjective 查询客观题
+	QueryObjective(ctx context.Context, req *QueryObjectiveReq) (*QueryObjectiveRsp, error)
+	// QueryAllCompletion QueryAllCompletion 查询客观题
+	QueryAllCompletion(ctx context.Context, req *QueryCompletionListReq) (*QueryCompletionListRsp, error)
+	// QueryCompletionList QueryCompletionList 分页查询客观题
+	QueryCompletionList(ctx context.Context, req *QueryCompletionListReq) (*QueryCompletionListRsp, error)
+	// IsCorrectCompletion IsCorrectCompletion 是否客观题错误
+	IsCorrectCompletion(ctx context.Context, req *IsCorrectCompletionReq) (*IsCorrectCompletionRsp, error)
+}
+
+func ObjectiveServerService_AddObjective_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &AddObjectiveReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ObjectiveServerService).AddObjective(ctx, reqbody.(*AddObjectiveReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ObjectiveServerService_UpdateObjective_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UpdateObjectiveReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ObjectiveServerService).UpdateObjective(ctx, reqbody.(*UpdateObjectiveReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ObjectiveServerService_UpdateObjectiveStatus_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UpdateObjectiveStatusReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ObjectiveServerService).UpdateObjectiveStatus(ctx, reqbody.(*UpdateObjectiveStatusReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ObjectiveServerService_QueryObjective_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryObjectiveReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ObjectiveServerService).QueryObjective(ctx, reqbody.(*QueryObjectiveReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ObjectiveServerService_QueryAllCompletion_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryCompletionListReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ObjectiveServerService).QueryAllCompletion(ctx, reqbody.(*QueryCompletionListReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ObjectiveServerService_QueryCompletionList_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryCompletionListReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ObjectiveServerService).QueryCompletionList(ctx, reqbody.(*QueryCompletionListReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ObjectiveServerService_IsCorrectCompletion_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &IsCorrectCompletionReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ObjectiveServerService).IsCorrectCompletion(ctx, reqbody.(*IsCorrectCompletionReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+// ObjectiveServerServer_ServiceDesc descriptor for server.RegisterService.
+var ObjectiveServerServer_ServiceDesc = server.ServiceDesc{
+	ServiceName: "oj.problem.ObjectiveServer",
+	HandlerType: ((*ObjectiveServerService)(nil)),
+	Methods: []server.Method{
+		{
+			Name: "/oj.problem.ObjectiveServer/AddObjective",
+			Func: ObjectiveServerService_AddObjective_Handler,
+		},
+		{
+			Name: "/oj.problem.ObjectiveServer/UpdateObjective",
+			Func: ObjectiveServerService_UpdateObjective_Handler,
+		},
+		{
+			Name: "/oj.problem.ObjectiveServer/UpdateObjectiveStatus",
+			Func: ObjectiveServerService_UpdateObjectiveStatus_Handler,
+		},
+		{
+			Name: "/oj.problem.ObjectiveServer/QueryObjective",
+			Func: ObjectiveServerService_QueryObjective_Handler,
+		},
+		{
+			Name: "/oj.problem.ObjectiveServer/QueryAllCompletion",
+			Func: ObjectiveServerService_QueryAllCompletion_Handler,
+		},
+		{
+			Name: "/oj.problem.ObjectiveServer/QueryCompletionList",
+			Func: ObjectiveServerService_QueryCompletionList_Handler,
+		},
+		{
+			Name: "/oj.problem.ObjectiveServer/IsCorrectCompletion",
+			Func: ObjectiveServerService_IsCorrectCompletion_Handler,
+		},
+	},
+}
+
+// RegisterObjectiveServerService registers service.
+func RegisterObjectiveServerService(s server.Service, svr ObjectiveServerService) {
+	if err := s.Register(&ObjectiveServerServer_ServiceDesc, svr); err != nil {
+		panic(fmt.Sprintf("ObjectiveServer register error:%v", err))
+	}
+}
+
 // START --------------------------------- Default Unimplemented Server Service --------------------------------- START
 
 type UnimplementedProblemServer struct{}
@@ -444,6 +631,43 @@ func (s *UnimplementedProblemServer) DeleteProblemData(ctx context.Context, req 
 // QueryContestProblem QueryContestProblem 查询作业的题目数据
 func (s *UnimplementedProblemServer) QueryContestProblem(ctx context.Context, req *QueryContestProblemReq) (*QueryContestProblemReqRsp, error) {
 	return nil, errors.New("rpc QueryContestProblem of service ProblemServer is not implemented")
+}
+
+type UnimplementedObjectiveServer struct{}
+
+// AddObjective AddObjective 添加客观题
+func (s *UnimplementedObjectiveServer) AddObjective(ctx context.Context, req *AddObjectiveReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc AddObjective of service ObjectiveServer is not implemented")
+}
+
+// UpdateObjective UpdateObjective 更新客观题
+func (s *UnimplementedObjectiveServer) UpdateObjective(ctx context.Context, req *UpdateObjectiveReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc UpdateObjective of service ObjectiveServer is not implemented")
+}
+
+// UpdateObjectiveStatus UpdateObjectiveStatus 更新客观题状态
+func (s *UnimplementedObjectiveServer) UpdateObjectiveStatus(ctx context.Context, req *UpdateObjectiveStatusReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc UpdateObjectiveStatus of service ObjectiveServer is not implemented")
+}
+
+// QueryObjective QueryObjective 查询客观题
+func (s *UnimplementedObjectiveServer) QueryObjective(ctx context.Context, req *QueryObjectiveReq) (*QueryObjectiveRsp, error) {
+	return nil, errors.New("rpc QueryObjective of service ObjectiveServer is not implemented")
+}
+
+// QueryAllCompletion QueryAllCompletion 查询客观题
+func (s *UnimplementedObjectiveServer) QueryAllCompletion(ctx context.Context, req *QueryCompletionListReq) (*QueryCompletionListRsp, error) {
+	return nil, errors.New("rpc QueryAllCompletion of service ObjectiveServer is not implemented")
+}
+
+// QueryCompletionList QueryCompletionList 分页查询客观题
+func (s *UnimplementedObjectiveServer) QueryCompletionList(ctx context.Context, req *QueryCompletionListReq) (*QueryCompletionListRsp, error) {
+	return nil, errors.New("rpc QueryCompletionList of service ObjectiveServer is not implemented")
+}
+
+// IsCorrectCompletion IsCorrectCompletion 是否客观题错误
+func (s *UnimplementedObjectiveServer) IsCorrectCompletion(ctx context.Context, req *IsCorrectCompletionReq) (*IsCorrectCompletionRsp, error) {
+	return nil, errors.New("rpc IsCorrectCompletion of service ObjectiveServer is not implemented")
 }
 
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
@@ -767,6 +991,173 @@ func (c *ProblemServerClientProxyImpl) QueryContestProblem(ctx context.Context, 
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryContestProblemReqRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+// ObjectiveServerClientProxy defines service client proxy
+type ObjectiveServerClientProxy interface {
+	// AddObjective AddObjective 添加客观题
+	AddObjective(ctx context.Context, req *AddObjectiveReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// UpdateObjective UpdateObjective 更新客观题
+	UpdateObjective(ctx context.Context, req *UpdateObjectiveReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// UpdateObjectiveStatus UpdateObjectiveStatus 更新客观题状态
+	UpdateObjectiveStatus(ctx context.Context, req *UpdateObjectiveStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// QueryObjective QueryObjective 查询客观题
+	QueryObjective(ctx context.Context, req *QueryObjectiveReq, opts ...client.Option) (rsp *QueryObjectiveRsp, err error)
+	// QueryAllCompletion QueryAllCompletion 查询客观题
+	QueryAllCompletion(ctx context.Context, req *QueryCompletionListReq, opts ...client.Option) (rsp *QueryCompletionListRsp, err error)
+	// QueryCompletionList QueryCompletionList 分页查询客观题
+	QueryCompletionList(ctx context.Context, req *QueryCompletionListReq, opts ...client.Option) (rsp *QueryCompletionListRsp, err error)
+	// IsCorrectCompletion IsCorrectCompletion 是否客观题错误
+	IsCorrectCompletion(ctx context.Context, req *IsCorrectCompletionReq, opts ...client.Option) (rsp *IsCorrectCompletionRsp, err error)
+}
+
+type ObjectiveServerClientProxyImpl struct {
+	client client.Client
+	opts   []client.Option
+}
+
+var NewObjectiveServerClientProxy = func(opts ...client.Option) ObjectiveServerClientProxy {
+	return &ObjectiveServerClientProxyImpl{client: client.DefaultClient, opts: opts}
+}
+
+func (c *ObjectiveServerClientProxyImpl) AddObjective(ctx context.Context, req *AddObjectiveReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ObjectiveServer/AddObjective")
+	msg.WithCalleeServiceName(ObjectiveServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ObjectiveServer")
+	msg.WithCalleeMethod("AddObjective")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ObjectiveServerClientProxyImpl) UpdateObjective(ctx context.Context, req *UpdateObjectiveReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ObjectiveServer/UpdateObjective")
+	msg.WithCalleeServiceName(ObjectiveServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ObjectiveServer")
+	msg.WithCalleeMethod("UpdateObjective")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ObjectiveServerClientProxyImpl) UpdateObjectiveStatus(ctx context.Context, req *UpdateObjectiveStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ObjectiveServer/UpdateObjectiveStatus")
+	msg.WithCalleeServiceName(ObjectiveServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ObjectiveServer")
+	msg.WithCalleeMethod("UpdateObjectiveStatus")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ObjectiveServerClientProxyImpl) QueryObjective(ctx context.Context, req *QueryObjectiveReq, opts ...client.Option) (*QueryObjectiveRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ObjectiveServer/QueryObjective")
+	msg.WithCalleeServiceName(ObjectiveServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ObjectiveServer")
+	msg.WithCalleeMethod("QueryObjective")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryObjectiveRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ObjectiveServerClientProxyImpl) QueryAllCompletion(ctx context.Context, req *QueryCompletionListReq, opts ...client.Option) (*QueryCompletionListRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ObjectiveServer/QueryAllCompletion")
+	msg.WithCalleeServiceName(ObjectiveServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ObjectiveServer")
+	msg.WithCalleeMethod("QueryAllCompletion")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryCompletionListRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ObjectiveServerClientProxyImpl) QueryCompletionList(ctx context.Context, req *QueryCompletionListReq, opts ...client.Option) (*QueryCompletionListRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ObjectiveServer/QueryCompletionList")
+	msg.WithCalleeServiceName(ObjectiveServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ObjectiveServer")
+	msg.WithCalleeMethod("QueryCompletionList")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryCompletionListRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ObjectiveServerClientProxyImpl) IsCorrectCompletion(ctx context.Context, req *IsCorrectCompletionReq, opts ...client.Option) (*IsCorrectCompletionRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ObjectiveServer/IsCorrectCompletion")
+	msg.WithCalleeServiceName(ObjectiveServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ObjectiveServer")
+	msg.WithCalleeMethod("IsCorrectCompletion")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &IsCorrectCompletionRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

@@ -255,6 +255,139 @@ func (mr *MockProblemServerServiceMockRecorder) UpdateProblemVisitNumber(ctx, re
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateProblemVisitNumber", reflect.TypeOf((*MockProblemServerService)(nil).UpdateProblemVisitNumber), ctx, req)
 }
 
+// MockObjectiveServerService is a mock of ObjectiveServerService interface.
+type MockObjectiveServerService struct {
+	ctrl     *gomock.Controller
+	recorder *MockObjectiveServerServiceMockRecorder
+}
+
+// MockObjectiveServerServiceMockRecorder is the mock recorder for MockObjectiveServerService.
+type MockObjectiveServerServiceMockRecorder struct {
+	mock *MockObjectiveServerService
+}
+
+// NewMockObjectiveServerService creates a new mock instance.
+func NewMockObjectiveServerService(ctrl *gomock.Controller) *MockObjectiveServerService {
+	mock := &MockObjectiveServerService{ctrl: ctrl}
+	mock.recorder = &MockObjectiveServerServiceMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockObjectiveServerService) EXPECT() *MockObjectiveServerServiceMockRecorder {
+	return m.recorder
+}
+
+// ISGOMOCK indicates that this struct is a gomock mock.
+func (m *MockObjectiveServerService) ISGOMOCK() struct{} {
+	return struct{}{}
+}
+
+// AddObjective mocks base method.
+func (m *MockObjectiveServerService) AddObjective(ctx context.Context, req *AddObjectiveReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddObjective", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddObjective indicates an expected call of AddObjective.
+func (mr *MockObjectiveServerServiceMockRecorder) AddObjective(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddObjective", reflect.TypeOf((*MockObjectiveServerService)(nil).AddObjective), ctx, req)
+}
+
+// IsCorrectCompletion mocks base method.
+func (m *MockObjectiveServerService) IsCorrectCompletion(ctx context.Context, req *IsCorrectCompletionReq) (*IsCorrectCompletionRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IsCorrectCompletion", ctx, req)
+	ret0, _ := ret[0].(*IsCorrectCompletionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IsCorrectCompletion indicates an expected call of IsCorrectCompletion.
+func (mr *MockObjectiveServerServiceMockRecorder) IsCorrectCompletion(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsCorrectCompletion", reflect.TypeOf((*MockObjectiveServerService)(nil).IsCorrectCompletion), ctx, req)
+}
+
+// QueryAllCompletion mocks base method.
+func (m *MockObjectiveServerService) QueryAllCompletion(ctx context.Context, req *QueryCompletionListReq) (*QueryCompletionListRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryAllCompletion", ctx, req)
+	ret0, _ := ret[0].(*QueryCompletionListRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryAllCompletion indicates an expected call of QueryAllCompletion.
+func (mr *MockObjectiveServerServiceMockRecorder) QueryAllCompletion(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllCompletion", reflect.TypeOf((*MockObjectiveServerService)(nil).QueryAllCompletion), ctx, req)
+}
+
+// QueryCompletionList mocks base method.
+func (m *MockObjectiveServerService) QueryCompletionList(ctx context.Context, req *QueryCompletionListReq) (*QueryCompletionListRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryCompletionList", ctx, req)
+	ret0, _ := ret[0].(*QueryCompletionListRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryCompletionList indicates an expected call of QueryCompletionList.
+func (mr *MockObjectiveServerServiceMockRecorder) QueryCompletionList(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryCompletionList", reflect.TypeOf((*MockObjectiveServerService)(nil).QueryCompletionList), ctx, req)
+}
+
+// QueryObjective mocks base method.
+func (m *MockObjectiveServerService) QueryObjective(ctx context.Context, req *QueryObjectiveReq) (*QueryObjectiveRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryObjective", ctx, req)
+	ret0, _ := ret[0].(*QueryObjectiveRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryObjective indicates an expected call of QueryObjective.
+func (mr *MockObjectiveServerServiceMockRecorder) QueryObjective(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryObjective", reflect.TypeOf((*MockObjectiveServerService)(nil).QueryObjective), ctx, req)
+}
+
+// UpdateObjective mocks base method.
+func (m *MockObjectiveServerService) UpdateObjective(ctx context.Context, req *UpdateObjectiveReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateObjective", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateObjective indicates an expected call of UpdateObjective.
+func (mr *MockObjectiveServerServiceMockRecorder) UpdateObjective(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateObjective", reflect.TypeOf((*MockObjectiveServerService)(nil).UpdateObjective), ctx, req)
+}
+
+// UpdateObjectiveStatus mocks base method.
+func (m *MockObjectiveServerService) UpdateObjectiveStatus(ctx context.Context, req *UpdateObjectiveStatusReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateObjectiveStatus", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateObjectiveStatus indicates an expected call of UpdateObjectiveStatus.
+func (mr *MockObjectiveServerServiceMockRecorder) UpdateObjectiveStatus(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateObjectiveStatus", reflect.TypeOf((*MockObjectiveServerService)(nil).UpdateObjectiveStatus), ctx, req)
+}
+
 // MockProblemServerClientProxy is a mock of ProblemServerClientProxy interface.
 type MockProblemServerClientProxy struct {
 	ctrl     *gomock.Controller
@@ -561,4 +694,172 @@ func (mr *MockProblemServerClientProxyMockRecorder) UpdateProblemVisitNumber(ctx
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateProblemVisitNumber", reflect.TypeOf((*MockProblemServerClientProxy)(nil).UpdateProblemVisitNumber), varargs...)
+}
+
+// MockObjectiveServerClientProxy is a mock of ObjectiveServerClientProxy interface.
+type MockObjectiveServerClientProxy struct {
+	ctrl     *gomock.Controller
+	recorder *MockObjectiveServerClientProxyMockRecorder
+}
+
+// MockObjectiveServerClientProxyMockRecorder is the mock recorder for MockObjectiveServerClientProxy.
+type MockObjectiveServerClientProxyMockRecorder struct {
+	mock *MockObjectiveServerClientProxy
+}
+
+// NewMockObjectiveServerClientProxy creates a new mock instance.
+func NewMockObjectiveServerClientProxy(ctrl *gomock.Controller) *MockObjectiveServerClientProxy {
+	mock := &MockObjectiveServerClientProxy{ctrl: ctrl}
+	mock.recorder = &MockObjectiveServerClientProxyMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockObjectiveServerClientProxy) EXPECT() *MockObjectiveServerClientProxyMockRecorder {
+	return m.recorder
+}
+
+// ISGOMOCK indicates that this struct is a gomock mock.
+func (m *MockObjectiveServerClientProxy) ISGOMOCK() struct{} {
+	return struct{}{}
+}
+
+// AddObjective mocks base method.
+func (m *MockObjectiveServerClientProxy) AddObjective(ctx context.Context, req *AddObjectiveReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AddObjective", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddObjective indicates an expected call of AddObjective.
+func (mr *MockObjectiveServerClientProxyMockRecorder) AddObjective(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddObjective", reflect.TypeOf((*MockObjectiveServerClientProxy)(nil).AddObjective), varargs...)
+}
+
+// IsCorrectCompletion mocks base method.
+func (m *MockObjectiveServerClientProxy) IsCorrectCompletion(ctx context.Context, req *IsCorrectCompletionReq, opts ...client.Option) (*IsCorrectCompletionRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "IsCorrectCompletion", varargs...)
+	ret0, _ := ret[0].(*IsCorrectCompletionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// IsCorrectCompletion indicates an expected call of IsCorrectCompletion.
+func (mr *MockObjectiveServerClientProxyMockRecorder) IsCorrectCompletion(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsCorrectCompletion", reflect.TypeOf((*MockObjectiveServerClientProxy)(nil).IsCorrectCompletion), varargs...)
+}
+
+// QueryAllCompletion mocks base method.
+func (m *MockObjectiveServerClientProxy) QueryAllCompletion(ctx context.Context, req *QueryCompletionListReq, opts ...client.Option) (*QueryCompletionListRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryAllCompletion", varargs...)
+	ret0, _ := ret[0].(*QueryCompletionListRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryAllCompletion indicates an expected call of QueryAllCompletion.
+func (mr *MockObjectiveServerClientProxyMockRecorder) QueryAllCompletion(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllCompletion", reflect.TypeOf((*MockObjectiveServerClientProxy)(nil).QueryAllCompletion), varargs...)
+}
+
+// QueryCompletionList mocks base method.
+func (m *MockObjectiveServerClientProxy) QueryCompletionList(ctx context.Context, req *QueryCompletionListReq, opts ...client.Option) (*QueryCompletionListRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryCompletionList", varargs...)
+	ret0, _ := ret[0].(*QueryCompletionListRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryCompletionList indicates an expected call of QueryCompletionList.
+func (mr *MockObjectiveServerClientProxyMockRecorder) QueryCompletionList(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryCompletionList", reflect.TypeOf((*MockObjectiveServerClientProxy)(nil).QueryCompletionList), varargs...)
+}
+
+// QueryObjective mocks base method.
+func (m *MockObjectiveServerClientProxy) QueryObjective(ctx context.Context, req *QueryObjectiveReq, opts ...client.Option) (*QueryObjectiveRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryObjective", varargs...)
+	ret0, _ := ret[0].(*QueryObjectiveRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryObjective indicates an expected call of QueryObjective.
+func (mr *MockObjectiveServerClientProxyMockRecorder) QueryObjective(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryObjective", reflect.TypeOf((*MockObjectiveServerClientProxy)(nil).QueryObjective), varargs...)
+}
+
+// UpdateObjective mocks base method.
+func (m *MockObjectiveServerClientProxy) UpdateObjective(ctx context.Context, req *UpdateObjectiveReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateObjective", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateObjective indicates an expected call of UpdateObjective.
+func (mr *MockObjectiveServerClientProxyMockRecorder) UpdateObjective(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateObjective", reflect.TypeOf((*MockObjectiveServerClientProxy)(nil).UpdateObjective), varargs...)
+}
+
+// UpdateObjectiveStatus mocks base method.
+func (m *MockObjectiveServerClientProxy) UpdateObjectiveStatus(ctx context.Context, req *UpdateObjectiveStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateObjectiveStatus", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateObjectiveStatus indicates an expected call of UpdateObjectiveStatus.
+func (mr *MockObjectiveServerClientProxyMockRecorder) UpdateObjectiveStatus(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateObjectiveStatus", reflect.TypeOf((*MockObjectiveServerClientProxy)(nil).UpdateObjectiveStatus), varargs...)
 }
