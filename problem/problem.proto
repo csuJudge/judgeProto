@@ -225,34 +225,34 @@ service ObjectiveServer {
     rpc UpdateObjectiveStatus(UpdateObjectiveStatusReq) returns (CommonRsp) {}
     // QueryObjective 查询客观题
     rpc QueryObjective(QueryObjectiveReq) returns (QueryObjectiveRsp) {}
-    // QueryAllCompletion 查询客观题
-    rpc QueryAllCompletion(QueryCompletionListReq) returns (QueryCompletionListRsp) {}
-    // QueryCompletionList 分页查询客观题
-    rpc QueryCompletionList(QueryCompletionListReq) returns (QueryCompletionListRsp) {}
-    // IsCorrectCompletion 是否客观题错误
-    rpc IsCorrectCompletion(IsCorrectCompletionReq) returns (IsCorrectCompletionRsp) {}
+    // QueryAllObjective 查询客观题
+    rpc QueryAllObjective(QueryObjectiveListReq) returns (QueryObjectiveListRsp) {}
+    // QueryObjectiveList 分页查询客观题
+    rpc QueryObjectiveList(QueryObjectiveListReq) returns (QueryObjectiveListRsp) {}
+    // IsCorrectObjective 是否客观题错误
+    rpc IsCorrectObjective(IsCorrectObjectiveReq) returns (IsCorrectObjectiveRsp) {}
 }
 
-message QueryCompletionListRsp {
+message QueryObjectiveListRsp {
     string message                = 1;  // 返回信息
     int32 code                    = 2;  // 返回码
     repeated Objective objectives = 3;  // 客观题集合
     int32 total                   = 4;  // 总数
 }
 
-message QueryCompletionListReq {
+message QueryObjectiveListReq {
     int32 userID = 1;  // 用户主键
     int32 page   = 2;  // 页
     int32 limit  = 3;  // 页大小
 }
 
-message IsCorrectCompletionRsp {
+message IsCorrectObjectiveRsp {
     string message = 1;  // 返回信息
     int32 code     = 2;  // 返回码
     int32 isRight  = 3;  // 是否正确
 }
 
-message IsCorrectCompletionReq {
+message IsCorrectObjectiveReq {
     int32 userID      = 1;  // 用户主键
     int32 objectiveID = 2;  // 客观题主键
     string answer     = 3;  // 答案
