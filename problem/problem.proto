@@ -215,3 +215,37 @@ message AddProblemReq {
     string knowledges        = 11;  // 知识点
     int32 difficulty         = 12;  // 难度
 }
+
+service ObjectiveServer {
+    // AddObjective 添加客观题
+    rpc AddObjective(AddObjectiveReq) returns (CommonRsp) {}
+    // UpdateObjective 更新客观题
+    rpc UpdateObjective(UpdateObjectiveReq) returns (CommonRsp) {}
+    // UpdateObjectiveStatus 更新客观题状态
+    rpc UpdateObjectiveStatus(UpdateObjectiveStatusReq) returns (CommonRsp) {}
+}
+
+message AddObjectiveReq {
+    string content    = 1;  // 内容
+    string name       = 2;  // 名称
+    int32 userID      = 3;  // 用户编号
+    string answer     = 4;  // 答案
+    string options    = 5;  // 选项
+    int32 problemType = 6;  // 题目类型
+}
+
+message UpdateObjectiveReq {
+    int32 objectiveID = 1;  // 客观题主键
+    string content    = 2;  // 内容
+    string name       = 3;  // 名称
+    int32 userID      = 4;  // 用户编号
+    string answer     = 5;  // 答案
+    string options    = 6;  // 选项
+    int32 problemType = 7;  // 题目类型
+}
+
+message UpdateObjectiveStatusReq {
+    int32 objectiveID = 1;  // 客观题主键
+    int32 userID      = 2;  // 用户编号
+    int32 status      = 3;  // 状态
+}
