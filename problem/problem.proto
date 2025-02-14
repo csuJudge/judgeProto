@@ -269,15 +269,16 @@ message Option {
 }
 
 message Objective {
-    int32 objectiveID       = 1;  // 客观题主键
-    string content          = 2;  // 名称
-    string name             = 3;  // 出题人
-    string creator          = 4;  // 题目类型
-    string answer           = 5;  // 答案
-    string updateTime       = 6;  // 更新时间
-    string createTime       = 7;  // 创建时间
-    int32 enable            = 8;  // 是否可用
-    repeated Option options = 9;  // 选项
+    int32 objectiveID       = 1;   // 客观题主键
+    string content          = 2;   // 名称
+    string name             = 3;   // 出题人
+    string creator          = 4;   // 题目类型
+    string answer           = 5;   // 答案
+    string updateTime       = 6;   // 更新时间
+    string createTime       = 7;   // 创建时间
+    int32 enable            = 8;   // 是否可用
+    repeated Option options = 9;   // 选项
+    int32 objectiveType     = 10;  // 客观题类型
 }
 
 message QueryObjectiveRsp {
