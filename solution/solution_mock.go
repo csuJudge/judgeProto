@@ -161,6 +161,36 @@ func (mr *MockSolutionServerServiceMockRecorder) AddTestSolution(ctx, req any) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddTestSolution", reflect.TypeOf((*MockSolutionServerService)(nil).AddTestSolution), ctx, req)
 }
 
+// CountContestProblemSubmission mocks base method.
+func (m *MockSolutionServerService) CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq) (*CountContestProblemSubmissionRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CountContestProblemSubmission", ctx, req)
+	ret0, _ := ret[0].(*CountContestProblemSubmissionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CountContestProblemSubmission indicates an expected call of CountContestProblemSubmission.
+func (mr *MockSolutionServerServiceMockRecorder) CountContestProblemSubmission(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountContestProblemSubmission", reflect.TypeOf((*MockSolutionServerService)(nil).CountContestProblemSubmission), ctx, req)
+}
+
+// CountContestSubmission mocks base method.
+func (m *MockSolutionServerService) CountContestSubmission(ctx context.Context, req *CountContestSubmissionReq) (*CountContestSubmissionRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CountContestSubmission", ctx, req)
+	ret0, _ := ret[0].(*CountContestSubmissionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CountContestSubmission indicates an expected call of CountContestSubmission.
+func (mr *MockSolutionServerServiceMockRecorder) CountContestSubmission(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountContestSubmission", reflect.TypeOf((*MockSolutionServerService)(nil).CountContestSubmission), ctx, req)
+}
+
 // CountUserProblemSolution mocks base method.
 func (m *MockSolutionServerService) CountUserProblemSolution(ctx context.Context, req *CountUserProblemSolutionReq) (*CountUserProblemSolutionRsp, error) {
 	m.ctrl.T.Helper()
@@ -174,6 +204,21 @@ func (m *MockSolutionServerService) CountUserProblemSolution(ctx context.Context
 func (mr *MockSolutionServerServiceMockRecorder) CountUserProblemSolution(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerService)(nil).CountUserProblemSolution), ctx, req)
+}
+
+// QueryContestRankData mocks base method.
+func (m *MockSolutionServerService) QueryContestRankData(ctx context.Context, req *QueryContestRankDataReq) (*QueryContestRankDataRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryContestRankData", ctx, req)
+	ret0, _ := ret[0].(*QueryContestRankDataRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestRankData indicates an expected call of QueryContestRankData.
+func (mr *MockSolutionServerServiceMockRecorder) QueryContestRankData(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestRankData", reflect.TypeOf((*MockSolutionServerService)(nil).QueryContestRankData), ctx, req)
 }
 
 // QueryLatestCode mocks base method.
@@ -475,6 +520,46 @@ func (mr *MockSolutionServerClientProxyMockRecorder) AddTestSolution(ctx, req an
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddTestSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).AddTestSolution), varargs...)
 }
 
+// CountContestProblemSubmission mocks base method.
+func (m *MockSolutionServerClientProxy) CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq, opts ...client.Option) (*CountContestProblemSubmissionRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CountContestProblemSubmission", varargs...)
+	ret0, _ := ret[0].(*CountContestProblemSubmissionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CountContestProblemSubmission indicates an expected call of CountContestProblemSubmission.
+func (mr *MockSolutionServerClientProxyMockRecorder) CountContestProblemSubmission(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountContestProblemSubmission", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountContestProblemSubmission), varargs...)
+}
+
+// CountContestSubmission mocks base method.
+func (m *MockSolutionServerClientProxy) CountContestSubmission(ctx context.Context, req *CountContestSubmissionReq, opts ...client.Option) (*CountContestSubmissionRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CountContestSubmission", varargs...)
+	ret0, _ := ret[0].(*CountContestSubmissionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CountContestSubmission indicates an expected call of CountContestSubmission.
+func (mr *MockSolutionServerClientProxyMockRecorder) CountContestSubmission(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountContestSubmission", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountContestSubmission), varargs...)
+}
+
 // CountUserProblemSolution mocks base method.
 func (m *MockSolutionServerClientProxy) CountUserProblemSolution(ctx context.Context, req *CountUserProblemSolutionReq, opts ...client.Option) (*CountUserProblemSolutionRsp, error) {
 	m.ctrl.T.Helper()
@@ -493,6 +578,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) CountUserProblemSolution(ct
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountUserProblemSolution), varargs...)
+}
+
+// QueryContestRankData mocks base method.
+func (m *MockSolutionServerClientProxy) QueryContestRankData(ctx context.Context, req *QueryContestRankDataReq, opts ...client.Option) (*QueryContestRankDataRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryContestRankData", varargs...)
+	ret0, _ := ret[0].(*QueryContestRankDataRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestRankData indicates an expected call of QueryContestRankData.
+func (mr *MockSolutionServerClientProxyMockRecorder) QueryContestRankData(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestRankData", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryContestRankData), varargs...)
 }
 
 // QueryLatestCode mocks base method.

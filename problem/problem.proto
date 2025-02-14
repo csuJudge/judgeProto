@@ -279,6 +279,7 @@ message Objective {
     int32 enable            = 8;   // 是否可用
     repeated Option options = 9;   // 选项
     int32 objectiveType     = 10;  // 客观题类型
+    int32 isRight           = 11;  // 是否做对
 }
 
 message QueryObjectiveRsp {

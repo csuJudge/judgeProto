@@ -36,6 +36,83 @@ service SolutionServer {
     rpc QuerySolution(QuerySolutionReq) returns (QuerySolutionRsp) {}
     // AddTestSolution 测试
     rpc AddTestSolution(AddSolutionReq) returns (AddSolutionRsp) {}
+    // QueryContestRankData 查询作业的排名数据
+    rpc QueryContestRankData(QueryContestRankDataReq) returns (QueryContestRankDataRsp) {}
+    // CountContestSubmission 查询作业的提交统计数据
+    rpc CountContestSubmission(CountContestSubmissionReq) returns (CountContestSubmissionRsp) {}
+    // CountContestProblemSubmission 查询作业的题目提交统计数据
+    rpc CountContestProblemSubmission(CountContestSubmissionReq) returns (CountContestProblemSubmissionRsp) {}
+}
+
+message CountContestSubmissionReq {
+    int32 contestID = 1;  // 作业编号
+    int32 userID    = 2;  // 用户编号
+}
+
+message CountContestProblemSubmissionRsp {
+    string message                                = 1;  // 返回信息
+    int32 code                                    = 2;  // 返回码
+    repeated ProblemClassifiedSolution statistics = 3;  // 统计数据
+}
+
+message ProblemClassifiedSolution {
+    int32 problemID               = 1;  // 题目编号
+    string name                   = 2;  // 题目名称
+    ClassifiedSolution statistics = 3;  // 统计数据
+}
+
+message CountContestSubmissionRsp {
+    string message                = 1;  // 返回信息
+    int32 code                    = 2;  // 返回码
+    ClassifiedSolution statistics = 3;  // 统计数据
+}
+
+message ClassifiedSolution {
+    int32 acceptCount              = 1;  // 程序通过数量
+    int32 presentationErrorCount   = 2;  // 格式不对数量
+    int32 wrongAnswerCount         = 3;  // 答案不对数量
+    int32 timeLimitExceededCount   = 4;  // 运行超出时间限制数量
+    int32 memoryLimitExceededCount = 5;  // 超出内存限制数量
+    int32 outputLimitExceededCount = 6;  // 输出超过限制数量
+    int32 runtimeErrorCount        = 7;  // 运行时错误数量
+    int32 compileErrorCount        = 8;  // 编译错误数量
+}
+
+message QueryContestRankDataReq {
+    int32 contestID = 1;  // 作业编号
+    int32 userID    = 2;  // 用户编号
+}
+
+message QueryContestRankDataRsp {
+    string message            = 1;  // 返回信息
+    int32 code                = 2;  // 返回码
+    repeated Problem problems = 3;  // 题目数据
+    repeated Rank ranks       = 4;  // 排名
+}
+
+message Problem {
+    int32 problemID = 1;  // 题目编号
+    string name     = 2;  // 题目名称
+    int32 isSolved  = 3;  // 是否做完
+}
+
+message Rank {
+    string name                               = 1;  // 用户姓名
+    int32 userID                              = 2;  // 用户编号
+    int32 solvedCount                         = 3;  // 解决的数量
+    string number                             = 4;  // 用户学工号
+    float score                               = 5;  // 总得分
+    repeated ContestSolutionData solutionData = 6;  // 作业提交数据
+}
+
+message ContestSolutionData {
+    int32 problemID    = 1;  // 题目主键
+    float passRate     = 2;  // 通过率
+    string code        = 3;  // 用户代码
+    string createdTime = 4;  // 提交时间
+    string name        = 5;  // 题目名称
+    int32 submitCount  = 6;  // 提交数
+    int32 solvedCount  = 7;  // 正确数
 }
 
 message AddCodeReq {
