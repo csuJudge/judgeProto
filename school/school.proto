@@ -6,6 +6,10 @@ package oj.school;
 service CourseServer {
     // AddCourse 添加课程
     rpc AddCourse(AddCourseReq) returns (CommonRsp) {}
+    // UpdateCourse 更新课程
+    rpc UpdateCourse(UpdateCourseReq) returns (CommonRsp) {}
+    // UpdateCourse 更新课程状态
+    rpc UpdateCourseStatus(UpdateCourseStatusReq) returns (CommonRsp) {}
 }
 
 service ClassServer {
@@ -30,6 +34,29 @@ service ClassServer {
 service TermServer {
     // AddTerm 添加学期
     rpc AddTerm(AddTermReq) returns (CommonRsp) {}
+    // UpdateTerm 更新课程
+    rpc UpdateTerm(UpdateTermReq) returns (CommonRsp) {}
+    // UpdateTerm 更新课程状态
+    rpc UpdateTermStatus(UpdateTermStatusReq) returns (CommonRsp) {}
+}
+
+message UpdateTermStatusReq {
+    int32 userID = 1;  // 用户主键
+    int32 termID = 2;  // 学期主键
+    int32 status = 3;  // 状态
+}
+
+message UpdateCourseStatusReq {
+    int32 courseID = 1;  // 课程编号
+    int32 userID   = 2;  // 用户主键
+    int32 status   = 3;  // 状态
+}
+
+message UpdateCourseReq {
+    string name        = 1;  // 名称
+    int32 userID       = 2;  // 用户编号
+    string description = 3;  // 描述
+    int32 courseID     = 4;  // 课程编号
 }
 
 message QueryClassPageSizeReq {
@@ -128,6 +155,13 @@ message QueryUserClassRsp {
     string message   = 1;  // 返回信息
     int32 code       = 2;  // 返回码
     string userClass = 3;  // 用户的班级
+}
+
+message UpdateTermReq {
+    string name        = 1;  // 名称
+    int32 userID       = 2;  // 用户编号
+    string description = 3;  // 描述
+    int32 termID       = 4;  // 学期编号
 }
 
 message AddTermReq {

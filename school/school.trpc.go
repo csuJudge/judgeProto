@@ -21,6 +21,10 @@ import (
 type CourseServerService interface {
 	// AddCourse AddCourse 添加课程
 	AddCourse(ctx context.Context, req *AddCourseReq) (*CommonRsp, error)
+	// UpdateCourse UpdateCourse 更新课程
+	UpdateCourse(ctx context.Context, req *UpdateCourseReq) (*CommonRsp, error)
+	// UpdateCourseStatus UpdateCourse 更新课程状态
+	UpdateCourseStatus(ctx context.Context, req *UpdateCourseStatusReq) (*CommonRsp, error)
 }
 
 func CourseServerService_AddCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -41,6 +45,42 @@ func CourseServerService_AddCourse_Handler(svr interface{}, ctx context.Context,
 	return rsp, nil
 }
 
+func CourseServerService_UpdateCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UpdateCourseReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(CourseServerService).UpdateCourse(ctx, reqbody.(*UpdateCourseReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func CourseServerService_UpdateCourseStatus_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UpdateCourseStatusReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(CourseServerService).UpdateCourseStatus(ctx, reqbody.(*UpdateCourseStatusReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // CourseServerServer_ServiceDesc descriptor for server.RegisterService.
 var CourseServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.school.CourseServer",
@@ -49,6 +89,14 @@ var CourseServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.school.CourseServer/AddCourse",
 			Func: CourseServerService_AddCourse_Handler,
+		},
+		{
+			Name: "/oj.school.CourseServer/UpdateCourse",
+			Func: CourseServerService_UpdateCourse_Handler,
+		},
+		{
+			Name: "/oj.school.CourseServer/UpdateCourseStatus",
+			Func: CourseServerService_UpdateCourseStatus_Handler,
 		},
 	},
 }
@@ -275,6 +323,10 @@ func RegisterClassServerService(s server.Service, svr ClassServerService) {
 type TermServerService interface {
 	// AddTerm AddTerm 添加学期
 	AddTerm(ctx context.Context, req *AddTermReq) (*CommonRsp, error)
+	// UpdateTerm UpdateTerm 更新课程
+	UpdateTerm(ctx context.Context, req *UpdateTermReq) (*CommonRsp, error)
+	// UpdateTermStatus UpdateTerm 更新课程状态
+	UpdateTermStatus(ctx context.Context, req *UpdateTermStatusReq) (*CommonRsp, error)
 }
 
 func TermServerService_AddTerm_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -295,6 +347,42 @@ func TermServerService_AddTerm_Handler(svr interface{}, ctx context.Context, f s
 	return rsp, nil
 }
 
+func TermServerService_UpdateTerm_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UpdateTermReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(TermServerService).UpdateTerm(ctx, reqbody.(*UpdateTermReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func TermServerService_UpdateTermStatus_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UpdateTermStatusReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(TermServerService).UpdateTermStatus(ctx, reqbody.(*UpdateTermStatusReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // TermServerServer_ServiceDesc descriptor for server.RegisterService.
 var TermServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.school.TermServer",
@@ -303,6 +391,14 @@ var TermServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.school.TermServer/AddTerm",
 			Func: TermServerService_AddTerm_Handler,
+		},
+		{
+			Name: "/oj.school.TermServer/UpdateTerm",
+			Func: TermServerService_UpdateTerm_Handler,
+		},
+		{
+			Name: "/oj.school.TermServer/UpdateTermStatus",
+			Func: TermServerService_UpdateTermStatus_Handler,
 		},
 	},
 }
@@ -321,6 +417,16 @@ type UnimplementedCourseServer struct{}
 // AddCourse AddCourse 添加课程
 func (s *UnimplementedCourseServer) AddCourse(ctx context.Context, req *AddCourseReq) (*CommonRsp, error) {
 	return nil, errors.New("rpc AddCourse of service CourseServer is not implemented")
+}
+
+// UpdateCourse UpdateCourse 更新课程
+func (s *UnimplementedCourseServer) UpdateCourse(ctx context.Context, req *UpdateCourseReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc UpdateCourse of service CourseServer is not implemented")
+}
+
+// UpdateCourseStatus UpdateCourse 更新课程状态
+func (s *UnimplementedCourseServer) UpdateCourseStatus(ctx context.Context, req *UpdateCourseStatusReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc UpdateCourseStatus of service CourseServer is not implemented")
 }
 
 type UnimplementedClassServer struct{}
@@ -372,6 +478,16 @@ func (s *UnimplementedTermServer) AddTerm(ctx context.Context, req *AddTermReq) 
 	return nil, errors.New("rpc AddTerm of service TermServer is not implemented")
 }
 
+// UpdateTerm UpdateTerm 更新课程
+func (s *UnimplementedTermServer) UpdateTerm(ctx context.Context, req *UpdateTermReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc UpdateTerm of service TermServer is not implemented")
+}
+
+// UpdateTermStatus UpdateTerm 更新课程状态
+func (s *UnimplementedTermServer) UpdateTermStatus(ctx context.Context, req *UpdateTermStatusReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc UpdateTermStatus of service TermServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -382,6 +498,10 @@ func (s *UnimplementedTermServer) AddTerm(ctx context.Context, req *AddTermReq) 
 type CourseServerClientProxy interface {
 	// AddCourse AddCourse 添加课程
 	AddCourse(ctx context.Context, req *AddCourseReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// UpdateCourse UpdateCourse 更新课程
+	UpdateCourse(ctx context.Context, req *UpdateCourseReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// UpdateCourseStatus UpdateCourse 更新课程状态
+	UpdateCourseStatus(ctx context.Context, req *UpdateCourseStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
 }
 
 type CourseServerClientProxyImpl struct {
@@ -402,6 +522,46 @@ func (c *CourseServerClientProxyImpl) AddCourse(ctx context.Context, req *AddCou
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("CourseServer")
 	msg.WithCalleeMethod("AddCourse")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *CourseServerClientProxyImpl) UpdateCourse(ctx context.Context, req *UpdateCourseReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.school.CourseServer/UpdateCourse")
+	msg.WithCalleeServiceName(CourseServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("CourseServer")
+	msg.WithCalleeMethod("UpdateCourse")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *CourseServerClientProxyImpl) UpdateCourseStatus(ctx context.Context, req *UpdateCourseStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.school.CourseServer/UpdateCourseStatus")
+	msg.WithCalleeServiceName(CourseServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("CourseServer")
+	msg.WithCalleeMethod("UpdateCourseStatus")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
@@ -606,6 +766,10 @@ func (c *ClassServerClientProxyImpl) QueryClass(ctx context.Context, req *QueryC
 type TermServerClientProxy interface {
 	// AddTerm AddTerm 添加学期
 	AddTerm(ctx context.Context, req *AddTermReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// UpdateTerm UpdateTerm 更新课程
+	UpdateTerm(ctx context.Context, req *UpdateTermReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// UpdateTermStatus UpdateTerm 更新课程状态
+	UpdateTermStatus(ctx context.Context, req *UpdateTermStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
 }
 
 type TermServerClientProxyImpl struct {
@@ -626,6 +790,46 @@ func (c *TermServerClientProxyImpl) AddTerm(ctx context.Context, req *AddTermReq
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("TermServer")
 	msg.WithCalleeMethod("AddTerm")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *TermServerClientProxyImpl) UpdateTerm(ctx context.Context, req *UpdateTermReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.school.TermServer/UpdateTerm")
+	msg.WithCalleeServiceName(TermServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("TermServer")
+	msg.WithCalleeMethod("UpdateTerm")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *TermServerClientProxyImpl) UpdateTermStatus(ctx context.Context, req *UpdateTermStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.school.TermServer/UpdateTermStatus")
+	msg.WithCalleeServiceName(TermServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("TermServer")
+	msg.WithCalleeMethod("UpdateTermStatus")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)

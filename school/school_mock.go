@@ -60,6 +60,36 @@ func (mr *MockCourseServerServiceMockRecorder) AddCourse(ctx, req any) *gomock.C
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddCourse", reflect.TypeOf((*MockCourseServerService)(nil).AddCourse), ctx, req)
 }
 
+// UpdateCourse mocks base method.
+func (m *MockCourseServerService) UpdateCourse(ctx context.Context, req *UpdateCourseReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateCourse", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateCourse indicates an expected call of UpdateCourse.
+func (mr *MockCourseServerServiceMockRecorder) UpdateCourse(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateCourse", reflect.TypeOf((*MockCourseServerService)(nil).UpdateCourse), ctx, req)
+}
+
+// UpdateCourseStatus mocks base method.
+func (m *MockCourseServerService) UpdateCourseStatus(ctx context.Context, req *UpdateCourseStatusReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateCourseStatus", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateCourseStatus indicates an expected call of UpdateCourseStatus.
+func (mr *MockCourseServerServiceMockRecorder) UpdateCourseStatus(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateCourseStatus", reflect.TypeOf((*MockCourseServerService)(nil).UpdateCourseStatus), ctx, req)
+}
+
 // MockClassServerService is a mock of ClassServerService interface.
 type MockClassServerService struct {
 	ctrl     *gomock.Controller
@@ -251,6 +281,36 @@ func (mr *MockTermServerServiceMockRecorder) AddTerm(ctx, req any) *gomock.Call 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddTerm", reflect.TypeOf((*MockTermServerService)(nil).AddTerm), ctx, req)
 }
 
+// UpdateTerm mocks base method.
+func (m *MockTermServerService) UpdateTerm(ctx context.Context, req *UpdateTermReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateTerm", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTerm indicates an expected call of UpdateTerm.
+func (mr *MockTermServerServiceMockRecorder) UpdateTerm(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTerm", reflect.TypeOf((*MockTermServerService)(nil).UpdateTerm), ctx, req)
+}
+
+// UpdateTermStatus mocks base method.
+func (m *MockTermServerService) UpdateTermStatus(ctx context.Context, req *UpdateTermStatusReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateTermStatus", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTermStatus indicates an expected call of UpdateTermStatus.
+func (mr *MockTermServerServiceMockRecorder) UpdateTermStatus(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTermStatus", reflect.TypeOf((*MockTermServerService)(nil).UpdateTermStatus), ctx, req)
+}
+
 // MockCourseServerClientProxy is a mock of CourseServerClientProxy interface.
 type MockCourseServerClientProxy struct {
 	ctrl     *gomock.Controller
@@ -297,6 +357,46 @@ func (mr *MockCourseServerClientProxyMockRecorder) AddCourse(ctx, req any, opts 
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddCourse", reflect.TypeOf((*MockCourseServerClientProxy)(nil).AddCourse), varargs...)
+}
+
+// UpdateCourse mocks base method.
+func (m *MockCourseServerClientProxy) UpdateCourse(ctx context.Context, req *UpdateCourseReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateCourse", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateCourse indicates an expected call of UpdateCourse.
+func (mr *MockCourseServerClientProxyMockRecorder) UpdateCourse(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateCourse", reflect.TypeOf((*MockCourseServerClientProxy)(nil).UpdateCourse), varargs...)
+}
+
+// UpdateCourseStatus mocks base method.
+func (m *MockCourseServerClientProxy) UpdateCourseStatus(ctx context.Context, req *UpdateCourseStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateCourseStatus", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateCourseStatus indicates an expected call of UpdateCourseStatus.
+func (mr *MockCourseServerClientProxyMockRecorder) UpdateCourseStatus(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateCourseStatus", reflect.TypeOf((*MockCourseServerClientProxy)(nil).UpdateCourseStatus), varargs...)
 }
 
 // MockClassServerClientProxy is a mock of ClassServerClientProxy interface.
@@ -533,4 +633,44 @@ func (mr *MockTermServerClientProxyMockRecorder) AddTerm(ctx, req any, opts ...a
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddTerm", reflect.TypeOf((*MockTermServerClientProxy)(nil).AddTerm), varargs...)
+}
+
+// UpdateTerm mocks base method.
+func (m *MockTermServerClientProxy) UpdateTerm(ctx context.Context, req *UpdateTermReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateTerm", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTerm indicates an expected call of UpdateTerm.
+func (mr *MockTermServerClientProxyMockRecorder) UpdateTerm(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTerm", reflect.TypeOf((*MockTermServerClientProxy)(nil).UpdateTerm), varargs...)
+}
+
+// UpdateTermStatus mocks base method.
+func (m *MockTermServerClientProxy) UpdateTermStatus(ctx context.Context, req *UpdateTermStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateTermStatus", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTermStatus indicates an expected call of UpdateTermStatus.
+func (mr *MockTermServerClientProxyMockRecorder) UpdateTermStatus(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTermStatus", reflect.TypeOf((*MockTermServerClientProxy)(nil).UpdateTermStatus), varargs...)
 }
