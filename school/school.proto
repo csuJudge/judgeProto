@@ -112,6 +112,7 @@ message Term {
     string termID      = 1;  // 学期编号
     string name        = 2;  // 学期名
     string description = 3;  // 描述
+    string creator     = 4;  // 创建者
 }
 
 message SetPresentTermReq {
@@ -263,4 +264,6 @@ message CommonRsp {
 message Course {
     string name        = 1;  // 名称
     string description = 2;  // 描述
+    string courseID    = 3;  // 课程编号
+    string creator     = 4;  // 创建者
 }
