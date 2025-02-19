@@ -42,6 +42,27 @@ service SolutionServer {
     rpc CountContestSubmission(CountContestSubmissionReq) returns (CountContestSubmissionRsp) {}
     // CountContestProblemSubmission 查询作业的题目提交统计数据
     rpc CountContestProblemSubmission(CountContestSubmissionReq) returns (CountContestProblemSubmissionRsp) {}
+    // QueryRankData 查询片数据
+    rpc QueryRankData(QueryRankDataReq) returns (QuerySolutionRsp) {}
+
+    rpc QueryContestSolutionSubmitCount(QueryRankDataReq) returns (QueryContestSolutionSubmitCountRsp) {}
+}
+
+message QueryContestSolutionSubmitCountRsp {
+    string message                             = 1;  // 返回信息
+    int32 code                                 = 2;  // 返回码
+    repeated ContestSolutionSubmitCount accept = 3;  // 正确的提交
+    repeated ContestSolutionSubmitCount total  = 4;  // 提交总数
+}
+
+message ContestSolutionSubmitCount {
+    int32 userID    = 1;  // 用户编号
+    int32 problemID = 2;  // 题目编号
+    int32 count     = 3;  // 提交数
+}
+
+message QueryRankDataReq {
+    int32 contestID = 1;  // 作业编号
 }
 
 message CountContestSubmissionReq {
@@ -149,22 +170,9 @@ message QuerySolutionReq {
 }
 
 message QuerySolutionRsp {
-    int32 solutionID      = 1;   // 提交编号
-    int32 problemID       = 2;   // 题目编号
-    int32 result          = 3;   // 结果
-    double passRate       = 4;   // 通过率
-    int32 memory          = 5;   // 内存
-    int32 timeLimit       = 6;   // 时间限制
-    int32 language        = 7;   // 代码长度
-    int32 codeLength      = 8;   // 代码长度
-    string creator        = 9;   // 提交者
-    string creatTime      = 10;  // 提交时间
-    bool isSeeRuntimeInfo = 11;  // 是否可见运行信息
-    string userCode       = 12;  // 用户提交的代码
-    int32 creatorID       = 13;  // 提交者编号
-    bool codeView         = 14;  // 代码是否可见
-    string problemName    = 15;  // 题目名称
-    string userNumber     = 16;  // 用户学号
+    string message             = 1;  // 返回信息
+    int32 code                 = 2;  // 返回码
+    repeated Solution solution = 3;  // 提交数据
 }
 
 message QueryUserProblemSolutionReq {

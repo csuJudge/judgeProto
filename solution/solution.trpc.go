@@ -133,6 +133,10 @@ type SolutionServerService interface {
 	CountContestSubmission(ctx context.Context, req *CountContestSubmissionReq) (*CountContestSubmissionRsp, error)
 	// CountContestProblemSubmission CountContestProblemSubmission 查询作业的题目提交统计数据
 	CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq) (*CountContestProblemSubmissionRsp, error)
+	// QueryRankData QueryRankData 查询片数据
+	QueryRankData(ctx context.Context, req *QueryRankDataReq) (*QuerySolutionRsp, error)
+
+	QueryContestSolutionSubmitCount(ctx context.Context, req *QueryRankDataReq) (*QueryContestSolutionSubmitCountRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -405,6 +409,42 @@ func SolutionServerService_CountContestProblemSubmission_Handler(svr interface{}
 	return rsp, nil
 }
 
+func SolutionServerService_QueryRankData_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryRankDataReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryRankData(ctx, reqbody.(*QueryRankDataReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func SolutionServerService_QueryContestSolutionSubmitCount_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryRankDataReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryContestSolutionSubmitCount(ctx, reqbody.(*QueryRankDataReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -469,6 +509,14 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/CountContestProblemSubmission",
 			Func: SolutionServerService_CountContestProblemSubmission_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryRankData",
+			Func: SolutionServerService_QueryRankData_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryContestSolutionSubmitCount",
+			Func: SolutionServerService_QueryContestSolutionSubmitCount_Handler,
 		},
 	},
 }
@@ -569,6 +617,14 @@ func (s *UnimplementedSolutionServer) CountContestSubmission(ctx context.Context
 // CountContestProblemSubmission CountContestProblemSubmission 查询作业的题目提交统计数据
 func (s *UnimplementedSolutionServer) CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq) (*CountContestProblemSubmissionRsp, error) {
 	return nil, errors.New("rpc CountContestProblemSubmission of service SolutionServer is not implemented")
+}
+
+// QueryRankData QueryRankData 查询片数据
+func (s *UnimplementedSolutionServer) QueryRankData(ctx context.Context, req *QueryRankDataReq) (*QuerySolutionRsp, error) {
+	return nil, errors.New("rpc QueryRankData of service SolutionServer is not implemented")
+}
+func (s *UnimplementedSolutionServer) QueryContestSolutionSubmitCount(ctx context.Context, req *QueryRankDataReq) (*QueryContestSolutionSubmitCountRsp, error) {
+	return nil, errors.New("rpc QueryContestSolutionSubmitCount of service SolutionServer is not implemented")
 }
 
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
@@ -677,6 +733,10 @@ type SolutionServerClientProxy interface {
 	CountContestSubmission(ctx context.Context, req *CountContestSubmissionReq, opts ...client.Option) (rsp *CountContestSubmissionRsp, err error)
 	// CountContestProblemSubmission CountContestProblemSubmission 查询作业的题目提交统计数据
 	CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq, opts ...client.Option) (rsp *CountContestProblemSubmissionRsp, err error)
+	// QueryRankData QueryRankData 查询片数据
+	QueryRankData(ctx context.Context, req *QueryRankDataReq, opts ...client.Option) (rsp *QuerySolutionRsp, err error)
+
+	QueryContestSolutionSubmitCount(ctx context.Context, req *QueryRankDataReq, opts ...client.Option) (rsp *QueryContestSolutionSubmitCountRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -982,6 +1042,46 @@ func (c *SolutionServerClientProxyImpl) CountContestProblemSubmission(ctx contex
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CountContestProblemSubmissionRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryRankData(ctx context.Context, req *QueryRankDataReq, opts ...client.Option) (*QuerySolutionRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryRankData")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryRankData")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QuerySolutionRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryContestSolutionSubmitCount(ctx context.Context, req *QueryRankDataReq, opts ...client.Option) (*QueryContestSolutionSubmitCountRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryContestSolutionSubmitCount")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryContestSolutionSubmitCount")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryContestSolutionSubmitCountRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
