@@ -137,6 +137,12 @@ type SolutionServerService interface {
 	QueryRankData(ctx context.Context, req *QueryRankDataReq) (*QuerySolutionRsp, error)
 
 	QueryContestSolutionSubmitCount(ctx context.Context, req *QueryRankDataReq) (*QueryContestSolutionSubmitCountRsp, error)
+	// QueryMySolutionRecord QueryMySolutionRecord 查询我的提交历史
+	QueryMySolutionRecord(ctx context.Context, req *QueryMySolutionRecordReq) (*QueryMySolutionRecordRsp, error)
+	// CountMySolution CountMySolution 计算我的提交数据
+	CountMySolution(ctx context.Context, req *QueryMySolutionRecordReq) (*CountContestSubmissionRsp, error)
+	// QueryTodaySolution QueryTodaySolution 查询今天的预约
+	QueryTodaySolution(ctx context.Context, req *EmptyReq) (*QueryTodaySolutionRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -445,6 +451,60 @@ func SolutionServerService_QueryContestSolutionSubmitCount_Handler(svr interface
 	return rsp, nil
 }
 
+func SolutionServerService_QueryMySolutionRecord_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryMySolutionRecordReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryMySolutionRecord(ctx, reqbody.(*QueryMySolutionRecordReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func SolutionServerService_CountMySolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryMySolutionRecordReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).CountMySolution(ctx, reqbody.(*QueryMySolutionRecordReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func SolutionServerService_QueryTodaySolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &EmptyReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryTodaySolution(ctx, reqbody.(*EmptyReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -517,6 +577,18 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/QueryContestSolutionSubmitCount",
 			Func: SolutionServerService_QueryContestSolutionSubmitCount_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryMySolutionRecord",
+			Func: SolutionServerService_QueryMySolutionRecord_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/CountMySolution",
+			Func: SolutionServerService_CountMySolution_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryTodaySolution",
+			Func: SolutionServerService_QueryTodaySolution_Handler,
 		},
 	},
 }
@@ -625,6 +697,21 @@ func (s *UnimplementedSolutionServer) QueryRankData(ctx context.Context, req *Qu
 }
 func (s *UnimplementedSolutionServer) QueryContestSolutionSubmitCount(ctx context.Context, req *QueryRankDataReq) (*QueryContestSolutionSubmitCountRsp, error) {
 	return nil, errors.New("rpc QueryContestSolutionSubmitCount of service SolutionServer is not implemented")
+}
+
+// QueryMySolutionRecord QueryMySolutionRecord 查询我的提交历史
+func (s *UnimplementedSolutionServer) QueryMySolutionRecord(ctx context.Context, req *QueryMySolutionRecordReq) (*QueryMySolutionRecordRsp, error) {
+	return nil, errors.New("rpc QueryMySolutionRecord of service SolutionServer is not implemented")
+}
+
+// CountMySolution CountMySolution 计算我的提交数据
+func (s *UnimplementedSolutionServer) CountMySolution(ctx context.Context, req *QueryMySolutionRecordReq) (*CountContestSubmissionRsp, error) {
+	return nil, errors.New("rpc CountMySolution of service SolutionServer is not implemented")
+}
+
+// QueryTodaySolution QueryTodaySolution 查询今天的预约
+func (s *UnimplementedSolutionServer) QueryTodaySolution(ctx context.Context, req *EmptyReq) (*QueryTodaySolutionRsp, error) {
+	return nil, errors.New("rpc QueryTodaySolution of service SolutionServer is not implemented")
 }
 
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
@@ -737,6 +824,12 @@ type SolutionServerClientProxy interface {
 	QueryRankData(ctx context.Context, req *QueryRankDataReq, opts ...client.Option) (rsp *QuerySolutionRsp, err error)
 
 	QueryContestSolutionSubmitCount(ctx context.Context, req *QueryRankDataReq, opts ...client.Option) (rsp *QueryContestSolutionSubmitCountRsp, err error)
+	// QueryMySolutionRecord QueryMySolutionRecord 查询我的提交历史
+	QueryMySolutionRecord(ctx context.Context, req *QueryMySolutionRecordReq, opts ...client.Option) (rsp *QueryMySolutionRecordRsp, err error)
+	// CountMySolution CountMySolution 计算我的提交数据
+	CountMySolution(ctx context.Context, req *QueryMySolutionRecordReq, opts ...client.Option) (rsp *CountContestSubmissionRsp, err error)
+	// QueryTodaySolution QueryTodaySolution 查询今天的预约
+	QueryTodaySolution(ctx context.Context, req *EmptyReq, opts ...client.Option) (rsp *QueryTodaySolutionRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -1082,6 +1175,66 @@ func (c *SolutionServerClientProxyImpl) QueryContestSolutionSubmitCount(ctx cont
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryContestSolutionSubmitCountRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryMySolutionRecord(ctx context.Context, req *QueryMySolutionRecordReq, opts ...client.Option) (*QueryMySolutionRecordRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryMySolutionRecord")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryMySolutionRecord")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryMySolutionRecordRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) CountMySolution(ctx context.Context, req *QueryMySolutionRecordReq, opts ...client.Option) (*CountContestSubmissionRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/CountMySolution")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("CountMySolution")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CountContestSubmissionRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryTodaySolution(ctx context.Context, req *EmptyReq, opts ...client.Option) (*QueryTodaySolutionRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryTodaySolution")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryTodaySolution")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryTodaySolutionRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

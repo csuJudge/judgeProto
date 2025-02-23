@@ -46,6 +46,33 @@ service SolutionServer {
     rpc QueryRankData(QueryRankDataReq) returns (QuerySolutionRsp) {}
 
     rpc QueryContestSolutionSubmitCount(QueryRankDataReq) returns (QueryContestSolutionSubmitCountRsp) {}
+    // QueryMySolutionRecord 查询我的提交历史
+    rpc QueryMySolutionRecord(QueryMySolutionRecordReq) returns (QueryMySolutionRecordRsp) {}
+    // CountMySolution 计算我的提交数据
+    rpc CountMySolution(QueryMySolutionRecordReq) returns (CountContestSubmissionRsp) {}
+    // QueryTodaySolution 查询今天的预约
+    rpc QueryTodaySolution(EmptyReq) returns (QueryTodaySolutionRsp) {}
+}
+
+message QueryTodaySolutionRsp {
+    string message                = 1;  // 返回信息
+    int32 code                    = 2;  // 返回码
+    ClassifiedSolution statistics = 3;  // 统计数据
+    repeated int32 timeRange      = 4;  // 时间跨度
+}
+
+message EmptyReq {
+}
+
+message QueryMySolutionRecordReq {
+    int32 userID = 1;  // 用户编号
+}
+
+message QueryMySolutionRecordRsp {
+    string message                    = 1;  // 返回信息
+    int32 code                        = 2;  // 返回码
+    repeated Problem acceptProblems   = 3;  // 通过的题目
+    repeated Problem unAcceptProblems = 4;  // 不通过的题目
 }
 
 message QueryContestSolutionSubmitCountRsp {
