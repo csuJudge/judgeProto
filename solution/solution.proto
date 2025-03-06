@@ -44,7 +44,7 @@ service SolutionServer {
     rpc CountContestProblemSubmission(CountContestSubmissionReq) returns (CountContestProblemSubmissionRsp) {}
     // QueryRankData 查询片数据
     rpc QueryRankData(QueryRankDataReq) returns (QuerySolutionRsp) {}
-
+    // QueryContestSolutionSubmitCount 查询题目的提交次数
     rpc QueryContestSolutionSubmitCount(QueryRankDataReq) returns (QueryContestSolutionSubmitCountRsp) {}
     // QueryMySolutionRecord 查询我的提交历史
     rpc QueryMySolutionRecord(QueryMySolutionRecordReq) returns (QueryMySolutionRecordRsp) {}

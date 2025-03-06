@@ -135,7 +135,7 @@ type SolutionServerService interface {
 	CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq) (*CountContestProblemSubmissionRsp, error)
 	// QueryRankData QueryRankData 查询片数据
 	QueryRankData(ctx context.Context, req *QueryRankDataReq) (*QuerySolutionRsp, error)
-
+	// QueryContestSolutionSubmitCount QueryContestSolutionSubmitCount 查询题目的提交次数
 	QueryContestSolutionSubmitCount(ctx context.Context, req *QueryRankDataReq) (*QueryContestSolutionSubmitCountRsp, error)
 	// QueryMySolutionRecord QueryMySolutionRecord 查询我的提交历史
 	QueryMySolutionRecord(ctx context.Context, req *QueryMySolutionRecordReq) (*QueryMySolutionRecordRsp, error)
@@ -695,6 +695,8 @@ func (s *UnimplementedSolutionServer) CountContestProblemSubmission(ctx context.
 func (s *UnimplementedSolutionServer) QueryRankData(ctx context.Context, req *QueryRankDataReq) (*QuerySolutionRsp, error) {
 	return nil, errors.New("rpc QueryRankData of service SolutionServer is not implemented")
 }
+
+// QueryContestSolutionSubmitCount QueryContestSolutionSubmitCount 查询题目的提交次数
 func (s *UnimplementedSolutionServer) QueryContestSolutionSubmitCount(ctx context.Context, req *QueryRankDataReq) (*QueryContestSolutionSubmitCountRsp, error) {
 	return nil, errors.New("rpc QueryContestSolutionSubmitCount of service SolutionServer is not implemented")
 }
@@ -822,7 +824,7 @@ type SolutionServerClientProxy interface {
 	CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq, opts ...client.Option) (rsp *CountContestProblemSubmissionRsp, err error)
 	// QueryRankData QueryRankData 查询片数据
 	QueryRankData(ctx context.Context, req *QueryRankDataReq, opts ...client.Option) (rsp *QuerySolutionRsp, err error)
-
+	// QueryContestSolutionSubmitCount QueryContestSolutionSubmitCount 查询题目的提交次数
 	QueryContestSolutionSubmitCount(ctx context.Context, req *QueryRankDataReq, opts ...client.Option) (rsp *QueryContestSolutionSubmitCountRsp, err error)
 	// QueryMySolutionRecord QueryMySolutionRecord 查询我的提交历史
 	QueryMySolutionRecord(ctx context.Context, req *QueryMySolutionRecordReq, opts ...client.Option) (rsp *QueryMySolutionRecordRsp, err error)
