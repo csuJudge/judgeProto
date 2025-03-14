@@ -65,6 +65,7 @@ message QueryProblemListReq {
     int32 userID     = 3;  // 用户编号
     string condition = 4;  // 条件（名称或者编号）
     string knowledge = 5;  // 知识点
+    string course    = 6;  // 课程
 }
 
 message QueryProblemListRsp {
