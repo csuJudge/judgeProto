@@ -50,7 +50,7 @@ service SolutionServer {
     rpc QueryMySolutionRecord(QueryMySolutionRecordReq) returns (QueryMySolutionRecordRsp) {}
     // CountMySolution 计算我的提交数据
     rpc CountMySolution(QueryMySolutionRecordReq) returns (CountContestSubmissionRsp) {}
-    // QueryTodaySolution 查询今天的预约
+    // QueryTodaySolution 查询今天的提交
     rpc QueryTodaySolution(EmptyReq) returns (QueryTodaySolutionRsp) {}
 }
 

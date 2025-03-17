@@ -141,7 +141,7 @@ type SolutionServerService interface {
 	QueryMySolutionRecord(ctx context.Context, req *QueryMySolutionRecordReq) (*QueryMySolutionRecordRsp, error)
 	// CountMySolution CountMySolution 计算我的提交数据
 	CountMySolution(ctx context.Context, req *QueryMySolutionRecordReq) (*CountContestSubmissionRsp, error)
-	// QueryTodaySolution QueryTodaySolution 查询今天的预约
+	// QueryTodaySolution QueryTodaySolution 查询今天的提交
 	QueryTodaySolution(ctx context.Context, req *EmptyReq) (*QueryTodaySolutionRsp, error)
 }
 
@@ -711,7 +711,7 @@ func (s *UnimplementedSolutionServer) CountMySolution(ctx context.Context, req *
 	return nil, errors.New("rpc CountMySolution of service SolutionServer is not implemented")
 }
 
-// QueryTodaySolution QueryTodaySolution 查询今天的预约
+// QueryTodaySolution QueryTodaySolution 查询今天的提交
 func (s *UnimplementedSolutionServer) QueryTodaySolution(ctx context.Context, req *EmptyReq) (*QueryTodaySolutionRsp, error) {
 	return nil, errors.New("rpc QueryTodaySolution of service SolutionServer is not implemented")
 }
@@ -830,7 +830,7 @@ type SolutionServerClientProxy interface {
 	QueryMySolutionRecord(ctx context.Context, req *QueryMySolutionRecordReq, opts ...client.Option) (rsp *QueryMySolutionRecordRsp, err error)
 	// CountMySolution CountMySolution 计算我的提交数据
 	CountMySolution(ctx context.Context, req *QueryMySolutionRecordReq, opts ...client.Option) (rsp *CountContestSubmissionRsp, err error)
-	// QueryTodaySolution QueryTodaySolution 查询今天的预约
+	// QueryTodaySolution QueryTodaySolution 查询今天的提交
 	QueryTodaySolution(ctx context.Context, req *EmptyReq, opts ...client.Option) (rsp *QueryTodaySolutionRsp, err error)
 }
 

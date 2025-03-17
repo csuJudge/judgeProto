@@ -23,6 +23,8 @@ type ContestServerService interface {
 	QueryContest(ctx context.Context, req *QueryContestReq) (*QueryContestRsp, error)
 	// QueryContestList QueryContestList 查询作业列表
 	QueryContestList(ctx context.Context, req *QueryContestListReq) (*QueryContestListRsp, error)
+	// QueryMyContestList QueryMyContestList 查询我的作业列表
+	QueryMyContestList(ctx context.Context, req *QueryContestListReq) (*QueryContestListRsp, error)
 	// UpdateContestStatus UpdateContestStatus 更新作业状态
 	UpdateContestStatus(ctx context.Context, req *UpdateContestStatusReq) (*CommonRsp, error)
 	// AddContest AddContest 添加作业
@@ -59,6 +61,24 @@ func ContestServerService_QueryContestList_Handler(svr interface{}, ctx context.
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
 		return svr.(ContestServerService).QueryContestList(ctx, reqbody.(*QueryContestListReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ContestServerService_QueryMyContestList_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryContestListReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ContestServerService).QueryMyContestList(ctx, reqbody.(*QueryContestListReq))
 	}
 
 	var rsp interface{}
@@ -155,6 +175,10 @@ var ContestServerServer_ServiceDesc = server.ServiceDesc{
 			Func: ContestServerService_QueryContestList_Handler,
 		},
 		{
+			Name: "/oj.contest.ContestServer/QueryMyContestList",
+			Func: ContestServerService_QueryMyContestList_Handler,
+		},
+		{
 			Name: "/oj.contest.ContestServer/UpdateContestStatus",
 			Func: ContestServerService_UpdateContestStatus_Handler,
 		},
@@ -194,6 +218,11 @@ func (s *UnimplementedContestServer) QueryContestList(ctx context.Context, req *
 	return nil, errors.New("rpc QueryContestList of service ContestServer is not implemented")
 }
 
+// QueryMyContestList QueryMyContestList 查询我的作业列表
+func (s *UnimplementedContestServer) QueryMyContestList(ctx context.Context, req *QueryContestListReq) (*QueryContestListRsp, error) {
+	return nil, errors.New("rpc QueryMyContestList of service ContestServer is not implemented")
+}
+
 // UpdateContestStatus UpdateContestStatus 更新作业状态
 func (s *UnimplementedContestServer) UpdateContestStatus(ctx context.Context, req *UpdateContestStatusReq) (*CommonRsp, error) {
 	return nil, errors.New("rpc UpdateContestStatus of service ContestServer is not implemented")
@@ -226,6 +255,8 @@ type ContestServerClientProxy interface {
 	QueryContest(ctx context.Context, req *QueryContestReq, opts ...client.Option) (rsp *QueryContestRsp, err error)
 	// QueryContestList QueryContestList 查询作业列表
 	QueryContestList(ctx context.Context, req *QueryContestListReq, opts ...client.Option) (rsp *QueryContestListRsp, err error)
+	// QueryMyContestList QueryMyContestList 查询我的作业列表
+	QueryMyContestList(ctx context.Context, req *QueryContestListReq, opts ...client.Option) (rsp *QueryContestListRsp, err error)
 	// UpdateContestStatus UpdateContestStatus 更新作业状态
 	UpdateContestStatus(ctx context.Context, req *UpdateContestStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// AddContest AddContest 添加作业
@@ -274,6 +305,26 @@ func (c *ContestServerClientProxyImpl) QueryContestList(ctx context.Context, req
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("ContestServer")
 	msg.WithCalleeMethod("QueryContestList")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryContestListRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ContestServerClientProxyImpl) QueryMyContestList(ctx context.Context, req *QueryContestListReq, opts ...client.Option) (*QueryContestListRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.contest.ContestServer/QueryMyContestList")
+	msg.WithCalleeServiceName(ContestServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ContestServer")
+	msg.WithCalleeMethod("QueryMyContestList")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)

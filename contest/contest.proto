@@ -8,6 +8,8 @@ service ContestServer {
     rpc QueryContest(QueryContestReq) returns (QueryContestRsp) {}
     // QueryContestList 查询作业列表
     rpc QueryContestList(QueryContestListReq) returns (QueryContestListRsp) {}
+    // QueryMyContestList 查询我的作业列表
+    rpc QueryMyContestList(QueryContestListReq) returns (QueryContestListRsp) {}
     // UpdateContestStatus 更新作业状态
     rpc UpdateContestStatus(UpdateContestStatusReq) returns (CommonRsp) {}
     // AddContest 添加作业
