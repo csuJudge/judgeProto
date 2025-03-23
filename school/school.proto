@@ -18,6 +18,8 @@ service CourseServer {
     rpc QueryCourse(QueryCourseReq) returns (QueryCourseRsp) {}
     // QueryCourseClass 查询课程的班级
     rpc QueryCourseClass(QueryCourseClassReq) returns (QueryCourseClassRsp) {}
+    // QueryCourseKnowledge 查询课程的知识点
+    rpc QueryCourseKnowledge(QueryCourseKnowledgeReq) returns (QueryCourseKnowledgeRsp) {}
 }
 
 service ClassServer {
@@ -56,6 +58,21 @@ service TermServer {
     rpc QueryAllTerm(QueryAllTermReq) returns (QueryAllTermRsp) {}
     // QueryTerm 查询学期
     rpc QueryTerm(QueryTermReq) returns (QueryTermRsp) {}
+}
+
+message QueryCourseKnowledgeReq {
+    int32 courseID = 1;  // 课程编号
+}
+
+message QueryCourseKnowledgeRsp {
+    string message               = 1;  // 返回信息
+    int32 code                   = 2;  // 返回码
+    repeated Knowledge knowledge = 3;  // 知识点
+}
+
+message Knowledge {
+    int32 id    = 1;  // 知识点主键
+    string name = 2;  // 知识点名称
 }
 
 message QueryCourseClassReq {

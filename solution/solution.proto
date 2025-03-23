@@ -216,16 +216,17 @@ message QueryUserProblemSolutionRsp {
 }
 
 message AddSolutionReq {
-    int32 problemID  = 1;   // 题目编号
-    int32 userID     = 2;   // 用户编号
-    int32 language   = 3;   // 语言
-    int32 contestID  = 4;   // 考试编号
-    string userCode  = 5;   // 用户代码
-    string input     = 6;   // 输入
-    string keyAction = 7;   // 击键行为
-    int32 type       = 8;   // 类型
-    string ip        = 9;   // ip信息
-    string startTime = 10;  // 进入题目的时间
+    int32 problemID    = 1;   // 题目编号
+    int32 userID       = 2;   // 用户编号
+    int32 language     = 3;   // 语言
+    int32 contestID    = 4;   // 考试编号
+    string userCode    = 5;   // 用户代码
+    string input       = 6;   // 输入
+    string keyAction   = 7;   // 击键行为
+    int32 type         = 8;   // 类型
+    string ip          = 9;   // ip信息
+    string startTime   = 10;  // 进入题目的时间
+    int32 solutionType = 11;  // 提交的类型
 }
 
 message QuerySimListReq {

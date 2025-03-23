@@ -48,6 +48,8 @@ message UpdateProblemReq {
     string knowledges        = 11;  // 知识点
     int32 difficulty         = 12;  // 难度
     int32 userID             = 13;  // 用户编号
+    int32 type               = 14;  // 题目类型
+    string template          = 15;  // 模板
 }
 
 message updateProblemVisitNumberReq {
@@ -200,6 +202,8 @@ message Problem {
     string updateTime        = 17;  // 修改时间
     string createdTime       = 18;  // 创建时间
     string updatedBy         = 19;  // 更新者
+    int32 type               = 20;  // 题目类型
+    string template          = 21;  // 模板
 }
 
 message AddProblemReq {
@@ -215,6 +219,8 @@ message AddProblemReq {
     int32 memoryLimit        = 10;  // 内存限制
     string knowledges        = 11;  // 知识点
     int32 difficulty         = 12;  // 难度
+    int32 type               = 13;  // 题目类型
+    string template          = 14;  // 模板
 }
 
 service ObjectiveServer {

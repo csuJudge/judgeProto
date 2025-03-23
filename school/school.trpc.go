@@ -33,6 +33,8 @@ type CourseServerService interface {
 	QueryCourse(ctx context.Context, req *QueryCourseReq) (*QueryCourseRsp, error)
 	// QueryCourseClass QueryCourseClass 查询课程的班级
 	QueryCourseClass(ctx context.Context, req *QueryCourseClassReq) (*QueryCourseClassRsp, error)
+	// QueryCourseKnowledge QueryCourseKnowledge 查询课程的知识点
+	QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq) (*QueryCourseKnowledgeRsp, error)
 }
 
 func CourseServerService_AddCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -161,6 +163,24 @@ func CourseServerService_QueryCourseClass_Handler(svr interface{}, ctx context.C
 	return rsp, nil
 }
 
+func CourseServerService_QueryCourseKnowledge_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryCourseKnowledgeReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(CourseServerService).QueryCourseKnowledge(ctx, reqbody.(*QueryCourseKnowledgeReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // CourseServerServer_ServiceDesc descriptor for server.RegisterService.
 var CourseServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.school.CourseServer",
@@ -193,6 +213,10 @@ var CourseServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.school.CourseServer/QueryCourseClass",
 			Func: CourseServerService_QueryCourseClass_Handler,
+		},
+		{
+			Name: "/oj.school.CourseServer/QueryCourseKnowledge",
+			Func: CourseServerService_QueryCourseKnowledge_Handler,
 		},
 	},
 }
@@ -665,6 +689,11 @@ func (s *UnimplementedCourseServer) QueryCourseClass(ctx context.Context, req *Q
 	return nil, errors.New("rpc QueryCourseClass of service CourseServer is not implemented")
 }
 
+// QueryCourseKnowledge QueryCourseKnowledge 查询课程的知识点
+func (s *UnimplementedCourseServer) QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq) (*QueryCourseKnowledgeRsp, error) {
+	return nil, errors.New("rpc QueryCourseKnowledge of service CourseServer is not implemented")
+}
+
 type UnimplementedClassServer struct{}
 
 // QueryUserClass QueryUserClass 查询用户的班级
@@ -771,6 +800,8 @@ type CourseServerClientProxy interface {
 	QueryCourse(ctx context.Context, req *QueryCourseReq, opts ...client.Option) (rsp *QueryCourseRsp, err error)
 	// QueryCourseClass QueryCourseClass 查询课程的班级
 	QueryCourseClass(ctx context.Context, req *QueryCourseClassReq, opts ...client.Option) (rsp *QueryCourseClassRsp, err error)
+	// QueryCourseKnowledge QueryCourseKnowledge 查询课程的知识点
+	QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq, opts ...client.Option) (rsp *QueryCourseKnowledgeRsp, err error)
 }
 
 type CourseServerClientProxyImpl struct {
@@ -916,6 +947,26 @@ func (c *CourseServerClientProxyImpl) QueryCourseClass(ctx context.Context, req 
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryCourseClassRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *CourseServerClientProxyImpl) QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq, opts ...client.Option) (*QueryCourseKnowledgeRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.school.CourseServer/QueryCourseKnowledge")
+	msg.WithCalleeServiceName(CourseServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("CourseServer")
+	msg.WithCalleeMethod("QueryCourseKnowledge")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryCourseKnowledgeRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
