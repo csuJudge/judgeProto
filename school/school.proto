@@ -11,15 +11,17 @@ service CourseServer {
     // UpdateCourseStatus 更新课程状态
     rpc UpdateCourseStatus(UpdateCourseStatusReq) returns (CommonRsp) {}
     // QueryAllCourse 查询所有课程
-    rpc QueryAllCourse(QueryAllCourseReq) returns (QueryAllCourseRsp) {}
+    rpc QueryAllCourse(QueryCoursePageSizeReq) returns (QueryCoursePageSizeRsp) {}
     // QueryMyCourse 查询我的课程
-    rpc QueryMyCourse(QueryAllCourseReq) returns (QueryAllCourseRsp) {}
+    rpc QueryMyCourse(QueryCoursePageSizeReq) returns (QueryCoursePageSizeRsp) {}
     // QueryCourse 查询课程
     rpc QueryCourse(QueryCourseReq) returns (QueryCourseRsp) {}
     // QueryCourseClass 查询课程的班级
     rpc QueryCourseClass(QueryCourseClassReq) returns (QueryCourseClassRsp) {}
     // QueryCourseKnowledge 查询课程的知识点
     rpc QueryCourseKnowledge(QueryCourseKnowledgeReq) returns (QueryCourseKnowledgeRsp) {}
+    // QueryCoursePageSize 分页查询所有课程
+    rpc QueryCoursePageSize(QueryCoursePageSizeReq) returns (QueryCoursePageSizeRsp) {}
 }
 
 service ClassServer {
@@ -116,14 +118,14 @@ message QueryTermRsp {
     Term term      = 3;  // 学期
 }
 
-message QueryAllCourseRsp {
+message QueryCoursePageSizeRsp {
     string message         = 1;  // 返回信息
     int32 code             = 2;  // 返回码
     repeated Course course = 3;  // 课程
     int32 total            = 4;  // 总数
 }
 
-message QueryAllCourseReq {
+message QueryCoursePageSizeReq {
     int32 page   = 1;  // 页
     int32 limit  = 2;  // 页大小
     int32 userID = 3;  // 用户编号

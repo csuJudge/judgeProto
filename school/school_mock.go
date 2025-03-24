@@ -61,10 +61,10 @@ func (mr *MockCourseServerServiceMockRecorder) AddCourse(ctx, req any) *gomock.C
 }
 
 // QueryAllCourse mocks base method.
-func (m *MockCourseServerService) QueryAllCourse(ctx context.Context, req *QueryAllCourseReq) (*QueryAllCourseRsp, error) {
+func (m *MockCourseServerService) QueryAllCourse(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryCoursePageSizeRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryAllCourse", ctx, req)
-	ret0, _ := ret[0].(*QueryAllCourseRsp)
+	ret0, _ := ret[0].(*QueryCoursePageSizeRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -120,11 +120,26 @@ func (mr *MockCourseServerServiceMockRecorder) QueryCourseKnowledge(ctx, req any
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryCourseKnowledge", reflect.TypeOf((*MockCourseServerService)(nil).QueryCourseKnowledge), ctx, req)
 }
 
+// QueryCoursePageSize mocks base method.
+func (m *MockCourseServerService) QueryCoursePageSize(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryCoursePageSizeRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryCoursePageSize", ctx, req)
+	ret0, _ := ret[0].(*QueryCoursePageSizeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryCoursePageSize indicates an expected call of QueryCoursePageSize.
+func (mr *MockCourseServerServiceMockRecorder) QueryCoursePageSize(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryCoursePageSize", reflect.TypeOf((*MockCourseServerService)(nil).QueryCoursePageSize), ctx, req)
+}
+
 // QueryMyCourse mocks base method.
-func (m *MockCourseServerService) QueryMyCourse(ctx context.Context, req *QueryAllCourseReq) (*QueryAllCourseRsp, error) {
+func (m *MockCourseServerService) QueryMyCourse(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryCoursePageSizeRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryMyCourse", ctx, req)
-	ret0, _ := ret[0].(*QueryAllCourseRsp)
+	ret0, _ := ret[0].(*QueryCoursePageSizeRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -510,14 +525,14 @@ func (mr *MockCourseServerClientProxyMockRecorder) AddCourse(ctx, req any, opts 
 }
 
 // QueryAllCourse mocks base method.
-func (m *MockCourseServerClientProxy) QueryAllCourse(ctx context.Context, req *QueryAllCourseReq, opts ...client.Option) (*QueryAllCourseRsp, error) {
+func (m *MockCourseServerClientProxy) QueryAllCourse(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (*QueryCoursePageSizeRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "QueryAllCourse", varargs...)
-	ret0, _ := ret[0].(*QueryAllCourseRsp)
+	ret0, _ := ret[0].(*QueryCoursePageSizeRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -589,15 +604,35 @@ func (mr *MockCourseServerClientProxyMockRecorder) QueryCourseKnowledge(ctx, req
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryCourseKnowledge", reflect.TypeOf((*MockCourseServerClientProxy)(nil).QueryCourseKnowledge), varargs...)
 }
 
+// QueryCoursePageSize mocks base method.
+func (m *MockCourseServerClientProxy) QueryCoursePageSize(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (*QueryCoursePageSizeRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryCoursePageSize", varargs...)
+	ret0, _ := ret[0].(*QueryCoursePageSizeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryCoursePageSize indicates an expected call of QueryCoursePageSize.
+func (mr *MockCourseServerClientProxyMockRecorder) QueryCoursePageSize(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryCoursePageSize", reflect.TypeOf((*MockCourseServerClientProxy)(nil).QueryCoursePageSize), varargs...)
+}
+
 // QueryMyCourse mocks base method.
-func (m *MockCourseServerClientProxy) QueryMyCourse(ctx context.Context, req *QueryAllCourseReq, opts ...client.Option) (*QueryAllCourseRsp, error) {
+func (m *MockCourseServerClientProxy) QueryMyCourse(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (*QueryCoursePageSizeRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "QueryMyCourse", varargs...)
-	ret0, _ := ret[0].(*QueryAllCourseRsp)
+	ret0, _ := ret[0].(*QueryCoursePageSizeRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
