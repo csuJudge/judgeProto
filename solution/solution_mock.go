@@ -266,6 +266,21 @@ func (mr *MockSolutionServerServiceMockRecorder) QueryLatestCode(ctx, req any) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryLatestCode", reflect.TypeOf((*MockSolutionServerService)(nil).QueryLatestCode), ctx, req)
 }
 
+// QueryMySolution mocks base method.
+func (m *MockSolutionServerService) QueryMySolution(ctx context.Context, req *QuerySolutionReq) (*QuerySolutionRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryMySolution", ctx, req)
+	ret0, _ := ret[0].(*QuerySolutionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryMySolution indicates an expected call of QueryMySolution.
+func (mr *MockSolutionServerServiceMockRecorder) QueryMySolution(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryMySolution", reflect.TypeOf((*MockSolutionServerService)(nil).QueryMySolution), ctx, req)
+}
+
 // QueryMySolutionRecord mocks base method.
 func (m *MockSolutionServerService) QueryMySolutionRecord(ctx context.Context, req *QueryMySolutionRecordReq) (*QueryMySolutionRecordRsp, error) {
 	m.ctrl.T.Helper()
@@ -733,6 +748,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) QueryLatestCode(ctx, req an
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryLatestCode", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryLatestCode), varargs...)
+}
+
+// QueryMySolution mocks base method.
+func (m *MockSolutionServerClientProxy) QueryMySolution(ctx context.Context, req *QuerySolutionReq, opts ...client.Option) (*QuerySolutionRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryMySolution", varargs...)
+	ret0, _ := ret[0].(*QuerySolutionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryMySolution indicates an expected call of QueryMySolution.
+func (mr *MockSolutionServerClientProxyMockRecorder) QueryMySolution(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryMySolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryMySolution), varargs...)
 }
 
 // QueryMySolutionRecord mocks base method.
