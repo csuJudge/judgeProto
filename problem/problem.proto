@@ -106,6 +106,7 @@ message UpdateProblemStatusReq {
 message DeleteProblemDataReq {
     int32 problemID   = 1;  // 问题编号
     string sampleName = 2;  // 样例名
+    int32 userID      = 3;  // 用户编号
 }
 
 message UpdateProblemDataReq {
@@ -113,6 +114,7 @@ message UpdateProblemDataReq {
     string sampleName = 2;  // 样例名
     string input      = 3;  // 输入
     string output     = 4;  // 输出
+    int32 userID      = 5;  // 用户编号
 }
 
 message CommonRsp {
@@ -128,6 +130,7 @@ message AddProblemDataReq {
 message QueryProblemDataReq {
     int32 problemID   = 1;  // 问题编号
     string sampleName = 2;  // 样例名称
+    int32 userID      = 3;  // 用户编号
 }
 
 message QueryProblemDataRsp {
@@ -139,6 +142,7 @@ message QueryProblemDataRsp {
 
 message QueryProblemDataListReq {
     int32 problemID = 1;  // 问题编号
+    int32 userID    = 2;  // 用户编号
 }
 
 message QueryProblemDataListRsp {

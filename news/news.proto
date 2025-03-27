@@ -29,6 +29,7 @@ message QueryNewsByPageSizeRsp {
 
 message QueryNewsReq {
     int32 newsID = 1;  // 公告的主键
+    int32 userID = 2;  // 用户编号
 }
 
 message QueryNewsRsp {
@@ -48,8 +49,9 @@ message News {
 }
 
 message QueryNewsByPageSizeReq {
-    int32 page  = 1;  // 页
-    int32 limit = 2;  // 页大小
+    int32 page   = 1;  // 页
+    int32 limit  = 2;  // 页大小
+    int32 userID = 3;  // 用户编号
 }
 
 message UpdateNewsPriorityReq {

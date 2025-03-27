@@ -21,6 +21,7 @@ service KnowledgeServer {
 }
 
 message EmptyReq {
+    int32 userID = 1;  // 用户编号
 }
 
 message UpdateKnowledgeWeightReq {
@@ -43,8 +44,9 @@ message UpdateKnowledgeReq {
 }
 
 message QueryKnowledgePageSizeReq {
-    int32 page  = 1;  // 页
-    int32 limit = 2;  // 页大小
+    int32 page   = 1;  // 页
+    int32 limit  = 2;  // 页大小
+    int32 userID = 3;  // 用户编号
 }
 
 message QueryKnowledgeRsp {
@@ -66,6 +68,7 @@ message CommonRsp {
 
 message QueryProblemKnowledgeReq {
     int32 problemID = 1;  // 问题编号
+    int32 userID    = 2;  // 用户编号
 }
 
 message QueryProblemKnowledgeRsp {

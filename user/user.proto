@@ -31,6 +31,7 @@ service UserServer {
 }
 
 message QueryTeacherReq {
+    int32 userID = 1;  // 用户编号
 }
 
 message UpdateMyInfoReq {
@@ -57,7 +58,7 @@ message LoginReq {
     string password = 2;  // 密码
     string name     = 3;  // 用户名
     int32 loginType = 4;  // 登录方式
-    string ip = 5; // 登录的ip
+    string ip       = 5;  // 登录的ip
 }
 
 message LoginRsp {
@@ -96,6 +97,7 @@ message QueryUserReq {
     int32 limit   = 2;  // 页大小
     string name   = 3;  // 姓名
     string number = 4;  // 学号
+    int32 userID  = 5;  // 用户编号
 }
 
 message UserRank {
