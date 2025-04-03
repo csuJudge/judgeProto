@@ -74,9 +74,8 @@ message UpdateUserReq {
     string email    = 3;  // 邮箱
     string phone    = 4;  // 电话号
     string class    = 5;  // 行政班级
-    string password = 6;  // 密码
-    int32 privilege = 7;  // 权限
-    int32 updatedBy = 8;  // 用户编号（更新人）
+    int32 privilege = 6;  // 权限
+    int32 updatedBy = 7;  // 用户编号（更新人）
 }
 
 message QueryAllUserRsp {
@@ -95,9 +94,8 @@ message QueryUserRankReq {
 message QueryUserReq {
     int32 page    = 1;  // 页
     int32 limit   = 2;  // 页大小
-    string name   = 3;  // 姓名
-    string number = 4;  // 学号
-    int32 userID  = 5;  // 用户编号
+    string user   = 3;  // 姓名
+    int32 userID  = 4;  // 用户编号
 }
 
 message UserRank {
@@ -141,6 +139,8 @@ message UpdateUserPasswordReq {
     int32 updateBy  = 1;  // 更新者编号
     int32 userID    = 2;  // 用户主键
     string password = 3;  // 密码
+    string oldPassword = 4; // 老密码
+    int32 updateType = 5; // 更新的类别
 }
 
 message UpdateUserStatusReq {
