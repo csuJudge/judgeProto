@@ -31,8 +31,6 @@ type NewsServerService interface {
 	QueryNewsByPageSize(ctx context.Context, req *QueryNewsByPageSizeReq) (*QueryNewsByPageSizeRsp, error)
 	// QueryNews QueryNews 查询公告
 	QueryNews(ctx context.Context, req *QueryNewsReq) (*QueryNewsRsp, error)
-	// QueryAllNews QueryAllNews 分页所有查询公告
-	QueryAllNews(ctx context.Context, req *QueryNewsByPageSizeReq) (*QueryNewsByPageSizeRsp, error)
 }
 
 func NewsServerService_AddNews_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -143,24 +141,6 @@ func NewsServerService_QueryNews_Handler(svr interface{}, ctx context.Context, f
 	return rsp, nil
 }
 
-func NewsServerService_QueryAllNews_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &QueryNewsByPageSizeReq{}
-	filters, err := f(req)
-	if err != nil {
-		return nil, err
-	}
-	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(NewsServerService).QueryAllNews(ctx, reqbody.(*QueryNewsByPageSizeReq))
-	}
-
-	var rsp interface{}
-	rsp, err = filters.Filter(ctx, req, handleFunc)
-	if err != nil {
-		return nil, err
-	}
-	return rsp, nil
-}
-
 // NewsServerServer_ServiceDesc descriptor for server.RegisterService.
 var NewsServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.news.NewsServer",
@@ -189,10 +169,6 @@ var NewsServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.news.NewsServer/QueryNews",
 			Func: NewsServerService_QueryNews_Handler,
-		},
-		{
-			Name: "/oj.news.NewsServer/QueryAllNews",
-			Func: NewsServerService_QueryAllNews_Handler,
 		},
 	},
 }
@@ -238,11 +214,6 @@ func (s *UnimplementedNewsServer) QueryNews(ctx context.Context, req *QueryNewsR
 	return nil, errors.New("rpc QueryNews of service NewsServer is not implemented")
 }
 
-// QueryAllNews QueryAllNews 分页所有查询公告
-func (s *UnimplementedNewsServer) QueryAllNews(ctx context.Context, req *QueryNewsByPageSizeReq) (*QueryNewsByPageSizeRsp, error) {
-	return nil, errors.New("rpc QueryAllNews of service NewsServer is not implemented")
-}
-
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -263,8 +234,6 @@ type NewsServerClientProxy interface {
 	QueryNewsByPageSize(ctx context.Context, req *QueryNewsByPageSizeReq, opts ...client.Option) (rsp *QueryNewsByPageSizeRsp, err error)
 	// QueryNews QueryNews 查询公告
 	QueryNews(ctx context.Context, req *QueryNewsReq, opts ...client.Option) (rsp *QueryNewsRsp, err error)
-	// QueryAllNews QueryAllNews 分页所有查询公告
-	QueryAllNews(ctx context.Context, req *QueryNewsByPageSizeReq, opts ...client.Option) (rsp *QueryNewsByPageSizeRsp, err error)
 }
 
 type NewsServerClientProxyImpl struct {
@@ -390,26 +359,6 @@ func (c *NewsServerClientProxyImpl) QueryNews(ctx context.Context, req *QueryNew
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryNewsRsp{}
-	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
-		return nil, err
-	}
-	return rsp, nil
-}
-
-func (c *NewsServerClientProxyImpl) QueryAllNews(ctx context.Context, req *QueryNewsByPageSizeReq, opts ...client.Option) (*QueryNewsByPageSizeRsp, error) {
-	ctx, msg := codec.WithCloneMessage(ctx)
-	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/oj.news.NewsServer/QueryAllNews")
-	msg.WithCalleeServiceName(NewsServerServer_ServiceDesc.ServiceName)
-	msg.WithCalleeApp("")
-	msg.WithCalleeServer("")
-	msg.WithCalleeService("NewsServer")
-	msg.WithCalleeMethod("QueryAllNews")
-	msg.WithSerializationType(codec.SerializationTypePB)
-	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
-	callopts = append(callopts, c.opts...)
-	callopts = append(callopts, opts...)
-	rsp := &QueryNewsByPageSizeRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

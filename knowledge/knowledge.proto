@@ -5,7 +5,7 @@ package oj.knowledge;
 
 service KnowledgeServer {
     // QueryKnowledge 查询知识点
-    rpc QueryKnowledge(EmptyReq) returns (QueryKnowledgeRsp) {}
+    rpc QueryKnowledge(UserIDReq) returns (QueryKnowledgeRsp) {}
     // AddKnowledge 添加知识点
     rpc AddKnowledge(AddKnowledgeReq) returns (CommonRsp) {}
     // QueryProblemKnowledge 查询题目的知识点
@@ -20,7 +20,7 @@ service KnowledgeServer {
     rpc QueryKnowledgePageSize(QueryKnowledgePageSizeReq) returns (QueryKnowledgeRsp) {}
 }
 
-message EmptyReq {
+message UserIDReq {
     int32 userID = 1;  // 用户编号
 }
 

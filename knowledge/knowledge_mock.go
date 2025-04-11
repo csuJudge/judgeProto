@@ -61,7 +61,7 @@ func (mr *MockKnowledgeServerServiceMockRecorder) AddKnowledge(ctx, req any) *go
 }
 
 // QueryKnowledge mocks base method.
-func (m *MockKnowledgeServerService) QueryKnowledge(ctx context.Context, req *EmptyReq) (*QueryKnowledgeRsp, error) {
+func (m *MockKnowledgeServerService) QueryKnowledge(ctx context.Context, req *UserIDReq) (*QueryKnowledgeRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryKnowledge", ctx, req)
 	ret0, _ := ret[0].(*QueryKnowledgeRsp)
@@ -199,7 +199,7 @@ func (mr *MockKnowledgeServerClientProxyMockRecorder) AddKnowledge(ctx, req any,
 }
 
 // QueryKnowledge mocks base method.
-func (m *MockKnowledgeServerClientProxy) QueryKnowledge(ctx context.Context, req *EmptyReq, opts ...client.Option) (*QueryKnowledgeRsp, error) {
+func (m *MockKnowledgeServerClientProxy) QueryKnowledge(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryKnowledgeRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {

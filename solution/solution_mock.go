@@ -402,7 +402,7 @@ func (mr *MockSolutionServerServiceMockRecorder) QuerySourceCode(ctx, req any) *
 }
 
 // QueryTodaySolution mocks base method.
-func (m *MockSolutionServerService) QueryTodaySolution(ctx context.Context, req *EmptyReq) (*QueryTodaySolutionRsp, error) {
+func (m *MockSolutionServerService) QueryTodaySolution(ctx context.Context, req *UserIDReq) (*QueryTodaySolutionRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryTodaySolution", ctx, req)
 	ret0, _ := ret[0].(*QueryTodaySolutionRsp)
@@ -931,7 +931,7 @@ func (mr *MockSolutionServerClientProxyMockRecorder) QuerySourceCode(ctx, req an
 }
 
 // QueryTodaySolution mocks base method.
-func (m *MockSolutionServerClientProxy) QueryTodaySolution(ctx context.Context, req *EmptyReq, opts ...client.Option) (*QueryTodaySolutionRsp, error) {
+func (m *MockSolutionServerClientProxy) QueryTodaySolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryTodaySolutionRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {

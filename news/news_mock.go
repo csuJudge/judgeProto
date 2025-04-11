@@ -60,21 +60,6 @@ func (mr *MockNewsServerServiceMockRecorder) AddNews(ctx, req any) *gomock.Call 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddNews", reflect.TypeOf((*MockNewsServerService)(nil).AddNews), ctx, req)
 }
 
-// QueryAllNews mocks base method.
-func (m *MockNewsServerService) QueryAllNews(ctx context.Context, req *QueryNewsByPageSizeReq) (*QueryNewsByPageSizeRsp, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "QueryAllNews", ctx, req)
-	ret0, _ := ret[0].(*QueryNewsByPageSizeRsp)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// QueryAllNews indicates an expected call of QueryAllNews.
-func (mr *MockNewsServerServiceMockRecorder) QueryAllNews(ctx, req any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllNews", reflect.TypeOf((*MockNewsServerService)(nil).QueryAllNews), ctx, req)
-}
-
 // QueryNews mocks base method.
 func (m *MockNewsServerService) QueryNews(ctx context.Context, req *QueryNewsReq) (*QueryNewsRsp, error) {
 	m.ctrl.T.Helper()
@@ -196,26 +181,6 @@ func (mr *MockNewsServerClientProxyMockRecorder) AddNews(ctx, req any, opts ...a
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddNews", reflect.TypeOf((*MockNewsServerClientProxy)(nil).AddNews), varargs...)
-}
-
-// QueryAllNews mocks base method.
-func (m *MockNewsServerClientProxy) QueryAllNews(ctx context.Context, req *QueryNewsByPageSizeReq, opts ...client.Option) (*QueryNewsByPageSizeRsp, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, req}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "QueryAllNews", varargs...)
-	ret0, _ := ret[0].(*QueryNewsByPageSizeRsp)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// QueryAllNews indicates an expected call of QueryAllNews.
-func (mr *MockNewsServerClientProxyMockRecorder) QueryAllNews(ctx, req any, opts ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllNews", reflect.TypeOf((*MockNewsServerClientProxy)(nil).QueryAllNews), varargs...)
 }
 
 // QueryNews mocks base method.

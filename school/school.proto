@@ -43,6 +43,8 @@ service ClassServer {
     rpc QueryClass(QueryClassReq) returns (QueryClassRsp) {}
     // QueryContestClassUser 查询作业班级的学生
     rpc QueryContestClassUser(QueryContestClassUserReq) returns (QueryContestClassUserRsp) {}
+    // QueryClassTeacher 查询作业班级的老师
+    rpc QueryClassTeacher(UserIDReq) returns (QueryClassTeacherRsp) {}
 }
 
 service TermServer {
@@ -55,11 +57,17 @@ service TermServer {
     // SetPresentTerm 设置当前学期
     rpc SetPresentTerm(SetPresentTermReq) returns (CommonRsp) {}
     // QueryPresentTerm 查询当前学期
-    rpc QueryPresentTerm(EmptyReq) returns (QueryPresentTermRsp) {}
+    rpc QueryPresentTerm(UserIDReq) returns (QueryPresentTermRsp) {}
     // QueryAllTerm 查询所有学期
     rpc QueryAllTerm(QueryAllTermReq) returns (QueryAllTermRsp) {}
     // QueryTerm 查询学期
     rpc QueryTerm(QueryTermReq) returns (QueryTermRsp) {}
+}
+
+message QueryClassTeacherRsp {
+    string message        = 1;  // 返回信息
+    int32 code            = 2;  // 返回码
+    repeated int32 userID = 3;  // 所有老师的编号
 }
 
 message QueryCourseKnowledgeReq {
@@ -149,7 +157,7 @@ message QueryAllTermRsp {
     int32 total        = 4;  // 总数
 }
 
-message EmptyReq {
+message UserIDReq {
     int32 userID = 1;  // 用户编号
 }
 

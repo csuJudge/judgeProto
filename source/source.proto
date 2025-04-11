@@ -5,7 +5,7 @@ package oj.source;
 
 service SourceServer {
     // QuerySource 查询来源
-    rpc QuerySource(EmptyReq) returns (QuerySourceRsp) {}
+    rpc QuerySource(UserIDReq) returns (QuerySourceRsp) {}
     // AddSource 添加来源
     rpc AddSource(AddSourceReq) returns (CommonRsp) {}
     // QueryProblemSource 查询题目的来源
@@ -18,7 +18,7 @@ service SourceServer {
     rpc QuerySourcePageSize(QuerySourcePageSizeReq) returns (QuerySourceRsp) {}
 }
 
-message EmptyReq {
+message UserIDReq {
     int32 userID = 1;  // 用户编号
 }
 

@@ -20,7 +20,7 @@ import (
 // SourceServerService defines service.
 type SourceServerService interface {
 	// QuerySource QuerySource 查询来源
-	QuerySource(ctx context.Context, req *EmptyReq) (*QuerySourceRsp, error)
+	QuerySource(ctx context.Context, req *UserIDReq) (*QuerySourceRsp, error)
 	// AddSource AddSource 添加来源
 	AddSource(ctx context.Context, req *AddSourceReq) (*CommonRsp, error)
 	// QueryProblemSource QueryProblemSource 查询题目的来源
@@ -34,13 +34,13 @@ type SourceServerService interface {
 }
 
 func SourceServerService_QuerySource_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &EmptyReq{}
+	req := &UserIDReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(SourceServerService).QuerySource(ctx, reqbody.(*EmptyReq))
+		return svr.(SourceServerService).QuerySource(ctx, reqbody.(*UserIDReq))
 	}
 
 	var rsp interface{}
@@ -185,7 +185,7 @@ func RegisterSourceServerService(s server.Service, svr SourceServerService) {
 type UnimplementedSourceServer struct{}
 
 // QuerySource QuerySource 查询来源
-func (s *UnimplementedSourceServer) QuerySource(ctx context.Context, req *EmptyReq) (*QuerySourceRsp, error) {
+func (s *UnimplementedSourceServer) QuerySource(ctx context.Context, req *UserIDReq) (*QuerySourceRsp, error) {
 	return nil, errors.New("rpc QuerySource of service SourceServer is not implemented")
 }
 
@@ -223,7 +223,7 @@ func (s *UnimplementedSourceServer) QuerySourcePageSize(ctx context.Context, req
 // SourceServerClientProxy defines service client proxy
 type SourceServerClientProxy interface {
 	// QuerySource QuerySource 查询来源
-	QuerySource(ctx context.Context, req *EmptyReq, opts ...client.Option) (rsp *QuerySourceRsp, err error)
+	QuerySource(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QuerySourceRsp, err error)
 	// AddSource AddSource 添加来源
 	AddSource(ctx context.Context, req *AddSourceReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryProblemSource QueryProblemSource 查询题目的来源
@@ -245,7 +245,7 @@ var NewSourceServerClientProxy = func(opts ...client.Option) SourceServerClientP
 	return &SourceServerClientProxyImpl{client: client.DefaultClient, opts: opts}
 }
 
-func (c *SourceServerClientProxyImpl) QuerySource(ctx context.Context, req *EmptyReq, opts ...client.Option) (*QuerySourceRsp, error) {
+func (c *SourceServerClientProxyImpl) QuerySource(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QuerySourceRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.source.SourceServer/QuerySource")

@@ -16,8 +16,6 @@ service NewsServer {
     rpc QueryNewsByPageSize(QueryNewsByPageSizeReq) returns (QueryNewsByPageSizeRsp) {}
     // QueryNews 查询公告
     rpc QueryNews(QueryNewsReq) returns (QueryNewsRsp) {}
-    // QueryAllNews 分页所有查询公告
-    rpc QueryAllNews(QueryNewsByPageSizeReq) returns (QueryNewsByPageSizeRsp) {}
 }
 
 message QueryNewsByPageSizeRsp {
@@ -49,9 +47,10 @@ message News {
 }
 
 message QueryNewsByPageSizeReq {
-    int32 page   = 1;  // 页
-    int32 limit  = 2;  // 页大小
-    int32 userID = 3;  // 用户编号
+    int32 page      = 1;  // 页
+    int32 limit     = 2;  // 页大小
+    int32 userID    = 3;  // 用户编号
+    int32 queryType = 4;  // 查询类型
 }
 
 message UpdateNewsPriorityReq {

@@ -76,7 +76,7 @@ func (mr *MockSourceServerServiceMockRecorder) QueryProblemSource(ctx, req any) 
 }
 
 // QuerySource mocks base method.
-func (m *MockSourceServerService) QuerySource(ctx context.Context, req *EmptyReq) (*QuerySourceRsp, error) {
+func (m *MockSourceServerService) QuerySource(ctx context.Context, req *UserIDReq) (*QuerySourceRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QuerySource", ctx, req)
 	ret0, _ := ret[0].(*QuerySourceRsp)
@@ -204,7 +204,7 @@ func (mr *MockSourceServerClientProxyMockRecorder) QueryProblemSource(ctx, req a
 }
 
 // QuerySource mocks base method.
-func (m *MockSourceServerClientProxy) QuerySource(ctx context.Context, req *EmptyReq, opts ...client.Option) (*QuerySourceRsp, error) {
+func (m *MockSourceServerClientProxy) QuerySource(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QuerySourceRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {

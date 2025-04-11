@@ -20,7 +20,7 @@ import (
 // KnowledgeServerService defines service.
 type KnowledgeServerService interface {
 	// QueryKnowledge QueryKnowledge 查询知识点
-	QueryKnowledge(ctx context.Context, req *EmptyReq) (*QueryKnowledgeRsp, error)
+	QueryKnowledge(ctx context.Context, req *UserIDReq) (*QueryKnowledgeRsp, error)
 	// AddKnowledge AddKnowledge 添加知识点
 	AddKnowledge(ctx context.Context, req *AddKnowledgeReq) (*CommonRsp, error)
 	// QueryProblemKnowledge QueryProblemKnowledge 查询题目的知识点
@@ -36,13 +36,13 @@ type KnowledgeServerService interface {
 }
 
 func KnowledgeServerService_QueryKnowledge_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &EmptyReq{}
+	req := &UserIDReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(KnowledgeServerService).QueryKnowledge(ctx, reqbody.(*EmptyReq))
+		return svr.(KnowledgeServerService).QueryKnowledge(ctx, reqbody.(*UserIDReq))
 	}
 
 	var rsp interface{}
@@ -209,7 +209,7 @@ func RegisterKnowledgeServerService(s server.Service, svr KnowledgeServerService
 type UnimplementedKnowledgeServer struct{}
 
 // QueryKnowledge QueryKnowledge 查询知识点
-func (s *UnimplementedKnowledgeServer) QueryKnowledge(ctx context.Context, req *EmptyReq) (*QueryKnowledgeRsp, error) {
+func (s *UnimplementedKnowledgeServer) QueryKnowledge(ctx context.Context, req *UserIDReq) (*QueryKnowledgeRsp, error) {
 	return nil, errors.New("rpc QueryKnowledge of service KnowledgeServer is not implemented")
 }
 
@@ -252,7 +252,7 @@ func (s *UnimplementedKnowledgeServer) QueryKnowledgePageSize(ctx context.Contex
 // KnowledgeServerClientProxy defines service client proxy
 type KnowledgeServerClientProxy interface {
 	// QueryKnowledge QueryKnowledge 查询知识点
-	QueryKnowledge(ctx context.Context, req *EmptyReq, opts ...client.Option) (rsp *QueryKnowledgeRsp, err error)
+	QueryKnowledge(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryKnowledgeRsp, err error)
 	// AddKnowledge AddKnowledge 添加知识点
 	AddKnowledge(ctx context.Context, req *AddKnowledgeReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryProblemKnowledge QueryProblemKnowledge 查询题目的知识点
@@ -276,7 +276,7 @@ var NewKnowledgeServerClientProxy = func(opts ...client.Option) KnowledgeServerC
 	return &KnowledgeServerClientProxyImpl{client: client.DefaultClient, opts: opts}
 }
 
-func (c *KnowledgeServerClientProxyImpl) QueryKnowledge(ctx context.Context, req *EmptyReq, opts ...client.Option) (*QueryKnowledgeRsp, error) {
+func (c *KnowledgeServerClientProxyImpl) QueryKnowledge(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryKnowledgeRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/QueryKnowledge")

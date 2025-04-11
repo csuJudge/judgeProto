@@ -272,6 +272,8 @@ type ClassServerService interface {
 	QueryClass(ctx context.Context, req *QueryClassReq) (*QueryClassRsp, error)
 	// QueryContestClassUser QueryContestClassUser 查询作业班级的学生
 	QueryContestClassUser(ctx context.Context, req *QueryContestClassUserReq) (*QueryContestClassUserRsp, error)
+	// QueryClassTeacher QueryClassTeacher 查询作业班级的老师
+	QueryClassTeacher(ctx context.Context, req *UserIDReq) (*QueryClassTeacherRsp, error)
 }
 
 func ClassServerService_QueryUserClass_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -436,6 +438,24 @@ func ClassServerService_QueryContestClassUser_Handler(svr interface{}, ctx conte
 	return rsp, nil
 }
 
+func ClassServerService_QueryClassTeacher_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UserIDReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ClassServerService).QueryClassTeacher(ctx, reqbody.(*UserIDReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // ClassServerServer_ServiceDesc descriptor for server.RegisterService.
 var ClassServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.school.ClassServer",
@@ -477,6 +497,10 @@ var ClassServerServer_ServiceDesc = server.ServiceDesc{
 			Name: "/oj.school.ClassServer/QueryContestClassUser",
 			Func: ClassServerService_QueryContestClassUser_Handler,
 		},
+		{
+			Name: "/oj.school.ClassServer/QueryClassTeacher",
+			Func: ClassServerService_QueryClassTeacher_Handler,
+		},
 	},
 }
 
@@ -498,7 +522,7 @@ type TermServerService interface {
 	// SetPresentTerm SetPresentTerm 设置当前学期
 	SetPresentTerm(ctx context.Context, req *SetPresentTermReq) (*CommonRsp, error)
 	// QueryPresentTerm QueryPresentTerm 查询当前学期
-	QueryPresentTerm(ctx context.Context, req *EmptyReq) (*QueryPresentTermRsp, error)
+	QueryPresentTerm(ctx context.Context, req *UserIDReq) (*QueryPresentTermRsp, error)
 	// QueryAllTerm QueryAllTerm 查询所有学期
 	QueryAllTerm(ctx context.Context, req *QueryAllTermReq) (*QueryAllTermRsp, error)
 	// QueryTerm QueryTerm 查询学期
@@ -578,13 +602,13 @@ func TermServerService_SetPresentTerm_Handler(svr interface{}, ctx context.Conte
 }
 
 func TermServerService_QueryPresentTerm_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &EmptyReq{}
+	req := &UserIDReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(TermServerService).QueryPresentTerm(ctx, reqbody.(*EmptyReq))
+		return svr.(TermServerService).QueryPresentTerm(ctx, reqbody.(*UserIDReq))
 	}
 
 	var rsp interface{}
@@ -770,6 +794,11 @@ func (s *UnimplementedClassServer) QueryContestClassUser(ctx context.Context, re
 	return nil, errors.New("rpc QueryContestClassUser of service ClassServer is not implemented")
 }
 
+// QueryClassTeacher QueryClassTeacher 查询作业班级的老师
+func (s *UnimplementedClassServer) QueryClassTeacher(ctx context.Context, req *UserIDReq) (*QueryClassTeacherRsp, error) {
+	return nil, errors.New("rpc QueryClassTeacher of service ClassServer is not implemented")
+}
+
 type UnimplementedTermServer struct{}
 
 // AddTerm AddTerm 添加学期
@@ -793,7 +822,7 @@ func (s *UnimplementedTermServer) SetPresentTerm(ctx context.Context, req *SetPr
 }
 
 // QueryPresentTerm QueryPresentTerm 查询当前学期
-func (s *UnimplementedTermServer) QueryPresentTerm(ctx context.Context, req *EmptyReq) (*QueryPresentTermRsp, error) {
+func (s *UnimplementedTermServer) QueryPresentTerm(ctx context.Context, req *UserIDReq) (*QueryPresentTermRsp, error) {
 	return nil, errors.New("rpc QueryPresentTerm of service TermServer is not implemented")
 }
 
@@ -1044,6 +1073,8 @@ type ClassServerClientProxy interface {
 	QueryClass(ctx context.Context, req *QueryClassReq, opts ...client.Option) (rsp *QueryClassRsp, err error)
 	// QueryContestClassUser QueryContestClassUser 查询作业班级的学生
 	QueryContestClassUser(ctx context.Context, req *QueryContestClassUserReq, opts ...client.Option) (rsp *QueryContestClassUserRsp, err error)
+	// QueryClassTeacher QueryClassTeacher 查询作业班级的老师
+	QueryClassTeacher(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryClassTeacherRsp, err error)
 }
 
 type ClassServerClientProxyImpl struct {
@@ -1235,6 +1266,26 @@ func (c *ClassServerClientProxyImpl) QueryContestClassUser(ctx context.Context, 
 	return rsp, nil
 }
 
+func (c *ClassServerClientProxyImpl) QueryClassTeacher(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryClassTeacherRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.school.ClassServer/QueryClassTeacher")
+	msg.WithCalleeServiceName(ClassServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ClassServer")
+	msg.WithCalleeMethod("QueryClassTeacher")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryClassTeacherRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // TermServerClientProxy defines service client proxy
 type TermServerClientProxy interface {
 	// AddTerm AddTerm 添加学期
@@ -1246,7 +1297,7 @@ type TermServerClientProxy interface {
 	// SetPresentTerm SetPresentTerm 设置当前学期
 	SetPresentTerm(ctx context.Context, req *SetPresentTermReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryPresentTerm QueryPresentTerm 查询当前学期
-	QueryPresentTerm(ctx context.Context, req *EmptyReq, opts ...client.Option) (rsp *QueryPresentTermRsp, err error)
+	QueryPresentTerm(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryPresentTermRsp, err error)
 	// QueryAllTerm QueryAllTerm 查询所有学期
 	QueryAllTerm(ctx context.Context, req *QueryAllTermReq, opts ...client.Option) (rsp *QueryAllTermRsp, err error)
 	// QueryTerm QueryTerm 查询学期
@@ -1342,7 +1393,7 @@ func (c *TermServerClientProxyImpl) SetPresentTerm(ctx context.Context, req *Set
 	return rsp, nil
 }
 
-func (c *TermServerClientProxyImpl) QueryPresentTerm(ctx context.Context, req *EmptyReq, opts ...client.Option) (*QueryPresentTermRsp, error) {
+func (c *TermServerClientProxyImpl) QueryPresentTerm(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryPresentTermRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.school.TermServer/QueryPresentTerm")

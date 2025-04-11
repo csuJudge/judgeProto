@@ -253,6 +253,21 @@ func (mr *MockClassServerServiceMockRecorder) QueryClassPageSize(ctx, req any) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassPageSize", reflect.TypeOf((*MockClassServerService)(nil).QueryClassPageSize), ctx, req)
 }
 
+// QueryClassTeacher mocks base method.
+func (m *MockClassServerService) QueryClassTeacher(ctx context.Context, req *UserIDReq) (*QueryClassTeacherRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryClassTeacher", ctx, req)
+	ret0, _ := ret[0].(*QueryClassTeacherRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryClassTeacher indicates an expected call of QueryClassTeacher.
+func (mr *MockClassServerServiceMockRecorder) QueryClassTeacher(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassTeacher", reflect.TypeOf((*MockClassServerService)(nil).QueryClassTeacher), ctx, req)
+}
+
 // QueryClassUser mocks base method.
 func (m *MockClassServerService) QueryClassUser(ctx context.Context, req *QueryClassUserReq) (*QueryClassUserRsp, error) {
 	m.ctrl.T.Helper()
@@ -402,7 +417,7 @@ func (mr *MockTermServerServiceMockRecorder) QueryAllTerm(ctx, req any) *gomock.
 }
 
 // QueryPresentTerm mocks base method.
-func (m *MockTermServerService) QueryPresentTerm(ctx context.Context, req *EmptyReq) (*QueryPresentTermRsp, error) {
+func (m *MockTermServerService) QueryPresentTerm(ctx context.Context, req *UserIDReq) (*QueryPresentTermRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryPresentTerm", ctx, req)
 	ret0, _ := ret[0].(*QueryPresentTermRsp)
@@ -772,6 +787,26 @@ func (mr *MockClassServerClientProxyMockRecorder) QueryClassPageSize(ctx, req an
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassPageSize", reflect.TypeOf((*MockClassServerClientProxy)(nil).QueryClassPageSize), varargs...)
 }
 
+// QueryClassTeacher mocks base method.
+func (m *MockClassServerClientProxy) QueryClassTeacher(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryClassTeacherRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryClassTeacher", varargs...)
+	ret0, _ := ret[0].(*QueryClassTeacherRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryClassTeacher indicates an expected call of QueryClassTeacher.
+func (mr *MockClassServerClientProxyMockRecorder) QueryClassTeacher(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassTeacher", reflect.TypeOf((*MockClassServerClientProxy)(nil).QueryClassTeacher), varargs...)
+}
+
 // QueryClassUser mocks base method.
 func (m *MockClassServerClientProxy) QueryClassUser(ctx context.Context, req *QueryClassUserReq, opts ...client.Option) (*QueryClassUserRsp, error) {
 	m.ctrl.T.Helper()
@@ -961,7 +996,7 @@ func (mr *MockTermServerClientProxyMockRecorder) QueryAllTerm(ctx, req any, opts
 }
 
 // QueryPresentTerm mocks base method.
-func (m *MockTermServerClientProxy) QueryPresentTerm(ctx context.Context, req *EmptyReq, opts ...client.Option) (*QueryPresentTermRsp, error) {
+func (m *MockTermServerClientProxy) QueryPresentTerm(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryPresentTermRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
