@@ -20,9 +20,9 @@ import (
 // NewsServerService defines service.
 type NewsServerService interface {
 	// AddNews AddNews 添加公告
-	AddNews(ctx context.Context, req *AddNewsReq) (*CommonRsp, error)
+	AddNews(ctx context.Context, req *AddNewsReq) (*OperateNewsRsp, error)
 	// UpdateNews UpdateNews 更新公告
-	UpdateNews(ctx context.Context, req *UpdateNewsReq) (*CommonRsp, error)
+	UpdateNews(ctx context.Context, req *UpdateNewsReq) (*OperateNewsRsp, error)
 	// UpdateNewsStatus UpdateNewsStatus 更新公告状态
 	UpdateNewsStatus(ctx context.Context, req *UpdateNewsStatusReq) (*CommonRsp, error)
 	// UpdateNewsPriority UpdateNewsPriority 更新公告优先级
@@ -185,12 +185,12 @@ func RegisterNewsServerService(s server.Service, svr NewsServerService) {
 type UnimplementedNewsServer struct{}
 
 // AddNews AddNews 添加公告
-func (s *UnimplementedNewsServer) AddNews(ctx context.Context, req *AddNewsReq) (*CommonRsp, error) {
+func (s *UnimplementedNewsServer) AddNews(ctx context.Context, req *AddNewsReq) (*OperateNewsRsp, error) {
 	return nil, errors.New("rpc AddNews of service NewsServer is not implemented")
 }
 
 // UpdateNews UpdateNews 更新公告
-func (s *UnimplementedNewsServer) UpdateNews(ctx context.Context, req *UpdateNewsReq) (*CommonRsp, error) {
+func (s *UnimplementedNewsServer) UpdateNews(ctx context.Context, req *UpdateNewsReq) (*OperateNewsRsp, error) {
 	return nil, errors.New("rpc UpdateNews of service NewsServer is not implemented")
 }
 
@@ -223,9 +223,9 @@ func (s *UnimplementedNewsServer) QueryNews(ctx context.Context, req *QueryNewsR
 // NewsServerClientProxy defines service client proxy
 type NewsServerClientProxy interface {
 	// AddNews AddNews 添加公告
-	AddNews(ctx context.Context, req *AddNewsReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	AddNews(ctx context.Context, req *AddNewsReq, opts ...client.Option) (rsp *OperateNewsRsp, err error)
 	// UpdateNews UpdateNews 更新公告
-	UpdateNews(ctx context.Context, req *UpdateNewsReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	UpdateNews(ctx context.Context, req *UpdateNewsReq, opts ...client.Option) (rsp *OperateNewsRsp, err error)
 	// UpdateNewsStatus UpdateNewsStatus 更新公告状态
 	UpdateNewsStatus(ctx context.Context, req *UpdateNewsStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// UpdateNewsPriority UpdateNewsPriority 更新公告优先级
@@ -245,7 +245,7 @@ var NewNewsServerClientProxy = func(opts ...client.Option) NewsServerClientProxy
 	return &NewsServerClientProxyImpl{client: client.DefaultClient, opts: opts}
 }
 
-func (c *NewsServerClientProxyImpl) AddNews(ctx context.Context, req *AddNewsReq, opts ...client.Option) (*CommonRsp, error) {
+func (c *NewsServerClientProxyImpl) AddNews(ctx context.Context, req *AddNewsReq, opts ...client.Option) (*OperateNewsRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.news.NewsServer/AddNews")
@@ -258,14 +258,14 @@ func (c *NewsServerClientProxyImpl) AddNews(ctx context.Context, req *AddNewsReq
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &CommonRsp{}
+	rsp := &OperateNewsRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
 	return rsp, nil
 }
 
-func (c *NewsServerClientProxyImpl) UpdateNews(ctx context.Context, req *UpdateNewsReq, opts ...client.Option) (*CommonRsp, error) {
+func (c *NewsServerClientProxyImpl) UpdateNews(ctx context.Context, req *UpdateNewsReq, opts ...client.Option) (*OperateNewsRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.news.NewsServer/UpdateNews")
@@ -278,7 +278,7 @@ func (c *NewsServerClientProxyImpl) UpdateNews(ctx context.Context, req *UpdateN
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &CommonRsp{}
+	rsp := &OperateNewsRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

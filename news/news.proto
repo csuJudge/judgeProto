@@ -5,9 +5,9 @@ package oj.news;
 
 service NewsServer {
     // AddNews 添加公告
-    rpc AddNews(AddNewsReq) returns (CommonRsp) {}
+    rpc AddNews(AddNewsReq) returns (OperateNewsRsp) {}
     // UpdateNews 更新公告
-    rpc UpdateNews(UpdateNewsReq) returns (CommonRsp) {}
+    rpc UpdateNews(UpdateNewsReq) returns (OperateNewsRsp) {}
     // UpdateNewsStatus 更新公告状态
     rpc UpdateNewsStatus(UpdateNewsStatusReq) returns (CommonRsp) {}
     // UpdateNewsPriority 更新公告优先级
@@ -81,4 +81,10 @@ message UpdateNewsReq {
 message CommonRsp {
     string message = 1;  // 返回信息
     int32 code     = 2;  // 返回码
+}
+
+message OperateNewsRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+    int64 newsID   = 3;  // 公告编号
 }

@@ -46,10 +46,10 @@ func (m *MockNewsServerService) ISGOMOCK() struct{} {
 }
 
 // AddNews mocks base method.
-func (m *MockNewsServerService) AddNews(ctx context.Context, req *AddNewsReq) (*CommonRsp, error) {
+func (m *MockNewsServerService) AddNews(ctx context.Context, req *AddNewsReq) (*OperateNewsRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddNews", ctx, req)
-	ret0, _ := ret[0].(*CommonRsp)
+	ret0, _ := ret[0].(*OperateNewsRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -91,10 +91,10 @@ func (mr *MockNewsServerServiceMockRecorder) QueryNewsByPageSize(ctx, req any) *
 }
 
 // UpdateNews mocks base method.
-func (m *MockNewsServerService) UpdateNews(ctx context.Context, req *UpdateNewsReq) (*CommonRsp, error) {
+func (m *MockNewsServerService) UpdateNews(ctx context.Context, req *UpdateNewsReq) (*OperateNewsRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateNews", ctx, req)
-	ret0, _ := ret[0].(*CommonRsp)
+	ret0, _ := ret[0].(*OperateNewsRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -164,14 +164,14 @@ func (m *MockNewsServerClientProxy) ISGOMOCK() struct{} {
 }
 
 // AddNews mocks base method.
-func (m *MockNewsServerClientProxy) AddNews(ctx context.Context, req *AddNewsReq, opts ...client.Option) (*CommonRsp, error) {
+func (m *MockNewsServerClientProxy) AddNews(ctx context.Context, req *AddNewsReq, opts ...client.Option) (*OperateNewsRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "AddNews", varargs...)
-	ret0, _ := ret[0].(*CommonRsp)
+	ret0, _ := ret[0].(*OperateNewsRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -224,14 +224,14 @@ func (mr *MockNewsServerClientProxyMockRecorder) QueryNewsByPageSize(ctx, req an
 }
 
 // UpdateNews mocks base method.
-func (m *MockNewsServerClientProxy) UpdateNews(ctx context.Context, req *UpdateNewsReq, opts ...client.Option) (*CommonRsp, error) {
+func (m *MockNewsServerClientProxy) UpdateNews(ctx context.Context, req *UpdateNewsReq, opts ...client.Option) (*OperateNewsRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "UpdateNews", varargs...)
-	ret0, _ := ret[0].(*CommonRsp)
+	ret0, _ := ret[0].(*OperateNewsRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
