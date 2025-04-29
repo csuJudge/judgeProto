@@ -12,7 +12,7 @@ service KeyActionServer {
 }
 
 service SolutionServer {
-    // CountUserProblemSolution 计算用户题目的提交次数
+    // CountUserProblemSolution 计算用户题目的提交次数 1
     rpc CountUserProblemSolution(CountUserProblemSolutionReq) returns (CountUserProblemSolutionRsp) {}
     // RejudgeSolution 重判
     rpc RejudgeSolution(RejudgeSolutionReq) returns (CommonRsp) {}
@@ -42,18 +42,12 @@ service SolutionServer {
     rpc CountContestSubmission(CountContestSubmissionReq) returns (CountContestSubmissionRsp) {}
     // CountContestProblemSubmission 查询作业的题目提交统计数据
     rpc CountContestProblemSubmission(CountContestSubmissionReq) returns (CountContestProblemSubmissionRsp) {}
-    // QueryRankData 查询片数据
-    rpc QueryRankData(QueryRankDataReq) returns (QuerySolutionRsp) {}
-    // QueryContestSolutionSubmitCount 查询题目的提交次数
-    rpc QueryContestSolutionSubmitCount(QueryRankDataReq) returns (QueryContestSolutionSubmitCountRsp) {}
     // QueryMySolutionRecord 查询我的提交历史
     rpc QueryMySolutionRecord(QueryMySolutionRecordReq) returns (QueryMySolutionRecordRsp) {}
     // CountMySolution 计算我的提交数据
     rpc CountMySolution(QueryMySolutionRecordReq) returns (CountContestSubmissionRsp) {}
     // QueryTodaySolution 查询今天的提交
     rpc QueryTodaySolution(UserIDReq) returns (QueryTodaySolutionRsp) {}
-    // QueryMySolution 查询我的提交
-    rpc QueryMySolution(QuerySolutionReq) returns (QuerySolutionRsp) {}
 }
 
 message QueryTodaySolutionRsp {
@@ -76,13 +70,6 @@ message QueryMySolutionRecordRsp {
     int32 code                        = 2;  // 返回码
     repeated Problem acceptProblems   = 3;  // 通过的题目
     repeated Problem unAcceptProblems = 4;  // 不通过的题目
-}
-
-message QueryContestSolutionSubmitCountRsp {
-    string message                             = 1;  // 返回信息
-    int32 code                                 = 2;  // 返回码
-    repeated ContestSolutionSubmitCount accept = 3;  // 正确的提交
-    repeated ContestSolutionSubmitCount total  = 4;  // 提交总数
 }
 
 message ContestSolutionSubmitCount {
