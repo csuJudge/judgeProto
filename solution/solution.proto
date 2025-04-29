@@ -59,6 +59,7 @@ message QueryUserContestSubmissionReq{
 message QueryUserContestSubmissionRsp{
     string message                = 1;  // 返回信息
     int32 code                    = 2;  // 返回码
+    repeated UserProblemCondition condition = 3; // 题目的完成状态
 }
 
 message UserProblemCondition {
