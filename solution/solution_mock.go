@@ -162,7 +162,7 @@ func (mr *MockSolutionServerServiceMockRecorder) AddTestSolution(ctx, req any) *
 }
 
 // CountContestProblemSubmission mocks base method.
-func (m *MockSolutionServerService) CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq) (*CountContestProblemSubmissionRsp, error) {
+func (m *MockSolutionServerService) CountContestProblemSubmission(ctx context.Context, req *CountContestProblemSubmissionReq) (*CountContestProblemSubmissionRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CountContestProblemSubmission", ctx, req)
 	ret0, _ := ret[0].(*CountContestProblemSubmissionRsp)
@@ -174,21 +174,6 @@ func (m *MockSolutionServerService) CountContestProblemSubmission(ctx context.Co
 func (mr *MockSolutionServerServiceMockRecorder) CountContestProblemSubmission(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountContestProblemSubmission", reflect.TypeOf((*MockSolutionServerService)(nil).CountContestProblemSubmission), ctx, req)
-}
-
-// CountContestSubmission mocks base method.
-func (m *MockSolutionServerService) CountContestSubmission(ctx context.Context, req *CountContestSubmissionReq) (*CountContestSubmissionRsp, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CountContestSubmission", ctx, req)
-	ret0, _ := ret[0].(*CountContestSubmissionRsp)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CountContestSubmission indicates an expected call of CountContestSubmission.
-func (mr *MockSolutionServerServiceMockRecorder) CountContestSubmission(ctx, req any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountContestSubmission", reflect.TypeOf((*MockSolutionServerService)(nil).CountContestSubmission), ctx, req)
 }
 
 // CountMySolution mocks base method.
@@ -369,6 +354,21 @@ func (m *MockSolutionServerService) QueryTodaySolution(ctx context.Context, req 
 func (mr *MockSolutionServerServiceMockRecorder) QueryTodaySolution(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryTodaySolution", reflect.TypeOf((*MockSolutionServerService)(nil).QueryTodaySolution), ctx, req)
+}
+
+// QueryUserContestSubmission mocks base method.
+func (m *MockSolutionServerService) QueryUserContestSubmission(ctx context.Context, req *QueryUserContestSubmissionReq) (*QueryUserContestSubmissionRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryUserContestSubmission", ctx, req)
+	ret0, _ := ret[0].(*QueryUserContestSubmissionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserContestSubmission indicates an expected call of QueryUserContestSubmission.
+func (mr *MockSolutionServerServiceMockRecorder) QueryUserContestSubmission(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserContestSubmission", reflect.TypeOf((*MockSolutionServerService)(nil).QueryUserContestSubmission), ctx, req)
 }
 
 // QueryUserProblemSolution mocks base method.
@@ -566,7 +566,7 @@ func (mr *MockSolutionServerClientProxyMockRecorder) AddTestSolution(ctx, req an
 }
 
 // CountContestProblemSubmission mocks base method.
-func (m *MockSolutionServerClientProxy) CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq, opts ...client.Option) (*CountContestProblemSubmissionRsp, error) {
+func (m *MockSolutionServerClientProxy) CountContestProblemSubmission(ctx context.Context, req *CountContestProblemSubmissionReq, opts ...client.Option) (*CountContestProblemSubmissionRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
@@ -583,26 +583,6 @@ func (mr *MockSolutionServerClientProxyMockRecorder) CountContestProblemSubmissi
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountContestProblemSubmission", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountContestProblemSubmission), varargs...)
-}
-
-// CountContestSubmission mocks base method.
-func (m *MockSolutionServerClientProxy) CountContestSubmission(ctx context.Context, req *CountContestSubmissionReq, opts ...client.Option) (*CountContestSubmissionRsp, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, req}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CountContestSubmission", varargs...)
-	ret0, _ := ret[0].(*CountContestSubmissionRsp)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CountContestSubmission indicates an expected call of CountContestSubmission.
-func (mr *MockSolutionServerClientProxyMockRecorder) CountContestSubmission(ctx, req any, opts ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountContestSubmission", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountContestSubmission), varargs...)
 }
 
 // CountMySolution mocks base method.
@@ -843,6 +823,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) QueryTodaySolution(ctx, req
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryTodaySolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryTodaySolution), varargs...)
+}
+
+// QueryUserContestSubmission mocks base method.
+func (m *MockSolutionServerClientProxy) QueryUserContestSubmission(ctx context.Context, req *QueryUserContestSubmissionReq, opts ...client.Option) (*QueryUserContestSubmissionRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryUserContestSubmission", varargs...)
+	ret0, _ := ret[0].(*QueryUserContestSubmissionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserContestSubmission indicates an expected call of QueryUserContestSubmission.
+func (mr *MockSolutionServerClientProxyMockRecorder) QueryUserContestSubmission(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserContestSubmission", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryUserContestSubmission), varargs...)
 }
 
 // QueryUserProblemSolution mocks base method.

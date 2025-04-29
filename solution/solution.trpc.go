@@ -129,10 +129,10 @@ type SolutionServerService interface {
 	AddTestSolution(ctx context.Context, req *AddSolutionReq) (*AddSolutionRsp, error)
 	// QueryContestRankData QueryContestRankData 查询作业的排名数据
 	QueryContestRankData(ctx context.Context, req *QueryContestRankDataReq) (*QueryContestRankDataRsp, error)
-	// CountContestSubmission CountContestSubmission 查询作业的提交统计数据
-	CountContestSubmission(ctx context.Context, req *CountContestSubmissionReq) (*CountContestSubmissionRsp, error)
+	// QueryUserContestSubmission QueryUserContestSubmission 查询用户作业的提交统计数据
+	QueryUserContestSubmission(ctx context.Context, req *QueryUserContestSubmissionReq) (*QueryUserContestSubmissionRsp, error)
 	// CountContestProblemSubmission CountContestProblemSubmission 查询作业的题目提交统计数据
-	CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq) (*CountContestProblemSubmissionRsp, error)
+	CountContestProblemSubmission(ctx context.Context, req *CountContestProblemSubmissionReq) (*CountContestProblemSubmissionRsp, error)
 	// QueryMySolutionRecord QueryMySolutionRecord 查询我的提交历史
 	QueryMySolutionRecord(ctx context.Context, req *QueryMySolutionRecordReq) (*QueryMySolutionRecordRsp, error)
 	// CountMySolution CountMySolution 计算我的提交数据
@@ -375,14 +375,14 @@ func SolutionServerService_QueryContestRankData_Handler(svr interface{}, ctx con
 	return rsp, nil
 }
 
-func SolutionServerService_CountContestSubmission_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &CountContestSubmissionReq{}
+func SolutionServerService_QueryUserContestSubmission_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryUserContestSubmissionReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(SolutionServerService).CountContestSubmission(ctx, reqbody.(*CountContestSubmissionReq))
+		return svr.(SolutionServerService).QueryUserContestSubmission(ctx, reqbody.(*QueryUserContestSubmissionReq))
 	}
 
 	var rsp interface{}
@@ -394,13 +394,13 @@ func SolutionServerService_CountContestSubmission_Handler(svr interface{}, ctx c
 }
 
 func SolutionServerService_CountContestProblemSubmission_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &CountContestSubmissionReq{}
+	req := &CountContestProblemSubmissionReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(SolutionServerService).CountContestProblemSubmission(ctx, reqbody.(*CountContestSubmissionReq))
+		return svr.(SolutionServerService).CountContestProblemSubmission(ctx, reqbody.(*CountContestProblemSubmissionReq))
 	}
 
 	var rsp interface{}
@@ -523,8 +523,8 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 			Func: SolutionServerService_QueryContestRankData_Handler,
 		},
 		{
-			Name: "/oj.solution.SolutionServer/CountContestSubmission",
-			Func: SolutionServerService_CountContestSubmission_Handler,
+			Name: "/oj.solution.SolutionServer/QueryUserContestSubmission",
+			Func: SolutionServerService_QueryUserContestSubmission_Handler,
 		},
 		{
 			Name: "/oj.solution.SolutionServer/CountContestProblemSubmission",
@@ -633,13 +633,13 @@ func (s *UnimplementedSolutionServer) QueryContestRankData(ctx context.Context, 
 	return nil, errors.New("rpc QueryContestRankData of service SolutionServer is not implemented")
 }
 
-// CountContestSubmission CountContestSubmission 查询作业的提交统计数据
-func (s *UnimplementedSolutionServer) CountContestSubmission(ctx context.Context, req *CountContestSubmissionReq) (*CountContestSubmissionRsp, error) {
-	return nil, errors.New("rpc CountContestSubmission of service SolutionServer is not implemented")
+// QueryUserContestSubmission QueryUserContestSubmission 查询用户作业的提交统计数据
+func (s *UnimplementedSolutionServer) QueryUserContestSubmission(ctx context.Context, req *QueryUserContestSubmissionReq) (*QueryUserContestSubmissionRsp, error) {
+	return nil, errors.New("rpc QueryUserContestSubmission of service SolutionServer is not implemented")
 }
 
 // CountContestProblemSubmission CountContestProblemSubmission 查询作业的题目提交统计数据
-func (s *UnimplementedSolutionServer) CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq) (*CountContestProblemSubmissionRsp, error) {
+func (s *UnimplementedSolutionServer) CountContestProblemSubmission(ctx context.Context, req *CountContestProblemSubmissionReq) (*CountContestProblemSubmissionRsp, error) {
 	return nil, errors.New("rpc CountContestProblemSubmission of service SolutionServer is not implemented")
 }
 
@@ -760,10 +760,10 @@ type SolutionServerClientProxy interface {
 	AddTestSolution(ctx context.Context, req *AddSolutionReq, opts ...client.Option) (rsp *AddSolutionRsp, err error)
 	// QueryContestRankData QueryContestRankData 查询作业的排名数据
 	QueryContestRankData(ctx context.Context, req *QueryContestRankDataReq, opts ...client.Option) (rsp *QueryContestRankDataRsp, err error)
-	// CountContestSubmission CountContestSubmission 查询作业的提交统计数据
-	CountContestSubmission(ctx context.Context, req *CountContestSubmissionReq, opts ...client.Option) (rsp *CountContestSubmissionRsp, err error)
+	// QueryUserContestSubmission QueryUserContestSubmission 查询用户作业的提交统计数据
+	QueryUserContestSubmission(ctx context.Context, req *QueryUserContestSubmissionReq, opts ...client.Option) (rsp *QueryUserContestSubmissionRsp, err error)
 	// CountContestProblemSubmission CountContestProblemSubmission 查询作业的题目提交统计数据
-	CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq, opts ...client.Option) (rsp *CountContestProblemSubmissionRsp, err error)
+	CountContestProblemSubmission(ctx context.Context, req *CountContestProblemSubmissionReq, opts ...client.Option) (rsp *CountContestProblemSubmissionRsp, err error)
 	// QueryMySolutionRecord QueryMySolutionRecord 查询我的提交历史
 	QueryMySolutionRecord(ctx context.Context, req *QueryMySolutionRecordReq, opts ...client.Option) (rsp *QueryMySolutionRecordRsp, err error)
 	// CountMySolution CountMySolution 计算我的提交数据
@@ -1041,27 +1041,27 @@ func (c *SolutionServerClientProxyImpl) QueryContestRankData(ctx context.Context
 	return rsp, nil
 }
 
-func (c *SolutionServerClientProxyImpl) CountContestSubmission(ctx context.Context, req *CountContestSubmissionReq, opts ...client.Option) (*CountContestSubmissionRsp, error) {
+func (c *SolutionServerClientProxyImpl) QueryUserContestSubmission(ctx context.Context, req *QueryUserContestSubmissionReq, opts ...client.Option) (*QueryUserContestSubmissionRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/oj.solution.SolutionServer/CountContestSubmission")
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryUserContestSubmission")
 	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
 	msg.WithCalleeApp("")
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("SolutionServer")
-	msg.WithCalleeMethod("CountContestSubmission")
+	msg.WithCalleeMethod("QueryUserContestSubmission")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &CountContestSubmissionRsp{}
+	rsp := &QueryUserContestSubmissionRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
 	return rsp, nil
 }
 
-func (c *SolutionServerClientProxyImpl) CountContestProblemSubmission(ctx context.Context, req *CountContestSubmissionReq, opts ...client.Option) (*CountContestProblemSubmissionRsp, error) {
+func (c *SolutionServerClientProxyImpl) CountContestProblemSubmission(ctx context.Context, req *CountContestProblemSubmissionReq, opts ...client.Option) (*CountContestProblemSubmissionRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.solution.SolutionServer/CountContestProblemSubmission")

@@ -38,16 +38,32 @@ service SolutionServer {
     rpc AddTestSolution(AddSolutionReq) returns (AddSolutionRsp) {}
     // QueryContestRankData 查询作业的排名数据
     rpc QueryContestRankData(QueryContestRankDataReq) returns (QueryContestRankDataRsp) {}
-    // CountContestSubmission 查询作业的提交统计数据
-    rpc CountContestSubmission(CountContestSubmissionReq) returns (CountContestSubmissionRsp) {}
+    // QueryUserContestSubmission 查询用户作业的提交统计数据
+    rpc QueryUserContestSubmission(QueryUserContestSubmissionReq) returns (QueryUserContestSubmissionRsp) {}
     // CountContestProblemSubmission 查询作业的题目提交统计数据
-    rpc CountContestProblemSubmission(CountContestSubmissionReq) returns (CountContestProblemSubmissionRsp) {}
+    rpc CountContestProblemSubmission(CountContestProblemSubmissionReq) returns (CountContestProblemSubmissionRsp) {}
     // QueryMySolutionRecord 查询我的提交历史
     rpc QueryMySolutionRecord(QueryMySolutionRecordReq) returns (QueryMySolutionRecordRsp) {}
     // CountMySolution 计算我的提交数据
     rpc CountMySolution(QueryMySolutionRecordReq) returns (CountContestSubmissionRsp) {}
     // QueryTodaySolution 查询今天的提交
     rpc QueryTodaySolution(UserIDReq) returns (QueryTodaySolutionRsp) {}
+}
+
+message QueryUserContestSubmissionReq{
+    int32 userID = 1; // 用户编号
+    string problemIDs = 2; // 题目列表
+    int32 contestID = 3; // 作业列表
+}
+
+message QueryUserContestSubmissionRsp{
+    string message                = 1;  // 返回信息
+    int32 code                    = 2;  // 返回码
+}
+
+message UserProblemCondition {
+    int32 problemID = 1; // 题目编号
+    int32 isDone = 2; // 是否做完
 }
 
 message QueryTodaySolutionRsp {
@@ -83,7 +99,7 @@ message QueryRankDataReq {
     int32 userID    = 2;  // 用户编号
 }
 
-message CountContestSubmissionReq {
+message CountContestProblemSubmissionReq {
     int32 contestID = 1;  // 作业编号
     int32 userID    = 2;  // 用户编号
 }
