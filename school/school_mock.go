@@ -298,6 +298,21 @@ func (mr *MockClassServerServiceMockRecorder) QueryContestClassUser(ctx, req any
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestClassUser", reflect.TypeOf((*MockClassServerService)(nil).QueryContestClassUser), ctx, req)
 }
 
+// QueryMyClass mocks base method.
+func (m *MockClassServerService) QueryMyClass(ctx context.Context, req *UserIDReq) (*QueryMyClassRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryMyClass", ctx, req)
+	ret0, _ := ret[0].(*QueryMyClassRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryMyClass indicates an expected call of QueryMyClass.
+func (mr *MockClassServerServiceMockRecorder) QueryMyClass(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryMyClass", reflect.TypeOf((*MockClassServerService)(nil).QueryMyClass), ctx, req)
+}
+
 // QueryUserClass mocks base method.
 func (m *MockClassServerService) QueryUserClass(ctx context.Context, req *QueryUserClassReq) (*QueryUserClassRsp, error) {
 	m.ctrl.T.Helper()
@@ -845,6 +860,26 @@ func (mr *MockClassServerClientProxyMockRecorder) QueryContestClassUser(ctx, req
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestClassUser", reflect.TypeOf((*MockClassServerClientProxy)(nil).QueryContestClassUser), varargs...)
+}
+
+// QueryMyClass mocks base method.
+func (m *MockClassServerClientProxy) QueryMyClass(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryMyClassRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryMyClass", varargs...)
+	ret0, _ := ret[0].(*QueryMyClassRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryMyClass indicates an expected call of QueryMyClass.
+func (mr *MockClassServerClientProxyMockRecorder) QueryMyClass(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryMyClass", reflect.TypeOf((*MockClassServerClientProxy)(nil).QueryMyClass), varargs...)
 }
 
 // QueryUserClass mocks base method.
