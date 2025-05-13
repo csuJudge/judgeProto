@@ -69,6 +69,7 @@ service TermServer {
 message QueryMyClassRsp{
     string message        = 1;  // 返回信息
     int32 code            = 2;  // 返回码
+    repeated MyClass classes = 3; // 我的班级
 }
 
 message MyClass {
