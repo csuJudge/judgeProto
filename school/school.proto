@@ -74,7 +74,7 @@ message QueryMyClassRsp{
 
 message MyClass {
     int32 classID = 1; // 班级编号
-    int32 className = 2; // 班级名称
+    string className = 2; // 班级名称
 }
 
 message QueryClassTeacherRsp {
