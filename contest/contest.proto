@@ -108,6 +108,12 @@ message Contest {
     int32 private                    = 10;  // 是否私有
     string password                  = 11;  // 密码
     int32 enable                     = 12;  // 是否结束
+    repeated Class classes = 13; // 作业的班级
+}
+
+message Class {
+    int32 classID = 1; // 班级编号
+    int32 ClassName = 2; // 班级名称
 }
 
 message CommonRsp {
