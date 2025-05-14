@@ -113,7 +113,7 @@ message Contest {
 
 message Class {
     int32 classID = 1; // 班级编号
-    int32 ClassName = 2; // 班级名称
+    string ClassName = 2; // 班级名称
 }
 
 message CommonRsp {
