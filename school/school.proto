@@ -48,7 +48,7 @@ service ClassServer {
     // QueryMyClass 查询作业班级的老师
     rpc QueryMyClass(UserIDReq) returns (QueryMyClassRsp) {}
     // QueryContestClass 查询作业的班级
-    rpc QueryContestClass(UserIDReq) returns (QueryMyClassRsp) {}
+    rpc QueryContestClass(QueryContestClassReq) returns (QueryMyClassRsp) {}
 }
 
 service TermServer {
@@ -66,6 +66,10 @@ service TermServer {
     rpc QueryAllTerm(QueryAllTermReq) returns (QueryAllTermRsp) {}
     // QueryTerm 查询学期
     rpc QueryTerm(QueryTermReq) returns (QueryTermRsp) {}
+}
+
+message QueryContestClassReq{
+    int32 contestID   = 1;  // 作业编号
 }
 
 message QueryMyClassRsp{

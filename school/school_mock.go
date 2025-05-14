@@ -284,7 +284,7 @@ func (mr *MockClassServerServiceMockRecorder) QueryClassUser(ctx, req any) *gomo
 }
 
 // QueryContestClass mocks base method.
-func (m *MockClassServerService) QueryContestClass(ctx context.Context, req *UserIDReq) (*QueryMyClassRsp, error) {
+func (m *MockClassServerService) QueryContestClass(ctx context.Context, req *QueryContestClassReq) (*QueryMyClassRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryContestClass", ctx, req)
 	ret0, _ := ret[0].(*QueryMyClassRsp)
@@ -858,7 +858,7 @@ func (mr *MockClassServerClientProxyMockRecorder) QueryClassUser(ctx, req any, o
 }
 
 // QueryContestClass mocks base method.
-func (m *MockClassServerClientProxy) QueryContestClass(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryMyClassRsp, error) {
+func (m *MockClassServerClientProxy) QueryContestClass(ctx context.Context, req *QueryContestClassReq, opts ...client.Option) (*QueryMyClassRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {

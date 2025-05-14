@@ -277,7 +277,7 @@ type ClassServerService interface {
 	// QueryMyClass QueryMyClass 查询作业班级的老师
 	QueryMyClass(ctx context.Context, req *UserIDReq) (*QueryMyClassRsp, error)
 	// QueryContestClass QueryContestClass 查询作业的班级
-	QueryContestClass(ctx context.Context, req *UserIDReq) (*QueryMyClassRsp, error)
+	QueryContestClass(ctx context.Context, req *QueryContestClassReq) (*QueryMyClassRsp, error)
 }
 
 func ClassServerService_QueryUserClass_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -479,13 +479,13 @@ func ClassServerService_QueryMyClass_Handler(svr interface{}, ctx context.Contex
 }
 
 func ClassServerService_QueryContestClass_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &UserIDReq{}
+	req := &QueryContestClassReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(ClassServerService).QueryContestClass(ctx, reqbody.(*UserIDReq))
+		return svr.(ClassServerService).QueryContestClass(ctx, reqbody.(*QueryContestClassReq))
 	}
 
 	var rsp interface{}
@@ -853,7 +853,7 @@ func (s *UnimplementedClassServer) QueryMyClass(ctx context.Context, req *UserID
 }
 
 // QueryContestClass QueryContestClass 查询作业的班级
-func (s *UnimplementedClassServer) QueryContestClass(ctx context.Context, req *UserIDReq) (*QueryMyClassRsp, error) {
+func (s *UnimplementedClassServer) QueryContestClass(ctx context.Context, req *QueryContestClassReq) (*QueryMyClassRsp, error) {
 	return nil, errors.New("rpc QueryContestClass of service ClassServer is not implemented")
 }
 
@@ -1136,7 +1136,7 @@ type ClassServerClientProxy interface {
 	// QueryMyClass QueryMyClass 查询作业班级的老师
 	QueryMyClass(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryMyClassRsp, err error)
 	// QueryContestClass QueryContestClass 查询作业的班级
-	QueryContestClass(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryMyClassRsp, err error)
+	QueryContestClass(ctx context.Context, req *QueryContestClassReq, opts ...client.Option) (rsp *QueryMyClassRsp, err error)
 }
 
 type ClassServerClientProxyImpl struct {
@@ -1368,7 +1368,7 @@ func (c *ClassServerClientProxyImpl) QueryMyClass(ctx context.Context, req *User
 	return rsp, nil
 }
 
-func (c *ClassServerClientProxyImpl) QueryContestClass(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryMyClassRsp, error) {
+func (c *ClassServerClientProxyImpl) QueryContestClass(ctx context.Context, req *QueryContestClassReq, opts ...client.Option) (*QueryMyClassRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.school.ClassServer/QueryContestClass")
