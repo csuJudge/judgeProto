@@ -86,7 +86,12 @@ message MyClass {
 message QueryClassTeacherRsp {
     string message        = 1;  // 返回信息
     int32 code            = 2;  // 返回码
-    repeated int32 userID = 3;  // 所有老师的编号
+    repeated TeacherInfo teachers = 3;  // 所有老师的编号
+}
+
+message TeacherInfo{
+    int32 userID = 1; // 用户编号
+    string userName = 2; // 用户名称
 }
 
 message QueryCourseKnowledgeReq {
@@ -191,6 +196,7 @@ message Term {
     string name        = 2;  // 学期名
     string description = 3;  // 描述
     string creator     = 4;  // 创建者
+    int32 enable = 5; // 状态
 }
 
 message SetPresentTermReq {
@@ -347,4 +353,5 @@ message Course {
     string description = 2;  // 描述
     string courseID    = 3;  // 课程编号
     string creator     = 4;  // 创建者
+    int32 enable = 5; // 状态
 }
