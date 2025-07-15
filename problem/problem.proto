@@ -208,6 +208,7 @@ message Problem {
     string updatedBy         = 19;  // 更新者
     int32 type               = 20;  // 题目类型
     string template          = 21;  // 模板
+    int32 creatorID = 22; // 用户编号
 }
 
 message AddProblemReq {

@@ -197,6 +197,7 @@ message Term {
     string description = 3;  // 描述
     string creator     = 4;  // 创建者
     int32 enable = 5; // 状态
+    int32 isPresent = 6; // 是否当前学期
 }
 
 message SetPresentTermReq {
