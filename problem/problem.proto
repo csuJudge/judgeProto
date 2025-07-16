@@ -32,6 +32,13 @@ service ProblemServer {
     rpc DeleteProblemData(DeleteProblemDataReq) returns (CommonRsp) {}
     // QueryContestProblem 查询作业的题目数据
     rpc QueryContestProblem(QueryContestProblemReq) returns (QueryContestProblemReqRsp) {}
+    // QueryCourseProblem 查询课程的题目
+    rpc QueryCourseProblem(QueryCourseProblemReq) returns (QueryAllProblemRsp) {}
+}
+
+message QueryCourseProblemReq{
+    int32 courseID = 1;  // 课程编号
+    int32 userID    = 2;  // 用户编号
 }
 
 message UpdateProblemReq {

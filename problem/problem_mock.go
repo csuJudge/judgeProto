@@ -120,6 +120,21 @@ func (mr *MockProblemServerServiceMockRecorder) QueryContestProblem(ctx, req any
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestProblem", reflect.TypeOf((*MockProblemServerService)(nil).QueryContestProblem), ctx, req)
 }
 
+// QueryCourseProblem mocks base method.
+func (m *MockProblemServerService) QueryCourseProblem(ctx context.Context, req *QueryCourseProblemReq) (*QueryAllProblemRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryCourseProblem", ctx, req)
+	ret0, _ := ret[0].(*QueryAllProblemRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryCourseProblem indicates an expected call of QueryCourseProblem.
+func (mr *MockProblemServerServiceMockRecorder) QueryCourseProblem(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryCourseProblem", reflect.TypeOf((*MockProblemServerService)(nil).QueryCourseProblem), ctx, req)
+}
+
 // QueryProblem mocks base method.
 func (m *MockProblemServerService) QueryProblem(ctx context.Context, req *QueryProblemReq) (*QueryProblemRsp, error) {
 	m.ctrl.T.Helper()
@@ -514,6 +529,26 @@ func (mr *MockProblemServerClientProxyMockRecorder) QueryContestProblem(ctx, req
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestProblem", reflect.TypeOf((*MockProblemServerClientProxy)(nil).QueryContestProblem), varargs...)
+}
+
+// QueryCourseProblem mocks base method.
+func (m *MockProblemServerClientProxy) QueryCourseProblem(ctx context.Context, req *QueryCourseProblemReq, opts ...client.Option) (*QueryAllProblemRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryCourseProblem", varargs...)
+	ret0, _ := ret[0].(*QueryAllProblemRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryCourseProblem indicates an expected call of QueryCourseProblem.
+func (mr *MockProblemServerClientProxyMockRecorder) QueryCourseProblem(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryCourseProblem", reflect.TypeOf((*MockProblemServerClientProxy)(nil).QueryCourseProblem), varargs...)
 }
 
 // QueryProblem mocks base method.

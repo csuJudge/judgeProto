@@ -60,6 +60,21 @@ func (mr *MockKnowledgeServerServiceMockRecorder) AddKnowledge(ctx, req any) *go
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddKnowledge", reflect.TypeOf((*MockKnowledgeServerService)(nil).AddKnowledge), ctx, req)
 }
 
+// QueryCourseKnowledge mocks base method.
+func (m *MockKnowledgeServerService) QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq) (*QueryKnowledgeRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryCourseKnowledge", ctx, req)
+	ret0, _ := ret[0].(*QueryKnowledgeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryCourseKnowledge indicates an expected call of QueryCourseKnowledge.
+func (mr *MockKnowledgeServerServiceMockRecorder) QueryCourseKnowledge(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryCourseKnowledge", reflect.TypeOf((*MockKnowledgeServerService)(nil).QueryCourseKnowledge), ctx, req)
+}
+
 // QueryKnowledge mocks base method.
 func (m *MockKnowledgeServerService) QueryKnowledge(ctx context.Context, req *UserIDReq) (*QueryKnowledgeRsp, error) {
 	m.ctrl.T.Helper()
@@ -196,6 +211,26 @@ func (mr *MockKnowledgeServerClientProxyMockRecorder) AddKnowledge(ctx, req any,
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddKnowledge", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).AddKnowledge), varargs...)
+}
+
+// QueryCourseKnowledge mocks base method.
+func (m *MockKnowledgeServerClientProxy) QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq, opts ...client.Option) (*QueryKnowledgeRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryCourseKnowledge", varargs...)
+	ret0, _ := ret[0].(*QueryKnowledgeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryCourseKnowledge indicates an expected call of QueryCourseKnowledge.
+func (mr *MockKnowledgeServerClientProxyMockRecorder) QueryCourseKnowledge(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryCourseKnowledge", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).QueryCourseKnowledge), varargs...)
 }
 
 // QueryKnowledge mocks base method.

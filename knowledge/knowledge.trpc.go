@@ -33,6 +33,8 @@ type KnowledgeServerService interface {
 	UpdateKnowledgeWeight(ctx context.Context, req *UpdateKnowledgeWeightReq) (*CommonRsp, error)
 	// QueryKnowledgePageSize QueryKnowledgePageSize 查询知识点
 	QueryKnowledgePageSize(ctx context.Context, req *QueryKnowledgePageSizeReq) (*QueryKnowledgeRsp, error)
+	// QueryCourseKnowledge QueryContestKnowledge 查询课程的知识点
+	QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq) (*QueryKnowledgeRsp, error)
 }
 
 func KnowledgeServerService_QueryKnowledge_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -161,6 +163,24 @@ func KnowledgeServerService_QueryKnowledgePageSize_Handler(svr interface{}, ctx 
 	return rsp, nil
 }
 
+func KnowledgeServerService_QueryCourseKnowledge_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryCourseKnowledgeReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).QueryCourseKnowledge(ctx, reqbody.(*QueryCourseKnowledgeReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // KnowledgeServerServer_ServiceDesc descriptor for server.RegisterService.
 var KnowledgeServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.knowledge.KnowledgeServer",
@@ -193,6 +213,10 @@ var KnowledgeServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.knowledge.KnowledgeServer/QueryKnowledgePageSize",
 			Func: KnowledgeServerService_QueryKnowledgePageSize_Handler,
+		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/QueryCourseKnowledge",
+			Func: KnowledgeServerService_QueryCourseKnowledge_Handler,
 		},
 	},
 }
@@ -243,6 +267,11 @@ func (s *UnimplementedKnowledgeServer) QueryKnowledgePageSize(ctx context.Contex
 	return nil, errors.New("rpc QueryKnowledgePageSize of service KnowledgeServer is not implemented")
 }
 
+// QueryCourseKnowledge QueryContestKnowledge 查询课程的知识点
+func (s *UnimplementedKnowledgeServer) QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq) (*QueryKnowledgeRsp, error) {
+	return nil, errors.New("rpc QueryCourseKnowledge of service KnowledgeServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -265,6 +294,8 @@ type KnowledgeServerClientProxy interface {
 	UpdateKnowledgeWeight(ctx context.Context, req *UpdateKnowledgeWeightReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryKnowledgePageSize QueryKnowledgePageSize 查询知识点
 	QueryKnowledgePageSize(ctx context.Context, req *QueryKnowledgePageSizeReq, opts ...client.Option) (rsp *QueryKnowledgeRsp, err error)
+	// QueryCourseKnowledge QueryContestKnowledge 查询课程的知识点
+	QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq, opts ...client.Option) (rsp *QueryKnowledgeRsp, err error)
 }
 
 type KnowledgeServerClientProxyImpl struct {
@@ -405,6 +436,26 @@ func (c *KnowledgeServerClientProxyImpl) QueryKnowledgePageSize(ctx context.Cont
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("KnowledgeServer")
 	msg.WithCalleeMethod("QueryKnowledgePageSize")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryKnowledgeRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq, opts ...client.Option) (*QueryKnowledgeRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/QueryCourseKnowledge")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("QueryCourseKnowledge")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
