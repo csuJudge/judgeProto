@@ -20,6 +20,14 @@ service KnowledgeServer {
     rpc QueryKnowledgePageSize(QueryKnowledgePageSizeReq) returns (QueryKnowledgeRsp) {}
     // QueryContestKnowledge 查询课程的知识点
     rpc QueryCourseKnowledge(QueryCourseKnowledgeReq) returns (QueryKnowledgeRsp) {}
+    // UpdateCourseKnowledgeReq 更新课程的知识点
+    rpc UpdateCourseKnowledge(UpdateCourseKnowledgeReq) returns (CommonRsp) {}
+}
+
+message UpdateCourseKnowledgeReq{
+    int32 courseID = 1;  // 课程编号
+    int32 userID    = 2;  // 用户编号
+    string knowledgeIDs = 3; // 知识点编号
 }
 
 message QueryCourseKnowledgeReq{

@@ -120,6 +120,21 @@ func (mr *MockKnowledgeServerServiceMockRecorder) QueryProblemKnowledge(ctx, req
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryProblemKnowledge", reflect.TypeOf((*MockKnowledgeServerService)(nil).QueryProblemKnowledge), ctx, req)
 }
 
+// UpdateCourseKnowledge mocks base method.
+func (m *MockKnowledgeServerService) UpdateCourseKnowledge(ctx context.Context, req *UpdateCourseKnowledgeReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateCourseKnowledge", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateCourseKnowledge indicates an expected call of UpdateCourseKnowledge.
+func (mr *MockKnowledgeServerServiceMockRecorder) UpdateCourseKnowledge(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateCourseKnowledge", reflect.TypeOf((*MockKnowledgeServerService)(nil).UpdateCourseKnowledge), ctx, req)
+}
+
 // UpdateKnowledge mocks base method.
 func (m *MockKnowledgeServerService) UpdateKnowledge(ctx context.Context, req *UpdateKnowledgeReq) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
@@ -291,6 +306,26 @@ func (mr *MockKnowledgeServerClientProxyMockRecorder) QueryProblemKnowledge(ctx,
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryProblemKnowledge", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).QueryProblemKnowledge), varargs...)
+}
+
+// UpdateCourseKnowledge mocks base method.
+func (m *MockKnowledgeServerClientProxy) UpdateCourseKnowledge(ctx context.Context, req *UpdateCourseKnowledgeReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateCourseKnowledge", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateCourseKnowledge indicates an expected call of UpdateCourseKnowledge.
+func (mr *MockKnowledgeServerClientProxyMockRecorder) UpdateCourseKnowledge(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateCourseKnowledge", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).UpdateCourseKnowledge), varargs...)
 }
 
 // UpdateKnowledge mocks base method.
