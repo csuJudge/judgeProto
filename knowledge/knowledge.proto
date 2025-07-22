@@ -89,7 +89,7 @@ message QueryProblemKnowledgeReq {
 message QueryProblemKnowledgeRsp {
     string message    = 1;  // 返回信息
     int32 code        = 2;  // 返回码
-    string knowledges = 3;  // 知识点的字符串集合
+    Knowledge knowledges = 3;  // 知识点的字符串集合
 }
 
 message Knowledge {
