@@ -60,7 +60,7 @@ message UpdateProblemReq {
     string output            = 8;   // 样例输出
     int32 timeLimit          = 9;   // 时间限制
     int32 memoryLimit        = 10;  // 内存限制
-    string knowledges        = 11;  // 知识点
+    Knowledge knowledges        = 11;  // 知识点
     int32 difficulty         = 12;  // 难度
     int32 userID             = 13;  // 用户编号
     int32 type               = 14;  // 题目类型
@@ -214,7 +214,7 @@ message Problem {
     string output            = 10;  // 样例输出
     int32 timeLimit          = 11;  // 时间限制
     int32 memoryLimit        = 12;  // 内存限制
-    string knowledges        = 13;  // 知识点
+    Knowledge knowledges        = 13;  // 知识点
     int32 enable             = 14;  // 状态
     int32 difficulty         = 15;  // 难度
     string creator           = 16;  // 提交者
@@ -237,10 +237,19 @@ message AddProblemReq {
     string output            = 8;   // 样例输出
     int32 timeLimit          = 9;   // 时间限制
     int32 memoryLimit        = 10;  // 内存限制
-    string knowledges        = 11;  // 知识点
+    Knowledge knowledges        = 11;  // 知识点
     int32 difficulty         = 12;  // 难度
     int32 type               = 13;  // 题目类型
     string template          = 14;  // 模板
+}
+
+message Knowledge {
+    int32 id          = 1;  // 知识点主键
+    string name       = 2;  // 知识点名称
+    string creator    = 3;  // 创建者
+    string createTime = 4;  // 创建时间
+    int32 enable      = 5;  // 状态
+    int32 weight      = 6;  // 权重
 }
 
 service ObjectiveServer {
