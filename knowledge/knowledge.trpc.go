@@ -25,6 +25,8 @@ type KnowledgeServerService interface {
 	AddKnowledge(ctx context.Context, req *AddKnowledgeReq) (*CommonRsp, error)
 	// QueryProblemKnowledge QueryProblemKnowledge 查询题目的知识点
 	QueryProblemKnowledge(ctx context.Context, req *QueryProblemKnowledgeReq) (*QueryProblemKnowledgeRsp, error)
+	// QueryAllProblemKnowledge QueryAllProblemKnowledge 查询题目所有的知识点
+	QueryAllProblemKnowledge(ctx context.Context, req *QueryProblemKnowledgeReq) (*QueryProblemKnowledgeRsp, error)
 	// UpdateKnowledge UpdateKnowledge 更新知识点
 	UpdateKnowledge(ctx context.Context, req *UpdateKnowledgeReq) (*CommonRsp, error)
 	// UpdateKnowledgeStatus UpdateKnowledgeStatus 更新知识点状态
@@ -83,6 +85,24 @@ func KnowledgeServerService_QueryProblemKnowledge_Handler(svr interface{}, ctx c
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
 		return svr.(KnowledgeServerService).QueryProblemKnowledge(ctx, reqbody.(*QueryProblemKnowledgeReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func KnowledgeServerService_QueryAllProblemKnowledge_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryProblemKnowledgeReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).QueryAllProblemKnowledge(ctx, reqbody.(*QueryProblemKnowledgeReq))
 	}
 
 	var rsp interface{}
@@ -219,6 +239,10 @@ var KnowledgeServerServer_ServiceDesc = server.ServiceDesc{
 			Func: KnowledgeServerService_QueryProblemKnowledge_Handler,
 		},
 		{
+			Name: "/oj.knowledge.KnowledgeServer/QueryAllProblemKnowledge",
+			Func: KnowledgeServerService_QueryAllProblemKnowledge_Handler,
+		},
+		{
 			Name: "/oj.knowledge.KnowledgeServer/UpdateKnowledge",
 			Func: KnowledgeServerService_UpdateKnowledge_Handler,
 		},
@@ -271,6 +295,11 @@ func (s *UnimplementedKnowledgeServer) QueryProblemKnowledge(ctx context.Context
 	return nil, errors.New("rpc QueryProblemKnowledge of service KnowledgeServer is not implemented")
 }
 
+// QueryAllProblemKnowledge QueryAllProblemKnowledge 查询题目所有的知识点
+func (s *UnimplementedKnowledgeServer) QueryAllProblemKnowledge(ctx context.Context, req *QueryProblemKnowledgeReq) (*QueryProblemKnowledgeRsp, error) {
+	return nil, errors.New("rpc QueryAllProblemKnowledge of service KnowledgeServer is not implemented")
+}
+
 // UpdateKnowledge UpdateKnowledge 更新知识点
 func (s *UnimplementedKnowledgeServer) UpdateKnowledge(ctx context.Context, req *UpdateKnowledgeReq) (*CommonRsp, error) {
 	return nil, errors.New("rpc UpdateKnowledge of service KnowledgeServer is not implemented")
@@ -315,6 +344,8 @@ type KnowledgeServerClientProxy interface {
 	AddKnowledge(ctx context.Context, req *AddKnowledgeReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryProblemKnowledge QueryProblemKnowledge 查询题目的知识点
 	QueryProblemKnowledge(ctx context.Context, req *QueryProblemKnowledgeReq, opts ...client.Option) (rsp *QueryProblemKnowledgeRsp, err error)
+	// QueryAllProblemKnowledge QueryAllProblemKnowledge 查询题目所有的知识点
+	QueryAllProblemKnowledge(ctx context.Context, req *QueryProblemKnowledgeReq, opts ...client.Option) (rsp *QueryProblemKnowledgeRsp, err error)
 	// UpdateKnowledge UpdateKnowledge 更新知识点
 	UpdateKnowledge(ctx context.Context, req *UpdateKnowledgeReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// UpdateKnowledgeStatus UpdateKnowledgeStatus 更新知识点状态
@@ -387,6 +418,26 @@ func (c *KnowledgeServerClientProxyImpl) QueryProblemKnowledge(ctx context.Conte
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("KnowledgeServer")
 	msg.WithCalleeMethod("QueryProblemKnowledge")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryProblemKnowledgeRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) QueryAllProblemKnowledge(ctx context.Context, req *QueryProblemKnowledgeReq, opts ...client.Option) (*QueryProblemKnowledgeRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/QueryAllProblemKnowledge")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("QueryAllProblemKnowledge")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
