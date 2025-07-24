@@ -476,6 +476,21 @@ func (mr *MockTermServerServiceMockRecorder) QueryTerm(ctx, req any) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryTerm", reflect.TypeOf((*MockTermServerService)(nil).QueryTerm), ctx, req)
 }
 
+// QueryTermCourse mocks base method.
+func (m *MockTermServerService) QueryTermCourse(ctx context.Context, req *QueryTermReq) (*QueryCourseRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryTermCourse", ctx, req)
+	ret0, _ := ret[0].(*QueryCourseRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryTermCourse indicates an expected call of QueryTermCourse.
+func (mr *MockTermServerServiceMockRecorder) QueryTermCourse(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryTermCourse", reflect.TypeOf((*MockTermServerService)(nil).QueryTermCourse), ctx, req)
+}
+
 // SetPresentTerm mocks base method.
 func (m *MockTermServerService) SetPresentTerm(ctx context.Context, req *SetPresentTermReq) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
@@ -1103,6 +1118,26 @@ func (mr *MockTermServerClientProxyMockRecorder) QueryTerm(ctx, req any, opts ..
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryTerm", reflect.TypeOf((*MockTermServerClientProxy)(nil).QueryTerm), varargs...)
+}
+
+// QueryTermCourse mocks base method.
+func (m *MockTermServerClientProxy) QueryTermCourse(ctx context.Context, req *QueryTermReq, opts ...client.Option) (*QueryCourseRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryTermCourse", varargs...)
+	ret0, _ := ret[0].(*QueryCourseRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryTermCourse indicates an expected call of QueryTermCourse.
+func (mr *MockTermServerClientProxyMockRecorder) QueryTermCourse(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryTermCourse", reflect.TypeOf((*MockTermServerClientProxy)(nil).QueryTermCourse), varargs...)
 }
 
 // SetPresentTerm mocks base method.

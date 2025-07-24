@@ -575,6 +575,8 @@ type TermServerService interface {
 	QueryAllTerm(ctx context.Context, req *QueryAllTermReq) (*QueryAllTermRsp, error)
 	// QueryTerm QueryTerm 查询学期
 	QueryTerm(ctx context.Context, req *QueryTermReq) (*QueryTermRsp, error)
+	// QueryTermCourse 查询学期的课程
+	QueryTermCourse(ctx context.Context, req *QueryTermReq) (*QueryCourseRsp, error)
 }
 
 func TermServerService_AddTerm_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -703,6 +705,24 @@ func TermServerService_QueryTerm_Handler(svr interface{}, ctx context.Context, f
 	return rsp, nil
 }
 
+func TermServerService_QueryTermCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryTermReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(TermServerService).QueryTermCourse(ctx, reqbody.(*QueryTermReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // TermServerServer_ServiceDesc descriptor for server.RegisterService.
 var TermServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.school.TermServer",
@@ -735,6 +755,10 @@ var TermServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.school.TermServer/QueryTerm",
 			Func: TermServerService_QueryTerm_Handler,
+		},
+		{
+			Name: "/oj.school.TermServer/QueryTermCourse",
+			Func: TermServerService_QueryTermCourse_Handler,
 		},
 	},
 }
@@ -892,6 +916,11 @@ func (s *UnimplementedTermServer) QueryAllTerm(ctx context.Context, req *QueryAl
 // QueryTerm QueryTerm 查询学期
 func (s *UnimplementedTermServer) QueryTerm(ctx context.Context, req *QueryTermReq) (*QueryTermRsp, error) {
 	return nil, errors.New("rpc QueryTerm of service TermServer is not implemented")
+}
+
+// QueryTermCourse 查询学期的课程
+func (s *UnimplementedTermServer) QueryTermCourse(ctx context.Context, req *QueryTermReq) (*QueryCourseRsp, error) {
+	return nil, errors.New("rpc QueryTermCourse of service TermServer is not implemented")
 }
 
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
@@ -1404,6 +1433,8 @@ type TermServerClientProxy interface {
 	QueryAllTerm(ctx context.Context, req *QueryAllTermReq, opts ...client.Option) (rsp *QueryAllTermRsp, err error)
 	// QueryTerm QueryTerm 查询学期
 	QueryTerm(ctx context.Context, req *QueryTermReq, opts ...client.Option) (rsp *QueryTermRsp, err error)
+	// QueryTermCourse 查询学期的课程
+	QueryTermCourse(ctx context.Context, req *QueryTermReq, opts ...client.Option) (rsp *QueryCourseRsp, err error)
 }
 
 type TermServerClientProxyImpl struct {
@@ -1549,6 +1580,26 @@ func (c *TermServerClientProxyImpl) QueryTerm(ctx context.Context, req *QueryTer
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryTermRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *TermServerClientProxyImpl) QueryTermCourse(ctx context.Context, req *QueryTermReq, opts ...client.Option) (*QueryCourseRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.school.TermServer/QueryTermCourse")
+	msg.WithCalleeServiceName(TermServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("TermServer")
+	msg.WithCalleeMethod("QueryTermCourse")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryCourseRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

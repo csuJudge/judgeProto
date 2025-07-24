@@ -66,6 +66,8 @@ service TermServer {
     rpc QueryAllTerm(QueryAllTermReq) returns (QueryAllTermRsp) {}
     // QueryTerm 查询学期
     rpc QueryTerm(QueryTermReq) returns (QueryTermRsp) {}
+    // 查询学期的课程
+    rpc QueryTermCourse(QueryTermReq) returns (QueryCourseRsp){}
 }
 
 message QueryContestClassReq{

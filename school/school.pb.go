@@ -3302,7 +3302,7 @@ var file_school_proto_rawDesc = []byte{
 	0x65, 0x72, 0x79, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x73, 0x74, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x52,
 	0x65, 0x71, 0x1a, 0x1a, 0x2e, 0x6f, 0x6a, 0x2e, 0x73, 0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x2e, 0x51,
 	0x75, 0x65, 0x72, 0x79, 0x4d, 0x79, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x52, 0x73, 0x70, 0x22, 0x00,
-	0x32, 0xf1, 0x03, 0x0a, 0x0a, 0x54, 0x65, 0x72, 0x6d, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x12,
+	0x32, 0xba, 0x04, 0x0a, 0x0a, 0x54, 0x65, 0x72, 0x6d, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x12,
 	0x38, 0x0a, 0x07, 0x41, 0x64, 0x64, 0x54, 0x65, 0x72, 0x6d, 0x12, 0x15, 0x2e, 0x6f, 0x6a, 0x2e,
 	0x73, 0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x2e, 0x41, 0x64, 0x64, 0x54, 0x65, 0x72, 0x6d, 0x52, 0x65,
 	0x71, 0x1a, 0x14, 0x2e, 0x6f, 0x6a, 0x2e, 0x73, 0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x2e, 0x43, 0x6f,
@@ -3333,10 +3333,14 @@ var file_school_proto_rawDesc = []byte{
 	0x12, 0x17, 0x2e, 0x6f, 0x6a, 0x2e, 0x73, 0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x2e, 0x51, 0x75, 0x65,
 	0x72, 0x79, 0x54, 0x65, 0x72, 0x6d, 0x52, 0x65, 0x71, 0x1a, 0x17, 0x2e, 0x6f, 0x6a, 0x2e, 0x73,
 	0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x54, 0x65, 0x72, 0x6d, 0x52,
-	0x73, 0x70, 0x22, 0x00, 0x42, 0x27, 0x5a, 0x25, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x63, 0x73, 0x75, 0x4a, 0x75, 0x64, 0x67, 0x65, 0x2f, 0x6a, 0x75, 0x64, 0x67,
-	0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x73, 0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x70, 0x22, 0x00, 0x12, 0x47, 0x0a, 0x0f, 0x51, 0x75, 0x65, 0x72, 0x79, 0x54, 0x65, 0x72,
+	0x6d, 0x43, 0x6f, 0x75, 0x72, 0x73, 0x65, 0x12, 0x17, 0x2e, 0x6f, 0x6a, 0x2e, 0x73, 0x63, 0x68,
+	0x6f, 0x6f, 0x6c, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x54, 0x65, 0x72, 0x6d, 0x52, 0x65, 0x71,
+	0x1a, 0x19, 0x2e, 0x6f, 0x6a, 0x2e, 0x73, 0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x2e, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x43, 0x6f, 0x75, 0x72, 0x73, 0x65, 0x52, 0x73, 0x70, 0x22, 0x00, 0x42, 0x27, 0x5a,
+	0x25, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x73, 0x75, 0x4a,
+	0x75, 0x64, 0x67, 0x65, 0x2f, 0x6a, 0x75, 0x64, 0x67, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2f,
+	0x73, 0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3442,36 +3446,38 @@ var file_school_proto_depIdxs = []int32{
 	20, // 38: oj.school.TermServer.QueryPresentTerm:input_type -> oj.school.UserIDReq
 	18, // 39: oj.school.TermServer.QueryAllTerm:input_type -> oj.school.QueryAllTermReq
 	14, // 40: oj.school.TermServer.QueryTerm:input_type -> oj.school.QueryTermReq
-	44, // 41: oj.school.CourseServer.AddCourse:output_type -> oj.school.CommonRsp
-	44, // 42: oj.school.CourseServer.UpdateCourse:output_type -> oj.school.CommonRsp
-	44, // 43: oj.school.CourseServer.UpdateCourseStatus:output_type -> oj.school.CommonRsp
-	16, // 44: oj.school.CourseServer.QueryAllCourse:output_type -> oj.school.QueryCoursePageSizeRsp
-	16, // 45: oj.school.CourseServer.QueryMyCourse:output_type -> oj.school.QueryCoursePageSizeRsp
-	13, // 46: oj.school.CourseServer.QueryCourse:output_type -> oj.school.QueryCourseRsp
-	9,  // 47: oj.school.CourseServer.QueryCourseClass:output_type -> oj.school.QueryCourseClassRsp
-	6,  // 48: oj.school.CourseServer.QueryCourseKnowledge:output_type -> oj.school.QueryCourseKnowledgeRsp
-	16, // 49: oj.school.CourseServer.QueryCoursePageSize:output_type -> oj.school.QueryCoursePageSizeRsp
-	40, // 50: oj.school.ClassServer.QueryUserClass:output_type -> oj.school.QueryUserClassRsp
-	44, // 51: oj.school.ClassServer.AddClass:output_type -> oj.school.CommonRsp
-	44, // 52: oj.school.ClassServer.UpdateClass:output_type -> oj.school.CommonRsp
-	44, // 53: oj.school.ClassServer.UpdateClassStatus:output_type -> oj.school.CommonRsp
-	44, // 54: oj.school.ClassServer.UpdateClassUser:output_type -> oj.school.CommonRsp
-	33, // 55: oj.school.ClassServer.QueryClassUser:output_type -> oj.school.QueryClassUserRsp
-	31, // 56: oj.school.ClassServer.QueryClassPageSize:output_type -> oj.school.QueryClassPageSizeRsp
-	30, // 57: oj.school.ClassServer.QueryClass:output_type -> oj.school.QueryClassRsp
-	11, // 58: oj.school.ClassServer.QueryContestClassUser:output_type -> oj.school.QueryContestClassUserRsp
-	3,  // 59: oj.school.ClassServer.QueryClassTeacher:output_type -> oj.school.QueryClassTeacherRsp
-	1,  // 60: oj.school.ClassServer.QueryMyClass:output_type -> oj.school.QueryMyClassRsp
-	1,  // 61: oj.school.ClassServer.QueryContestClass:output_type -> oj.school.QueryMyClassRsp
-	44, // 62: oj.school.TermServer.AddTerm:output_type -> oj.school.CommonRsp
-	44, // 63: oj.school.TermServer.UpdateTerm:output_type -> oj.school.CommonRsp
-	44, // 64: oj.school.TermServer.UpdateTermStatus:output_type -> oj.school.CommonRsp
-	44, // 65: oj.school.TermServer.SetPresentTerm:output_type -> oj.school.CommonRsp
-	21, // 66: oj.school.TermServer.QueryPresentTerm:output_type -> oj.school.QueryPresentTermRsp
-	19, // 67: oj.school.TermServer.QueryAllTerm:output_type -> oj.school.QueryAllTermRsp
-	15, // 68: oj.school.TermServer.QueryTerm:output_type -> oj.school.QueryTermRsp
-	41, // [41:69] is the sub-list for method output_type
-	13, // [13:41] is the sub-list for method input_type
+	14, // 41: oj.school.TermServer.QueryTermCourse:input_type -> oj.school.QueryTermReq
+	44, // 42: oj.school.CourseServer.AddCourse:output_type -> oj.school.CommonRsp
+	44, // 43: oj.school.CourseServer.UpdateCourse:output_type -> oj.school.CommonRsp
+	44, // 44: oj.school.CourseServer.UpdateCourseStatus:output_type -> oj.school.CommonRsp
+	16, // 45: oj.school.CourseServer.QueryAllCourse:output_type -> oj.school.QueryCoursePageSizeRsp
+	16, // 46: oj.school.CourseServer.QueryMyCourse:output_type -> oj.school.QueryCoursePageSizeRsp
+	13, // 47: oj.school.CourseServer.QueryCourse:output_type -> oj.school.QueryCourseRsp
+	9,  // 48: oj.school.CourseServer.QueryCourseClass:output_type -> oj.school.QueryCourseClassRsp
+	6,  // 49: oj.school.CourseServer.QueryCourseKnowledge:output_type -> oj.school.QueryCourseKnowledgeRsp
+	16, // 50: oj.school.CourseServer.QueryCoursePageSize:output_type -> oj.school.QueryCoursePageSizeRsp
+	40, // 51: oj.school.ClassServer.QueryUserClass:output_type -> oj.school.QueryUserClassRsp
+	44, // 52: oj.school.ClassServer.AddClass:output_type -> oj.school.CommonRsp
+	44, // 53: oj.school.ClassServer.UpdateClass:output_type -> oj.school.CommonRsp
+	44, // 54: oj.school.ClassServer.UpdateClassStatus:output_type -> oj.school.CommonRsp
+	44, // 55: oj.school.ClassServer.UpdateClassUser:output_type -> oj.school.CommonRsp
+	33, // 56: oj.school.ClassServer.QueryClassUser:output_type -> oj.school.QueryClassUserRsp
+	31, // 57: oj.school.ClassServer.QueryClassPageSize:output_type -> oj.school.QueryClassPageSizeRsp
+	30, // 58: oj.school.ClassServer.QueryClass:output_type -> oj.school.QueryClassRsp
+	11, // 59: oj.school.ClassServer.QueryContestClassUser:output_type -> oj.school.QueryContestClassUserRsp
+	3,  // 60: oj.school.ClassServer.QueryClassTeacher:output_type -> oj.school.QueryClassTeacherRsp
+	1,  // 61: oj.school.ClassServer.QueryMyClass:output_type -> oj.school.QueryMyClassRsp
+	1,  // 62: oj.school.ClassServer.QueryContestClass:output_type -> oj.school.QueryMyClassRsp
+	44, // 63: oj.school.TermServer.AddTerm:output_type -> oj.school.CommonRsp
+	44, // 64: oj.school.TermServer.UpdateTerm:output_type -> oj.school.CommonRsp
+	44, // 65: oj.school.TermServer.UpdateTermStatus:output_type -> oj.school.CommonRsp
+	44, // 66: oj.school.TermServer.SetPresentTerm:output_type -> oj.school.CommonRsp
+	21, // 67: oj.school.TermServer.QueryPresentTerm:output_type -> oj.school.QueryPresentTermRsp
+	19, // 68: oj.school.TermServer.QueryAllTerm:output_type -> oj.school.QueryAllTermRsp
+	15, // 69: oj.school.TermServer.QueryTerm:output_type -> oj.school.QueryTermRsp
+	13, // 70: oj.school.TermServer.QueryTermCourse:output_type -> oj.school.QueryCourseRsp
+	42, // [42:71] is the sub-list for method output_type
+	13, // [13:42] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name
 	13, // [13:13] is the sub-list for extension extendee
 	0,  // [0:13] is the sub-list for field type_name
