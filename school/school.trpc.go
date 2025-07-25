@@ -37,6 +37,8 @@ type CourseServerService interface {
 	QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq) (*QueryCourseKnowledgeRsp, error)
 	// QueryCoursePageSize QueryCoursePageSize 分页查询所有课程
 	QueryCoursePageSize(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryCoursePageSizeRsp, error)
+	// QueryUserCourse QueryUserCourse 分页用户的课程
+	QueryUserCourse(ctx context.Context, req *QueryUserCourseReq) (*QueryCoursePageSizeRsp, error)
 }
 
 func CourseServerService_AddCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -201,6 +203,24 @@ func CourseServerService_QueryCoursePageSize_Handler(svr interface{}, ctx contex
 	return rsp, nil
 }
 
+func CourseServerService_QueryUserCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryUserCourseReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(CourseServerService).QueryUserCourse(ctx, reqbody.(*QueryUserCourseReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // CourseServerServer_ServiceDesc descriptor for server.RegisterService.
 var CourseServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.school.CourseServer",
@@ -241,6 +261,10 @@ var CourseServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.school.CourseServer/QueryCoursePageSize",
 			Func: CourseServerService_QueryCoursePageSize_Handler,
+		},
+		{
+			Name: "/oj.school.CourseServer/QueryUserCourse",
+			Func: CourseServerService_QueryUserCourse_Handler,
 		},
 	},
 }
@@ -819,6 +843,11 @@ func (s *UnimplementedCourseServer) QueryCoursePageSize(ctx context.Context, req
 	return nil, errors.New("rpc QueryCoursePageSize of service CourseServer is not implemented")
 }
 
+// QueryUserCourse QueryUserCourse 分页用户的课程
+func (s *UnimplementedCourseServer) QueryUserCourse(ctx context.Context, req *QueryUserCourseReq) (*QueryCoursePageSizeRsp, error) {
+	return nil, errors.New("rpc QueryUserCourse of service CourseServer is not implemented")
+}
+
 type UnimplementedClassServer struct{}
 
 // QueryUserClass QueryUserClass 查询用户的班级
@@ -949,6 +978,8 @@ type CourseServerClientProxy interface {
 	QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq, opts ...client.Option) (rsp *QueryCourseKnowledgeRsp, err error)
 	// QueryCoursePageSize QueryCoursePageSize 分页查询所有课程
 	QueryCoursePageSize(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (rsp *QueryCoursePageSizeRsp, err error)
+	// QueryUserCourse QueryUserCourse 分页用户的课程
+	QueryUserCourse(ctx context.Context, req *QueryUserCourseReq, opts ...client.Option) (rsp *QueryCoursePageSizeRsp, err error)
 }
 
 type CourseServerClientProxyImpl struct {
@@ -1129,6 +1160,26 @@ func (c *CourseServerClientProxyImpl) QueryCoursePageSize(ctx context.Context, r
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("CourseServer")
 	msg.WithCalleeMethod("QueryCoursePageSize")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryCoursePageSizeRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *CourseServerClientProxyImpl) QueryUserCourse(ctx context.Context, req *QueryUserCourseReq, opts ...client.Option) (*QueryCoursePageSizeRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.school.CourseServer/QueryUserCourse")
+	msg.WithCalleeServiceName(CourseServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("CourseServer")
+	msg.WithCalleeMethod("QueryUserCourse")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)

@@ -22,6 +22,8 @@ service CourseServer {
     rpc QueryCourseKnowledge(QueryCourseKnowledgeReq) returns (QueryCourseKnowledgeRsp) {}
     // QueryCoursePageSize 分页查询所有课程
     rpc QueryCoursePageSize(QueryCoursePageSizeReq) returns (QueryCoursePageSizeRsp) {}
+    // QueryUserCourse 分页用户的课程
+    rpc QueryUserCourse(QueryUserCourseReq) returns (QueryCoursePageSizeRsp) {}
 }
 
 service ClassServer {
@@ -68,6 +70,10 @@ service TermServer {
     rpc QueryTerm(QueryTermReq) returns (QueryTermRsp) {}
     // 查询学期的课程
     rpc QueryTermCourse(QueryTermReq) returns (QueryCourseRsp){}
+}
+
+message QueryUserCourseReq{
+    int32 userID = 1; // 用户编号
 }
 
 message QueryContestClassReq{
