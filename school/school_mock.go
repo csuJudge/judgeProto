@@ -151,10 +151,10 @@ func (mr *MockCourseServerServiceMockRecorder) QueryMyCourse(ctx, req any) *gomo
 }
 
 // QueryTermCourse mocks base method.
-func (m *MockCourseServerService) QueryTermCourse(ctx context.Context, req *QueryTermReq) (*QueryCourseRsp, error) {
+func (m *MockCourseServerService) QueryTermCourse(ctx context.Context, req *QueryTermReq) (*QueryCoursePageSizeRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryTermCourse", ctx, req)
-	ret0, _ := ret[0].(*QueryCourseRsp)
+	ret0, _ := ret[0].(*QueryCoursePageSizeRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -705,14 +705,14 @@ func (mr *MockCourseServerClientProxyMockRecorder) QueryMyCourse(ctx, req any, o
 }
 
 // QueryTermCourse mocks base method.
-func (m *MockCourseServerClientProxy) QueryTermCourse(ctx context.Context, req *QueryTermReq, opts ...client.Option) (*QueryCourseRsp, error) {
+func (m *MockCourseServerClientProxy) QueryTermCourse(ctx context.Context, req *QueryTermReq, opts ...client.Option) (*QueryCoursePageSizeRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "QueryTermCourse", varargs...)
-	ret0, _ := ret[0].(*QueryCourseRsp)
+	ret0, _ := ret[0].(*QueryCoursePageSizeRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

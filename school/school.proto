@@ -23,7 +23,7 @@ service CourseServer {
     // QueryCoursePageSize 分页查询所有课程
     rpc QueryCoursePageSize(QueryCoursePageSizeReq) returns (QueryCoursePageSizeRsp) {}
     // 查询学期的课程
-    rpc QueryTermCourse(QueryTermReq) returns (QueryCourseRsp){}
+    rpc QueryTermCourse(QueryTermReq) returns (QueryCoursePageSizeRsp){}
 }
 
 service ClassServer {

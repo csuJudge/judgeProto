@@ -38,7 +38,7 @@ type CourseServerService interface {
 	// QueryCoursePageSize QueryCoursePageSize 分页查询所有课程
 	QueryCoursePageSize(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryCoursePageSizeRsp, error)
 	// QueryTermCourse 查询学期的课程
-	QueryTermCourse(ctx context.Context, req *QueryTermReq) (*QueryCourseRsp, error)
+	QueryTermCourse(ctx context.Context, req *QueryTermReq) (*QueryCoursePageSizeRsp, error)
 }
 
 func CourseServerService_AddCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -820,7 +820,7 @@ func (s *UnimplementedCourseServer) QueryCoursePageSize(ctx context.Context, req
 }
 
 // QueryTermCourse 查询学期的课程
-func (s *UnimplementedCourseServer) QueryTermCourse(ctx context.Context, req *QueryTermReq) (*QueryCourseRsp, error) {
+func (s *UnimplementedCourseServer) QueryTermCourse(ctx context.Context, req *QueryTermReq) (*QueryCoursePageSizeRsp, error) {
 	return nil, errors.New("rpc QueryTermCourse of service CourseServer is not implemented")
 }
 
@@ -950,7 +950,7 @@ type CourseServerClientProxy interface {
 	// QueryCoursePageSize QueryCoursePageSize 分页查询所有课程
 	QueryCoursePageSize(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (rsp *QueryCoursePageSizeRsp, err error)
 	// QueryTermCourse 查询学期的课程
-	QueryTermCourse(ctx context.Context, req *QueryTermReq, opts ...client.Option) (rsp *QueryCourseRsp, err error)
+	QueryTermCourse(ctx context.Context, req *QueryTermReq, opts ...client.Option) (rsp *QueryCoursePageSizeRsp, err error)
 }
 
 type CourseServerClientProxyImpl struct {
@@ -1142,7 +1142,7 @@ func (c *CourseServerClientProxyImpl) QueryCoursePageSize(ctx context.Context, r
 	return rsp, nil
 }
 
-func (c *CourseServerClientProxyImpl) QueryTermCourse(ctx context.Context, req *QueryTermReq, opts ...client.Option) (*QueryCourseRsp, error) {
+func (c *CourseServerClientProxyImpl) QueryTermCourse(ctx context.Context, req *QueryTermReq, opts ...client.Option) (*QueryCoursePageSizeRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.school.CourseServer/QueryTermCourse")
@@ -1155,7 +1155,7 @@ func (c *CourseServerClientProxyImpl) QueryTermCourse(ctx context.Context, req *
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &QueryCourseRsp{}
+	rsp := &QueryCoursePageSizeRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
