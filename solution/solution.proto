@@ -203,6 +203,7 @@ message QuerySolutionReq {
     string user     = 6;  // 姓名 or 学号
     int32 language  = 7;  // 语言
     int32 problemID = 8;  // 题目编号
+    string classID = 9; // 班级编号
 }
 
 message QuerySolutionRsp {

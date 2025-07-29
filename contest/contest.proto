@@ -73,6 +73,7 @@ message QueryContestListReq {
     int32 limit     = 2;  // 页大小
     int32 userID    = 3;  // 用户主键
     int32 queryType = 4;  // 查询的类型
+    string classID = 5; // 班级编号
 }
 
 message QueryContestListRsp {

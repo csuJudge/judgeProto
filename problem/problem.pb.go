@@ -387,12 +387,12 @@ func (x *QueryProblemNameReq) GetUserID() int32 {
 
 type QueryProblemListReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`          // 页
-	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`        // 页大小
-	UserID        int32                  `protobuf:"varint,3,opt,name=userID,proto3" json:"userID,omitempty"`      // 用户编号
-	Condition     string                 `protobuf:"bytes,4,opt,name=condition,proto3" json:"condition,omitempty"` // 条件（名称或者编号）
-	Knowledge     string                 `protobuf:"bytes,5,opt,name=knowledge,proto3" json:"knowledge,omitempty"` // 知识点
-	Course        string                 `protobuf:"bytes,6,opt,name=course,proto3" json:"course,omitempty"`       // 课程
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`           // 页
+	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`         // 页大小
+	UserID        int32                  `protobuf:"varint,3,opt,name=userID,proto3" json:"userID,omitempty"`       // 用户编号
+	Condition     string                 `protobuf:"bytes,4,opt,name=condition,proto3" json:"condition,omitempty"`  // 条件（名称或者编号）
+	Knowledge     int32                  `protobuf:"varint,5,opt,name=knowledge,proto3" json:"knowledge,omitempty"` // 知识点
+	Course        string                 `protobuf:"bytes,6,opt,name=course,proto3" json:"course,omitempty"`        // 课程
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -455,11 +455,11 @@ func (x *QueryProblemListReq) GetCondition() string {
 	return ""
 }
 
-func (x *QueryProblemListReq) GetKnowledge() string {
+func (x *QueryProblemListReq) GetKnowledge() int32 {
 	if x != nil {
 		return x.Knowledge
 	}
-	return ""
+	return 0
 }
 
 func (x *QueryProblemListReq) GetCourse() string {
@@ -2891,7 +2891,7 @@ var file_problem_proto_rawDesc = []byte{
 	0x44, 0x12, 0x1c, 0x0a, 0x09, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x04,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12,
 	0x1c, 0x0a, 0x09, 0x6b, 0x6e, 0x6f, 0x77, 0x6c, 0x65, 0x64, 0x67, 0x65, 0x18, 0x05, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x09, 0x6b, 0x6e, 0x6f, 0x77, 0x6c, 0x65, 0x64, 0x67, 0x65, 0x12, 0x16, 0x0a,
+	0x28, 0x05, 0x52, 0x09, 0x6b, 0x6e, 0x6f, 0x77, 0x6c, 0x65, 0x64, 0x67, 0x65, 0x12, 0x16, 0x0a,
 	0x06, 0x63, 0x6f, 0x75, 0x72, 0x73, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x63,
 	0x6f, 0x75, 0x72, 0x73, 0x65, 0x22, 0x8c, 0x01, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50,
 	0x72, 0x6f, 0x62, 0x6c, 0x65, 0x6d, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x73, 0x70, 0x12, 0x18, 0x0a,
