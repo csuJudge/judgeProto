@@ -272,8 +272,6 @@ type ClassServerService interface {
 	QueryClass(ctx context.Context, req *QueryClassReq) (*QueryClassRsp, error)
 	// QueryContestClassUser QueryContestClassUser 查询作业班级的学生
 	QueryContestClassUser(ctx context.Context, req *QueryContestClassUserReq) (*QueryContestClassUserRsp, error)
-	// QueryClassTeacher QueryClassTeacher 查询作业班级的老师
-	QueryClassTeacher(ctx context.Context, req *UserIDReq) (*QueryClassTeacherRsp, error)
 	// QueryMyClass QueryMyClass 查询作业班级的老师
 	QueryMyClass(ctx context.Context, req *UserIDReq) (*QueryMyClassRsp, error)
 	// QueryContestClass QueryContestClass 查询作业的班级
@@ -444,24 +442,6 @@ func ClassServerService_QueryContestClassUser_Handler(svr interface{}, ctx conte
 	return rsp, nil
 }
 
-func ClassServerService_QueryClassTeacher_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &UserIDReq{}
-	filters, err := f(req)
-	if err != nil {
-		return nil, err
-	}
-	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(ClassServerService).QueryClassTeacher(ctx, reqbody.(*UserIDReq))
-	}
-
-	var rsp interface{}
-	rsp, err = filters.Filter(ctx, req, handleFunc)
-	if err != nil {
-		return nil, err
-	}
-	return rsp, nil
-}
-
 func ClassServerService_QueryMyClass_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
 	req := &UserIDReq{}
 	filters, err := f(req)
@@ -556,10 +536,6 @@ var ClassServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.school.ClassServer/QueryContestClassUser",
 			Func: ClassServerService_QueryContestClassUser_Handler,
-		},
-		{
-			Name: "/oj.school.ClassServer/QueryClassTeacher",
-			Func: ClassServerService_QueryClassTeacher_Handler,
 		},
 		{
 			Name: "/oj.school.ClassServer/QueryMyClass",
@@ -866,11 +842,6 @@ func (s *UnimplementedClassServer) QueryContestClassUser(ctx context.Context, re
 	return nil, errors.New("rpc QueryContestClassUser of service ClassServer is not implemented")
 }
 
-// QueryClassTeacher QueryClassTeacher 查询作业班级的老师
-func (s *UnimplementedClassServer) QueryClassTeacher(ctx context.Context, req *UserIDReq) (*QueryClassTeacherRsp, error) {
-	return nil, errors.New("rpc QueryClassTeacher of service ClassServer is not implemented")
-}
-
 // QueryMyClass QueryMyClass 查询作业班级的老师
 func (s *UnimplementedClassServer) QueryMyClass(ctx context.Context, req *UserIDReq) (*QueryMyClassRsp, error) {
 	return nil, errors.New("rpc QueryMyClass of service ClassServer is not implemented")
@@ -1160,8 +1131,6 @@ type ClassServerClientProxy interface {
 	QueryClass(ctx context.Context, req *QueryClassReq, opts ...client.Option) (rsp *QueryClassRsp, err error)
 	// QueryContestClassUser QueryContestClassUser 查询作业班级的学生
 	QueryContestClassUser(ctx context.Context, req *QueryContestClassUserReq, opts ...client.Option) (rsp *QueryContestClassUserRsp, err error)
-	// QueryClassTeacher QueryClassTeacher 查询作业班级的老师
-	QueryClassTeacher(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryClassTeacherRsp, err error)
 	// QueryMyClass QueryMyClass 查询作业班级的老师
 	QueryMyClass(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryMyClassRsp, err error)
 	// QueryContestClass QueryContestClass 查询作业的班级
@@ -1353,26 +1322,6 @@ func (c *ClassServerClientProxyImpl) QueryContestClassUser(ctx context.Context, 
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryContestClassUserRsp{}
-	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
-		return nil, err
-	}
-	return rsp, nil
-}
-
-func (c *ClassServerClientProxyImpl) QueryClassTeacher(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryClassTeacherRsp, error) {
-	ctx, msg := codec.WithCloneMessage(ctx)
-	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/oj.school.ClassServer/QueryClassTeacher")
-	msg.WithCalleeServiceName(ClassServerServer_ServiceDesc.ServiceName)
-	msg.WithCalleeApp("")
-	msg.WithCalleeServer("")
-	msg.WithCalleeService("ClassServer")
-	msg.WithCalleeMethod("QueryClassTeacher")
-	msg.WithSerializationType(codec.SerializationTypePB)
-	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
-	callopts = append(callopts, c.opts...)
-	callopts = append(callopts, opts...)
-	rsp := &QueryClassTeacherRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

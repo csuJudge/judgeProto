@@ -43,6 +43,12 @@ type UserServerService interface {
 	UpdateMyInfo(ctx context.Context, req *UpdateMyInfoReq) (*CommonRsp, error)
 	// QueryTeacher QueryTeacher 查询老师信息
 	QueryTeacher(ctx context.Context, req *QueryTeacherReq) (*QueryAllUserRsp, error)
+	// QueryClassTeacher QueryClassTeacher 查询作业班级的老师
+	QueryClassTeacher(ctx context.Context, req *QueryClassTeacherReq) (*QueryClassTeacherRsp, error)
+	// UpdateClassUser UpdateClassUser 更新班级的人
+	UpdateClassUser(ctx context.Context, req *UpdateClassUserReq) (*CommonRsp, error)
+	// QueryClassUser QueryClassUser 查询班级用户
+	QueryClassUser(ctx context.Context, req *QueryClassUserReq) (*QueryClassUserRsp, error)
 }
 
 func UserServerService_QueryUserPrivilege_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -261,6 +267,60 @@ func UserServerService_QueryTeacher_Handler(svr interface{}, ctx context.Context
 	return rsp, nil
 }
 
+func UserServerService_QueryClassTeacher_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryClassTeacherReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(UserServerService).QueryClassTeacher(ctx, reqbody.(*QueryClassTeacherReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func UserServerService_UpdateClassUser_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UpdateClassUserReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(UserServerService).UpdateClassUser(ctx, reqbody.(*UpdateClassUserReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func UserServerService_QueryClassUser_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryClassUserReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(UserServerService).QueryClassUser(ctx, reqbody.(*QueryClassUserReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // UserServerServer_ServiceDesc descriptor for server.RegisterService.
 var UserServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.user.UserServer",
@@ -313,6 +373,18 @@ var UserServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.user.UserServer/QueryTeacher",
 			Func: UserServerService_QueryTeacher_Handler,
+		},
+		{
+			Name: "/oj.user.UserServer/QueryClassTeacher",
+			Func: UserServerService_QueryClassTeacher_Handler,
+		},
+		{
+			Name: "/oj.user.UserServer/UpdateClassUser",
+			Func: UserServerService_UpdateClassUser_Handler,
+		},
+		{
+			Name: "/oj.user.UserServer/QueryClassUser",
+			Func: UserServerService_QueryClassUser_Handler,
 		},
 	},
 }
@@ -388,6 +460,21 @@ func (s *UnimplementedUserServer) QueryTeacher(ctx context.Context, req *QueryTe
 	return nil, errors.New("rpc QueryTeacher of service UserServer is not implemented")
 }
 
+// QueryClassTeacher QueryClassTeacher 查询作业班级的老师
+func (s *UnimplementedUserServer) QueryClassTeacher(ctx context.Context, req *QueryClassTeacherReq) (*QueryClassTeacherRsp, error) {
+	return nil, errors.New("rpc QueryClassTeacher of service UserServer is not implemented")
+}
+
+// UpdateClassUser UpdateClassUser 更新班级的人
+func (s *UnimplementedUserServer) UpdateClassUser(ctx context.Context, req *UpdateClassUserReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc UpdateClassUser of service UserServer is not implemented")
+}
+
+// QueryClassUser QueryClassUser 查询班级用户
+func (s *UnimplementedUserServer) QueryClassUser(ctx context.Context, req *QueryClassUserReq) (*QueryClassUserRsp, error) {
+	return nil, errors.New("rpc QueryClassUser of service UserServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -420,6 +507,12 @@ type UserServerClientProxy interface {
 	UpdateMyInfo(ctx context.Context, req *UpdateMyInfoReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryTeacher QueryTeacher 查询老师信息
 	QueryTeacher(ctx context.Context, req *QueryTeacherReq, opts ...client.Option) (rsp *QueryAllUserRsp, err error)
+	// QueryClassTeacher QueryClassTeacher 查询作业班级的老师
+	QueryClassTeacher(ctx context.Context, req *QueryClassTeacherReq, opts ...client.Option) (rsp *QueryClassTeacherRsp, err error)
+	// UpdateClassUser UpdateClassUser 更新班级的人
+	UpdateClassUser(ctx context.Context, req *UpdateClassUserReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// QueryClassUser QueryClassUser 查询班级用户
+	QueryClassUser(ctx context.Context, req *QueryClassUserReq, opts ...client.Option) (rsp *QueryClassUserRsp, err error)
 }
 
 type UserServerClientProxyImpl struct {
@@ -665,6 +758,66 @@ func (c *UserServerClientProxyImpl) QueryTeacher(ctx context.Context, req *Query
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryAllUserRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *UserServerClientProxyImpl) QueryClassTeacher(ctx context.Context, req *QueryClassTeacherReq, opts ...client.Option) (*QueryClassTeacherRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.user.UserServer/QueryClassTeacher")
+	msg.WithCalleeServiceName(UserServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("UserServer")
+	msg.WithCalleeMethod("QueryClassTeacher")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryClassTeacherRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *UserServerClientProxyImpl) UpdateClassUser(ctx context.Context, req *UpdateClassUserReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.user.UserServer/UpdateClassUser")
+	msg.WithCalleeServiceName(UserServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("UserServer")
+	msg.WithCalleeMethod("UpdateClassUser")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *UserServerClientProxyImpl) QueryClassUser(ctx context.Context, req *QueryClassUserReq, opts ...client.Option) (*QueryClassUserRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.user.UserServer/QueryClassUser")
+	msg.WithCalleeServiceName(UserServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("UserServer")
+	msg.WithCalleeMethod("QueryClassUser")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryClassUserRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

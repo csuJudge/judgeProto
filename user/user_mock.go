@@ -105,6 +105,36 @@ func (mr *MockUserServerServiceMockRecorder) QueryAllUser(ctx, req any) *gomock.
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllUser", reflect.TypeOf((*MockUserServerService)(nil).QueryAllUser), ctx, req)
 }
 
+// QueryClassTeacher mocks base method.
+func (m *MockUserServerService) QueryClassTeacher(ctx context.Context, req *QueryClassTeacherReq) (*QueryClassTeacherRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryClassTeacher", ctx, req)
+	ret0, _ := ret[0].(*QueryClassTeacherRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryClassTeacher indicates an expected call of QueryClassTeacher.
+func (mr *MockUserServerServiceMockRecorder) QueryClassTeacher(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassTeacher", reflect.TypeOf((*MockUserServerService)(nil).QueryClassTeacher), ctx, req)
+}
+
+// QueryClassUser mocks base method.
+func (m *MockUserServerService) QueryClassUser(ctx context.Context, req *QueryClassUserReq) (*QueryClassUserRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryClassUser", ctx, req)
+	ret0, _ := ret[0].(*QueryClassUserRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryClassUser indicates an expected call of QueryClassUser.
+func (mr *MockUserServerServiceMockRecorder) QueryClassUser(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassUser", reflect.TypeOf((*MockUserServerService)(nil).QueryClassUser), ctx, req)
+}
+
 // QueryTeacher mocks base method.
 func (m *MockUserServerService) QueryTeacher(ctx context.Context, req *QueryTeacherReq) (*QueryAllUserRsp, error) {
 	m.ctrl.T.Helper()
@@ -163,6 +193,21 @@ func (m *MockUserServerService) QueryUserRank(ctx context.Context, req *QueryUse
 func (mr *MockUserServerServiceMockRecorder) QueryUserRank(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserRank", reflect.TypeOf((*MockUserServerService)(nil).QueryUserRank), ctx, req)
+}
+
+// UpdateClassUser mocks base method.
+func (m *MockUserServerService) UpdateClassUser(ctx context.Context, req *UpdateClassUserReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateClassUser", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateClassUser indicates an expected call of UpdateClassUser.
+func (mr *MockUserServerServiceMockRecorder) UpdateClassUser(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateClassUser", reflect.TypeOf((*MockUserServerService)(nil).UpdateClassUser), ctx, req)
 }
 
 // UpdateMyInfo mocks base method.
@@ -333,6 +378,46 @@ func (mr *MockUserServerClientProxyMockRecorder) QueryAllUser(ctx, req any, opts
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllUser", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryAllUser), varargs...)
 }
 
+// QueryClassTeacher mocks base method.
+func (m *MockUserServerClientProxy) QueryClassTeacher(ctx context.Context, req *QueryClassTeacherReq, opts ...client.Option) (*QueryClassTeacherRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryClassTeacher", varargs...)
+	ret0, _ := ret[0].(*QueryClassTeacherRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryClassTeacher indicates an expected call of QueryClassTeacher.
+func (mr *MockUserServerClientProxyMockRecorder) QueryClassTeacher(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassTeacher", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryClassTeacher), varargs...)
+}
+
+// QueryClassUser mocks base method.
+func (m *MockUserServerClientProxy) QueryClassUser(ctx context.Context, req *QueryClassUserReq, opts ...client.Option) (*QueryClassUserRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryClassUser", varargs...)
+	ret0, _ := ret[0].(*QueryClassUserRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryClassUser indicates an expected call of QueryClassUser.
+func (mr *MockUserServerClientProxyMockRecorder) QueryClassUser(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassUser", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryClassUser), varargs...)
+}
+
 // QueryTeacher mocks base method.
 func (m *MockUserServerClientProxy) QueryTeacher(ctx context.Context, req *QueryTeacherReq, opts ...client.Option) (*QueryAllUserRsp, error) {
 	m.ctrl.T.Helper()
@@ -411,6 +496,26 @@ func (mr *MockUserServerClientProxyMockRecorder) QueryUserRank(ctx, req any, opt
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserRank", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryUserRank), varargs...)
+}
+
+// UpdateClassUser mocks base method.
+func (m *MockUserServerClientProxy) UpdateClassUser(ctx context.Context, req *UpdateClassUserReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateClassUser", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateClassUser indicates an expected call of UpdateClassUser.
+func (mr *MockUserServerClientProxyMockRecorder) UpdateClassUser(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateClassUser", reflect.TypeOf((*MockUserServerClientProxy)(nil).UpdateClassUser), varargs...)
 }
 
 // UpdateMyInfo mocks base method.

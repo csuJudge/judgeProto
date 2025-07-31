@@ -28,6 +28,49 @@ service UserServer {
     rpc UpdateMyInfo(UpdateMyInfoReq) returns (CommonRsp) {}
     // QueryTeacher 查询老师信息
     rpc QueryTeacher(QueryTeacherReq) returns (QueryAllUserRsp) {}
+    // QueryClassTeacher 查询作业班级的老师
+    rpc QueryClassTeacher(QueryClassTeacherReq) returns (QueryClassTeacherRsp) {}
+    // UpdateClassUser 更新班级的人
+    rpc UpdateClassUser(UpdateClassUserReq) returns (CommonRsp) {}
+    // QueryClassUser 查询班级用户
+    rpc QueryClassUser(QueryClassUserReq) returns (QueryClassUserRsp) {}
+}
+
+message QueryClassUserReq {
+    int32 classID = 1;  // 班级编号
+    int32 page    = 2;  // 页
+    int32 limit   = 3;  // 页大小
+    int32 userID  = 4;  // 用户编号
+}
+
+message QueryClassUserRsp {
+    string message      = 1;  // 返回信息
+    int32 code          = 2;  // 返回码
+    int32 total         = 3;  // 总数
+    repeated User users = 4;  // 班级的用户
+}
+
+message UpdateClassUserReq {
+    int32 classID = 1;  // 班级编号
+    string user   = 2;  // 班级人员
+    int32 userID  = 3;  // 用户主键
+}
+
+message QueryClassTeacherReq{
+    int32 userID = 1; // 用户编号
+    int32 classID = 2 ;// 班级编号
+}
+
+
+message TeacherInfo {
+    int32 userID    = 1;  // 用户编号
+    string userName = 2;  // 用户名称
+}
+
+message QueryClassTeacherRsp {
+    string message                = 1;  // 返回信息
+    int32 code                    = 2;  // 返回码
+    repeated TeacherInfo teachers = 3;  // 所有老师的编号
 }
 
 message QueryTeacherReq {
