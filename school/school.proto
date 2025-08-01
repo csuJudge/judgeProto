@@ -227,16 +227,20 @@ message QueryClassReq {
     int32 userID  = 2;  // 用户编号
 }
 
+message TeacherInfo {
+    int32 userID    = 1;  // 用户编号
+    string userName = 2;  // 用户名称
+}
+
 message Class {
     int32 createdBy    = 1;  // 创建者主键
     string creator     = 2;  // 创建者
-    int32 teacherID    = 3;  // 老师主键
-    string teacherName = 4;  // 老师名称
     string name        = 5;  // 班级名
     string description = 6;  // 班级描述
     int32 classID      = 7;  // 班级编号
     int32 enable       = 8;  // 状态
     int32 CourseID = 9; // 课程编号
+    repeated TeacherInfo teachers = 10; // 老师信息
 }
 
 message QueryClassRsp {

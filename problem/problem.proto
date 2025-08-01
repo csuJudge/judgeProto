@@ -36,8 +36,6 @@ service ProblemServer {
     rpc QueryCourseProblem(QueryCourseProblemReq) returns (QueryAllProblemRsp) {}
     // UpdateCourseProblem 更新题目的知识点
     rpc UpdateCourseProblem(UpdateCourseProblemReq) returns (CommonRsp) {}
-    // CopyProblem 复制题目
-    rpc CopyProblem(AddProblemReq) returns (CommonRsp) {}
 }
 
 message UpdateCourseProblemReq{
