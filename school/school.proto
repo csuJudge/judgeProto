@@ -299,7 +299,7 @@ message UpdateClassStatusReq {
 
 message UpdateClassReq {
     int32 userID       = 1;  // 更新者
-    int32 teacher      = 2;  // 老师
+    string teacher      = 2;  // 老师
     string name        = 3;  // 班级名
     string description = 4;  // 班级描述
     int32 classID      = 5;  // 班级编号
