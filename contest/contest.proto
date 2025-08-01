@@ -18,6 +18,8 @@ service ContestServer {
     rpc UpdateContest(UpdateContestReq) returns (CommonRsp) {}
     // QueryContestPrivilegeInfo 查询作业的权限信息
     rpc QueryContestPrivilegeInfo(QueryContestPrivilegeInfoReq) returns (QueryContestPrivilegeInfoRsp) {}
+    // CopyContest 复制作业
+    rpc CopyContest(AddContestReq) returns (CommonRsp) {}
 }
 
 message QueryContestPrivilegeInfoReq {

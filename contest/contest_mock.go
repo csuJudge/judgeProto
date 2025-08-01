@@ -60,6 +60,21 @@ func (mr *MockContestServerServiceMockRecorder) AddContest(ctx, req any) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddContest", reflect.TypeOf((*MockContestServerService)(nil).AddContest), ctx, req)
 }
 
+// CopyContest mocks base method.
+func (m *MockContestServerService) CopyContest(ctx context.Context, req *AddContestReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CopyContest", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CopyContest indicates an expected call of CopyContest.
+func (mr *MockContestServerServiceMockRecorder) CopyContest(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CopyContest", reflect.TypeOf((*MockContestServerService)(nil).CopyContest), ctx, req)
+}
+
 // QueryContest mocks base method.
 func (m *MockContestServerService) QueryContest(ctx context.Context, req *QueryContestReq) (*QueryContestRsp, error) {
 	m.ctrl.T.Helper()
@@ -196,6 +211,26 @@ func (mr *MockContestServerClientProxyMockRecorder) AddContest(ctx, req any, opt
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddContest", reflect.TypeOf((*MockContestServerClientProxy)(nil).AddContest), varargs...)
+}
+
+// CopyContest mocks base method.
+func (m *MockContestServerClientProxy) CopyContest(ctx context.Context, req *AddContestReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CopyContest", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CopyContest indicates an expected call of CopyContest.
+func (mr *MockContestServerClientProxyMockRecorder) CopyContest(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CopyContest", reflect.TypeOf((*MockContestServerClientProxy)(nil).CopyContest), varargs...)
 }
 
 // QueryContest mocks base method.

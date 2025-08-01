@@ -51,6 +51,8 @@ type ProblemServerService interface {
 	QueryCourseProblem(ctx context.Context, req *QueryCourseProblemReq) (*QueryAllProblemRsp, error)
 	// UpdateCourseProblem UpdateCourseProblem 更新题目的知识点
 	UpdateCourseProblem(ctx context.Context, req *UpdateCourseProblemReq) (*CommonRsp, error)
+	// CopyProblem CopyProblem 复制题目
+	CopyProblem(ctx context.Context, req *AddProblemReq) (*CommonRsp, error)
 }
 
 func ProblemServerService_QueryProblem_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -341,6 +343,24 @@ func ProblemServerService_UpdateCourseProblem_Handler(svr interface{}, ctx conte
 	return rsp, nil
 }
 
+func ProblemServerService_CopyProblem_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &AddProblemReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ProblemServerService).CopyProblem(ctx, reqbody.(*AddProblemReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // ProblemServerServer_ServiceDesc descriptor for server.RegisterService.
 var ProblemServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.problem.ProblemServer",
@@ -409,6 +429,10 @@ var ProblemServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.problem.ProblemServer/UpdateCourseProblem",
 			Func: ProblemServerService_UpdateCourseProblem_Handler,
+		},
+		{
+			Name: "/oj.problem.ProblemServer/CopyProblem",
+			Func: ProblemServerService_CopyProblem_Handler,
 		},
 	},
 }
@@ -691,6 +715,11 @@ func (s *UnimplementedProblemServer) UpdateCourseProblem(ctx context.Context, re
 	return nil, errors.New("rpc UpdateCourseProblem of service ProblemServer is not implemented")
 }
 
+// CopyProblem CopyProblem 复制题目
+func (s *UnimplementedProblemServer) CopyProblem(ctx context.Context, req *AddProblemReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc CopyProblem of service ProblemServer is not implemented")
+}
+
 type UnimplementedObjectiveServer struct{}
 
 // AddObjective AddObjective 添加客观题
@@ -768,6 +797,8 @@ type ProblemServerClientProxy interface {
 	QueryCourseProblem(ctx context.Context, req *QueryCourseProblemReq, opts ...client.Option) (rsp *QueryAllProblemRsp, err error)
 	// UpdateCourseProblem UpdateCourseProblem 更新题目的知识点
 	UpdateCourseProblem(ctx context.Context, req *UpdateCourseProblemReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// CopyProblem CopyProblem 复制题目
+	CopyProblem(ctx context.Context, req *AddProblemReq, opts ...client.Option) (rsp *CommonRsp, err error)
 }
 
 type ProblemServerClientProxyImpl struct {
@@ -1088,6 +1119,26 @@ func (c *ProblemServerClientProxyImpl) UpdateCourseProblem(ctx context.Context, 
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("ProblemServer")
 	msg.WithCalleeMethod("UpdateCourseProblem")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ProblemServerClientProxyImpl) CopyProblem(ctx context.Context, req *AddProblemReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ProblemServer/CopyProblem")
+	msg.WithCalleeServiceName(ProblemServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ProblemServer")
+	msg.WithCalleeMethod("CopyProblem")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
