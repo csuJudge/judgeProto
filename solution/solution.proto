@@ -47,7 +47,7 @@ service SolutionServer {
     // CountMySolution 计算我的提交数据
     rpc CountMySolution(QueryMySolutionRecordReq) returns (CountContestSubmissionRsp) {}
     // QueryTodaySolution 查询今天的提交
-    rpc QueryTodaySolution(UserIDReq) returns (QueryTodaySolutionRsp) {}
+    rpc QueryTodaySolution(QueryTodaySolutionReq) returns (QueryTodaySolutionRsp) {}
 }
 
 message QueryUserContestSubmissionReq{
@@ -72,6 +72,11 @@ message QueryTodaySolutionRsp {
     int32 code                    = 2;  // 返回码
     ClassifiedSolution statistics = 3;  // 统计数据
     repeated int32 timeRange      = 4;  // 时间跨度
+}
+
+message QueryTodaySolutionReq{
+    int32 userID = 1;  // 用户编号
+    string classIDs = 2; // 班级编号
 }
 
 message UserIDReq {
@@ -204,6 +209,7 @@ message QuerySolutionReq {
     int32 language  = 7;  // 语言
     int32 problemID = 8;  // 题目编号
     string classID = 9; // 班级编号
+    int32 queryType = 10; // 请求类型
 }
 
 message QuerySolutionRsp {

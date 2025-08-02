@@ -51,6 +51,7 @@ message QueryNewsByPageSizeReq {
     int32 limit     = 2;  // 页大小
     int32 userID    = 3;  // 用户编号
     int32 queryType = 4;  // 查询类型
+    string classIDs = 5; // 班级
 }
 
 message UpdateNewsPriorityReq {
@@ -69,6 +70,7 @@ message AddNewsReq {
     string name    = 1;  // 新闻名
     string content = 2;  // 内容
     int32 userID   = 3;  // 用户编号
+    string classIDs = 4; // 班级
 }
 
 message UpdateNewsReq {
@@ -76,6 +78,7 @@ message UpdateNewsReq {
     int32 newsID   = 2;  // 公告主键
     string name    = 3;  // 名称
     string content = 4;  // 内容
+    string classIDs = 5; // 班级
 }
 
 message CommonRsp {

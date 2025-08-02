@@ -138,7 +138,7 @@ type SolutionServerService interface {
 	// CountMySolution CountMySolution 计算我的提交数据
 	CountMySolution(ctx context.Context, req *QueryMySolutionRecordReq) (*CountContestSubmissionRsp, error)
 	// QueryTodaySolution QueryTodaySolution 查询今天的提交
-	QueryTodaySolution(ctx context.Context, req *UserIDReq) (*QueryTodaySolutionRsp, error)
+	QueryTodaySolution(ctx context.Context, req *QueryTodaySolutionReq) (*QueryTodaySolutionRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -448,13 +448,13 @@ func SolutionServerService_CountMySolution_Handler(svr interface{}, ctx context.
 }
 
 func SolutionServerService_QueryTodaySolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &UserIDReq{}
+	req := &QueryTodaySolutionReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(SolutionServerService).QueryTodaySolution(ctx, reqbody.(*UserIDReq))
+		return svr.(SolutionServerService).QueryTodaySolution(ctx, reqbody.(*QueryTodaySolutionReq))
 	}
 
 	var rsp interface{}
@@ -654,7 +654,7 @@ func (s *UnimplementedSolutionServer) CountMySolution(ctx context.Context, req *
 }
 
 // QueryTodaySolution QueryTodaySolution 查询今天的提交
-func (s *UnimplementedSolutionServer) QueryTodaySolution(ctx context.Context, req *UserIDReq) (*QueryTodaySolutionRsp, error) {
+func (s *UnimplementedSolutionServer) QueryTodaySolution(ctx context.Context, req *QueryTodaySolutionReq) (*QueryTodaySolutionRsp, error) {
 	return nil, errors.New("rpc QueryTodaySolution of service SolutionServer is not implemented")
 }
 
@@ -769,7 +769,7 @@ type SolutionServerClientProxy interface {
 	// CountMySolution CountMySolution 计算我的提交数据
 	CountMySolution(ctx context.Context, req *QueryMySolutionRecordReq, opts ...client.Option) (rsp *CountContestSubmissionRsp, err error)
 	// QueryTodaySolution QueryTodaySolution 查询今天的提交
-	QueryTodaySolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryTodaySolutionRsp, err error)
+	QueryTodaySolution(ctx context.Context, req *QueryTodaySolutionReq, opts ...client.Option) (rsp *QueryTodaySolutionRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -1121,7 +1121,7 @@ func (c *SolutionServerClientProxyImpl) CountMySolution(ctx context.Context, req
 	return rsp, nil
 }
 
-func (c *SolutionServerClientProxyImpl) QueryTodaySolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryTodaySolutionRsp, error) {
+func (c *SolutionServerClientProxyImpl) QueryTodaySolution(ctx context.Context, req *QueryTodaySolutionReq, opts ...client.Option) (*QueryTodaySolutionRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryTodaySolution")
