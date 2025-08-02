@@ -74,6 +74,7 @@ message updateProblemVisitNumberReq {
 
 message QueryProblemNameReq {
     int32 userID = 1;  // 用户编号
+    string courseIDs = 2; // 课程编号
 }
 
 message QueryProblemListReq {
