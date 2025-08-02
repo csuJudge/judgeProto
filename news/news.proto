@@ -44,6 +44,7 @@ message News {
     string author      = 5;  // 公告作业
     int32 enable       = 6;  // 公告状态
     int32 priority     = 7;  // 公告优先级
+    string classIDs = 8; // 班级编号
 }
 
 message QueryNewsByPageSizeReq {
