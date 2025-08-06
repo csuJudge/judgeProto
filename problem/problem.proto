@@ -65,6 +65,7 @@ message UpdateProblemReq {
     int32 userID             = 13;  // 用户编号
     int32 type               = 14;  // 题目类型
     string template          = 15;  // 模板
+    string courseIDs = 16; // 课程
 }
 
 message updateProblemVisitNumberReq {
@@ -225,6 +226,13 @@ message Problem {
     int32 type               = 20;  // 题目类型
     string template          = 21;  // 模板
     int32 creatorID = 22; // 用户编号
+    repeated Course course = 23; // 课程
+}
+
+
+message Course {
+    int32 courseID = 1; // 课程编号
+    string courseName = 2; // 课程名
 }
 
 message AddProblemReq {
@@ -242,6 +250,7 @@ message AddProblemReq {
     int32 difficulty         = 12;  // 难度
     int32 type               = 13;  // 题目类型
     string template          = 14;  // 模板
+    string courseIDs = 15; // 课程
 }
 
 message Knowledge {
