@@ -151,6 +151,7 @@ message UserRank {
     int32 submitCount = 4;  // 提交数
     int32 solvedCount = 5;  // 解决数
     int32 rankID      = 6;  // 排名
+    int32 deWeightCount = 7; // 去重的解决数
 }
 
 message QueryUserRankRsp {

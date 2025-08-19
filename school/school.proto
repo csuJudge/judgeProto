@@ -239,8 +239,10 @@ message Class {
     string description = 6;  // 班级描述
     int32 classID      = 7;  // 班级编号
     int32 enable       = 8;  // 状态
-    int32 CourseID = 9; // 课程编号
+    Course course = 9; // 课程
     repeated TeacherInfo teachers = 10; // 老师信息
+    Term term = 11; // 学期
+    int32 UserCount = 12; // 学生人数
 }
 
 message QueryClassRsp {
