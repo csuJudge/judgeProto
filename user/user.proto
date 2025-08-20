@@ -226,8 +226,8 @@ message User {
     int32 solvedCount   = 10;  // 解决的数量
     string userNumber   = 11;  // 学工号
     int32 enable        = 12;  // 是否可用
-    repeated Course course = 13; // 课程
-    repeated Class class = 14; // 班级
+    string course = 13; // 课程
+    string class = 14; // 班级
 }
 
 message Course {

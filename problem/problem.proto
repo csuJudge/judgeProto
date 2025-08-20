@@ -85,6 +85,7 @@ message QueryProblemListReq {
     string condition = 4;  // 条件（名称或者编号）
     int32 knowledge = 5;  // 知识点
     string course    = 6;  // 课程
+    int32 queryType = 7; // 请求类型
 }
 
 message QueryProblemListRsp {

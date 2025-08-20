@@ -327,6 +327,7 @@ message UpdateClassReq {
     string name        = 3;  // 班级名
     string description = 4;  // 班级描述
     int32 classID      = 5;  // 班级编号
+    string courseIDs = 6; // 课程
 }
 
 message AddClassReq {
@@ -334,6 +335,7 @@ message AddClassReq {
     string teacher      = 2;  // 老师
     string name        = 3;  // 班级名
     string description = 4;  // 班级描述
+    string courseIDs = 5; // 课程
 }
 
 message QueryUserClassReq {
