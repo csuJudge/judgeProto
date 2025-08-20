@@ -226,7 +226,7 @@ message Problem {
     int32 type               = 20;  // 题目类型
     string template          = 21;  // 模板
     int32 creatorID = 22; // 用户编号
-    repeated Course course = 23; // 课程
+    string courseIDs = 23; // 课程
 }
 
 
