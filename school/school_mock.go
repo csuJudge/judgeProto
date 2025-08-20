@@ -75,6 +75,21 @@ func (mr *MockCourseServerServiceMockRecorder) QueryAllCourse(ctx, req any) *gom
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllCourse", reflect.TypeOf((*MockCourseServerService)(nil).QueryAllCourse), ctx, req)
 }
 
+// QueryAllRelationCourse mocks base method.
+func (m *MockCourseServerService) QueryAllRelationCourse(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryAllRelationRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryAllRelationCourse", ctx, req)
+	ret0, _ := ret[0].(*QueryAllRelationRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryAllRelationCourse indicates an expected call of QueryAllRelationCourse.
+func (mr *MockCourseServerServiceMockRecorder) QueryAllRelationCourse(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllRelationCourse", reflect.TypeOf((*MockCourseServerService)(nil).QueryAllRelationCourse), ctx, req)
+}
+
 // QueryCourse mocks base method.
 func (m *MockCourseServerService) QueryCourse(ctx context.Context, req *QueryCourseReq) (*QueryCourseRsp, error) {
 	m.ctrl.T.Helper()
@@ -224,10 +239,10 @@ func (mr *MockClassServerServiceMockRecorder) AddClass(ctx, req any) *gomock.Cal
 }
 
 // QueryAllClass mocks base method.
-func (m *MockClassServerService) QueryAllClass(ctx context.Context, req *UserIDReq) (*QueryAllClassRsp, error) {
+func (m *MockClassServerService) QueryAllClass(ctx context.Context, req *UserIDReq) (*QueryAllRelationRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryAllClass", ctx, req)
-	ret0, _ := ret[0].(*QueryAllClassRsp)
+	ret0, _ := ret[0].(*QueryAllRelationRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -604,6 +619,26 @@ func (mr *MockCourseServerClientProxyMockRecorder) QueryAllCourse(ctx, req any, 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllCourse", reflect.TypeOf((*MockCourseServerClientProxy)(nil).QueryAllCourse), varargs...)
 }
 
+// QueryAllRelationCourse mocks base method.
+func (m *MockCourseServerClientProxy) QueryAllRelationCourse(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (*QueryAllRelationRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryAllRelationCourse", varargs...)
+	ret0, _ := ret[0].(*QueryAllRelationRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryAllRelationCourse indicates an expected call of QueryAllRelationCourse.
+func (mr *MockCourseServerClientProxyMockRecorder) QueryAllRelationCourse(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllRelationCourse", reflect.TypeOf((*MockCourseServerClientProxy)(nil).QueryAllRelationCourse), varargs...)
+}
+
 // QueryCourse mocks base method.
 func (m *MockCourseServerClientProxy) QueryCourse(ctx context.Context, req *QueryCourseReq, opts ...client.Option) (*QueryCourseRsp, error) {
 	m.ctrl.T.Helper()
@@ -793,14 +828,14 @@ func (mr *MockClassServerClientProxyMockRecorder) AddClass(ctx, req any, opts ..
 }
 
 // QueryAllClass mocks base method.
-func (m *MockClassServerClientProxy) QueryAllClass(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryAllClassRsp, error) {
+func (m *MockClassServerClientProxy) QueryAllClass(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryAllRelationRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "QueryAllClass", varargs...)
-	ret0, _ := ret[0].(*QueryAllClassRsp)
+	ret0, _ := ret[0].(*QueryAllRelationRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

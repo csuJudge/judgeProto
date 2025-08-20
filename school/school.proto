@@ -22,6 +22,8 @@ service CourseServer {
     rpc QueryCoursePageSize(QueryCoursePageSizeReq) returns (QueryCoursePageSizeRsp) {}
     // QueryTermCourse 查询学期的课程
     rpc QueryTermCourse(QueryTermReq) returns (QueryCoursePageSizeRsp) {}
+    // QueryAllRelationCourse 查询所有关联课程
+    rpc QueryAllRelationCourse(QueryCoursePageSizeReq) returns (QueryAllRelationRsp) {}
 }
 
 service ClassServer {
@@ -50,7 +52,7 @@ service ClassServer {
     // QueryCourseClass 查询课程的班级
     rpc QueryCourseClass(QueryCourseClassReq) returns (QueryCourseClassRsp) {}
     // QueryAllClass 查询所有班级
-    rpc QueryAllClass(UserIDReq) returns (QueryAllClassRsp) {}
+    rpc QueryAllClass(UserIDReq) returns (QueryAllRelationRsp) {}
 }
 
 service TermServer {
@@ -80,10 +82,23 @@ message QueryContestClassReq {
     int32 contestID = 1;  // 作业编号
 }
 
+message QueryAllRelationRsp{
+    string message           = 1;  // 返回信息
+    int32 code               = 2;  // 返回码
+    repeated RelationData courses = 3; // 课程
+}
+
 message QueryMyClassRsp {
     string message           = 1;  // 返回信息
     int32 code               = 2;  // 返回码
     repeated MyClass classes = 3;  // 我的班级
+}
+
+message RelationData{
+    int32 dataID = 1; // 编号
+    int32 relationID = 2; // 关联编号
+    int32 id = 3; // 主键编号
+    int32 enable = 4; // 状态
 }
 
 message MyClass {
