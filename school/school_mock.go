@@ -223,6 +223,21 @@ func (mr *MockClassServerServiceMockRecorder) AddClass(ctx, req any) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddClass", reflect.TypeOf((*MockClassServerService)(nil).AddClass), ctx, req)
 }
 
+// QueryAllClass mocks base method.
+func (m *MockClassServerService) QueryAllClass(ctx context.Context, req *UserIDReq) (*QueryAllClassRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryAllClass", ctx, req)
+	ret0, _ := ret[0].(*QueryAllClassRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryAllClass indicates an expected call of QueryAllClass.
+func (mr *MockClassServerServiceMockRecorder) QueryAllClass(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllClass", reflect.TypeOf((*MockClassServerService)(nil).QueryAllClass), ctx, req)
+}
+
 // QueryClass mocks base method.
 func (m *MockClassServerService) QueryClass(ctx context.Context, req *QueryClassReq) (*QueryClassRsp, error) {
 	m.ctrl.T.Helper()
@@ -775,6 +790,26 @@ func (mr *MockClassServerClientProxyMockRecorder) AddClass(ctx, req any, opts ..
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddClass", reflect.TypeOf((*MockClassServerClientProxy)(nil).AddClass), varargs...)
+}
+
+// QueryAllClass mocks base method.
+func (m *MockClassServerClientProxy) QueryAllClass(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryAllClassRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryAllClass", varargs...)
+	ret0, _ := ret[0].(*QueryAllClassRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryAllClass indicates an expected call of QueryAllClass.
+func (mr *MockClassServerClientProxyMockRecorder) QueryAllClass(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllClass", reflect.TypeOf((*MockClassServerClientProxy)(nil).QueryAllClass), varargs...)
 }
 
 // QueryClass mocks base method.
