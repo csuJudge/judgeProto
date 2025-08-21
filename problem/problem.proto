@@ -51,7 +51,12 @@ message UserIDReq {
 message QueryAllMyContestProblemRsp{
     string message               = 1;  // 返回信息
     int32 code                   = 2;  // 返回码
-    repeated ContestProblem problemIDs = 3; // 题目编号
+    repeated MyContestProblem problemIDs = 3; // 题目编号
+}
+
+message MyContestProblem {
+    string problemIDs = 1;// 题目编号
+    int32 contestID = 2; // 作业编号
 }
 
 
