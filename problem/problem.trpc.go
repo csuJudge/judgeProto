@@ -55,6 +55,8 @@ type ProblemServerService interface {
 	UpdateContestProblem(ctx context.Context, req *UpdateContestProblemReq) (*CommonRsp, error)
 	// CopyProblem CopyProblem 复制题目
 	CopyProblem(ctx context.Context, req *CopyProblemReq) (*CommonRsp, error)
+	// QueryAllMyContestProblem QueryAllMyContestProblem 查询我的所以作业的题目数据
+	QueryAllMyContestProblem(ctx context.Context, req *UserIDReq) (*QueryAllMyContestProblemRsp, error)
 }
 
 func ProblemServerService_QueryProblem_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -381,6 +383,24 @@ func ProblemServerService_CopyProblem_Handler(svr interface{}, ctx context.Conte
 	return rsp, nil
 }
 
+func ProblemServerService_QueryAllMyContestProblem_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UserIDReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ProblemServerService).QueryAllMyContestProblem(ctx, reqbody.(*UserIDReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // ProblemServerServer_ServiceDesc descriptor for server.RegisterService.
 var ProblemServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.problem.ProblemServer",
@@ -457,6 +477,10 @@ var ProblemServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.problem.ProblemServer/CopyProblem",
 			Func: ProblemServerService_CopyProblem_Handler,
+		},
+		{
+			Name: "/oj.problem.ProblemServer/QueryAllMyContestProblem",
+			Func: ProblemServerService_QueryAllMyContestProblem_Handler,
 		},
 	},
 }
@@ -749,6 +773,11 @@ func (s *UnimplementedProblemServer) CopyProblem(ctx context.Context, req *CopyP
 	return nil, errors.New("rpc CopyProblem of service ProblemServer is not implemented")
 }
 
+// QueryAllMyContestProblem QueryAllMyContestProblem 查询我的所以作业的题目数据
+func (s *UnimplementedProblemServer) QueryAllMyContestProblem(ctx context.Context, req *UserIDReq) (*QueryAllMyContestProblemRsp, error) {
+	return nil, errors.New("rpc QueryAllMyContestProblem of service ProblemServer is not implemented")
+}
+
 type UnimplementedObjectiveServer struct{}
 
 // AddObjective AddObjective 添加客观题
@@ -830,6 +859,8 @@ type ProblemServerClientProxy interface {
 	UpdateContestProblem(ctx context.Context, req *UpdateContestProblemReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// CopyProblem CopyProblem 复制题目
 	CopyProblem(ctx context.Context, req *CopyProblemReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// QueryAllMyContestProblem QueryAllMyContestProblem 查询我的所以作业的题目数据
+	QueryAllMyContestProblem(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryAllMyContestProblemRsp, err error)
 }
 
 type ProblemServerClientProxyImpl struct {
@@ -1195,6 +1226,26 @@ func (c *ProblemServerClientProxyImpl) CopyProblem(ctx context.Context, req *Cop
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ProblemServerClientProxyImpl) QueryAllMyContestProblem(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryAllMyContestProblemRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ProblemServer/QueryAllMyContestProblem")
+	msg.WithCalleeServiceName(ProblemServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ProblemServer")
+	msg.WithCalleeMethod("QueryAllMyContestProblem")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryAllMyContestProblemRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

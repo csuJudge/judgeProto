@@ -105,6 +105,21 @@ func (mr *MockProblemServerServiceMockRecorder) DeleteProblemData(ctx, req any) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteProblemData", reflect.TypeOf((*MockProblemServerService)(nil).DeleteProblemData), ctx, req)
 }
 
+// QueryAllMyContestProblem mocks base method.
+func (m *MockProblemServerService) QueryAllMyContestProblem(ctx context.Context, req *UserIDReq) (*QueryAllMyContestProblemRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryAllMyContestProblem", ctx, req)
+	ret0, _ := ret[0].(*QueryAllMyContestProblemRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryAllMyContestProblem indicates an expected call of QueryAllMyContestProblem.
+func (mr *MockProblemServerServiceMockRecorder) QueryAllMyContestProblem(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllMyContestProblem", reflect.TypeOf((*MockProblemServerService)(nil).QueryAllMyContestProblem), ctx, req)
+}
+
 // QueryAllProblem mocks base method.
 func (m *MockProblemServerService) QueryAllProblem(ctx context.Context, req *QueryProblemListReq) (*QueryAllProblemRsp, error) {
 	m.ctrl.T.Helper()
@@ -554,6 +569,26 @@ func (mr *MockProblemServerClientProxyMockRecorder) DeleteProblemData(ctx, req a
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteProblemData", reflect.TypeOf((*MockProblemServerClientProxy)(nil).DeleteProblemData), varargs...)
+}
+
+// QueryAllMyContestProblem mocks base method.
+func (m *MockProblemServerClientProxy) QueryAllMyContestProblem(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryAllMyContestProblemRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryAllMyContestProblem", varargs...)
+	ret0, _ := ret[0].(*QueryAllMyContestProblemRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryAllMyContestProblem indicates an expected call of QueryAllMyContestProblem.
+func (mr *MockProblemServerClientProxyMockRecorder) QueryAllMyContestProblem(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllMyContestProblem", reflect.TypeOf((*MockProblemServerClientProxy)(nil).QueryAllMyContestProblem), varargs...)
 }
 
 // QueryAllProblem mocks base method.
