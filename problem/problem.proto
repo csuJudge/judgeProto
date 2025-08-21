@@ -36,6 +36,34 @@ service ProblemServer {
     rpc QueryCourseProblem(QueryCourseProblemReq) returns (QueryAllProblemRsp) {}
     // UpdateCourseProblem 更新题目的知识点
     rpc UpdateCourseProblem(UpdateCourseProblemReq) returns (CommonRsp) {}
+    // UpdateContestProblem 更新作业的知识点
+    rpc UpdateContestProblem(UpdateContestProblemReq) returns (CommonRsp) {}
+    // CopyProblem 复制题目
+    rpc CopyProblem(CopyProblemReq) returns (CommonRsp) {}
+}
+
+message UpdateContestProblemReq{
+    int32 contestID = 1;  // 作业编号
+    int32 problem = 2; // 题目编号
+}
+
+message CopyProblemReq{
+    int32 userID             = 1;   // 用户编号
+    string name              = 2;   // 题目名称
+    string description       = 3;   // 描述
+    string hint              = 4;   // 提示
+    string inputDescription  = 5;   // 输入描述
+    string outputDescription = 6;   // 输出描述
+    string input             = 7;   // 样例输入
+    string output            = 8;   // 样例输出
+    int32 timeLimit          = 9;   // 时间限制
+    int32 memoryLimit        = 10;  // 内存限制
+    string knowledges        = 11;  // 知识点
+    int32 difficulty         = 12;  // 难度
+    int32 type               = 13;  // 题目类型
+    string template          = 14;  // 模板
+    string courseIDs = 15; // 课程
+    int32 problem = 16; // 题目编号
 }
 
 message UpdateCourseProblemReq{
