@@ -22,8 +22,8 @@ service CourseServer {
     rpc QueryCoursePageSize(QueryCoursePageSizeReq) returns (QueryCoursePageSizeRsp) {}
     // QueryTermCourse 查询学期的课程
     rpc QueryTermCourse(QueryTermReq) returns (QueryCoursePageSizeRsp) {}
-    // QueryAllRelationCourse 查询所有关联课程
-    rpc QueryAllRelationCourse(QueryCoursePageSizeReq) returns (QueryAllRelationRsp) {}
+    // QueryAllRelationData 查询所有关联数据
+    rpc QueryAllRelationData(QueryCoursePageSizeReq) returns (QueryAllRelationRsp) {}
 }
 
 service ClassServer {
@@ -54,7 +54,7 @@ service ClassServer {
     // QueryAllClass 查询所有班级
     rpc QueryAllClass(UserIDReq) returns (QueryAllRelationRsp) {}
     // QueryAllRelationClass 查询所有关联班级
-    rpc QueryAllRelationCourse(UserIDReq) returns (QueryAllRelationRsp) {}
+    rpc QueryAllRelationCourse(QueryCoursePageSizeReq) returns (QueryAllRelationRsp) {}
 }
 
 service TermServer {

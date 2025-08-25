@@ -37,8 +37,8 @@ type CourseServerService interface {
 	QueryCoursePageSize(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryCoursePageSizeRsp, error)
 	// QueryTermCourse QueryTermCourse 查询学期的课程
 	QueryTermCourse(ctx context.Context, req *QueryTermReq) (*QueryCoursePageSizeRsp, error)
-	// QueryAllRelationCourse QueryAllRelationCourse 查询所有关联课程
-	QueryAllRelationCourse(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryAllRelationRsp, error)
+	// QueryAllRelationData QueryAllRelationData 查询所有关联数据
+	QueryAllRelationData(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryAllRelationRsp, error)
 }
 
 func CourseServerService_AddCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -203,14 +203,14 @@ func CourseServerService_QueryTermCourse_Handler(svr interface{}, ctx context.Co
 	return rsp, nil
 }
 
-func CourseServerService_QueryAllRelationCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+func CourseServerService_QueryAllRelationData_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
 	req := &QueryCoursePageSizeReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(CourseServerService).QueryAllRelationCourse(ctx, reqbody.(*QueryCoursePageSizeReq))
+		return svr.(CourseServerService).QueryAllRelationData(ctx, reqbody.(*QueryCoursePageSizeReq))
 	}
 
 	var rsp interface{}
@@ -263,8 +263,8 @@ var CourseServerServer_ServiceDesc = server.ServiceDesc{
 			Func: CourseServerService_QueryTermCourse_Handler,
 		},
 		{
-			Name: "/oj.school.CourseServer/QueryAllRelationCourse",
-			Func: CourseServerService_QueryAllRelationCourse_Handler,
+			Name: "/oj.school.CourseServer/QueryAllRelationData",
+			Func: CourseServerService_QueryAllRelationData_Handler,
 		},
 	},
 }
@@ -305,7 +305,7 @@ type ClassServerService interface {
 	// QueryAllClass QueryAllClass 查询所有班级
 	QueryAllClass(ctx context.Context, req *UserIDReq) (*QueryAllRelationRsp, error)
 	// QueryAllRelationCourse QueryAllRelationClass 查询所有关联班级
-	QueryAllRelationCourse(ctx context.Context, req *UserIDReq) (*QueryAllRelationRsp, error)
+	QueryAllRelationCourse(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryAllRelationRsp, error)
 }
 
 func ClassServerService_QueryUserClass_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -543,13 +543,13 @@ func ClassServerService_QueryAllClass_Handler(svr interface{}, ctx context.Conte
 }
 
 func ClassServerService_QueryAllRelationCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &UserIDReq{}
+	req := &QueryCoursePageSizeReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(ClassServerService).QueryAllRelationCourse(ctx, reqbody.(*UserIDReq))
+		return svr.(ClassServerService).QueryAllRelationCourse(ctx, reqbody.(*QueryCoursePageSizeReq))
 	}
 
 	var rsp interface{}
@@ -867,9 +867,9 @@ func (s *UnimplementedCourseServer) QueryTermCourse(ctx context.Context, req *Qu
 	return nil, errors.New("rpc QueryTermCourse of service CourseServer is not implemented")
 }
 
-// QueryAllRelationCourse QueryAllRelationCourse 查询所有关联课程
-func (s *UnimplementedCourseServer) QueryAllRelationCourse(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryAllRelationRsp, error) {
-	return nil, errors.New("rpc QueryAllRelationCourse of service CourseServer is not implemented")
+// QueryAllRelationData QueryAllRelationData 查询所有关联数据
+func (s *UnimplementedCourseServer) QueryAllRelationData(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryAllRelationRsp, error) {
+	return nil, errors.New("rpc QueryAllRelationData of service CourseServer is not implemented")
 }
 
 type UnimplementedClassServer struct{}
@@ -940,7 +940,7 @@ func (s *UnimplementedClassServer) QueryAllClass(ctx context.Context, req *UserI
 }
 
 // QueryAllRelationCourse QueryAllRelationClass 查询所有关联班级
-func (s *UnimplementedClassServer) QueryAllRelationCourse(ctx context.Context, req *UserIDReq) (*QueryAllRelationRsp, error) {
+func (s *UnimplementedClassServer) QueryAllRelationCourse(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryAllRelationRsp, error) {
 	return nil, errors.New("rpc QueryAllRelationCourse of service ClassServer is not implemented")
 }
 
@@ -1007,8 +1007,8 @@ type CourseServerClientProxy interface {
 	QueryCoursePageSize(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (rsp *QueryCoursePageSizeRsp, err error)
 	// QueryTermCourse QueryTermCourse 查询学期的课程
 	QueryTermCourse(ctx context.Context, req *QueryTermReq, opts ...client.Option) (rsp *QueryCoursePageSizeRsp, err error)
-	// QueryAllRelationCourse QueryAllRelationCourse 查询所有关联课程
-	QueryAllRelationCourse(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (rsp *QueryAllRelationRsp, err error)
+	// QueryAllRelationData QueryAllRelationData 查询所有关联数据
+	QueryAllRelationData(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (rsp *QueryAllRelationRsp, err error)
 }
 
 type CourseServerClientProxyImpl struct {
@@ -1200,15 +1200,15 @@ func (c *CourseServerClientProxyImpl) QueryTermCourse(ctx context.Context, req *
 	return rsp, nil
 }
 
-func (c *CourseServerClientProxyImpl) QueryAllRelationCourse(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (*QueryAllRelationRsp, error) {
+func (c *CourseServerClientProxyImpl) QueryAllRelationData(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (*QueryAllRelationRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/oj.school.CourseServer/QueryAllRelationCourse")
+	msg.WithClientRPCName("/oj.school.CourseServer/QueryAllRelationData")
 	msg.WithCalleeServiceName(CourseServerServer_ServiceDesc.ServiceName)
 	msg.WithCalleeApp("")
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("CourseServer")
-	msg.WithCalleeMethod("QueryAllRelationCourse")
+	msg.WithCalleeMethod("QueryAllRelationData")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
@@ -1249,7 +1249,7 @@ type ClassServerClientProxy interface {
 	// QueryAllClass QueryAllClass 查询所有班级
 	QueryAllClass(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryAllRelationRsp, err error)
 	// QueryAllRelationCourse QueryAllRelationClass 查询所有关联班级
-	QueryAllRelationCourse(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryAllRelationRsp, err error)
+	QueryAllRelationCourse(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (rsp *QueryAllRelationRsp, err error)
 }
 
 type ClassServerClientProxyImpl struct {
@@ -1521,7 +1521,7 @@ func (c *ClassServerClientProxyImpl) QueryAllClass(ctx context.Context, req *Use
 	return rsp, nil
 }
 
-func (c *ClassServerClientProxyImpl) QueryAllRelationCourse(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryAllRelationRsp, error) {
+func (c *ClassServerClientProxyImpl) QueryAllRelationCourse(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (*QueryAllRelationRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.school.ClassServer/QueryAllRelationCourse")
