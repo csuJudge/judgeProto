@@ -53,6 +53,8 @@ service ClassServer {
     rpc QueryCourseClass(QueryCourseClassReq) returns (QueryCourseClassRsp) {}
     // QueryAllClass 查询所有班级
     rpc QueryAllClass(UserIDReq) returns (QueryAllRelationRsp) {}
+    // QueryAllRelationClass 查询所有关联班级
+    rpc QueryAllRelationCourse(UserIDReq) returns (QueryAllRelationRsp) {}
 }
 
 service TermServer {
@@ -85,7 +87,7 @@ message QueryContestClassReq {
 message QueryAllRelationRsp{
     string message           = 1;  // 返回信息
     int32 code               = 2;  // 返回码
-    repeated RelationData courses = 3; // 课程
+    repeated RelationData datas = 3; // 数据
 }
 
 message QueryMyClassRsp {
