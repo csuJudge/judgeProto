@@ -161,6 +161,21 @@ func (mr *MockSolutionServerServiceMockRecorder) AddTestSolution(ctx, req any) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddTestSolution", reflect.TypeOf((*MockSolutionServerService)(nil).AddTestSolution), ctx, req)
 }
 
+// CalSolutionDifference mocks base method.
+func (m *MockSolutionServerService) CalSolutionDifference(ctx context.Context, req *CalSolutionDifferenceReq) (*CalSolutionDifferenceRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CalSolutionDifference", ctx, req)
+	ret0, _ := ret[0].(*CalSolutionDifferenceRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CalSolutionDifference indicates an expected call of CalSolutionDifference.
+func (mr *MockSolutionServerServiceMockRecorder) CalSolutionDifference(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CalSolutionDifference", reflect.TypeOf((*MockSolutionServerService)(nil).CalSolutionDifference), ctx, req)
+}
+
 // CountContestProblemSubmission mocks base method.
 func (m *MockSolutionServerService) CountContestProblemSubmission(ctx context.Context, req *CountContestProblemSubmissionReq) (*CountContestProblemSubmissionRsp, error) {
 	m.ctrl.T.Helper()
@@ -174,6 +189,21 @@ func (m *MockSolutionServerService) CountContestProblemSubmission(ctx context.Co
 func (mr *MockSolutionServerServiceMockRecorder) CountContestProblemSubmission(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountContestProblemSubmission", reflect.TypeOf((*MockSolutionServerService)(nil).CountContestProblemSubmission), ctx, req)
+}
+
+// CountContestSubmission mocks base method.
+func (m *MockSolutionServerService) CountContestSubmission(ctx context.Context, req *CountContestProblemSubmissionReq) (*CountContestSubmissionRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CountContestSubmission", ctx, req)
+	ret0, _ := ret[0].(*CountContestSubmissionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CountContestSubmission indicates an expected call of CountContestSubmission.
+func (mr *MockSolutionServerServiceMockRecorder) CountContestSubmission(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountContestSubmission", reflect.TypeOf((*MockSolutionServerService)(nil).CountContestSubmission), ctx, req)
 }
 
 // CountMySolution mocks base method.
@@ -565,6 +595,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) AddTestSolution(ctx, req an
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddTestSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).AddTestSolution), varargs...)
 }
 
+// CalSolutionDifference mocks base method.
+func (m *MockSolutionServerClientProxy) CalSolutionDifference(ctx context.Context, req *CalSolutionDifferenceReq, opts ...client.Option) (*CalSolutionDifferenceRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CalSolutionDifference", varargs...)
+	ret0, _ := ret[0].(*CalSolutionDifferenceRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CalSolutionDifference indicates an expected call of CalSolutionDifference.
+func (mr *MockSolutionServerClientProxyMockRecorder) CalSolutionDifference(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CalSolutionDifference", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CalSolutionDifference), varargs...)
+}
+
 // CountContestProblemSubmission mocks base method.
 func (m *MockSolutionServerClientProxy) CountContestProblemSubmission(ctx context.Context, req *CountContestProblemSubmissionReq, opts ...client.Option) (*CountContestProblemSubmissionRsp, error) {
 	m.ctrl.T.Helper()
@@ -583,6 +633,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) CountContestProblemSubmissi
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountContestProblemSubmission", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountContestProblemSubmission), varargs...)
+}
+
+// CountContestSubmission mocks base method.
+func (m *MockSolutionServerClientProxy) CountContestSubmission(ctx context.Context, req *CountContestProblemSubmissionReq, opts ...client.Option) (*CountContestSubmissionRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CountContestSubmission", varargs...)
+	ret0, _ := ret[0].(*CountContestSubmissionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CountContestSubmission indicates an expected call of CountContestSubmission.
+func (mr *MockSolutionServerClientProxyMockRecorder) CountContestSubmission(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountContestSubmission", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountContestSubmission), varargs...)
 }
 
 // CountMySolution mocks base method.

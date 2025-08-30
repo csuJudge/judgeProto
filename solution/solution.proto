@@ -48,6 +48,21 @@ service SolutionServer {
     rpc CountMySolution(QueryMySolutionRecordReq) returns (CountContestSubmissionRsp) {}
     // QueryTodaySolution 查询今天的提交
     rpc QueryTodaySolution(QueryTodaySolutionReq) returns (QueryTodaySolutionRsp) {}
+    // CalSolutionDifference 计算时间的差值
+    rpc CalSolutionDifference(CalSolutionDifferenceReq) returns (CalSolutionDifferenceRsp){}
+    // CountContestSubmission 获取考试的提交数据
+    rpc CountContestSubmission(CountContestProblemSubmissionReq)returns (CountContestSubmissionRsp){}
+}
+
+message CalSolutionDifferenceReq{
+    int32 problemID = 1; // 题目编号
+    int32 userID = 2; // 用户编号
+}
+
+message CalSolutionDifferenceRsp{
+    string message                = 1;  // 返回信息
+    int32 code                    = 2;  // 返回码
+    repeated int32 timeDifference = 3; // 时间差值
 }
 
 message QueryUserContestSubmissionReq{

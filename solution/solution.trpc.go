@@ -139,6 +139,10 @@ type SolutionServerService interface {
 	CountMySolution(ctx context.Context, req *QueryMySolutionRecordReq) (*CountContestSubmissionRsp, error)
 	// QueryTodaySolution QueryTodaySolution 查询今天的提交
 	QueryTodaySolution(ctx context.Context, req *QueryTodaySolutionReq) (*QueryTodaySolutionRsp, error)
+	// CalSolutionDifference CalSolutionDifference 计算时间的差值
+	CalSolutionDifference(ctx context.Context, req *CalSolutionDifferenceReq) (*CalSolutionDifferenceRsp, error)
+	// CountContestSubmission CountContestSubmission 获取考试的提交数据
+	CountContestSubmission(ctx context.Context, req *CountContestProblemSubmissionReq) (*CountContestSubmissionRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -465,6 +469,42 @@ func SolutionServerService_QueryTodaySolution_Handler(svr interface{}, ctx conte
 	return rsp, nil
 }
 
+func SolutionServerService_CalSolutionDifference_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &CalSolutionDifferenceReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).CalSolutionDifference(ctx, reqbody.(*CalSolutionDifferenceReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func SolutionServerService_CountContestSubmission_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &CountContestProblemSubmissionReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).CountContestSubmission(ctx, reqbody.(*CountContestProblemSubmissionReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -541,6 +581,14 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/QueryTodaySolution",
 			Func: SolutionServerService_QueryTodaySolution_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/CalSolutionDifference",
+			Func: SolutionServerService_CalSolutionDifference_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/CountContestSubmission",
+			Func: SolutionServerService_CountContestSubmission_Handler,
 		},
 	},
 }
@@ -658,6 +706,16 @@ func (s *UnimplementedSolutionServer) QueryTodaySolution(ctx context.Context, re
 	return nil, errors.New("rpc QueryTodaySolution of service SolutionServer is not implemented")
 }
 
+// CalSolutionDifference CalSolutionDifference 计算时间的差值
+func (s *UnimplementedSolutionServer) CalSolutionDifference(ctx context.Context, req *CalSolutionDifferenceReq) (*CalSolutionDifferenceRsp, error) {
+	return nil, errors.New("rpc CalSolutionDifference of service SolutionServer is not implemented")
+}
+
+// CountContestSubmission CountContestSubmission 获取考试的提交数据
+func (s *UnimplementedSolutionServer) CountContestSubmission(ctx context.Context, req *CountContestProblemSubmissionReq) (*CountContestSubmissionRsp, error) {
+	return nil, errors.New("rpc CountContestSubmission of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -770,6 +828,10 @@ type SolutionServerClientProxy interface {
 	CountMySolution(ctx context.Context, req *QueryMySolutionRecordReq, opts ...client.Option) (rsp *CountContestSubmissionRsp, err error)
 	// QueryTodaySolution QueryTodaySolution 查询今天的提交
 	QueryTodaySolution(ctx context.Context, req *QueryTodaySolutionReq, opts ...client.Option) (rsp *QueryTodaySolutionRsp, err error)
+	// CalSolutionDifference CalSolutionDifference 计算时间的差值
+	CalSolutionDifference(ctx context.Context, req *CalSolutionDifferenceReq, opts ...client.Option) (rsp *CalSolutionDifferenceRsp, err error)
+	// CountContestSubmission CountContestSubmission 获取考试的提交数据
+	CountContestSubmission(ctx context.Context, req *CountContestProblemSubmissionReq, opts ...client.Option) (rsp *CountContestSubmissionRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -1135,6 +1197,46 @@ func (c *SolutionServerClientProxyImpl) QueryTodaySolution(ctx context.Context, 
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryTodaySolutionRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) CalSolutionDifference(ctx context.Context, req *CalSolutionDifferenceReq, opts ...client.Option) (*CalSolutionDifferenceRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/CalSolutionDifference")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("CalSolutionDifference")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CalSolutionDifferenceRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) CountContestSubmission(ctx context.Context, req *CountContestProblemSubmissionReq, opts ...client.Option) (*CountContestSubmissionRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/CountContestSubmission")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("CountContestSubmission")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CountContestSubmissionRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
