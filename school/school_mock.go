@@ -238,6 +238,21 @@ func (mr *MockClassServerServiceMockRecorder) AddClass(ctx, req any) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddClass", reflect.TypeOf((*MockClassServerService)(nil).AddClass), ctx, req)
 }
 
+// CountClassUser mocks base method.
+func (m *MockClassServerService) CountClassUser(ctx context.Context, req *CountClassUserReq) (*CountClassUserRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CountClassUser", ctx, req)
+	ret0, _ := ret[0].(*CountClassUserRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CountClassUser indicates an expected call of CountClassUser.
+func (mr *MockClassServerServiceMockRecorder) CountClassUser(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountClassUser", reflect.TypeOf((*MockClassServerService)(nil).CountClassUser), ctx, req)
+}
+
 // QueryAllClass mocks base method.
 func (m *MockClassServerService) QueryAllClass(ctx context.Context, req *UserIDReq) (*QueryAllRelationRsp, error) {
 	m.ctrl.T.Helper()
@@ -840,6 +855,26 @@ func (mr *MockClassServerClientProxyMockRecorder) AddClass(ctx, req any, opts ..
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddClass", reflect.TypeOf((*MockClassServerClientProxy)(nil).AddClass), varargs...)
+}
+
+// CountClassUser mocks base method.
+func (m *MockClassServerClientProxy) CountClassUser(ctx context.Context, req *CountClassUserReq, opts ...client.Option) (*CountClassUserRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CountClassUser", varargs...)
+	ret0, _ := ret[0].(*CountClassUserRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CountClassUser indicates an expected call of CountClassUser.
+func (mr *MockClassServerClientProxyMockRecorder) CountClassUser(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountClassUser", reflect.TypeOf((*MockClassServerClientProxy)(nil).CountClassUser), varargs...)
 }
 
 // QueryAllClass mocks base method.

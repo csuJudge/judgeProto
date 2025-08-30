@@ -236,6 +236,21 @@ func (mr *MockSolutionServerServiceMockRecorder) CountUserProblemSolution(ctx, r
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerService)(nil).CountUserProblemSolution), ctx, req)
 }
 
+// QueryContestCompletionStatus mocks base method.
+func (m *MockSolutionServerService) QueryContestCompletionStatus(ctx context.Context, req *QueryRankDataReq) (*QueryContestCompletionStatusRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryContestCompletionStatus", ctx, req)
+	ret0, _ := ret[0].(*QueryContestCompletionStatusRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestCompletionStatus indicates an expected call of QueryContestCompletionStatus.
+func (mr *MockSolutionServerServiceMockRecorder) QueryContestCompletionStatus(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestCompletionStatus", reflect.TypeOf((*MockSolutionServerService)(nil).QueryContestCompletionStatus), ctx, req)
+}
+
 // QueryContestRankData mocks base method.
 func (m *MockSolutionServerService) QueryContestRankData(ctx context.Context, req *QueryContestRankDataReq) (*QueryContestRankDataRsp, error) {
 	m.ctrl.T.Helper()
@@ -693,6 +708,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) CountUserProblemSolution(ct
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountUserProblemSolution), varargs...)
+}
+
+// QueryContestCompletionStatus mocks base method.
+func (m *MockSolutionServerClientProxy) QueryContestCompletionStatus(ctx context.Context, req *QueryRankDataReq, opts ...client.Option) (*QueryContestCompletionStatusRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryContestCompletionStatus", varargs...)
+	ret0, _ := ret[0].(*QueryContestCompletionStatusRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestCompletionStatus indicates an expected call of QueryContestCompletionStatus.
+func (mr *MockSolutionServerClientProxyMockRecorder) QueryContestCompletionStatus(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestCompletionStatus", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryContestCompletionStatus), varargs...)
 }
 
 // QueryContestRankData mocks base method.

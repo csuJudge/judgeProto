@@ -55,6 +55,8 @@ service ClassServer {
     rpc QueryAllClass(UserIDReq) returns (QueryAllRelationRsp) {}
     // QueryAllRelationClass 查询所有关联班级
     rpc QueryAllRelationCourse(QueryCoursePageSizeReq) returns (QueryAllRelationRsp) {}
+    // CountClassUser 计算班级人数
+    rpc CountClassUser(CountClassUserReq) returns (CountClassUserRsp){}
 }
 
 service TermServer {
@@ -72,6 +74,16 @@ service TermServer {
     rpc QueryAllTerm(QueryAllTermReq) returns (QueryAllTermRsp) {}
     // QueryTerm 查询学期
     rpc QueryTerm(QueryTermReq) returns (QueryTermRsp) {}
+}
+
+message CountClassUserReq{
+    string classIDs = 1; // 班级编号
+}
+
+message CountClassUserRsp{
+    string message           = 1;  // 返回信息
+    int32 code               = 2;  // 返回码
+    int32 count = 3; // 班级人数
 }
 
 message QueryAllClassRsp{

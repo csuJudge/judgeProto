@@ -143,6 +143,8 @@ type SolutionServerService interface {
 	CalSolutionDifference(ctx context.Context, req *CalSolutionDifferenceReq) (*CalSolutionDifferenceRsp, error)
 	// CountContestSubmission CountContestSubmission 获取考试的提交数据
 	CountContestSubmission(ctx context.Context, req *CountContestProblemSubmissionReq) (*CountContestSubmissionRsp, error)
+	// QueryContestCompletionStatus QueryContestCompletionStatus 查询作业完成情况
+	QueryContestCompletionStatus(ctx context.Context, req *QueryRankDataReq) (*QueryContestCompletionStatusRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -505,6 +507,24 @@ func SolutionServerService_CountContestSubmission_Handler(svr interface{}, ctx c
 	return rsp, nil
 }
 
+func SolutionServerService_QueryContestCompletionStatus_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryRankDataReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryContestCompletionStatus(ctx, reqbody.(*QueryRankDataReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -589,6 +609,10 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/CountContestSubmission",
 			Func: SolutionServerService_CountContestSubmission_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryContestCompletionStatus",
+			Func: SolutionServerService_QueryContestCompletionStatus_Handler,
 		},
 	},
 }
@@ -716,6 +740,11 @@ func (s *UnimplementedSolutionServer) CountContestSubmission(ctx context.Context
 	return nil, errors.New("rpc CountContestSubmission of service SolutionServer is not implemented")
 }
 
+// QueryContestCompletionStatus QueryContestCompletionStatus 查询作业完成情况
+func (s *UnimplementedSolutionServer) QueryContestCompletionStatus(ctx context.Context, req *QueryRankDataReq) (*QueryContestCompletionStatusRsp, error) {
+	return nil, errors.New("rpc QueryContestCompletionStatus of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -832,6 +861,8 @@ type SolutionServerClientProxy interface {
 	CalSolutionDifference(ctx context.Context, req *CalSolutionDifferenceReq, opts ...client.Option) (rsp *CalSolutionDifferenceRsp, err error)
 	// CountContestSubmission CountContestSubmission 获取考试的提交数据
 	CountContestSubmission(ctx context.Context, req *CountContestProblemSubmissionReq, opts ...client.Option) (rsp *CountContestSubmissionRsp, err error)
+	// QueryContestCompletionStatus QueryContestCompletionStatus 查询作业完成情况
+	QueryContestCompletionStatus(ctx context.Context, req *QueryRankDataReq, opts ...client.Option) (rsp *QueryContestCompletionStatusRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -1237,6 +1268,26 @@ func (c *SolutionServerClientProxyImpl) CountContestSubmission(ctx context.Conte
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CountContestSubmissionRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryContestCompletionStatus(ctx context.Context, req *QueryRankDataReq, opts ...client.Option) (*QueryContestCompletionStatusRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryContestCompletionStatus")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryContestCompletionStatus")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryContestCompletionStatusRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
