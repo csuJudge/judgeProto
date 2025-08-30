@@ -75,6 +75,21 @@ func (mr *MockContestServerServiceMockRecorder) QueryContest(ctx, req any) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContest", reflect.TypeOf((*MockContestServerService)(nil).QueryContest), ctx, req)
 }
 
+// QueryContestClass mocks base method.
+func (m *MockContestServerService) QueryContestClass(ctx context.Context, req *QueryContestReq) (*QueryContestClassRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryContestClass", ctx, req)
+	ret0, _ := ret[0].(*QueryContestClassRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestClass indicates an expected call of QueryContestClass.
+func (mr *MockContestServerServiceMockRecorder) QueryContestClass(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestClass", reflect.TypeOf((*MockContestServerService)(nil).QueryContestClass), ctx, req)
+}
+
 // QueryContestList mocks base method.
 func (m *MockContestServerService) QueryContestList(ctx context.Context, req *QueryContestListReq) (*QueryContestListRsp, error) {
 	m.ctrl.T.Helper()
@@ -216,6 +231,26 @@ func (mr *MockContestServerClientProxyMockRecorder) QueryContest(ctx, req any, o
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContest", reflect.TypeOf((*MockContestServerClientProxy)(nil).QueryContest), varargs...)
+}
+
+// QueryContestClass mocks base method.
+func (m *MockContestServerClientProxy) QueryContestClass(ctx context.Context, req *QueryContestReq, opts ...client.Option) (*QueryContestClassRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryContestClass", varargs...)
+	ret0, _ := ret[0].(*QueryContestClassRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestClass indicates an expected call of QueryContestClass.
+func (mr *MockContestServerClientProxyMockRecorder) QueryContestClass(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestClass", reflect.TypeOf((*MockContestServerClientProxy)(nil).QueryContestClass), varargs...)
 }
 
 // QueryContestList mocks base method.

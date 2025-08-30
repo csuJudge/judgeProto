@@ -60,7 +60,7 @@ message QueryContestCompletionStatusRsp{
     string message                = 1;  // 返回信息
     int32 code                    = 2;  // 返回码
     int32 totalUser = 3; // 总人数
-    repeated QueryContestCompletionStatusRsp statuses = 4; // 完成状况
+    repeated CompletionStatus statuses = 4; // 完成状况
 }
 
 message CompletionStatus{

@@ -18,6 +18,14 @@ service ContestServer {
     rpc UpdateContest(UpdateContestReq) returns (CommonRsp) {}
     // QueryContestPrivilegeInfo 查询作业的权限信息
     rpc QueryContestPrivilegeInfo(QueryContestPrivilegeInfoReq) returns (QueryContestPrivilegeInfoRsp) {}
+    // QueryContestClass 查询班级的作业
+    rpc QueryContestClass(QueryContestReq)returns  (QueryContestClassRsp){}
+}
+
+message QueryContestClassRsp{
+    string message        = 1;  // 返回信息
+    int32 code            = 2;  // 返回码
+    string classIDs = 3; // 班级
 }
 
 message QueryContestPrivilegeInfoReq {
