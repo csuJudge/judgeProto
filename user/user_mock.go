@@ -45,19 +45,19 @@ func (m *MockUserServerService) ISGOMOCK() struct{} {
 	return struct{}{}
 }
 
-// AddClassUserReq mocks base method.
-func (m *MockUserServerService) AddClassUserReq(ctx context.Context, req *AddUserReq) (*CommonRsp, error) {
+// AddClassUser mocks base method.
+func (m *MockUserServerService) AddClassUser(ctx context.Context, req *AddUserReq) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AddClassUserReq", ctx, req)
+	ret := m.ctrl.Call(m, "AddClassUser", ctx, req)
 	ret0, _ := ret[0].(*CommonRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// AddClassUserReq indicates an expected call of AddClassUserReq.
-func (mr *MockUserServerServiceMockRecorder) AddClassUserReq(ctx, req any) *gomock.Call {
+// AddClassUser indicates an expected call of AddClassUser.
+func (mr *MockUserServerServiceMockRecorder) AddClassUser(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddClassUserReq", reflect.TypeOf((*MockUserServerService)(nil).AddClassUserReq), ctx, req)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddClassUser", reflect.TypeOf((*MockUserServerService)(nil).AddClassUser), ctx, req)
 }
 
 // AddUser mocks base method.
@@ -313,24 +313,24 @@ func (m *MockUserServerClientProxy) ISGOMOCK() struct{} {
 	return struct{}{}
 }
 
-// AddClassUserReq mocks base method.
-func (m *MockUserServerClientProxy) AddClassUserReq(ctx context.Context, req *AddUserReq, opts ...client.Option) (*CommonRsp, error) {
+// AddClassUser mocks base method.
+func (m *MockUserServerClientProxy) AddClassUser(ctx context.Context, req *AddUserReq, opts ...client.Option) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "AddClassUserReq", varargs...)
+	ret := m.ctrl.Call(m, "AddClassUser", varargs...)
 	ret0, _ := ret[0].(*CommonRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// AddClassUserReq indicates an expected call of AddClassUserReq.
-func (mr *MockUserServerClientProxyMockRecorder) AddClassUserReq(ctx, req any, opts ...any) *gomock.Call {
+// AddClassUser indicates an expected call of AddClassUser.
+func (mr *MockUserServerClientProxyMockRecorder) AddClassUser(ctx, req any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddClassUserReq", reflect.TypeOf((*MockUserServerClientProxy)(nil).AddClassUserReq), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddClassUser", reflect.TypeOf((*MockUserServerClientProxy)(nil).AddClassUser), varargs...)
 }
 
 // AddUser mocks base method.

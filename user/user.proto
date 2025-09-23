@@ -14,8 +14,8 @@ service UserServer {
     rpc QueryUserInfo(QueryUserInfoReq) returns (QueryUserInfoRsp) {}
     // AddUser 添加用户
     rpc AddUser(AddUserReq) returns (CommonRsp) {}
-    // AddClassUserReq 添加班级的用户
-    rpc AddClassUserReq(AddUserReq) returns (CommonRsp) {}
+    // AddClassUser 添加班级的用户
+    rpc AddClassUser(AddUserReq) returns (CommonRsp) {}
     // QueryUserRank 查询用户排名
     rpc QueryUserRank(QueryUserRankReq) returns (QueryUserRankRsp) {}
     // QueryAllUser 查询所有用户
