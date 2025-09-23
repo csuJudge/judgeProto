@@ -29,6 +29,8 @@ type UserServerService interface {
 	QueryUserInfo(ctx context.Context, req *QueryUserInfoReq) (*QueryUserInfoRsp, error)
 	// AddUser AddUser 添加用户
 	AddUser(ctx context.Context, req *AddUserReq) (*CommonRsp, error)
+	// AddClassUserReq AddClassUserReq 添加班级的用户
+	AddClassUserReq(ctx context.Context, req *AddUserReq) (*CommonRsp, error)
 	// QueryUserRank QueryUserRank 查询用户排名
 	QueryUserRank(ctx context.Context, req *QueryUserRankReq) (*QueryUserRankRsp, error)
 	// QueryAllUser QueryAllUser 查询所有用户
@@ -131,6 +133,24 @@ func UserServerService_AddUser_Handler(svr interface{}, ctx context.Context, f s
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
 		return svr.(UserServerService).AddUser(ctx, reqbody.(*AddUserReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func UserServerService_AddClassUserReq_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &AddUserReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(UserServerService).AddClassUserReq(ctx, reqbody.(*AddUserReq))
 	}
 
 	var rsp interface{}
@@ -347,6 +367,10 @@ var UserServerServer_ServiceDesc = server.ServiceDesc{
 			Func: UserServerService_AddUser_Handler,
 		},
 		{
+			Name: "/oj.user.UserServer/AddClassUserReq",
+			Func: UserServerService_AddClassUserReq_Handler,
+		},
+		{
 			Name: "/oj.user.UserServer/QueryUserRank",
 			Func: UserServerService_QueryUserRank_Handler,
 		},
@@ -425,6 +449,11 @@ func (s *UnimplementedUserServer) AddUser(ctx context.Context, req *AddUserReq) 
 	return nil, errors.New("rpc AddUser of service UserServer is not implemented")
 }
 
+// AddClassUserReq AddClassUserReq 添加班级的用户
+func (s *UnimplementedUserServer) AddClassUserReq(ctx context.Context, req *AddUserReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc AddClassUserReq of service UserServer is not implemented")
+}
+
 // QueryUserRank QueryUserRank 查询用户排名
 func (s *UnimplementedUserServer) QueryUserRank(ctx context.Context, req *QueryUserRankReq) (*QueryUserRankRsp, error) {
 	return nil, errors.New("rpc QueryUserRank of service UserServer is not implemented")
@@ -493,6 +522,8 @@ type UserServerClientProxy interface {
 	QueryUserInfo(ctx context.Context, req *QueryUserInfoReq, opts ...client.Option) (rsp *QueryUserInfoRsp, err error)
 	// AddUser AddUser 添加用户
 	AddUser(ctx context.Context, req *AddUserReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// AddClassUserReq AddClassUserReq 添加班级的用户
+	AddClassUserReq(ctx context.Context, req *AddUserReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryUserRank QueryUserRank 查询用户排名
 	QueryUserRank(ctx context.Context, req *QueryUserRankReq, opts ...client.Option) (rsp *QueryUserRankRsp, err error)
 	// QueryAllUser QueryAllUser 查询所有用户
@@ -613,6 +644,26 @@ func (c *UserServerClientProxyImpl) AddUser(ctx context.Context, req *AddUserReq
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("UserServer")
 	msg.WithCalleeMethod("AddUser")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *UserServerClientProxyImpl) AddClassUserReq(ctx context.Context, req *AddUserReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.user.UserServer/AddClassUserReq")
+	msg.WithCalleeServiceName(UserServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("UserServer")
+	msg.WithCalleeMethod("AddClassUserReq")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
