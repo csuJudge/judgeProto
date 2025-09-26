@@ -236,6 +236,21 @@ func (mr *MockSolutionServerServiceMockRecorder) CountUserProblemSolution(ctx, r
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerService)(nil).CountUserProblemSolution), ctx, req)
 }
 
+// QueryAllUserSolution mocks base method.
+func (m *MockSolutionServerService) QueryAllUserSolution(ctx context.Context, req *QueryAllUserSolutionReq) (*QueryAllUserSolutionRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryAllUserSolution", ctx, req)
+	ret0, _ := ret[0].(*QueryAllUserSolutionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryAllUserSolution indicates an expected call of QueryAllUserSolution.
+func (mr *MockSolutionServerServiceMockRecorder) QueryAllUserSolution(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllUserSolution", reflect.TypeOf((*MockSolutionServerService)(nil).QueryAllUserSolution), ctx, req)
+}
+
 // QueryContestCompletionStatus mocks base method.
 func (m *MockSolutionServerService) QueryContestCompletionStatus(ctx context.Context, req *QueryRankDataReq) (*QueryContestCompletionStatusRsp, error) {
 	m.ctrl.T.Helper()
@@ -708,6 +723,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) CountUserProblemSolution(ct
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountUserProblemSolution), varargs...)
+}
+
+// QueryAllUserSolution mocks base method.
+func (m *MockSolutionServerClientProxy) QueryAllUserSolution(ctx context.Context, req *QueryAllUserSolutionReq, opts ...client.Option) (*QueryAllUserSolutionRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryAllUserSolution", varargs...)
+	ret0, _ := ret[0].(*QueryAllUserSolutionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryAllUserSolution indicates an expected call of QueryAllUserSolution.
+func (mr *MockSolutionServerClientProxyMockRecorder) QueryAllUserSolution(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryAllUserSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryAllUserSolution), varargs...)
 }
 
 // QueryContestCompletionStatus mocks base method.

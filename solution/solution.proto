@@ -54,6 +54,19 @@ service SolutionServer {
     rpc CountContestSubmission(CountContestProblemSubmissionReq)returns (CountContestSubmissionRsp){}
     // QueryContestCompletionStatus 查询作业完成情况
     rpc QueryContestCompletionStatus(QueryRankDataReq)returns (QueryContestCompletionStatusRsp){}
+    // QueryAllUserSolution 查询所有用户的提交
+    rpc QueryAllUserSolution(QueryAllUserSolutionReq)returns (QueryAllUserSolutionRsp){}
+}
+
+message QueryAllUserSolutionReq{
+    int32 userID  = 1; // 用户编号
+    int32 problemID = 2; // 题目编号
+}
+
+message QueryAllUserSolutionRsp{
+    string message                = 1;  // 返回信息
+    int32 code                    = 2;  // 返回码
+    repeated Solution solutions = 3; // 提交数据
 }
 
 message QueryContestCompletionStatusRsp{
