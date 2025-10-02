@@ -12,7 +12,7 @@ service KeyActionServer {
 }
 
 service SolutionServer {
-    // CountUserProblemSolution 计算用户题目的提交次数 1
+    // CountUserProblemSolution 计算用户题目的提交次数
     rpc CountUserProblemSolution(CountUserProblemSolutionReq) returns (CountUserProblemSolutionRsp) {}
     // RejudgeSolution 重判
     rpc RejudgeSolution(RejudgeSolutionReq) returns (CommonRsp) {}
@@ -49,64 +49,73 @@ service SolutionServer {
     // QueryTodaySolution 查询今天的提交
     rpc QueryTodaySolution(QueryTodaySolutionReq) returns (QueryTodaySolutionRsp) {}
     // CalSolutionDifference 计算时间的差值
-    rpc CalSolutionDifference(CalSolutionDifferenceReq) returns (CalSolutionDifferenceRsp){}
+    rpc CalSolutionDifference(CalSolutionDifferenceReq) returns (CalSolutionDifferenceRsp) {}
     // CountContestSubmission 获取考试的提交数据
-    rpc CountContestSubmission(CountContestProblemSubmissionReq)returns (CountContestSubmissionRsp){}
+    rpc CountContestSubmission(CountContestProblemSubmissionReq) returns (CountContestSubmissionRsp) {}
     // QueryContestCompletionStatus 查询作业完成情况
-    rpc QueryContestCompletionStatus(QueryRankDataReq)returns (QueryContestCompletionStatusRsp){}
+    rpc QueryContestCompletionStatus(QueryRankDataReq) returns (QueryContestCompletionStatusRsp) {}
     // QueryAllUserSolution 查询所有用户的提交
-    rpc QueryAllUserSolution(QueryAllUserSolutionReq)returns (QueryAllUserSolutionRsp){}
+    rpc QueryAllUserSolution(QueryAllUserSolutionReq) returns (QueryAllUserSolutionRsp) {}
+    // CountProblemSolutionStatistics 统计所有题目的提交
+    rpc CountProblemSolutionStatistics(QueryAllUserSolutionReq) returns (CountProblemSolutionStatisticsRsp) {}
 }
 
-message QueryAllUserSolutionReq{
-    int32 userID  = 1; // 用户编号
-    int32 problemID = 2; // 题目编号
-}
-
-message QueryAllUserSolutionRsp{
+message CountProblemSolutionStatisticsRsp {
     string message                = 1;  // 返回信息
     int32 code                    = 2;  // 返回码
-    repeated Solution solutions = 3; // 提交数据
+    ClassifiedSolution statistics = 3;  // 统计数据
+    repeated string solutions     = 4;  // 提交
 }
 
-message QueryContestCompletionStatusRsp{
+message QueryAllUserSolutionReq {
+    int32 userID    = 1;  // 用户编号
+    int32 problemID = 2;  // 题目编号
+}
+
+message QueryAllUserSolutionRsp {
+    string message              = 1;  // 返回信息
+    int32 code                  = 2;  // 返回码
+    repeated Solution solutions = 3;  // 提交数据
+}
+
+message QueryContestCompletionStatusRsp {
+    string message                     = 1;  // 返回信息
+    int32 code                         = 2;  // 返回码
+    int32 totalUser                    = 3;  // 总人数
+    repeated CompletionStatus statuses = 4;  // 完成状况
+}
+
+message CompletionStatus {
+    string problemName = 1;  // 题目名称
+    int32 solved       = 2;  // 解决数
+}
+
+message CalSolutionDifferenceReq {
+    int32 problemID = 1;  // 题目编号
+    int32 userID    = 2;  // 用户编号
+}
+
+message CalSolutionDifferenceRsp {
     string message                = 1;  // 返回信息
     int32 code                    = 2;  // 返回码
-    int32 totalUser = 3; // 总人数
-    repeated CompletionStatus statuses = 4; // 完成状况
+    repeated int32 timeDifference = 3;  // 时间差值
 }
 
-message CompletionStatus{
-    string problemName = 1; // 题目名称
-    int32 solved = 2; // 解决数
+message QueryUserContestSubmissionReq {
+    int32 userID      = 1;  // 用户编号
+    string problemIDs = 2;  // 题目列表
+    int32 contestID   = 3;  // 作业列表
 }
 
-message CalSolutionDifferenceReq{
-    int32 problemID = 1; // 题目编号
-    int32 userID = 2; // 用户编号
-}
-
-message CalSolutionDifferenceRsp{
-    string message                = 1;  // 返回信息
-    int32 code                    = 2;  // 返回码
-    repeated int32 timeDifference = 3; // 时间差值
-}
-
-message QueryUserContestSubmissionReq{
-    int32 userID = 1; // 用户编号
-    string problemIDs = 2; // 题目列表
-    int32 contestID = 3; // 作业列表
-}
-
-message QueryUserContestSubmissionRsp{
-    string message                = 1;  // 返回信息
-    int32 code                    = 2;  // 返回码
-    repeated UserProblemCondition condition = 3; // 题目的完成状态
+message QueryUserContestSubmissionRsp {
+    string message                          = 1;  // 返回信息
+    int32 code                              = 2;  // 返回码
+    repeated UserProblemCondition condition = 3;  // 题目的完成状态
 }
 
 message UserProblemCondition {
-    int32 problemID = 1; // 题目编号
-    int32 isDone = 2; // 是否做完
+    int32 problemID = 1;  // 题目编号
+    int32 isDone    = 2;  // 是否做完
 }
 
 message QueryTodaySolutionRsp {
@@ -116,9 +125,9 @@ message QueryTodaySolutionRsp {
     repeated int32 timeRange      = 4;  // 时间跨度
 }
 
-message QueryTodaySolutionReq{
-    int32 userID = 1;  // 用户编号
-    string classIDs = 2; // 班级编号
+message QueryTodaySolutionReq {
+    int32 userID    = 1;  // 用户编号
+    string classIDs = 2;  // 班级编号
 }
 
 message UserIDReq {
@@ -184,7 +193,7 @@ message ClassifiedSolution {
 message QueryContestRankDataReq {
     int32 contestID = 1;  // 作业编号
     int32 userID    = 2;  // 用户编号
-    int32 queryType = 3; // 排名类型
+    int32 queryType = 3;  // 排名类型
 }
 
 message QueryContestRankDataRsp {
@@ -242,16 +251,16 @@ message AddSolutionRsp {
 }
 
 message QuerySolutionReq {
-    int32 contestID = 1;  // 作业编号
-    int32 page      = 2;  // 页
-    int32 limit     = 3;  // 页大小
-    int32 userID    = 4;  // 用户编号
-    int32 result    = 5;  // 结果
-    string user     = 6;  // 姓名 or 学号
-    int32 language  = 7;  // 语言
-    int32 problemID = 8;  // 题目编号
-    string classID = 9; // 班级编号
-    int32 queryType = 10; // 请求类型
+    int32 contestID = 1;   // 作业编号
+    int32 page      = 2;   // 页
+    int32 limit     = 3;   // 页大小
+    int32 userID    = 4;   // 用户编号
+    int32 result    = 5;   // 结果
+    string user     = 6;   // 姓名 or 学号
+    int32 language  = 7;   // 语言
+    int32 problemID = 8;   // 题目编号
+    string classID  = 9;   // 班级编号
+    int32 queryType = 10;  // 请求类型
 }
 
 message QuerySolutionRsp {

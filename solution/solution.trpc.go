@@ -103,7 +103,7 @@ func RegisterKeyActionServerService(s server.Service, svr KeyActionServerService
 
 // SolutionServerService defines service.
 type SolutionServerService interface {
-	// CountUserProblemSolution CountUserProblemSolution 计算用户题目的提交次数 1
+	// CountUserProblemSolution CountUserProblemSolution 计算用户题目的提交次数
 	CountUserProblemSolution(ctx context.Context, req *CountUserProblemSolutionReq) (*CountUserProblemSolutionRsp, error)
 	// RejudgeSolution RejudgeSolution 重判
 	RejudgeSolution(ctx context.Context, req *RejudgeSolutionReq) (*CommonRsp, error)
@@ -147,6 +147,8 @@ type SolutionServerService interface {
 	QueryContestCompletionStatus(ctx context.Context, req *QueryRankDataReq) (*QueryContestCompletionStatusRsp, error)
 	// QueryAllUserSolution QueryAllUserSolution 查询所有用户的提交
 	QueryAllUserSolution(ctx context.Context, req *QueryAllUserSolutionReq) (*QueryAllUserSolutionRsp, error)
+	// CountProblemSolutionStatistics CountProblemSolutionStatistics 统计所有题目的提交
+	CountProblemSolutionStatistics(ctx context.Context, req *QueryAllUserSolutionReq) (*CountProblemSolutionStatisticsRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -545,6 +547,24 @@ func SolutionServerService_QueryAllUserSolution_Handler(svr interface{}, ctx con
 	return rsp, nil
 }
 
+func SolutionServerService_CountProblemSolutionStatistics_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryAllUserSolutionReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).CountProblemSolutionStatistics(ctx, reqbody.(*QueryAllUserSolutionReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -638,6 +658,10 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 			Name: "/oj.solution.SolutionServer/QueryAllUserSolution",
 			Func: SolutionServerService_QueryAllUserSolution_Handler,
 		},
+		{
+			Name: "/oj.solution.SolutionServer/CountProblemSolutionStatistics",
+			Func: SolutionServerService_CountProblemSolutionStatistics_Handler,
+		},
 	},
 }
 
@@ -664,7 +688,7 @@ func (s *UnimplementedKeyActionServer) AddKeyAction(ctx context.Context, req *Ad
 
 type UnimplementedSolutionServer struct{}
 
-// CountUserProblemSolution CountUserProblemSolution 计算用户题目的提交次数 1
+// CountUserProblemSolution CountUserProblemSolution 计算用户题目的提交次数
 func (s *UnimplementedSolutionServer) CountUserProblemSolution(ctx context.Context, req *CountUserProblemSolutionReq) (*CountUserProblemSolutionRsp, error) {
 	return nil, errors.New("rpc CountUserProblemSolution of service SolutionServer is not implemented")
 }
@@ -774,6 +798,11 @@ func (s *UnimplementedSolutionServer) QueryAllUserSolution(ctx context.Context, 
 	return nil, errors.New("rpc QueryAllUserSolution of service SolutionServer is not implemented")
 }
 
+// CountProblemSolutionStatistics CountProblemSolutionStatistics 统计所有题目的提交
+func (s *UnimplementedSolutionServer) CountProblemSolutionStatistics(ctx context.Context, req *QueryAllUserSolutionReq) (*CountProblemSolutionStatisticsRsp, error) {
+	return nil, errors.New("rpc CountProblemSolutionStatistics of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -850,7 +879,7 @@ func (c *KeyActionServerClientProxyImpl) AddKeyAction(ctx context.Context, req *
 
 // SolutionServerClientProxy defines service client proxy
 type SolutionServerClientProxy interface {
-	// CountUserProblemSolution CountUserProblemSolution 计算用户题目的提交次数 1
+	// CountUserProblemSolution CountUserProblemSolution 计算用户题目的提交次数
 	CountUserProblemSolution(ctx context.Context, req *CountUserProblemSolutionReq, opts ...client.Option) (rsp *CountUserProblemSolutionRsp, err error)
 	// RejudgeSolution RejudgeSolution 重判
 	RejudgeSolution(ctx context.Context, req *RejudgeSolutionReq, opts ...client.Option) (rsp *CommonRsp, err error)
@@ -894,6 +923,8 @@ type SolutionServerClientProxy interface {
 	QueryContestCompletionStatus(ctx context.Context, req *QueryRankDataReq, opts ...client.Option) (rsp *QueryContestCompletionStatusRsp, err error)
 	// QueryAllUserSolution QueryAllUserSolution 查询所有用户的提交
 	QueryAllUserSolution(ctx context.Context, req *QueryAllUserSolutionReq, opts ...client.Option) (rsp *QueryAllUserSolutionRsp, err error)
+	// CountProblemSolutionStatistics CountProblemSolutionStatistics 统计所有题目的提交
+	CountProblemSolutionStatistics(ctx context.Context, req *QueryAllUserSolutionReq, opts ...client.Option) (rsp *CountProblemSolutionStatisticsRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -1339,6 +1370,26 @@ func (c *SolutionServerClientProxyImpl) QueryAllUserSolution(ctx context.Context
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryAllUserSolutionRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) CountProblemSolutionStatistics(ctx context.Context, req *QueryAllUserSolutionReq, opts ...client.Option) (*CountProblemSolutionStatisticsRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/CountProblemSolutionStatistics")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("CountProblemSolutionStatistics")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CountProblemSolutionStatisticsRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
