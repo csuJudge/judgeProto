@@ -8,10 +8,18 @@ service NoteServer {
     rpc QueryNote(QueryNoteReq) returns (QueryNoteRsp) {}
     // OperateNote 操作题解
     rpc OperateNote(OperateNoteReq) returns (OperateNoteRsp) {}
+    // UpdateNoteStatus 更新题解状态
+    rpc UpdateNoteStatus(UpdateNoteStatusReq) returns (OperateNoteRsp) {}
+}
+
+message UpdateNoteStatusReq{
+    int32 noteID = 1; // 笔记编号
+    int32 userID = 2; // 用户编号
+    int32 status = 3; // 状态
 }
 
 message QueryNoteReq {
-    int32 problemID = 1;  // 题目编号
+    int32 relationID = 1;  // 关联编号
     int32 userID    = 2;  // 用户编号
     int32 noteType = 3; // 题解类型
 }
@@ -19,7 +27,17 @@ message QueryNoteReq {
 message QueryNoteRsp {
     string message = 1;  // 返回信息
     int32 code     = 2;  // 返回码
-    string note    = 3;  // 题解
+    Note note    = 3;  // 题解
+}
+
+message Note {
+    string note    = 1;  // 题解
+    int32 noteID = 2; // 笔记编号
+    int32 enable = 3; // 状态
+    string creator = 4; // 创建人
+    string updater = 5; // 更新人
+    string createdTime = 6; // 创建时间
+    string updatedTime = 7; // 更新时间
 }
 
 message OperateNoteReq {

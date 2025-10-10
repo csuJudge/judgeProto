@@ -75,6 +75,21 @@ func (mr *MockNoteServerServiceMockRecorder) QueryNote(ctx, req any) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryNote", reflect.TypeOf((*MockNoteServerService)(nil).QueryNote), ctx, req)
 }
 
+// UpdateNoteStatus mocks base method.
+func (m *MockNoteServerService) UpdateNoteStatus(ctx context.Context, req *UpdateNoteStatusReq) (*OperateNoteRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateNoteStatus", ctx, req)
+	ret0, _ := ret[0].(*OperateNoteRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateNoteStatus indicates an expected call of UpdateNoteStatus.
+func (mr *MockNoteServerServiceMockRecorder) UpdateNoteStatus(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNoteStatus", reflect.TypeOf((*MockNoteServerService)(nil).UpdateNoteStatus), ctx, req)
+}
+
 // MockNoteServerClientProxy is a mock of NoteServerClientProxy interface.
 type MockNoteServerClientProxy struct {
 	ctrl     *gomock.Controller
@@ -141,4 +156,24 @@ func (mr *MockNoteServerClientProxyMockRecorder) QueryNote(ctx, req any, opts ..
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryNote", reflect.TypeOf((*MockNoteServerClientProxy)(nil).QueryNote), varargs...)
+}
+
+// UpdateNoteStatus mocks base method.
+func (m *MockNoteServerClientProxy) UpdateNoteStatus(ctx context.Context, req *UpdateNoteStatusReq, opts ...client.Option) (*OperateNoteRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateNoteStatus", varargs...)
+	ret0, _ := ret[0].(*OperateNoteRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateNoteStatus indicates an expected call of UpdateNoteStatus.
+func (mr *MockNoteServerClientProxyMockRecorder) UpdateNoteStatus(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNoteStatus", reflect.TypeOf((*MockNoteServerClientProxy)(nil).UpdateNoteStatus), varargs...)
 }
