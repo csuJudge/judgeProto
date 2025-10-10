@@ -13,6 +13,7 @@ service NoteServer {
 message QueryNoteReq {
     int32 problemID = 1;  // 题目编号
     int32 userID    = 2;  // 用户编号
+    int32 noteType = 3; // 题解类型
 }
 
 message QueryNoteRsp {
@@ -24,7 +25,8 @@ message QueryNoteRsp {
 message OperateNoteReq {
     int32 userID    = 1;  // 用户编号
     string note     = 2;  // 笔记
-    int32 problemID = 3;  // 题目编号
+    int32 relationID = 3;  // 题目编号
+    int32 noteType = 4; // 题解类型
 }
 message OperateNoteRsp {
     string message = 1;  // 返回信息
