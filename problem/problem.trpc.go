@@ -57,6 +57,8 @@ type ProblemServerService interface {
 	CopyProblem(ctx context.Context, req *CopyProblemReq) (*CommonRsp, error)
 	// QueryAllMyContestProblem QueryAllMyContestProblem 查询我的所以作业的题目数据
 	QueryAllMyContestProblem(ctx context.Context, req *UserIDReq) (*QueryAllMyContestProblemRsp, error)
+	// QueryProblemType QueryProblemType 查询我的所以作业的题目数据
+	QueryProblemType(ctx context.Context, req *QueryProblemReq) (*QueryProblemTypeRsp, error)
 }
 
 func ProblemServerService_QueryProblem_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -401,6 +403,24 @@ func ProblemServerService_QueryAllMyContestProblem_Handler(svr interface{}, ctx 
 	return rsp, nil
 }
 
+func ProblemServerService_QueryProblemType_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryProblemReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ProblemServerService).QueryProblemType(ctx, reqbody.(*QueryProblemReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // ProblemServerServer_ServiceDesc descriptor for server.RegisterService.
 var ProblemServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.problem.ProblemServer",
@@ -481,6 +501,10 @@ var ProblemServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.problem.ProblemServer/QueryAllMyContestProblem",
 			Func: ProblemServerService_QueryAllMyContestProblem_Handler,
+		},
+		{
+			Name: "/oj.problem.ProblemServer/QueryProblemType",
+			Func: ProblemServerService_QueryProblemType_Handler,
 		},
 	},
 }
@@ -778,6 +802,11 @@ func (s *UnimplementedProblemServer) QueryAllMyContestProblem(ctx context.Contex
 	return nil, errors.New("rpc QueryAllMyContestProblem of service ProblemServer is not implemented")
 }
 
+// QueryProblemType QueryProblemType 查询我的所以作业的题目数据
+func (s *UnimplementedProblemServer) QueryProblemType(ctx context.Context, req *QueryProblemReq) (*QueryProblemTypeRsp, error) {
+	return nil, errors.New("rpc QueryProblemType of service ProblemServer is not implemented")
+}
+
 type UnimplementedObjectiveServer struct{}
 
 // AddObjective AddObjective 添加客观题
@@ -861,6 +890,8 @@ type ProblemServerClientProxy interface {
 	CopyProblem(ctx context.Context, req *CopyProblemReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryAllMyContestProblem QueryAllMyContestProblem 查询我的所以作业的题目数据
 	QueryAllMyContestProblem(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryAllMyContestProblemRsp, err error)
+	// QueryProblemType QueryProblemType 查询我的所以作业的题目数据
+	QueryProblemType(ctx context.Context, req *QueryProblemReq, opts ...client.Option) (rsp *QueryProblemTypeRsp, err error)
 }
 
 type ProblemServerClientProxyImpl struct {
@@ -1246,6 +1277,26 @@ func (c *ProblemServerClientProxyImpl) QueryAllMyContestProblem(ctx context.Cont
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryAllMyContestProblemRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ProblemServerClientProxyImpl) QueryProblemType(ctx context.Context, req *QueryProblemReq, opts ...client.Option) (*QueryProblemTypeRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.problem.ProblemServer/QueryProblemType")
+	msg.WithCalleeServiceName(ProblemServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ProblemServer")
+	msg.WithCalleeMethod("QueryProblemType")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryProblemTypeRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

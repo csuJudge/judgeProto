@@ -240,6 +240,21 @@ func (mr *MockProblemServerServiceMockRecorder) QueryProblemName(ctx, req any) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryProblemName", reflect.TypeOf((*MockProblemServerService)(nil).QueryProblemName), ctx, req)
 }
 
+// QueryProblemType mocks base method.
+func (m *MockProblemServerService) QueryProblemType(ctx context.Context, req *QueryProblemReq) (*QueryProblemTypeRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryProblemType", ctx, req)
+	ret0, _ := ret[0].(*QueryProblemTypeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryProblemType indicates an expected call of QueryProblemType.
+func (mr *MockProblemServerServiceMockRecorder) QueryProblemType(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryProblemType", reflect.TypeOf((*MockProblemServerService)(nil).QueryProblemType), ctx, req)
+}
+
 // UpdateContestProblem mocks base method.
 func (m *MockProblemServerService) UpdateContestProblem(ctx context.Context, req *UpdateContestProblemReq) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
@@ -749,6 +764,26 @@ func (mr *MockProblemServerClientProxyMockRecorder) QueryProblemName(ctx, req an
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryProblemName", reflect.TypeOf((*MockProblemServerClientProxy)(nil).QueryProblemName), varargs...)
+}
+
+// QueryProblemType mocks base method.
+func (m *MockProblemServerClientProxy) QueryProblemType(ctx context.Context, req *QueryProblemReq, opts ...client.Option) (*QueryProblemTypeRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryProblemType", varargs...)
+	ret0, _ := ret[0].(*QueryProblemTypeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryProblemType indicates an expected call of QueryProblemType.
+func (mr *MockProblemServerClientProxyMockRecorder) QueryProblemType(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryProblemType", reflect.TypeOf((*MockProblemServerClientProxy)(nil).QueryProblemType), varargs...)
 }
 
 // UpdateContestProblem mocks base method.
