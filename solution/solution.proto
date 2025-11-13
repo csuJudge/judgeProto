@@ -376,7 +376,7 @@ message QueryRuntimeInfoRsp {
     string message          = 1;  // 返回信息
     int32 code              = 2;  // 返回码
     string runtimeInfo      = 3;  // 运行信息
-    int32 compileInfoLength = 4;  //  编译信息的长度
+    string compileInfo = 4;  //  编译信息
 }
 
 message RejudgeSolutionReq {
