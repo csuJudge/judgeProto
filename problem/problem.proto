@@ -185,8 +185,8 @@ message DeleteProblemDataReq {
 message UpdateProblemDataReq {
     int32 problemID   = 1;  // 问题编号
     string sampleName = 2;  // 样例名
-    string input      = 3;  // 输入
-    string output     = 4;  // 输出
+    string content      = 3;  // 内容
+    string updateType     = 4;  // 更新类别
     int32 userID      = 5;  // 用户编号
 }
 
@@ -212,9 +212,8 @@ message QueryProblemDataReq {
 message QueryProblemDataRsp {
     string message = 1;  // 返回信息
     int32 code     = 2;  // 返回码
-    string input   = 3;  // 输入
-    string output  = 4;  // 输出
-    bool eof = 5;         // 是否到达文件末尾
+    string content   = 3;  // 输入
+    bool eof = 4;         // 是否到达文件末尾
 }
 
 message QueryProblemDataListReq {
