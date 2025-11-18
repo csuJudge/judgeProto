@@ -205,6 +205,8 @@ message QueryProblemDataReq {
     string sampleName = 2;  // 样例名称
     int32 userID      = 3;  // 用户编号
     int64 offset = 4; // 偏移量
+    int64 size = 5; // 需要的大小
+    int32  queryType = 6;  // 请求的类型，1为in，2为out
 }
 
 message QueryProblemDataRsp {
