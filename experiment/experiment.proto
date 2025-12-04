@@ -23,6 +23,8 @@ message AddCodeReq{
   int32 userID = 3; // 用户编号
   int32 codeType = 4;  // 代码类型
   string  fileName = 5; // 代码名称
+  int32 solutionType = 6; // 提交类型
+  string remoteIP = 7; // 提交IP
 }
 
 message QueryCodeReq{
@@ -42,4 +44,6 @@ message AddKeyActionReq{
   string startTime = 3; // 开始时间
   int32 problemID = 4; // 题目编号
   int32 userID = 5; // 用户编号
+  int32 solutionType = 6; // 提交类型
+  string remoteIP = 7; // 提交IP
 }
