@@ -35,7 +35,7 @@ message QueryCodeReq{
 message QueryCodeRsp{
   string message = 1;  // 返回信息
   int32 code     = 2;  // 返回码
-  string userCode = 3; // 代码
+  Code userCode = 3; // 代码
 }
 
 message AddKeyActionReq{
@@ -46,4 +46,9 @@ message AddKeyActionReq{
   int32 userID = 5; // 用户编号
   int32 solutionType = 6; // 提交类型
   string remoteIP = 7; // 提交IP
+}
+
+message Code{
+  int32 Language = 1; // 语言
+  string Code = 2; // 代码
 }
