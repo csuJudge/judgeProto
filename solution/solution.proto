@@ -216,6 +216,7 @@ message Rank {
     string number                             = 4;  // 用户学工号
     float score                               = 5;  // 总得分
     repeated ContestSolutionData solutionData = 6;  // 作业提交数据
+    int64 timeCost = 7; // 耗时
 }
 
 message ContestSolutionData {
@@ -419,6 +420,7 @@ message Solution {
     int32 codeView         = 14;  // 代码是否可见
     string problemName     = 15;  // 题目名称
     string userNumber      = 16;  // 用户学号
+    int64 timeCost = 17; // 耗费时间
 }
 
 message Code {

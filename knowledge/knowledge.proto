@@ -10,8 +10,6 @@ service KnowledgeServer {
     rpc AddKnowledge(AddKnowledgeReq) returns (CommonRsp) {}
     // QueryProblemKnowledge 查询题目的知识点
     rpc QueryProblemKnowledge(QueryProblemKnowledgeReq) returns (QueryProblemKnowledgeRsp) {}
-    // QueryAllProblemKnowledge 查询题目所有的知识点
-    rpc QueryAllProblemKnowledge(QueryProblemKnowledgeReq) returns (QueryProblemKnowledgeRsp) {}
     // UpdateKnowledge 更新知识点
     rpc UpdateKnowledge(UpdateKnowledgeReq) returns (CommonRsp) {}
     // UpdateKnowledgeStatus 更新知识点状态
