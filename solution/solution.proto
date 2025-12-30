@@ -71,7 +71,7 @@ message CountClassSolutionReq{
 message CountClassSolutionRsp{
     string message                = 1;  // 返回信息
     int32 code                    = 2;  // 返回码
-    UserSolution userSolution = 3; // 学生提交数据
+    repeated UserSolution userSolution = 3; // 学生提交数据
 }
 
 message UserSolution{
