@@ -149,6 +149,8 @@ type SolutionServerService interface {
 	QueryAllUserSolution(ctx context.Context, req *QueryAllUserSolutionReq) (*QueryAllUserSolutionRsp, error)
 	// CountProblemSolutionStatistics CountProblemSolutionStatistics 统计所有题目的提交
 	CountProblemSolutionStatistics(ctx context.Context, req *QueryAllUserSolutionReq) (*CountProblemSolutionStatisticsRsp, error)
+	// CountClassSolution CountClassSolution 统计班级的学生的提交数据
+	CountClassSolution(ctx context.Context, req *CountClassSolutionReq) (*CountClassSolutionRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -565,6 +567,24 @@ func SolutionServerService_CountProblemSolutionStatistics_Handler(svr interface{
 	return rsp, nil
 }
 
+func SolutionServerService_CountClassSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &CountClassSolutionReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).CountClassSolution(ctx, reqbody.(*CountClassSolutionReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -661,6 +681,10 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/CountProblemSolutionStatistics",
 			Func: SolutionServerService_CountProblemSolutionStatistics_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/CountClassSolution",
+			Func: SolutionServerService_CountClassSolution_Handler,
 		},
 	},
 }
@@ -803,6 +827,11 @@ func (s *UnimplementedSolutionServer) CountProblemSolutionStatistics(ctx context
 	return nil, errors.New("rpc CountProblemSolutionStatistics of service SolutionServer is not implemented")
 }
 
+// CountClassSolution CountClassSolution 统计班级的学生的提交数据
+func (s *UnimplementedSolutionServer) CountClassSolution(ctx context.Context, req *CountClassSolutionReq) (*CountClassSolutionRsp, error) {
+	return nil, errors.New("rpc CountClassSolution of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -925,6 +954,8 @@ type SolutionServerClientProxy interface {
 	QueryAllUserSolution(ctx context.Context, req *QueryAllUserSolutionReq, opts ...client.Option) (rsp *QueryAllUserSolutionRsp, err error)
 	// CountProblemSolutionStatistics CountProblemSolutionStatistics 统计所有题目的提交
 	CountProblemSolutionStatistics(ctx context.Context, req *QueryAllUserSolutionReq, opts ...client.Option) (rsp *CountProblemSolutionStatisticsRsp, err error)
+	// CountClassSolution CountClassSolution 统计班级的学生的提交数据
+	CountClassSolution(ctx context.Context, req *CountClassSolutionReq, opts ...client.Option) (rsp *CountClassSolutionRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -1390,6 +1421,26 @@ func (c *SolutionServerClientProxyImpl) CountProblemSolutionStatistics(ctx conte
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CountProblemSolutionStatisticsRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) CountClassSolution(ctx context.Context, req *CountClassSolutionReq, opts ...client.Option) (*CountClassSolutionRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/CountClassSolution")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("CountClassSolution")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CountClassSolutionRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

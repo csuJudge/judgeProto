@@ -58,6 +58,26 @@ service SolutionServer {
     rpc QueryAllUserSolution(QueryAllUserSolutionReq) returns (QueryAllUserSolutionRsp) {}
     // CountProblemSolutionStatistics 统计所有题目的提交
     rpc CountProblemSolutionStatistics(QueryAllUserSolutionReq) returns (CountProblemSolutionStatisticsRsp) {}
+    // CountClassSolution 统计班级的学生的提交数据
+    rpc CountClassSolution(CountClassSolutionReq) returns (CountClassSolutionRsp) {}
+}
+
+message CountClassSolutionReq{
+    string start = 1; // 开始时间
+    string end = 2; // 结束时间
+    string user = 3; // 学生
+}
+
+message CountClassSolutionRsp{
+    string message                = 1;  // 返回信息
+    int32 code                    = 2;  // 返回码
+    UserSolution userSolution = 3; // 学生提交数据
+}
+
+message UserSolution{
+    ClassifiedSolution statistics = 1;  // 统计数据
+    string name = 2; // 用户名
+    string number = 3; // 学号
 }
 
 message CountProblemSolutionStatisticsRsp {
