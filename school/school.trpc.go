@@ -308,6 +308,8 @@ type ClassServerService interface {
 	QueryAllRelationCourse(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryAllRelationRsp, error)
 	// CountClassUser CountClassUser 计算班级人数
 	CountClassUser(ctx context.Context, req *CountClassUserReq) (*CountClassUserRsp, error)
+	// QueryAllMyClassUser QueryAllMyClassUser 查询我班级的所有人
+	QueryAllMyClassUser(ctx context.Context, req *QueryClassReq) (*QueryClassUserRsp, error)
 }
 
 func ClassServerService_QueryUserClass_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -580,6 +582,24 @@ func ClassServerService_CountClassUser_Handler(svr interface{}, ctx context.Cont
 	return rsp, nil
 }
 
+func ClassServerService_QueryAllMyClassUser_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryClassReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ClassServerService).QueryAllMyClassUser(ctx, reqbody.(*QueryClassReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // ClassServerServer_ServiceDesc descriptor for server.RegisterService.
 var ClassServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.school.ClassServer",
@@ -644,6 +664,10 @@ var ClassServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.school.ClassServer/CountClassUser",
 			Func: ClassServerService_CountClassUser_Handler,
+		},
+		{
+			Name: "/oj.school.ClassServer/QueryAllMyClassUser",
+			Func: ClassServerService_QueryAllMyClassUser_Handler,
 		},
 	},
 }
@@ -973,6 +997,11 @@ func (s *UnimplementedClassServer) CountClassUser(ctx context.Context, req *Coun
 	return nil, errors.New("rpc CountClassUser of service ClassServer is not implemented")
 }
 
+// QueryAllMyClassUser QueryAllMyClassUser 查询我班级的所有人
+func (s *UnimplementedClassServer) QueryAllMyClassUser(ctx context.Context, req *QueryClassReq) (*QueryClassUserRsp, error) {
+	return nil, errors.New("rpc QueryAllMyClassUser of service ClassServer is not implemented")
+}
+
 type UnimplementedTermServer struct{}
 
 // AddTerm AddTerm 添加学期
@@ -1281,6 +1310,8 @@ type ClassServerClientProxy interface {
 	QueryAllRelationCourse(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (rsp *QueryAllRelationRsp, err error)
 	// CountClassUser CountClassUser 计算班级人数
 	CountClassUser(ctx context.Context, req *CountClassUserReq, opts ...client.Option) (rsp *CountClassUserRsp, err error)
+	// QueryAllMyClassUser QueryAllMyClassUser 查询我班级的所有人
+	QueryAllMyClassUser(ctx context.Context, req *QueryClassReq, opts ...client.Option) (rsp *QueryClassUserRsp, err error)
 }
 
 type ClassServerClientProxyImpl struct {
@@ -1586,6 +1617,26 @@ func (c *ClassServerClientProxyImpl) CountClassUser(ctx context.Context, req *Co
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CountClassUserRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ClassServerClientProxyImpl) QueryAllMyClassUser(ctx context.Context, req *QueryClassReq, opts ...client.Option) (*QueryClassUserRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.school.ClassServer/QueryAllMyClassUser")
+	msg.WithCalleeServiceName(ClassServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ClassServer")
+	msg.WithCalleeMethod("QueryAllMyClassUser")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryClassUserRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
