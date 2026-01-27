@@ -60,6 +60,21 @@ func (mr *MockCaptchaServerServiceMockRecorder) SendCaptcha(ctx, req any) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendCaptcha", reflect.TypeOf((*MockCaptchaServerService)(nil).SendCaptcha), ctx, req)
 }
 
+// VerifyCaptcha mocks base method.
+func (m *MockCaptchaServerService) VerifyCaptcha(ctx context.Context, req *VerifyCaptchaReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "VerifyCaptcha", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// VerifyCaptcha indicates an expected call of VerifyCaptcha.
+func (mr *MockCaptchaServerServiceMockRecorder) VerifyCaptcha(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "VerifyCaptcha", reflect.TypeOf((*MockCaptchaServerService)(nil).VerifyCaptcha), ctx, req)
+}
+
 // MockCaptchaServerClientProxy is a mock of CaptchaServerClientProxy interface.
 type MockCaptchaServerClientProxy struct {
 	ctrl     *gomock.Controller
@@ -106,4 +121,24 @@ func (mr *MockCaptchaServerClientProxyMockRecorder) SendCaptcha(ctx, req any, op
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendCaptcha", reflect.TypeOf((*MockCaptchaServerClientProxy)(nil).SendCaptcha), varargs...)
+}
+
+// VerifyCaptcha mocks base method.
+func (m *MockCaptchaServerClientProxy) VerifyCaptcha(ctx context.Context, req *VerifyCaptchaReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "VerifyCaptcha", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// VerifyCaptcha indicates an expected call of VerifyCaptcha.
+func (mr *MockCaptchaServerClientProxyMockRecorder) VerifyCaptcha(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "VerifyCaptcha", reflect.TypeOf((*MockCaptchaServerClientProxy)(nil).VerifyCaptcha), varargs...)
 }

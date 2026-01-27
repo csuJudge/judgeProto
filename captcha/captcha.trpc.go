@@ -21,6 +21,8 @@ import (
 type CaptchaServerService interface {
 	// SendCaptcha SendCaptcha 发送验证码
 	SendCaptcha(ctx context.Context, req *SendCaptchaReq) (*SendCaptchaRsp, error)
+	// VerifyCaptcha VerifyCaptcha 验证验证码
+	VerifyCaptcha(ctx context.Context, req *VerifyCaptchaReq) (*CommonRsp, error)
 }
 
 func CaptchaServerService_SendCaptcha_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -41,6 +43,24 @@ func CaptchaServerService_SendCaptcha_Handler(svr interface{}, ctx context.Conte
 	return rsp, nil
 }
 
+func CaptchaServerService_VerifyCaptcha_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &VerifyCaptchaReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(CaptchaServerService).VerifyCaptcha(ctx, reqbody.(*VerifyCaptchaReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // CaptchaServerServer_ServiceDesc descriptor for server.RegisterService.
 var CaptchaServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.captcha.CaptchaServer",
@@ -49,6 +69,10 @@ var CaptchaServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.captcha.CaptchaServer/SendCaptcha",
 			Func: CaptchaServerService_SendCaptcha_Handler,
+		},
+		{
+			Name: "/oj.captcha.CaptchaServer/VerifyCaptcha",
+			Func: CaptchaServerService_VerifyCaptcha_Handler,
 		},
 	},
 }
@@ -69,6 +93,11 @@ func (s *UnimplementedCaptchaServer) SendCaptcha(ctx context.Context, req *SendC
 	return nil, errors.New("rpc SendCaptcha of service CaptchaServer is not implemented")
 }
 
+// VerifyCaptcha VerifyCaptcha 验证验证码
+func (s *UnimplementedCaptchaServer) VerifyCaptcha(ctx context.Context, req *VerifyCaptchaReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc VerifyCaptcha of service CaptchaServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -79,6 +108,8 @@ func (s *UnimplementedCaptchaServer) SendCaptcha(ctx context.Context, req *SendC
 type CaptchaServerClientProxy interface {
 	// SendCaptcha SendCaptcha 发送验证码
 	SendCaptcha(ctx context.Context, req *SendCaptchaReq, opts ...client.Option) (rsp *SendCaptchaRsp, err error)
+	// VerifyCaptcha VerifyCaptcha 验证验证码
+	VerifyCaptcha(ctx context.Context, req *VerifyCaptchaReq, opts ...client.Option) (rsp *CommonRsp, err error)
 }
 
 type CaptchaServerClientProxyImpl struct {
@@ -104,6 +135,26 @@ func (c *CaptchaServerClientProxyImpl) SendCaptcha(ctx context.Context, req *Sen
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &SendCaptchaRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *CaptchaServerClientProxyImpl) VerifyCaptcha(ctx context.Context, req *VerifyCaptchaReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.captcha.CaptchaServer/VerifyCaptcha")
+	msg.WithCalleeServiceName(CaptchaServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("CaptchaServer")
+	msg.WithCalleeMethod("VerifyCaptcha")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

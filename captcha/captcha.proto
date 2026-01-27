@@ -6,6 +6,18 @@ package oj.captcha;
 service CaptchaServer {
   // SendCaptcha 发送验证码
   rpc SendCaptcha(SendCaptchaReq) returns (SendCaptchaRsp) {}
+  // VerifyCaptcha 验证验证码
+  rpc VerifyCaptcha(VerifyCaptchaReq) returns (CommonRsp) {}
+}
+
+message VerifyCaptchaReq{
+  string captchaID = 1; // 验证码编号
+  string captcha = 2; // 验证码
+}
+
+message CommonRsp {
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
 }
 
 message SendCaptchaRsp {
