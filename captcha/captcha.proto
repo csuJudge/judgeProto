@@ -1,0 +1,20 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto/captcha";
+
+package oj.captcha;
+
+service CaptchaServer {
+  // SendCaptcha 发送验证码
+  rpc SendCaptcha(SendCaptchaReq) returns (SendCaptchaRsp) {}
+}
+
+message SendCaptchaRsp {
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+  string captchaID = 3; // 验证码编号
+}
+
+message SendCaptchaReq{
+  string receive = 1; // 手机号或者邮箱号
+  int32 registerType = 2; // 注册的类型
+}
