@@ -29,6 +29,8 @@ type UserServerService interface {
 	QueryUserInfo(ctx context.Context, req *QueryUserInfoReq) (*QueryUserInfoRsp, error)
 	// AddUser AddUser 添加用户
 	AddUser(ctx context.Context, req *AddUserReq) (*CommonRsp, error)
+	// RegisterUser RegisterUser 注册用户
+	RegisterUser(ctx context.Context, req *RegisterUserReq) (*LoginRsp, error)
 	// AddClassUser AddClassUser 添加班级的用户
 	AddClassUser(ctx context.Context, req *AddUserReq) (*CommonRsp, error)
 	// QueryUserRank QueryUserRank 查询用户排名
@@ -133,6 +135,24 @@ func UserServerService_AddUser_Handler(svr interface{}, ctx context.Context, f s
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
 		return svr.(UserServerService).AddUser(ctx, reqbody.(*AddUserReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func UserServerService_RegisterUser_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &RegisterUserReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(UserServerService).RegisterUser(ctx, reqbody.(*RegisterUserReq))
 	}
 
 	var rsp interface{}
@@ -367,6 +387,10 @@ var UserServerServer_ServiceDesc = server.ServiceDesc{
 			Func: UserServerService_AddUser_Handler,
 		},
 		{
+			Name: "/oj.user.UserServer/RegisterUser",
+			Func: UserServerService_RegisterUser_Handler,
+		},
+		{
 			Name: "/oj.user.UserServer/AddClassUser",
 			Func: UserServerService_AddClassUser_Handler,
 		},
@@ -449,6 +473,11 @@ func (s *UnimplementedUserServer) AddUser(ctx context.Context, req *AddUserReq) 
 	return nil, errors.New("rpc AddUser of service UserServer is not implemented")
 }
 
+// RegisterUser RegisterUser 注册用户
+func (s *UnimplementedUserServer) RegisterUser(ctx context.Context, req *RegisterUserReq) (*LoginRsp, error) {
+	return nil, errors.New("rpc RegisterUser of service UserServer is not implemented")
+}
+
 // AddClassUser AddClassUser 添加班级的用户
 func (s *UnimplementedUserServer) AddClassUser(ctx context.Context, req *AddUserReq) (*CommonRsp, error) {
 	return nil, errors.New("rpc AddClassUser of service UserServer is not implemented")
@@ -522,6 +551,8 @@ type UserServerClientProxy interface {
 	QueryUserInfo(ctx context.Context, req *QueryUserInfoReq, opts ...client.Option) (rsp *QueryUserInfoRsp, err error)
 	// AddUser AddUser 添加用户
 	AddUser(ctx context.Context, req *AddUserReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// RegisterUser RegisterUser 注册用户
+	RegisterUser(ctx context.Context, req *RegisterUserReq, opts ...client.Option) (rsp *LoginRsp, err error)
 	// AddClassUser AddClassUser 添加班级的用户
 	AddClassUser(ctx context.Context, req *AddUserReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryUserRank QueryUserRank 查询用户排名
@@ -649,6 +680,26 @@ func (c *UserServerClientProxyImpl) AddUser(ctx context.Context, req *AddUserReq
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *UserServerClientProxyImpl) RegisterUser(ctx context.Context, req *RegisterUserReq, opts ...client.Option) (*LoginRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.user.UserServer/RegisterUser")
+	msg.WithCalleeServiceName(UserServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("UserServer")
+	msg.WithCalleeMethod("RegisterUser")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &LoginRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

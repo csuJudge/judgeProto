@@ -14,6 +14,8 @@ service UserServer {
     rpc QueryUserInfo(QueryUserInfoReq) returns (QueryUserInfoRsp) {}
     // AddUser 添加用户
     rpc AddUser(AddUserReq) returns (CommonRsp) {}
+    // RegisterUser 注册用户
+    rpc RegisterUser(RegisterUserReq) returns (LoginRsp) {}
     // AddClassUser 添加班级的用户
     rpc AddClassUser(AddUserReq) returns (CommonRsp) {}
     // QueryUserRank 查询用户排名
@@ -162,6 +164,22 @@ message QueryUserRankRsp {
     repeated UserRank rank = 3;  // 排名数据
     int32 total            = 4;  // 总数
 }
+
+message RegisterUserReq{
+    int32 userID    = 1;  // 用户编号（创建者）
+    string name     = 2;  // 用户名
+    string email    = 3;  // 邮箱
+    string phone    = 4;  // 电话号
+    string class    = 5;  // 行政班级
+    string password = 6;  // 密码
+    int32 privilege = 7;  // 权限
+    string number   = 8;  // 学工号
+    string classIDs = 9; // 班级
+    string courseIDs = 10; // 课程
+    int32 registerType = 11; // 注册
+    string captcha = 12; // 验证码
+    string captchaID = 13; // 验证码ID
+ }
 
 message AddUserReq {
     int32 userID    = 1;  // 用户编号（创建者）

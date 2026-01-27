@@ -210,6 +210,21 @@ func (mr *MockUserServerServiceMockRecorder) QueryUserRank(ctx, req any) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserRank", reflect.TypeOf((*MockUserServerService)(nil).QueryUserRank), ctx, req)
 }
 
+// RegisterUser mocks base method.
+func (m *MockUserServerService) RegisterUser(ctx context.Context, req *RegisterUserReq) (*LoginRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RegisterUser", ctx, req)
+	ret0, _ := ret[0].(*LoginRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RegisterUser indicates an expected call of RegisterUser.
+func (mr *MockUserServerServiceMockRecorder) RegisterUser(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterUser", reflect.TypeOf((*MockUserServerService)(nil).RegisterUser), ctx, req)
+}
+
 // UpdateClassUser mocks base method.
 func (m *MockUserServerService) UpdateClassUser(ctx context.Context, req *UpdateClassUserReq) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
@@ -531,6 +546,26 @@ func (mr *MockUserServerClientProxyMockRecorder) QueryUserRank(ctx, req any, opt
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserRank", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryUserRank), varargs...)
+}
+
+// RegisterUser mocks base method.
+func (m *MockUserServerClientProxy) RegisterUser(ctx context.Context, req *RegisterUserReq, opts ...client.Option) (*LoginRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "RegisterUser", varargs...)
+	ret0, _ := ret[0].(*LoginRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RegisterUser indicates an expected call of RegisterUser.
+func (mr *MockUserServerClientProxyMockRecorder) RegisterUser(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterUser", reflect.TypeOf((*MockUserServerClientProxy)(nil).RegisterUser), varargs...)
 }
 
 // UpdateClassUser mocks base method.
