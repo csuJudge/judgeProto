@@ -61,10 +61,10 @@ func (mr *MockCaptchaServerServiceMockRecorder) SendCaptcha(ctx, req any) *gomoc
 }
 
 // VerifyCaptcha mocks base method.
-func (m *MockCaptchaServerService) VerifyCaptcha(ctx context.Context, req *VerifyCaptchaReq) (*CommonRsp, error) {
+func (m *MockCaptchaServerService) VerifyCaptcha(ctx context.Context, req *VerifyCaptchaReq) (*VerifyCaptchaRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "VerifyCaptcha", ctx, req)
-	ret0, _ := ret[0].(*CommonRsp)
+	ret0, _ := ret[0].(*VerifyCaptchaRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -124,14 +124,14 @@ func (mr *MockCaptchaServerClientProxyMockRecorder) SendCaptcha(ctx, req any, op
 }
 
 // VerifyCaptcha mocks base method.
-func (m *MockCaptchaServerClientProxy) VerifyCaptcha(ctx context.Context, req *VerifyCaptchaReq, opts ...client.Option) (*CommonRsp, error) {
+func (m *MockCaptchaServerClientProxy) VerifyCaptcha(ctx context.Context, req *VerifyCaptchaReq, opts ...client.Option) (*VerifyCaptchaRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "VerifyCaptcha", varargs...)
-	ret0, _ := ret[0].(*CommonRsp)
+	ret0, _ := ret[0].(*VerifyCaptchaRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

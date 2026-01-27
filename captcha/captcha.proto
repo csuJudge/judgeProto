@@ -7,7 +7,7 @@ service CaptchaServer {
   // SendCaptcha 发送验证码
   rpc SendCaptcha(SendCaptchaReq) returns (SendCaptchaRsp) {}
   // VerifyCaptcha 验证验证码
-  rpc VerifyCaptcha(VerifyCaptchaReq) returns (CommonRsp) {}
+  rpc VerifyCaptcha(VerifyCaptchaReq) returns (VerifyCaptchaRsp) {}
 }
 
 message VerifyCaptchaReq{
@@ -15,9 +15,10 @@ message VerifyCaptchaReq{
   string captcha = 2; // 验证码
 }
 
-message CommonRsp {
+message VerifyCaptchaRsp {
   string message = 1;  // 返回信息
   int32 code     = 2;  // 返回码
+  bool isValid = 3; // 是否正确
 }
 
 message SendCaptchaRsp {
