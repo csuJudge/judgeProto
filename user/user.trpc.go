@@ -30,7 +30,7 @@ type UserServerService interface {
 	// AddUser AddUser 添加用户
 	AddUser(ctx context.Context, req *AddUserReq) (*CommonRsp, error)
 	// RegisterUser RegisterUser 注册用户
-	RegisterUser(ctx context.Context, req *RegisterUserReq) (*LoginRsp, error)
+	RegisterUser(ctx context.Context, req *RegisterUserReq) (*RegisterUserRsp, error)
 	// AddClassUser AddClassUser 添加班级的用户
 	AddClassUser(ctx context.Context, req *AddUserReq) (*CommonRsp, error)
 	// QueryUserRank QueryUserRank 查询用户排名
@@ -474,7 +474,7 @@ func (s *UnimplementedUserServer) AddUser(ctx context.Context, req *AddUserReq) 
 }
 
 // RegisterUser RegisterUser 注册用户
-func (s *UnimplementedUserServer) RegisterUser(ctx context.Context, req *RegisterUserReq) (*LoginRsp, error) {
+func (s *UnimplementedUserServer) RegisterUser(ctx context.Context, req *RegisterUserReq) (*RegisterUserRsp, error) {
 	return nil, errors.New("rpc RegisterUser of service UserServer is not implemented")
 }
 
@@ -552,7 +552,7 @@ type UserServerClientProxy interface {
 	// AddUser AddUser 添加用户
 	AddUser(ctx context.Context, req *AddUserReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// RegisterUser RegisterUser 注册用户
-	RegisterUser(ctx context.Context, req *RegisterUserReq, opts ...client.Option) (rsp *LoginRsp, err error)
+	RegisterUser(ctx context.Context, req *RegisterUserReq, opts ...client.Option) (rsp *RegisterUserRsp, err error)
 	// AddClassUser AddClassUser 添加班级的用户
 	AddClassUser(ctx context.Context, req *AddUserReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryUserRank QueryUserRank 查询用户排名
@@ -686,7 +686,7 @@ func (c *UserServerClientProxyImpl) AddUser(ctx context.Context, req *AddUserReq
 	return rsp, nil
 }
 
-func (c *UserServerClientProxyImpl) RegisterUser(ctx context.Context, req *RegisterUserReq, opts ...client.Option) (*LoginRsp, error) {
+func (c *UserServerClientProxyImpl) RegisterUser(ctx context.Context, req *RegisterUserReq, opts ...client.Option) (*RegisterUserRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.user.UserServer/RegisterUser")
@@ -699,7 +699,7 @@ func (c *UserServerClientProxyImpl) RegisterUser(ctx context.Context, req *Regis
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &LoginRsp{}
+	rsp := &RegisterUserRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

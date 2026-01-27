@@ -211,10 +211,10 @@ func (mr *MockUserServerServiceMockRecorder) QueryUserRank(ctx, req any) *gomock
 }
 
 // RegisterUser mocks base method.
-func (m *MockUserServerService) RegisterUser(ctx context.Context, req *RegisterUserReq) (*LoginRsp, error) {
+func (m *MockUserServerService) RegisterUser(ctx context.Context, req *RegisterUserReq) (*RegisterUserRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RegisterUser", ctx, req)
-	ret0, _ := ret[0].(*LoginRsp)
+	ret0, _ := ret[0].(*RegisterUserRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -549,14 +549,14 @@ func (mr *MockUserServerClientProxyMockRecorder) QueryUserRank(ctx, req any, opt
 }
 
 // RegisterUser mocks base method.
-func (m *MockUserServerClientProxy) RegisterUser(ctx context.Context, req *RegisterUserReq, opts ...client.Option) (*LoginRsp, error) {
+func (m *MockUserServerClientProxy) RegisterUser(ctx context.Context, req *RegisterUserReq, opts ...client.Option) (*RegisterUserRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "RegisterUser", varargs...)
-	ret0, _ := ret[0].(*LoginRsp)
+	ret0, _ := ret[0].(*RegisterUserRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

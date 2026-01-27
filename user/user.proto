@@ -15,7 +15,7 @@ service UserServer {
     // AddUser 添加用户
     rpc AddUser(AddUserReq) returns (CommonRsp) {}
     // RegisterUser 注册用户
-    rpc RegisterUser(RegisterUserReq) returns (LoginRsp) {}
+    rpc RegisterUser(RegisterUserReq) returns (RegisterUserRsp) {}
     // AddClassUser 添加班级的用户
     rpc AddClassUser(AddUserReq) returns (CommonRsp) {}
     // QueryUserRank 查询用户排名
@@ -38,6 +38,15 @@ service UserServer {
     rpc UpdateClassUser(UpdateClassUserReq) returns (CommonRsp) {}
     // QueryClassUser 查询班级用户
     rpc QueryClassUser(QueryClassUserReq) returns (QueryClassUserRsp) {}
+}
+
+message RegisterUserRsp{
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+    string token   = 3;  // 秘钥
+    User user      = 4;  // 用户信息
+    bool isValid = 5; // 是否合法
+    string verifyMessage = 6; // 验证信息
 }
 
 message QueryClassUserReq {
