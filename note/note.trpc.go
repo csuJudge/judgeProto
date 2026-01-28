@@ -23,6 +23,8 @@ type NoteServerService interface {
 	QueryNote(ctx context.Context, req *QueryNoteReq) (*QueryNoteRsp, error)
 	// OperateNote OperateNote 操作题解
 	OperateNote(ctx context.Context, req *OperateNoteReq) (*OperateNoteRsp, error)
+	// RateNote RateNote 题解评分
+	RateNote(ctx context.Context, req *RateNoteReq) (*RateNoteRsp, error)
 }
 
 func NoteServerService_QueryNote_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -61,6 +63,24 @@ func NoteServerService_OperateNote_Handler(svr interface{}, ctx context.Context,
 	return rsp, nil
 }
 
+func NoteServerService_RateNote_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &RateNoteReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(NoteServerService).RateNote(ctx, reqbody.(*RateNoteReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // NoteServerServer_ServiceDesc descriptor for server.RegisterService.
 var NoteServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.note.NoteServer",
@@ -73,6 +93,10 @@ var NoteServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.note.NoteServer/OperateNote",
 			Func: NoteServerService_OperateNote_Handler,
+		},
+		{
+			Name: "/oj.note.NoteServer/RateNote",
+			Func: NoteServerService_RateNote_Handler,
 		},
 	},
 }
@@ -98,6 +122,11 @@ func (s *UnimplementedNoteServer) OperateNote(ctx context.Context, req *OperateN
 	return nil, errors.New("rpc OperateNote of service NoteServer is not implemented")
 }
 
+// RateNote RateNote 题解评分
+func (s *UnimplementedNoteServer) RateNote(ctx context.Context, req *RateNoteReq) (*RateNoteRsp, error) {
+	return nil, errors.New("rpc RateNote of service NoteServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -110,6 +139,8 @@ type NoteServerClientProxy interface {
 	QueryNote(ctx context.Context, req *QueryNoteReq, opts ...client.Option) (rsp *QueryNoteRsp, err error)
 	// OperateNote OperateNote 操作题解
 	OperateNote(ctx context.Context, req *OperateNoteReq, opts ...client.Option) (rsp *OperateNoteRsp, err error)
+	// RateNote RateNote 题解评分
+	RateNote(ctx context.Context, req *RateNoteReq, opts ...client.Option) (rsp *RateNoteRsp, err error)
 }
 
 type NoteServerClientProxyImpl struct {
@@ -155,6 +186,26 @@ func (c *NoteServerClientProxyImpl) OperateNote(ctx context.Context, req *Operat
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &OperateNoteRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *NoteServerClientProxyImpl) RateNote(ctx context.Context, req *RateNoteReq, opts ...client.Option) (*RateNoteRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.note.NoteServer/RateNote")
+	msg.WithCalleeServiceName(NoteServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("NoteServer")
+	msg.WithCalleeMethod("RateNote")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &RateNoteRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
