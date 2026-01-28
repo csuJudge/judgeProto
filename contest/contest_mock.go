@@ -75,6 +75,21 @@ func (mr *MockContestServerServiceMockRecorder) QueryContest(ctx, req any) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContest", reflect.TypeOf((*MockContestServerService)(nil).QueryContest), ctx, req)
 }
 
+// QueryContestLanguageMask mocks base method.
+func (m *MockContestServerService) QueryContestLanguageMask(ctx context.Context, req *QueryContestReq) (*QueryContestLanguageMaskRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryContestLanguageMask", ctx, req)
+	ret0, _ := ret[0].(*QueryContestLanguageMaskRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestLanguageMask indicates an expected call of QueryContestLanguageMask.
+func (mr *MockContestServerServiceMockRecorder) QueryContestLanguageMask(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestLanguageMask", reflect.TypeOf((*MockContestServerService)(nil).QueryContestLanguageMask), ctx, req)
+}
+
 // QueryContestList mocks base method.
 func (m *MockContestServerService) QueryContestList(ctx context.Context, req *QueryContestListReq) (*QueryContestListRsp, error) {
 	m.ctrl.T.Helper()
@@ -216,6 +231,26 @@ func (mr *MockContestServerClientProxyMockRecorder) QueryContest(ctx, req any, o
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContest", reflect.TypeOf((*MockContestServerClientProxy)(nil).QueryContest), varargs...)
+}
+
+// QueryContestLanguageMask mocks base method.
+func (m *MockContestServerClientProxy) QueryContestLanguageMask(ctx context.Context, req *QueryContestReq, opts ...client.Option) (*QueryContestLanguageMaskRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryContestLanguageMask", varargs...)
+	ret0, _ := ret[0].(*QueryContestLanguageMaskRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestLanguageMask indicates an expected call of QueryContestLanguageMask.
+func (mr *MockContestServerClientProxyMockRecorder) QueryContestLanguageMask(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestLanguageMask", reflect.TypeOf((*MockContestServerClientProxy)(nil).QueryContestLanguageMask), varargs...)
 }
 
 // QueryContestList mocks base method.

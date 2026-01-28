@@ -18,6 +18,14 @@ service ContestServer {
     rpc UpdateContest(UpdateContestReq) returns (CommonRsp) {}
     // QueryContestPrivilegeInfo 查询作业的权限信息
     rpc QueryContestPrivilegeInfo(QueryContestPrivilegeInfoReq) returns (QueryContestPrivilegeInfoRsp) {}
+    // QueryContestLanguageMask 查询作业语言列表
+    rpc QueryContestLanguageMask(QueryContestReq)returns (QueryContestLanguageMaskRsp){}
+}
+
+message QueryContestLanguageMaskRsp{
+    string message        = 1;  // 返回信息
+    int32 code            = 2;  // 返回码
+    string languageMask = 3; //  语言列表
 }
 
 message QueryContestPrivilegeInfoReq {

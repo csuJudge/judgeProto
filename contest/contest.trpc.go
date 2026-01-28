@@ -33,6 +33,8 @@ type ContestServerService interface {
 	UpdateContest(ctx context.Context, req *UpdateContestReq) (*CommonRsp, error)
 	// QueryContestPrivilegeInfo QueryContestPrivilegeInfo 查询作业的权限信息
 	QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestPrivilegeInfoReq) (*QueryContestPrivilegeInfoRsp, error)
+	// QueryContestLanguageMask QueryContestLanguageMask 查询作业语言列表
+	QueryContestLanguageMask(ctx context.Context, req *QueryContestReq) (*QueryContestLanguageMaskRsp, error)
 }
 
 func ContestServerService_QueryContest_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -161,6 +163,24 @@ func ContestServerService_QueryContestPrivilegeInfo_Handler(svr interface{}, ctx
 	return rsp, nil
 }
 
+func ContestServerService_QueryContestLanguageMask_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryContestReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ContestServerService).QueryContestLanguageMask(ctx, reqbody.(*QueryContestReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // ContestServerServer_ServiceDesc descriptor for server.RegisterService.
 var ContestServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.contest.ContestServer",
@@ -193,6 +213,10 @@ var ContestServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.contest.ContestServer/QueryContestPrivilegeInfo",
 			Func: ContestServerService_QueryContestPrivilegeInfo_Handler,
+		},
+		{
+			Name: "/oj.contest.ContestServer/QueryContestLanguageMask",
+			Func: ContestServerService_QueryContestLanguageMask_Handler,
 		},
 	},
 }
@@ -243,6 +267,11 @@ func (s *UnimplementedContestServer) QueryContestPrivilegeInfo(ctx context.Conte
 	return nil, errors.New("rpc QueryContestPrivilegeInfo of service ContestServer is not implemented")
 }
 
+// QueryContestLanguageMask QueryContestLanguageMask 查询作业语言列表
+func (s *UnimplementedContestServer) QueryContestLanguageMask(ctx context.Context, req *QueryContestReq) (*QueryContestLanguageMaskRsp, error) {
+	return nil, errors.New("rpc QueryContestLanguageMask of service ContestServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -265,6 +294,8 @@ type ContestServerClientProxy interface {
 	UpdateContest(ctx context.Context, req *UpdateContestReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryContestPrivilegeInfo QueryContestPrivilegeInfo 查询作业的权限信息
 	QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestPrivilegeInfoReq, opts ...client.Option) (rsp *QueryContestPrivilegeInfoRsp, err error)
+	// QueryContestLanguageMask QueryContestLanguageMask 查询作业语言列表
+	QueryContestLanguageMask(ctx context.Context, req *QueryContestReq, opts ...client.Option) (rsp *QueryContestLanguageMaskRsp, err error)
 }
 
 type ContestServerClientProxyImpl struct {
@@ -410,6 +441,26 @@ func (c *ContestServerClientProxyImpl) QueryContestPrivilegeInfo(ctx context.Con
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryContestPrivilegeInfoRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ContestServerClientProxyImpl) QueryContestLanguageMask(ctx context.Context, req *QueryContestReq, opts ...client.Option) (*QueryContestLanguageMaskRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.contest.ContestServer/QueryContestLanguageMask")
+	msg.WithCalleeServiceName(ContestServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ContestServer")
+	msg.WithCalleeMethod("QueryContestLanguageMask")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryContestLanguageMaskRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
