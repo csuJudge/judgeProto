@@ -8,6 +8,8 @@ service NoteServer {
     rpc QueryNote(QueryNoteReq) returns (QueryNoteRsp) {}
     // OperateNote 操作题解
     rpc OperateNote(OperateNoteReq) returns (OperateNoteRsp) {}
+    // RateNote 题解评分
+    rpc RateNote(RateNoteReq) returns (RateNoteRsp) {}
 }
 
 
@@ -20,7 +22,7 @@ message QueryNoteReq {
 message QueryNoteRsp {
     string message = 1;  // 返回信息
     int32 code     = 2;  // 返回码
-    Note note    = 3;  // 题解
+    repeated Note notes = 3;  // 题解列表
 }
 
 message Note {
@@ -31,6 +33,8 @@ message Note {
     string updater = 5; // 更新人
     string createdTime = 6; // 创建时间
     string updatedTime = 7; // 更新时间
+    float avgScore = 8;  // 平均分
+    int32 scoreCount = 9;  // 评分人数
 }
 
 message OperateNoteReq {
@@ -43,4 +47,16 @@ message OperateNoteReq {
 message OperateNoteRsp {
     string message = 1;  // 返回信息
     int32 code     = 2;  // 返回码
+}
+
+message RateNoteReq {
+    int32 noteID = 1;  // 待评分题解编号
+    int32 userID = 2;  // 用户编号
+    int32 score  = 3;  // 分数 (1-5)
+}
+message RateNoteRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+    float newAvgRate = 3; // 新的平均分
+    int32 newRateCount = 4; // 新的评分人数
 }
