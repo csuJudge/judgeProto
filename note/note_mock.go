@@ -45,19 +45,19 @@ func (m *MockNoteServerService) ISGOMOCK() struct{} {
 	return struct{}{}
 }
 
-// OperateNote mocks base method.
-func (m *MockNoteServerService) OperateNote(ctx context.Context, req *OperateNoteReq) (*OperateNoteRsp, error) {
+// AddNote mocks base method.
+func (m *MockNoteServerService) AddNote(ctx context.Context, req *AddNoteReq) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "OperateNote", ctx, req)
-	ret0, _ := ret[0].(*OperateNoteRsp)
+	ret := m.ctrl.Call(m, "AddNote", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// OperateNote indicates an expected call of OperateNote.
-func (mr *MockNoteServerServiceMockRecorder) OperateNote(ctx, req any) *gomock.Call {
+// AddNote indicates an expected call of AddNote.
+func (mr *MockNoteServerServiceMockRecorder) AddNote(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OperateNote", reflect.TypeOf((*MockNoteServerService)(nil).OperateNote), ctx, req)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddNote", reflect.TypeOf((*MockNoteServerService)(nil).AddNote), ctx, req)
 }
 
 // QueryNote mocks base method.
@@ -75,6 +75,21 @@ func (mr *MockNoteServerServiceMockRecorder) QueryNote(ctx, req any) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryNote", reflect.TypeOf((*MockNoteServerService)(nil).QueryNote), ctx, req)
 }
 
+// QueryNotesList mocks base method.
+func (m *MockNoteServerService) QueryNotesList(ctx context.Context, req *QueryNotesListReq) (*QueryNoteRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryNotesList", ctx, req)
+	ret0, _ := ret[0].(*QueryNoteRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryNotesList indicates an expected call of QueryNotesList.
+func (mr *MockNoteServerServiceMockRecorder) QueryNotesList(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryNotesList", reflect.TypeOf((*MockNoteServerService)(nil).QueryNotesList), ctx, req)
+}
+
 // RateNote mocks base method.
 func (m *MockNoteServerService) RateNote(ctx context.Context, req *RateNoteReq) (*RateNoteRsp, error) {
 	m.ctrl.T.Helper()
@@ -88,6 +103,36 @@ func (m *MockNoteServerService) RateNote(ctx context.Context, req *RateNoteReq) 
 func (mr *MockNoteServerServiceMockRecorder) RateNote(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RateNote", reflect.TypeOf((*MockNoteServerService)(nil).RateNote), ctx, req)
+}
+
+// UpdateNote mocks base method.
+func (m *MockNoteServerService) UpdateNote(ctx context.Context, req *UpdateNoteReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateNote", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateNote indicates an expected call of UpdateNote.
+func (mr *MockNoteServerServiceMockRecorder) UpdateNote(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNote", reflect.TypeOf((*MockNoteServerService)(nil).UpdateNote), ctx, req)
+}
+
+// UpdateNoteStatus mocks base method.
+func (m *MockNoteServerService) UpdateNoteStatus(ctx context.Context, req *UpdateNoteStatusReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateNoteStatus", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateNoteStatus indicates an expected call of UpdateNoteStatus.
+func (mr *MockNoteServerServiceMockRecorder) UpdateNoteStatus(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNoteStatus", reflect.TypeOf((*MockNoteServerService)(nil).UpdateNoteStatus), ctx, req)
 }
 
 // MockNoteServerClientProxy is a mock of NoteServerClientProxy interface.
@@ -118,24 +163,24 @@ func (m *MockNoteServerClientProxy) ISGOMOCK() struct{} {
 	return struct{}{}
 }
 
-// OperateNote mocks base method.
-func (m *MockNoteServerClientProxy) OperateNote(ctx context.Context, req *OperateNoteReq, opts ...client.Option) (*OperateNoteRsp, error) {
+// AddNote mocks base method.
+func (m *MockNoteServerClientProxy) AddNote(ctx context.Context, req *AddNoteReq, opts ...client.Option) (*CommonRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "OperateNote", varargs...)
-	ret0, _ := ret[0].(*OperateNoteRsp)
+	ret := m.ctrl.Call(m, "AddNote", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// OperateNote indicates an expected call of OperateNote.
-func (mr *MockNoteServerClientProxyMockRecorder) OperateNote(ctx, req any, opts ...any) *gomock.Call {
+// AddNote indicates an expected call of AddNote.
+func (mr *MockNoteServerClientProxyMockRecorder) AddNote(ctx, req any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OperateNote", reflect.TypeOf((*MockNoteServerClientProxy)(nil).OperateNote), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddNote", reflect.TypeOf((*MockNoteServerClientProxy)(nil).AddNote), varargs...)
 }
 
 // QueryNote mocks base method.
@@ -158,6 +203,26 @@ func (mr *MockNoteServerClientProxyMockRecorder) QueryNote(ctx, req any, opts ..
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryNote", reflect.TypeOf((*MockNoteServerClientProxy)(nil).QueryNote), varargs...)
 }
 
+// QueryNotesList mocks base method.
+func (m *MockNoteServerClientProxy) QueryNotesList(ctx context.Context, req *QueryNotesListReq, opts ...client.Option) (*QueryNoteRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryNotesList", varargs...)
+	ret0, _ := ret[0].(*QueryNoteRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryNotesList indicates an expected call of QueryNotesList.
+func (mr *MockNoteServerClientProxyMockRecorder) QueryNotesList(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryNotesList", reflect.TypeOf((*MockNoteServerClientProxy)(nil).QueryNotesList), varargs...)
+}
+
 // RateNote mocks base method.
 func (m *MockNoteServerClientProxy) RateNote(ctx context.Context, req *RateNoteReq, opts ...client.Option) (*RateNoteRsp, error) {
 	m.ctrl.T.Helper()
@@ -176,4 +241,44 @@ func (mr *MockNoteServerClientProxyMockRecorder) RateNote(ctx, req any, opts ...
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RateNote", reflect.TypeOf((*MockNoteServerClientProxy)(nil).RateNote), varargs...)
+}
+
+// UpdateNote mocks base method.
+func (m *MockNoteServerClientProxy) UpdateNote(ctx context.Context, req *UpdateNoteReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateNote", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateNote indicates an expected call of UpdateNote.
+func (mr *MockNoteServerClientProxyMockRecorder) UpdateNote(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNote", reflect.TypeOf((*MockNoteServerClientProxy)(nil).UpdateNote), varargs...)
+}
+
+// UpdateNoteStatus mocks base method.
+func (m *MockNoteServerClientProxy) UpdateNoteStatus(ctx context.Context, req *UpdateNoteStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateNoteStatus", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateNoteStatus indicates an expected call of UpdateNoteStatus.
+func (mr *MockNoteServerClientProxyMockRecorder) UpdateNoteStatus(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNoteStatus", reflect.TypeOf((*MockNoteServerClientProxy)(nil).UpdateNoteStatus), varargs...)
 }

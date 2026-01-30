@@ -4,49 +4,75 @@ option go_package = "github.com/csuJudge/judgeProto/note";
 package oj.note;
 
 service NoteServer {
+    // UpdateNote 更新题解
+    rpc UpdateNote(UpdateNoteReq) returns (CommonRsp) {}
+    // UpdateNoteStatus 更新题解状态
+    rpc UpdateNoteStatus(UpdateNoteStatusReq) returns (CommonRsp) {}
+    // AddNote 添加题解
+    rpc AddNote(AddNoteReq) returns (CommonRsp) {}
     // QueryNote 查询题解
     rpc QueryNote(QueryNoteReq) returns (QueryNoteRsp) {}
-    // OperateNote 操作题解
-    rpc OperateNote(OperateNoteReq) returns (OperateNoteRsp) {}
     // RateNote 题解评分
     rpc RateNote(RateNoteReq) returns (RateNoteRsp) {}
+    // QueryNotesList 查询题解列表
+    rpc QueryNotesList(QueryNotesListReq) returns (QueryNoteRsp) {}
 }
 
+message QueryNotesListReq {
+    string condition = 1;  // 条件，1的时候为题目名称，2的时候为作业名称
+    int32 page       = 2;  // 页
+    int32 limit      = 3;  // 页大小
+    int32 queryType  = 4;  // 查询类型，1为查询题目，2为查询作业
+}
+
+message UpdateNoteStatusReq {
+    int32 userID = 1;  // 用户编号
+    int32 id     = 2;  // 主键
+    int32 status = 3;  // 状态
+}
+
+message AddNoteReq {
+    int32 userID     = 1;  // 用户编号
+    string note      = 2;  // 笔记
+    int32 relationID = 3;  // 题目编号
+    int32 noteType   = 4;  // 题解类型
+}
+
+message UpdateNoteReq {
+    int32 userID     = 1;  // 用户编号
+    string note      = 2;  // 笔记
+    int32 relationID = 3;  // 题目编号
+    int32 noteType   = 4;  // 题解类型
+    int32 status     = 5;  // 状态
+}
+
+message CommonRsp {
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+}
 
 message QueryNoteReq {
     int32 relationID = 1;  // 关联编号
-    int32 userID    = 2;  // 用户编号
-    int32 noteType = 3; // 题解类型
+    int32 userID     = 2;  // 用户编号
+    int32 noteType   = 3;  // 题解类型
 }
 
 message QueryNoteRsp {
-    string message = 1;  // 返回信息
-    int32 code     = 2;  // 返回码
+    string message      = 1;  // 返回信息
+    int32 code          = 2;  // 返回码
     repeated Note notes = 3;  // 题解列表
 }
 
 message Note {
-    string note    = 1;  // 题解
-    int32 noteID = 2; // 笔记编号
-    int32 enable = 3; // 状态
-    string creator = 4; // 创建人
-    string updater = 5; // 更新人
-    string createdTime = 6; // 创建时间
-    string updatedTime = 7; // 更新时间
-    float avgScore = 8;  // 平均分
-    int32 scoreCount = 9;  // 评分人数
-}
-
-message OperateNoteReq {
-    int32 userID    = 1;  // 用户编号
-    string note     = 2;  // 笔记
-    int32 relationID = 3;  // 题目编号
-    int32 noteType = 4; // 题解类型
-    int32 status = 5; // 状态
-}
-message OperateNoteRsp {
-    string message = 1;  // 返回信息
-    int32 code     = 2;  // 返回码
+    string note        = 1;  // 题解
+    int32 noteID       = 2;  // 笔记编号
+    int32 enable       = 3;  // 状态
+    string creator     = 4;  // 创建人
+    string updater     = 5;  // 更新人
+    string createdTime = 6;  // 创建时间
+    string updatedTime = 7;  // 更新时间
+    float avgScore     = 8;  // 平均分
+    int32 scoreCount   = 9;  // 评分人数
 }
 
 message RateNoteReq {
@@ -55,8 +81,8 @@ message RateNoteReq {
     int32 score  = 3;  // 分数 (1-5)
 }
 message RateNoteRsp {
-    string message = 1;  // 返回信息
-    int32 code     = 2;  // 返回码
-    float newAvgRate = 3; // 新的平均分
-    int32 newRateCount = 4; // 新的评分人数
+    string message     = 1;  // 返回信息
+    int32 code         = 2;  // 返回码
+    float newAvgRate   = 3;  // 新的平均分
+    int32 newRateCount = 4;  // 新的评分人数
 }
