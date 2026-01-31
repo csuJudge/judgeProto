@@ -40,11 +40,10 @@ message AddNoteReq {
 }
 
 message UpdateNoteReq {
-    int32 userID     = 1;  // 用户编号
-    string note      = 2;  // 笔记
-    int32 relationID = 3;  // 题目编号
-    int32 noteType   = 4;  // 题解类型
-    int32 status     = 5;  // 状态
+    int32 userID = 1;  // 用户编号
+    string note  = 2;  // 笔记
+    int32 noteID = 3;  // 主键
+    int32 status = 4;  // 状态
 }
 
 message CommonRsp {
