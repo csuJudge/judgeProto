@@ -61,6 +61,7 @@ message QueryNoteRsp {
     string message      = 1;  // 返回信息
     int32 code          = 2;  // 返回码
     repeated Note notes = 3;  // 题解列表
+    int32 count         = 4;  // 总数
 }
 
 message Note {
