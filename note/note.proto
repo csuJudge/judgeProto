@@ -36,6 +36,7 @@ message AddNoteReq {
     string note      = 2;  // 笔记
     int32 relationID = 3;  // 题目编号
     int32 noteType   = 4;  // 题解类型
+    int32 status     = 5;  // 状态
 }
 
 message UpdateNoteReq {
