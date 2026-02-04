@@ -19,10 +19,9 @@ service NoteServer {
 }
 
 message QueryNotesListReq {
-    string condition = 1;  // 条件，1的时候为题目名称，2的时候为作业名称
-    int32 page       = 2;  // 页
-    int32 limit      = 3;  // 页大小
-    int32 queryType  = 4;  // 查询类型，1为查询题目，2为查询作业
+    int32 page       = 1;  // 页
+    int32 limit      = 2;  // 页大小
+    int32 queryType  = 3;  // 查询类型，1为查询题目，2为查询作业
 }
 
 message UpdateNoteStatusReq {
