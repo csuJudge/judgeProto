@@ -22,6 +22,7 @@ message QueryNotesListReq {
     int32 page       = 1;  // 页
     int32 limit      = 2;  // 页大小
     int32 queryType  = 3;  // 查询类型，1为查询题目，2为查询作业
+    int32 relationID = 4; // 查询的编号
 }
 
 message UpdateNoteStatusReq {
