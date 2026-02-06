@@ -10,12 +10,20 @@ service NoteServer {
     rpc UpdateNoteStatus(UpdateNoteStatusReq) returns (CommonRsp) {}
     // AddNote 添加题解
     rpc AddNote(AddNoteReq) returns (CommonRsp) {}
-    // QueryNote 查询题解
-    rpc QueryNote(QueryNoteReq) returns (QueryNoteRsp) {}
+    // QueryNotes 查询题解
+    rpc QueryNotes(QueryNoteReq) returns (QueryNotesRsp) {}
     // RateNote 题解评分
     rpc RateNote(RateNoteReq) returns (RateNoteRsp) {}
     // QueryNotesList 查询题解列表
-    rpc QueryNotesList(QueryNotesListReq) returns (QueryNoteRsp) {}
+    rpc QueryNotesList(QueryNotesListReq) returns (QueryNotesRsp) {}
+    // QueryNote 查询题解
+    rpc QueryNote(QueryNoteReq) returns (QueryNoteRsp) {}
+}
+
+message QueryNoteRsp{
+    Note note = 1; // 笔记
+    string message = 2;  // 返回信息
+    int32 code     = 3;  // 返回码
 }
 
 message QueryNotesListReq {
@@ -57,7 +65,7 @@ message QueryNoteReq {
     int32 noteType   = 3;  // 题解类型
 }
 
-message QueryNoteRsp {
+message QueryNotesRsp {
     string message      = 1;  // 返回信息
     int32 code          = 2;  // 返回码
     repeated Note notes = 3;  // 题解列表

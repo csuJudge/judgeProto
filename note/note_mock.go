@@ -75,11 +75,26 @@ func (mr *MockNoteServerServiceMockRecorder) QueryNote(ctx, req any) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryNote", reflect.TypeOf((*MockNoteServerService)(nil).QueryNote), ctx, req)
 }
 
+// QueryNotes mocks base method.
+func (m *MockNoteServerService) QueryNotes(ctx context.Context, req *QueryNoteReq) (*QueryNotesRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryNotes", ctx, req)
+	ret0, _ := ret[0].(*QueryNotesRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryNotes indicates an expected call of QueryNotes.
+func (mr *MockNoteServerServiceMockRecorder) QueryNotes(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryNotes", reflect.TypeOf((*MockNoteServerService)(nil).QueryNotes), ctx, req)
+}
+
 // QueryNotesList mocks base method.
-func (m *MockNoteServerService) QueryNotesList(ctx context.Context, req *QueryNotesListReq) (*QueryNoteRsp, error) {
+func (m *MockNoteServerService) QueryNotesList(ctx context.Context, req *QueryNotesListReq) (*QueryNotesRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryNotesList", ctx, req)
-	ret0, _ := ret[0].(*QueryNoteRsp)
+	ret0, _ := ret[0].(*QueryNotesRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -203,15 +218,35 @@ func (mr *MockNoteServerClientProxyMockRecorder) QueryNote(ctx, req any, opts ..
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryNote", reflect.TypeOf((*MockNoteServerClientProxy)(nil).QueryNote), varargs...)
 }
 
+// QueryNotes mocks base method.
+func (m *MockNoteServerClientProxy) QueryNotes(ctx context.Context, req *QueryNoteReq, opts ...client.Option) (*QueryNotesRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryNotes", varargs...)
+	ret0, _ := ret[0].(*QueryNotesRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryNotes indicates an expected call of QueryNotes.
+func (mr *MockNoteServerClientProxyMockRecorder) QueryNotes(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryNotes", reflect.TypeOf((*MockNoteServerClientProxy)(nil).QueryNotes), varargs...)
+}
+
 // QueryNotesList mocks base method.
-func (m *MockNoteServerClientProxy) QueryNotesList(ctx context.Context, req *QueryNotesListReq, opts ...client.Option) (*QueryNoteRsp, error) {
+func (m *MockNoteServerClientProxy) QueryNotesList(ctx context.Context, req *QueryNotesListReq, opts ...client.Option) (*QueryNotesRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "QueryNotesList", varargs...)
-	ret0, _ := ret[0].(*QueryNoteRsp)
+	ret0, _ := ret[0].(*QueryNotesRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
