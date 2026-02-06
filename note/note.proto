@@ -11,13 +11,17 @@ service NoteServer {
     // AddNote 添加题解
     rpc AddNote(AddNoteReq) returns (CommonRsp) {}
     // QueryNotes 查询题解
-    rpc QueryNotes(QueryNoteReq) returns (QueryNotesRsp) {}
+    rpc QueryNotes(QueryNotesReq) returns (QueryNotesRsp) {}
     // RateNote 题解评分
     rpc RateNote(RateNoteReq) returns (RateNoteRsp) {}
     // QueryNotesList 查询题解列表
     rpc QueryNotesList(QueryNotesListReq) returns (QueryNotesRsp) {}
     // QueryNote 查询题解
     rpc QueryNote(QueryNoteReq) returns (QueryNoteRsp) {}
+}
+
+message QueryNoteReq{
+    int32 noteID     = 1;  // 笔记编号
 }
 
 message QueryNoteRsp{
@@ -59,7 +63,7 @@ message CommonRsp {
     int32 code     = 2;  // 返回码
 }
 
-message QueryNoteReq {
+message QueryNotesReq {
     int32 relationID = 1;  // 关联编号
     int32 userID     = 2;  // 用户编号
     int32 noteType   = 3;  // 题解类型

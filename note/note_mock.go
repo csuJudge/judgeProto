@@ -76,7 +76,7 @@ func (mr *MockNoteServerServiceMockRecorder) QueryNote(ctx, req any) *gomock.Cal
 }
 
 // QueryNotes mocks base method.
-func (m *MockNoteServerService) QueryNotes(ctx context.Context, req *QueryNoteReq) (*QueryNotesRsp, error) {
+func (m *MockNoteServerService) QueryNotes(ctx context.Context, req *QueryNotesReq) (*QueryNotesRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryNotes", ctx, req)
 	ret0, _ := ret[0].(*QueryNotesRsp)
@@ -219,7 +219,7 @@ func (mr *MockNoteServerClientProxyMockRecorder) QueryNote(ctx, req any, opts ..
 }
 
 // QueryNotes mocks base method.
-func (m *MockNoteServerClientProxy) QueryNotes(ctx context.Context, req *QueryNoteReq, opts ...client.Option) (*QueryNotesRsp, error) {
+func (m *MockNoteServerClientProxy) QueryNotes(ctx context.Context, req *QueryNotesReq, opts ...client.Option) (*QueryNotesRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {

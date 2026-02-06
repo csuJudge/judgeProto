@@ -26,7 +26,7 @@ type NoteServerService interface {
 	// AddNote AddNote 添加题解
 	AddNote(ctx context.Context, req *AddNoteReq) (*CommonRsp, error)
 	// QueryNotes QueryNotes 查询题解
-	QueryNotes(ctx context.Context, req *QueryNoteReq) (*QueryNotesRsp, error)
+	QueryNotes(ctx context.Context, req *QueryNotesReq) (*QueryNotesRsp, error)
 	// RateNote RateNote 题解评分
 	RateNote(ctx context.Context, req *RateNoteReq) (*RateNoteRsp, error)
 	// QueryNotesList QueryNotesList 查询题解列表
@@ -90,13 +90,13 @@ func NoteServerService_AddNote_Handler(svr interface{}, ctx context.Context, f s
 }
 
 func NoteServerService_QueryNotes_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &QueryNoteReq{}
+	req := &QueryNotesReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(NoteServerService).QueryNotes(ctx, reqbody.(*QueryNoteReq))
+		return svr.(NoteServerService).QueryNotes(ctx, reqbody.(*QueryNotesReq))
 	}
 
 	var rsp interface{}
@@ -224,7 +224,7 @@ func (s *UnimplementedNoteServer) AddNote(ctx context.Context, req *AddNoteReq) 
 }
 
 // QueryNotes QueryNotes 查询题解
-func (s *UnimplementedNoteServer) QueryNotes(ctx context.Context, req *QueryNoteReq) (*QueryNotesRsp, error) {
+func (s *UnimplementedNoteServer) QueryNotes(ctx context.Context, req *QueryNotesReq) (*QueryNotesRsp, error) {
 	return nil, errors.New("rpc QueryNotes of service NoteServer is not implemented")
 }
 
@@ -258,7 +258,7 @@ type NoteServerClientProxy interface {
 	// AddNote AddNote 添加题解
 	AddNote(ctx context.Context, req *AddNoteReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryNotes QueryNotes 查询题解
-	QueryNotes(ctx context.Context, req *QueryNoteReq, opts ...client.Option) (rsp *QueryNotesRsp, err error)
+	QueryNotes(ctx context.Context, req *QueryNotesReq, opts ...client.Option) (rsp *QueryNotesRsp, err error)
 	// RateNote RateNote 题解评分
 	RateNote(ctx context.Context, req *RateNoteReq, opts ...client.Option) (rsp *RateNoteRsp, err error)
 	// QueryNotesList QueryNotesList 查询题解列表
@@ -336,7 +336,7 @@ func (c *NoteServerClientProxyImpl) AddNote(ctx context.Context, req *AddNoteReq
 	return rsp, nil
 }
 
-func (c *NoteServerClientProxyImpl) QueryNotes(ctx context.Context, req *QueryNoteReq, opts ...client.Option) (*QueryNotesRsp, error) {
+func (c *NoteServerClientProxyImpl) QueryNotes(ctx context.Context, req *QueryNotesReq, opts ...client.Option) (*QueryNotesRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.note.NoteServer/QueryNotes")
