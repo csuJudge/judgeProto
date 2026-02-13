@@ -17,7 +17,7 @@ service ContestServer {
     // UpdateContest 更新作业
     rpc UpdateContest(UpdateContestReq) returns (CommonRsp) {}
     // QueryContestPrivilegeInfo 查询作业的权限信息
-    rpc QueryContestPrivilegeInfo(QueryContestPrivilegeInfoReq) returns (QueryContestPrivilegeInfoRsp) {}
+    rpc QueryContestPrivilegeInfo(QueryContestReq) returns (QueryContestPrivilegeInfoRsp) {}
     // QueryContestLanguageMask 查询作业语言列表
     rpc QueryContestLanguageMask(QueryContestReq)returns (QueryContestLanguageMaskRsp){}
 }
@@ -28,9 +28,6 @@ message QueryContestLanguageMaskRsp{
     string languageMask = 3; //  语言列表
 }
 
-message QueryContestPrivilegeInfoReq {
-    int32 userID = 1;  // 用户编号
-}
 
 message QueryContestPrivilegeInfoRsp {
     string message        = 1;  // 返回信息

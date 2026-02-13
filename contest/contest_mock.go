@@ -106,7 +106,7 @@ func (mr *MockContestServerServiceMockRecorder) QueryContestList(ctx, req any) *
 }
 
 // QueryContestPrivilegeInfo mocks base method.
-func (m *MockContestServerService) QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestPrivilegeInfoReq) (*QueryContestPrivilegeInfoRsp, error) {
+func (m *MockContestServerService) QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestReq) (*QueryContestPrivilegeInfoRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryContestPrivilegeInfo", ctx, req)
 	ret0, _ := ret[0].(*QueryContestPrivilegeInfoRsp)
@@ -274,7 +274,7 @@ func (mr *MockContestServerClientProxyMockRecorder) QueryContestList(ctx, req an
 }
 
 // QueryContestPrivilegeInfo mocks base method.
-func (m *MockContestServerClientProxy) QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestPrivilegeInfoReq, opts ...client.Option) (*QueryContestPrivilegeInfoRsp, error) {
+func (m *MockContestServerClientProxy) QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestReq, opts ...client.Option) (*QueryContestPrivilegeInfoRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {

@@ -32,7 +32,7 @@ type ContestServerService interface {
 	// UpdateContest UpdateContest 更新作业
 	UpdateContest(ctx context.Context, req *UpdateContestReq) (*CommonRsp, error)
 	// QueryContestPrivilegeInfo QueryContestPrivilegeInfo 查询作业的权限信息
-	QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestPrivilegeInfoReq) (*QueryContestPrivilegeInfoRsp, error)
+	QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestReq) (*QueryContestPrivilegeInfoRsp, error)
 	// QueryContestLanguageMask QueryContestLanguageMask 查询作业语言列表
 	QueryContestLanguageMask(ctx context.Context, req *QueryContestReq) (*QueryContestLanguageMaskRsp, error)
 }
@@ -146,13 +146,13 @@ func ContestServerService_UpdateContest_Handler(svr interface{}, ctx context.Con
 }
 
 func ContestServerService_QueryContestPrivilegeInfo_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &QueryContestPrivilegeInfoReq{}
+	req := &QueryContestReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(ContestServerService).QueryContestPrivilegeInfo(ctx, reqbody.(*QueryContestPrivilegeInfoReq))
+		return svr.(ContestServerService).QueryContestPrivilegeInfo(ctx, reqbody.(*QueryContestReq))
 	}
 
 	var rsp interface{}
@@ -263,7 +263,7 @@ func (s *UnimplementedContestServer) UpdateContest(ctx context.Context, req *Upd
 }
 
 // QueryContestPrivilegeInfo QueryContestPrivilegeInfo 查询作业的权限信息
-func (s *UnimplementedContestServer) QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestPrivilegeInfoReq) (*QueryContestPrivilegeInfoRsp, error) {
+func (s *UnimplementedContestServer) QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestReq) (*QueryContestPrivilegeInfoRsp, error) {
 	return nil, errors.New("rpc QueryContestPrivilegeInfo of service ContestServer is not implemented")
 }
 
@@ -293,7 +293,7 @@ type ContestServerClientProxy interface {
 	// UpdateContest UpdateContest 更新作业
 	UpdateContest(ctx context.Context, req *UpdateContestReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryContestPrivilegeInfo QueryContestPrivilegeInfo 查询作业的权限信息
-	QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestPrivilegeInfoReq, opts ...client.Option) (rsp *QueryContestPrivilegeInfoRsp, err error)
+	QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestReq, opts ...client.Option) (rsp *QueryContestPrivilegeInfoRsp, err error)
 	// QueryContestLanguageMask QueryContestLanguageMask 查询作业语言列表
 	QueryContestLanguageMask(ctx context.Context, req *QueryContestReq, opts ...client.Option) (rsp *QueryContestLanguageMaskRsp, err error)
 }
@@ -427,7 +427,7 @@ func (c *ContestServerClientProxyImpl) UpdateContest(ctx context.Context, req *U
 	return rsp, nil
 }
 
-func (c *ContestServerClientProxyImpl) QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestPrivilegeInfoReq, opts ...client.Option) (*QueryContestPrivilegeInfoRsp, error) {
+func (c *ContestServerClientProxyImpl) QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestReq, opts ...client.Option) (*QueryContestPrivilegeInfoRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.contest.ContestServer/QueryContestPrivilegeInfo")
