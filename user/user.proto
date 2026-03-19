@@ -20,6 +20,8 @@ service UserServer {
     rpc AddClassUser(AddUserReq) returns (CommonRsp) {}
     // QueryUserRank 查询用户排名
     rpc QueryUserRank(QueryUserRankReq) returns (QueryUserRankRsp) {}
+    // QueryUserRank 查询用户排名
+    rpc QueryUserSolvedRank(QueryTeacherReq) returns (QueryUserSolvedRankRsp) {}
     // QueryAllUser 查询所有用户
     rpc QueryAllUser(QueryUserReq) returns (QueryAllUserRsp) {}
     // UpdateUser 更新用户
@@ -38,6 +40,11 @@ service UserServer {
     rpc UpdateClassUser(UpdateClassUserReq) returns (CommonRsp) {}
     // QueryClassUser 查询班级用户
     rpc QueryClassUser(QueryClassUserReq) returns (QueryClassUserRsp) {}
+}
+
+message QueryUserSolvedRankRsp{
+    int32 rank = 1; // 排名
+    int32 gap = 2; // 距离上一名的差距
 }
 
 message RegisterUserRsp{

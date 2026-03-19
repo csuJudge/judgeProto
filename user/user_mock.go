@@ -210,6 +210,21 @@ func (mr *MockUserServerServiceMockRecorder) QueryUserRank(ctx, req any) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserRank", reflect.TypeOf((*MockUserServerService)(nil).QueryUserRank), ctx, req)
 }
 
+// QueryUserSolvedRank mocks base method.
+func (m *MockUserServerService) QueryUserSolvedRank(ctx context.Context, req *QueryTeacherReq) (*QueryUserSolvedRankRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryUserSolvedRank", ctx, req)
+	ret0, _ := ret[0].(*QueryUserSolvedRankRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserSolvedRank indicates an expected call of QueryUserSolvedRank.
+func (mr *MockUserServerServiceMockRecorder) QueryUserSolvedRank(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserSolvedRank", reflect.TypeOf((*MockUserServerService)(nil).QueryUserSolvedRank), ctx, req)
+}
+
 // RegisterUser mocks base method.
 func (m *MockUserServerService) RegisterUser(ctx context.Context, req *RegisterUserReq) (*RegisterUserRsp, error) {
 	m.ctrl.T.Helper()
@@ -546,6 +561,26 @@ func (mr *MockUserServerClientProxyMockRecorder) QueryUserRank(ctx, req any, opt
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserRank", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryUserRank), varargs...)
+}
+
+// QueryUserSolvedRank mocks base method.
+func (m *MockUserServerClientProxy) QueryUserSolvedRank(ctx context.Context, req *QueryTeacherReq, opts ...client.Option) (*QueryUserSolvedRankRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryUserSolvedRank", varargs...)
+	ret0, _ := ret[0].(*QueryUserSolvedRankRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserSolvedRank indicates an expected call of QueryUserSolvedRank.
+func (mr *MockUserServerClientProxyMockRecorder) QueryUserSolvedRank(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserSolvedRank", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryUserSolvedRank), varargs...)
 }
 
 // RegisterUser mocks base method.

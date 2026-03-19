@@ -35,6 +35,8 @@ type UserServerService interface {
 	AddClassUser(ctx context.Context, req *AddUserReq) (*CommonRsp, error)
 	// QueryUserRank QueryUserRank 查询用户排名
 	QueryUserRank(ctx context.Context, req *QueryUserRankReq) (*QueryUserRankRsp, error)
+	// QueryUserSolvedRank QueryUserRank 查询用户排名
+	QueryUserSolvedRank(ctx context.Context, req *QueryTeacherReq) (*QueryUserSolvedRankRsp, error)
 	// QueryAllUser QueryAllUser 查询所有用户
 	QueryAllUser(ctx context.Context, req *QueryUserReq) (*QueryAllUserRsp, error)
 	// UpdateUser UpdateUser 更新用户
@@ -189,6 +191,24 @@ func UserServerService_QueryUserRank_Handler(svr interface{}, ctx context.Contex
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
 		return svr.(UserServerService).QueryUserRank(ctx, reqbody.(*QueryUserRankReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func UserServerService_QueryUserSolvedRank_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryTeacherReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(UserServerService).QueryUserSolvedRank(ctx, reqbody.(*QueryTeacherReq))
 	}
 
 	var rsp interface{}
@@ -399,6 +419,10 @@ var UserServerServer_ServiceDesc = server.ServiceDesc{
 			Func: UserServerService_QueryUserRank_Handler,
 		},
 		{
+			Name: "/oj.user.UserServer/QueryUserSolvedRank",
+			Func: UserServerService_QueryUserSolvedRank_Handler,
+		},
+		{
 			Name: "/oj.user.UserServer/QueryAllUser",
 			Func: UserServerService_QueryAllUser_Handler,
 		},
@@ -488,6 +512,11 @@ func (s *UnimplementedUserServer) QueryUserRank(ctx context.Context, req *QueryU
 	return nil, errors.New("rpc QueryUserRank of service UserServer is not implemented")
 }
 
+// QueryUserSolvedRank QueryUserRank 查询用户排名
+func (s *UnimplementedUserServer) QueryUserSolvedRank(ctx context.Context, req *QueryTeacherReq) (*QueryUserSolvedRankRsp, error) {
+	return nil, errors.New("rpc QueryUserSolvedRank of service UserServer is not implemented")
+}
+
 // QueryAllUser QueryAllUser 查询所有用户
 func (s *UnimplementedUserServer) QueryAllUser(ctx context.Context, req *QueryUserReq) (*QueryAllUserRsp, error) {
 	return nil, errors.New("rpc QueryAllUser of service UserServer is not implemented")
@@ -557,6 +586,8 @@ type UserServerClientProxy interface {
 	AddClassUser(ctx context.Context, req *AddUserReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryUserRank QueryUserRank 查询用户排名
 	QueryUserRank(ctx context.Context, req *QueryUserRankReq, opts ...client.Option) (rsp *QueryUserRankRsp, err error)
+	// QueryUserSolvedRank QueryUserRank 查询用户排名
+	QueryUserSolvedRank(ctx context.Context, req *QueryTeacherReq, opts ...client.Option) (rsp *QueryUserSolvedRankRsp, err error)
 	// QueryAllUser QueryAllUser 查询所有用户
 	QueryAllUser(ctx context.Context, req *QueryUserReq, opts ...client.Option) (rsp *QueryAllUserRsp, err error)
 	// UpdateUser UpdateUser 更新用户
@@ -740,6 +771,26 @@ func (c *UserServerClientProxyImpl) QueryUserRank(ctx context.Context, req *Quer
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryUserRankRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *UserServerClientProxyImpl) QueryUserSolvedRank(ctx context.Context, req *QueryTeacherReq, opts ...client.Option) (*QueryUserSolvedRankRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.user.UserServer/QueryUserSolvedRank")
+	msg.WithCalleeServiceName(UserServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("UserServer")
+	msg.WithCalleeMethod("QueryUserSolvedRank")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryUserSolvedRankRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
