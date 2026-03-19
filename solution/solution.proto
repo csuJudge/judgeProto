@@ -197,6 +197,8 @@ message CountContestSubmissionRsp {
     string message                = 1;  // 返回信息
     int32 code                    = 2;  // 返回码
     ClassifiedSolution statistics = 3;  // 统计数据
+    int32 rank = 4; // 排名
+    int32 gap = 5; // 距离上一名的差距
 }
 
 message ClassifiedSolution {

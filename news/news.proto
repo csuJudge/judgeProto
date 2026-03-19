@@ -45,6 +45,7 @@ message News {
     int32 enable       = 6;  // 公告状态
     int32 priority     = 7;  // 公告优先级
     string classIDs = 8; // 班级编号
+    string abstract = 9; // 摘要
 }
 
 message QueryNewsByPageSizeReq {
