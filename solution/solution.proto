@@ -60,6 +60,21 @@ service SolutionServer {
     rpc CountProblemSolutionStatistics(QueryAllUserSolutionReq) returns (CountProblemSolutionStatisticsRsp) {}
     // CountClassSolution 统计班级的学生的提交数据
     rpc CountClassSolution(CountClassSolutionReq) returns (CountClassSolutionRsp) {}
+    // QueryMySolution 查询我的提交数据
+    rpc QueryMySolution(UserIDReq) returns (QuerySolutionRsp) {}
+    // CountClassSolution 统计班级的学生的提交数据
+    rpc QueryMyLanguageDistribution(UserIDReq) returns (QueryMyLanguageDistributionRsp) {}
+}
+
+message QueryMyLanguageDistributionRsp{
+    string message                = 1;  // 返回信息
+    int32 code                    = 2;  // 返回码
+    repeated LanguageDistribution distribution = 3; // 分布情况
+}
+
+message LanguageDistribution{
+    int32 language = 1; // 语言
+    int32 languageCount = 2; // 数量
 }
 
 message CountClassSolutionReq{

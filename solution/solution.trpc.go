@@ -151,6 +151,10 @@ type SolutionServerService interface {
 	CountProblemSolutionStatistics(ctx context.Context, req *QueryAllUserSolutionReq) (*CountProblemSolutionStatisticsRsp, error)
 	// CountClassSolution CountClassSolution 统计班级的学生的提交数据
 	CountClassSolution(ctx context.Context, req *CountClassSolutionReq) (*CountClassSolutionRsp, error)
+	// QueryMySolution QueryMySolution 查询我的提交数据
+	QueryMySolution(ctx context.Context, req *UserIDReq) (*QuerySolutionRsp, error)
+	// QueryMyLanguageDistribution CountClassSolution 统计班级的学生的提交数据
+	QueryMyLanguageDistribution(ctx context.Context, req *UserIDReq) (*QueryMyLanguageDistributionRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -585,6 +589,42 @@ func SolutionServerService_CountClassSolution_Handler(svr interface{}, ctx conte
 	return rsp, nil
 }
 
+func SolutionServerService_QueryMySolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UserIDReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryMySolution(ctx, reqbody.(*UserIDReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func SolutionServerService_QueryMyLanguageDistribution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UserIDReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryMyLanguageDistribution(ctx, reqbody.(*UserIDReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -685,6 +725,14 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/CountClassSolution",
 			Func: SolutionServerService_CountClassSolution_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryMySolution",
+			Func: SolutionServerService_QueryMySolution_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryMyLanguageDistribution",
+			Func: SolutionServerService_QueryMyLanguageDistribution_Handler,
 		},
 	},
 }
@@ -832,6 +880,16 @@ func (s *UnimplementedSolutionServer) CountClassSolution(ctx context.Context, re
 	return nil, errors.New("rpc CountClassSolution of service SolutionServer is not implemented")
 }
 
+// QueryMySolution QueryMySolution 查询我的提交数据
+func (s *UnimplementedSolutionServer) QueryMySolution(ctx context.Context, req *UserIDReq) (*QuerySolutionRsp, error) {
+	return nil, errors.New("rpc QueryMySolution of service SolutionServer is not implemented")
+}
+
+// QueryMyLanguageDistribution CountClassSolution 统计班级的学生的提交数据
+func (s *UnimplementedSolutionServer) QueryMyLanguageDistribution(ctx context.Context, req *UserIDReq) (*QueryMyLanguageDistributionRsp, error) {
+	return nil, errors.New("rpc QueryMyLanguageDistribution of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -956,6 +1014,10 @@ type SolutionServerClientProxy interface {
 	CountProblemSolutionStatistics(ctx context.Context, req *QueryAllUserSolutionReq, opts ...client.Option) (rsp *CountProblemSolutionStatisticsRsp, err error)
 	// CountClassSolution CountClassSolution 统计班级的学生的提交数据
 	CountClassSolution(ctx context.Context, req *CountClassSolutionReq, opts ...client.Option) (rsp *CountClassSolutionRsp, err error)
+	// QueryMySolution QueryMySolution 查询我的提交数据
+	QueryMySolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QuerySolutionRsp, err error)
+	// QueryMyLanguageDistribution CountClassSolution 统计班级的学生的提交数据
+	QueryMyLanguageDistribution(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryMyLanguageDistributionRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -1441,6 +1503,46 @@ func (c *SolutionServerClientProxyImpl) CountClassSolution(ctx context.Context, 
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CountClassSolutionRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryMySolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QuerySolutionRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryMySolution")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryMySolution")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QuerySolutionRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryMyLanguageDistribution(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryMyLanguageDistributionRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryMyLanguageDistribution")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryMyLanguageDistribution")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryMyLanguageDistributionRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
