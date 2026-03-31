@@ -251,6 +251,21 @@ func (mr *MockSolutionServerServiceMockRecorder) CountProblemSolutionStatistics(
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountProblemSolutionStatistics", reflect.TypeOf((*MockSolutionServerService)(nil).CountProblemSolutionStatistics), ctx, req)
 }
 
+// CountUserKnowledgeSolution mocks base method.
+func (m *MockSolutionServerService) CountUserKnowledgeSolution(ctx context.Context, req *UserIDReq) (*CountUserKnowledgeSolutionRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CountUserKnowledgeSolution", ctx, req)
+	ret0, _ := ret[0].(*CountUserKnowledgeSolutionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CountUserKnowledgeSolution indicates an expected call of CountUserKnowledgeSolution.
+func (mr *MockSolutionServerServiceMockRecorder) CountUserKnowledgeSolution(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserKnowledgeSolution", reflect.TypeOf((*MockSolutionServerService)(nil).CountUserKnowledgeSolution), ctx, req)
+}
+
 // CountUserProblemSolution mocks base method.
 func (m *MockSolutionServerService) CountUserProblemSolution(ctx context.Context, req *CountUserProblemSolutionReq) (*CountUserProblemSolutionRsp, error) {
 	m.ctrl.T.Helper()
@@ -264,6 +279,21 @@ func (m *MockSolutionServerService) CountUserProblemSolution(ctx context.Context
 func (mr *MockSolutionServerServiceMockRecorder) CountUserProblemSolution(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerService)(nil).CountUserProblemSolution), ctx, req)
+}
+
+// CountUserTimeRangeSolution mocks base method.
+func (m *MockSolutionServerService) CountUserTimeRangeSolution(ctx context.Context, req *UserIDReq) (*CountContestProblemSubmissionRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CountUserTimeRangeSolution", ctx, req)
+	ret0, _ := ret[0].(*CountContestProblemSubmissionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CountUserTimeRangeSolution indicates an expected call of CountUserTimeRangeSolution.
+func (mr *MockSolutionServerServiceMockRecorder) CountUserTimeRangeSolution(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserTimeRangeSolution", reflect.TypeOf((*MockSolutionServerService)(nil).CountUserTimeRangeSolution), ctx, req)
 }
 
 // QueryAllUserSolution mocks base method.
@@ -805,6 +835,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) CountProblemSolutionStatist
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountProblemSolutionStatistics", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountProblemSolutionStatistics), varargs...)
 }
 
+// CountUserKnowledgeSolution mocks base method.
+func (m *MockSolutionServerClientProxy) CountUserKnowledgeSolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (*CountUserKnowledgeSolutionRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CountUserKnowledgeSolution", varargs...)
+	ret0, _ := ret[0].(*CountUserKnowledgeSolutionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CountUserKnowledgeSolution indicates an expected call of CountUserKnowledgeSolution.
+func (mr *MockSolutionServerClientProxyMockRecorder) CountUserKnowledgeSolution(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserKnowledgeSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountUserKnowledgeSolution), varargs...)
+}
+
 // CountUserProblemSolution mocks base method.
 func (m *MockSolutionServerClientProxy) CountUserProblemSolution(ctx context.Context, req *CountUserProblemSolutionReq, opts ...client.Option) (*CountUserProblemSolutionRsp, error) {
 	m.ctrl.T.Helper()
@@ -823,6 +873,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) CountUserProblemSolution(ct
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountUserProblemSolution), varargs...)
+}
+
+// CountUserTimeRangeSolution mocks base method.
+func (m *MockSolutionServerClientProxy) CountUserTimeRangeSolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (*CountContestProblemSubmissionRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CountUserTimeRangeSolution", varargs...)
+	ret0, _ := ret[0].(*CountContestProblemSubmissionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CountUserTimeRangeSolution indicates an expected call of CountUserTimeRangeSolution.
+func (mr *MockSolutionServerClientProxyMockRecorder) CountUserTimeRangeSolution(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserTimeRangeSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountUserTimeRangeSolution), varargs...)
 }
 
 // QueryAllUserSolution mocks base method.

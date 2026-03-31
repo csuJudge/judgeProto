@@ -155,6 +155,10 @@ type SolutionServerService interface {
 	QueryMySolution(ctx context.Context, req *UserIDReq) (*QuerySolutionRsp, error)
 	// QueryMyLanguageDistribution CountClassSolution 统计班级的学生的提交数据
 	QueryMyLanguageDistribution(ctx context.Context, req *UserIDReq) (*QueryMyLanguageDistributionRsp, error)
+	// CountUserTimeRangeSolution CountUserTimeRangeSolution 统计用户时间范围内的提交数据
+	CountUserTimeRangeSolution(ctx context.Context, req *UserIDReq) (*CountContestProblemSubmissionRsp, error)
+	// CountUserKnowledgeSolution CountUserTimeRangeSolution 统计用户知识点分布数据
+	CountUserKnowledgeSolution(ctx context.Context, req *UserIDReq) (*CountUserKnowledgeSolutionRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -625,6 +629,42 @@ func SolutionServerService_QueryMyLanguageDistribution_Handler(svr interface{}, 
 	return rsp, nil
 }
 
+func SolutionServerService_CountUserTimeRangeSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UserIDReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).CountUserTimeRangeSolution(ctx, reqbody.(*UserIDReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func SolutionServerService_CountUserKnowledgeSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UserIDReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).CountUserKnowledgeSolution(ctx, reqbody.(*UserIDReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -733,6 +773,14 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/QueryMyLanguageDistribution",
 			Func: SolutionServerService_QueryMyLanguageDistribution_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/CountUserTimeRangeSolution",
+			Func: SolutionServerService_CountUserTimeRangeSolution_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/CountUserKnowledgeSolution",
+			Func: SolutionServerService_CountUserKnowledgeSolution_Handler,
 		},
 	},
 }
@@ -890,6 +938,16 @@ func (s *UnimplementedSolutionServer) QueryMyLanguageDistribution(ctx context.Co
 	return nil, errors.New("rpc QueryMyLanguageDistribution of service SolutionServer is not implemented")
 }
 
+// CountUserTimeRangeSolution CountUserTimeRangeSolution 统计用户时间范围内的提交数据
+func (s *UnimplementedSolutionServer) CountUserTimeRangeSolution(ctx context.Context, req *UserIDReq) (*CountContestProblemSubmissionRsp, error) {
+	return nil, errors.New("rpc CountUserTimeRangeSolution of service SolutionServer is not implemented")
+}
+
+// CountUserKnowledgeSolution CountUserTimeRangeSolution 统计用户知识点分布数据
+func (s *UnimplementedSolutionServer) CountUserKnowledgeSolution(ctx context.Context, req *UserIDReq) (*CountUserKnowledgeSolutionRsp, error) {
+	return nil, errors.New("rpc CountUserKnowledgeSolution of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -1018,6 +1076,10 @@ type SolutionServerClientProxy interface {
 	QueryMySolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QuerySolutionRsp, err error)
 	// QueryMyLanguageDistribution CountClassSolution 统计班级的学生的提交数据
 	QueryMyLanguageDistribution(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryMyLanguageDistributionRsp, err error)
+	// CountUserTimeRangeSolution CountUserTimeRangeSolution 统计用户时间范围内的提交数据
+	CountUserTimeRangeSolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *CountContestProblemSubmissionRsp, err error)
+	// CountUserKnowledgeSolution CountUserTimeRangeSolution 统计用户知识点分布数据
+	CountUserKnowledgeSolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *CountUserKnowledgeSolutionRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -1543,6 +1605,46 @@ func (c *SolutionServerClientProxyImpl) QueryMyLanguageDistribution(ctx context.
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryMyLanguageDistributionRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) CountUserTimeRangeSolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (*CountContestProblemSubmissionRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/CountUserTimeRangeSolution")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("CountUserTimeRangeSolution")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CountContestProblemSubmissionRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) CountUserKnowledgeSolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (*CountUserKnowledgeSolutionRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/CountUserKnowledgeSolution")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("CountUserKnowledgeSolution")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CountUserKnowledgeSolutionRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

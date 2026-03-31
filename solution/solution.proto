@@ -64,6 +64,21 @@ service SolutionServer {
     rpc QueryMySolution(UserIDReq) returns (QuerySolutionRsp) {}
     // CountClassSolution 统计班级的学生的提交数据
     rpc QueryMyLanguageDistribution(UserIDReq) returns (QueryMyLanguageDistributionRsp) {}
+    // CountUserTimeRangeSolution 统计用户时间范围内的提交数据
+    rpc CountUserTimeRangeSolution(UserIDReq) returns (CountContestProblemSubmissionRsp){}
+    // CountUserTimeRangeSolution 统计用户知识点分布数据
+    rpc CountUserKnowledgeSolution(UserIDReq) returns (CountUserKnowledgeSolutionRsp){}
+}
+
+message CountUserKnowledgeSolutionRsp{
+    string message                = 1;  // 返回信息
+    int32 code                    = 2;  // 返回码
+    repeated KnowledgeSolution KnowledgeSolution = 3; // 知识点分布数据
+}
+
+message KnowledgeSolution{
+    int32 knowledgeName = 1; // 知识点名称
+    int32 acceptCount = 2; //  通过数
 }
 
 message QueryMyLanguageDistributionRsp{
@@ -242,6 +257,9 @@ message Problem {
     int32 problemID = 1;  // 题目编号
     string name     = 2;  // 题目名称
     int32 isSolved  = 3;  // 是否做完
+    int32 difficulty = 4; // 难度
+    int32 timeCost = 5; // 耗时
+    int32 memoryCost = 6; // 消耗的内存
 }
 
 message Rank {
