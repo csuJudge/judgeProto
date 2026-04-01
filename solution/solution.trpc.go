@@ -149,8 +149,8 @@ type SolutionServerService interface {
 	QueryAllUserSolution(ctx context.Context, req *QueryAllUserSolutionReq) (*QueryAllUserSolutionRsp, error)
 	// CountProblemSolutionStatistics CountProblemSolutionStatistics 统计所有题目的提交
 	CountProblemSolutionStatistics(ctx context.Context, req *QueryAllUserSolutionReq) (*CountProblemSolutionStatisticsRsp, error)
-	// CountClassSolution CountClassSolution 统计班级的学生的提交数据
-	CountClassSolution(ctx context.Context, req *CountClassSolutionReq) (*CountClassSolutionRsp, error)
+	// CountUserSolution CountUserSolution 统计学生的提交数据
+	CountUserSolution(ctx context.Context, req *CountUserSolutionReq) (*CountUserSolutionRsp, error)
 	// QueryMySolution QueryMySolution 查询我的提交数据
 	QueryMySolution(ctx context.Context, req *UserIDReq) (*QuerySolutionRsp, error)
 	// QueryMyLanguageDistribution CountClassSolution 统计班级的学生的提交数据
@@ -573,14 +573,14 @@ func SolutionServerService_CountProblemSolutionStatistics_Handler(svr interface{
 	return rsp, nil
 }
 
-func SolutionServerService_CountClassSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &CountClassSolutionReq{}
+func SolutionServerService_CountUserSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &CountUserSolutionReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(SolutionServerService).CountClassSolution(ctx, reqbody.(*CountClassSolutionReq))
+		return svr.(SolutionServerService).CountUserSolution(ctx, reqbody.(*CountUserSolutionReq))
 	}
 
 	var rsp interface{}
@@ -743,8 +743,8 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 			Func: SolutionServerService_CountProblemSolutionStatistics_Handler,
 		},
 		{
-			Name: "/oj.solution.SolutionServer/CountClassSolution",
-			Func: SolutionServerService_CountClassSolution_Handler,
+			Name: "/oj.solution.SolutionServer/CountUserSolution",
+			Func: SolutionServerService_CountUserSolution_Handler,
 		},
 		{
 			Name: "/oj.solution.SolutionServer/QueryMySolution",
@@ -899,9 +899,9 @@ func (s *UnimplementedSolutionServer) CountProblemSolutionStatistics(ctx context
 	return nil, errors.New("rpc CountProblemSolutionStatistics of service SolutionServer is not implemented")
 }
 
-// CountClassSolution CountClassSolution 统计班级的学生的提交数据
-func (s *UnimplementedSolutionServer) CountClassSolution(ctx context.Context, req *CountClassSolutionReq) (*CountClassSolutionRsp, error) {
-	return nil, errors.New("rpc CountClassSolution of service SolutionServer is not implemented")
+// CountUserSolution CountUserSolution 统计学生的提交数据
+func (s *UnimplementedSolutionServer) CountUserSolution(ctx context.Context, req *CountUserSolutionReq) (*CountUserSolutionRsp, error) {
+	return nil, errors.New("rpc CountUserSolution of service SolutionServer is not implemented")
 }
 
 // QueryMySolution QueryMySolution 查询我的提交数据
@@ -1041,8 +1041,8 @@ type SolutionServerClientProxy interface {
 	QueryAllUserSolution(ctx context.Context, req *QueryAllUserSolutionReq, opts ...client.Option) (rsp *QueryAllUserSolutionRsp, err error)
 	// CountProblemSolutionStatistics CountProblemSolutionStatistics 统计所有题目的提交
 	CountProblemSolutionStatistics(ctx context.Context, req *QueryAllUserSolutionReq, opts ...client.Option) (rsp *CountProblemSolutionStatisticsRsp, err error)
-	// CountClassSolution CountClassSolution 统计班级的学生的提交数据
-	CountClassSolution(ctx context.Context, req *CountClassSolutionReq, opts ...client.Option) (rsp *CountClassSolutionRsp, err error)
+	// CountUserSolution CountUserSolution 统计学生的提交数据
+	CountUserSolution(ctx context.Context, req *CountUserSolutionReq, opts ...client.Option) (rsp *CountUserSolutionRsp, err error)
 	// QueryMySolution QueryMySolution 查询我的提交数据
 	QueryMySolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QuerySolutionRsp, err error)
 	// QueryMyLanguageDistribution CountClassSolution 统计班级的学生的提交数据
@@ -1520,20 +1520,20 @@ func (c *SolutionServerClientProxyImpl) CountProblemSolutionStatistics(ctx conte
 	return rsp, nil
 }
 
-func (c *SolutionServerClientProxyImpl) CountClassSolution(ctx context.Context, req *CountClassSolutionReq, opts ...client.Option) (*CountClassSolutionRsp, error) {
+func (c *SolutionServerClientProxyImpl) CountUserSolution(ctx context.Context, req *CountUserSolutionReq, opts ...client.Option) (*CountUserSolutionRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/oj.solution.SolutionServer/CountClassSolution")
+	msg.WithClientRPCName("/oj.solution.SolutionServer/CountUserSolution")
 	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
 	msg.WithCalleeApp("")
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("SolutionServer")
-	msg.WithCalleeMethod("CountClassSolution")
+	msg.WithCalleeMethod("CountUserSolution")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &CountClassSolutionRsp{}
+	rsp := &CountUserSolutionRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
