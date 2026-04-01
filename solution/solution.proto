@@ -103,7 +103,7 @@ message CountUserSolutionRsp{
 }
 
 message UserSolution{
-    ClassifiedSolution statistics = 1;  // 统计数据
+    repeated ClassifiedSolution statistics = 1;  // 统计数据
     string name = 2; // 用户名
     string number = 3; // 学号
     string date = 4; // 日期
