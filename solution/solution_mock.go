@@ -281,21 +281,6 @@ func (mr *MockSolutionServerServiceMockRecorder) CountUserProblemSolution(ctx, r
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerService)(nil).CountUserProblemSolution), ctx, req)
 }
 
-// CountUserTimeRangeSolution mocks base method.
-func (m *MockSolutionServerService) CountUserTimeRangeSolution(ctx context.Context, req *UserIDReq) (*CountContestProblemSubmissionRsp, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CountUserTimeRangeSolution", ctx, req)
-	ret0, _ := ret[0].(*CountContestProblemSubmissionRsp)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CountUserTimeRangeSolution indicates an expected call of CountUserTimeRangeSolution.
-func (mr *MockSolutionServerServiceMockRecorder) CountUserTimeRangeSolution(ctx, req any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserTimeRangeSolution", reflect.TypeOf((*MockSolutionServerService)(nil).CountUserTimeRangeSolution), ctx, req)
-}
-
 // QueryAllUserSolution mocks base method.
 func (m *MockSolutionServerService) QueryAllUserSolution(ctx context.Context, req *QueryAllUserSolutionReq) (*QueryAllUserSolutionRsp, error) {
 	m.ctrl.T.Helper()
@@ -873,26 +858,6 @@ func (mr *MockSolutionServerClientProxyMockRecorder) CountUserProblemSolution(ct
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserProblemSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountUserProblemSolution), varargs...)
-}
-
-// CountUserTimeRangeSolution mocks base method.
-func (m *MockSolutionServerClientProxy) CountUserTimeRangeSolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (*CountContestProblemSubmissionRsp, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, req}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CountUserTimeRangeSolution", varargs...)
-	ret0, _ := ret[0].(*CountContestProblemSubmissionRsp)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CountUserTimeRangeSolution indicates an expected call of CountUserTimeRangeSolution.
-func (mr *MockSolutionServerClientProxyMockRecorder) CountUserTimeRangeSolution(ctx, req any, opts ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountUserTimeRangeSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).CountUserTimeRangeSolution), varargs...)
 }
 
 // QueryAllUserSolution mocks base method.

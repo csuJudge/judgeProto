@@ -64,8 +64,6 @@ service SolutionServer {
     rpc QueryMySolution(UserIDReq) returns (QuerySolutionRsp) {}
     // CountClassSolution 统计班级的学生的提交数据
     rpc QueryMyLanguageDistribution(UserIDReq) returns (QueryMyLanguageDistributionRsp) {}
-    // CountUserTimeRangeSolution 统计用户时间范围内的提交数据
-    rpc CountUserTimeRangeSolution(UserIDReq) returns (CountContestProblemSubmissionRsp){}
     // CountUserTimeRangeSolution 统计用户知识点分布数据
     rpc CountUserKnowledgeSolution(UserIDReq) returns (CountUserKnowledgeSolutionRsp){}
 }
@@ -77,7 +75,7 @@ message CountUserKnowledgeSolutionRsp{
 }
 
 message KnowledgeSolution{
-    int32 knowledgeName = 1; // 知识点名称
+    string knowledgeName = 1; // 知识点名称
     int32 acceptCount = 2; //  通过数
 }
 
