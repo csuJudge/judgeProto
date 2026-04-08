@@ -154,7 +154,6 @@ message QueryUserRankReq {
     int32 page   = 1;  // 页
     int32 limit  = 2;  // 页大小
     int32 userID = 3;  // 用户编号
-    string classID = 4; // 班级编号
 }
 
 message QueryUserReq {
@@ -177,8 +176,10 @@ message UserRank {
 message QueryUserRankRsp {
     string message         = 1;  // 返回信息
     int32 code             = 2;  // 返回码
-    repeated UserRank rank = 3;  // 排名数据
-    int32 total            = 4;  // 总数
+    repeated UserRank totalRank = 3;  // 总排名数据
+    repeated UserRank classRank = 4;  // 班级排名数据
+    int32 totalRankCount            = 5;  // 总排名数
+    int32 classRankCount            = 6;  // 班级排名数
 }
 
 message RegisterUserReq{
