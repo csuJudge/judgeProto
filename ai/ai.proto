@@ -1,0 +1,60 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto/ai";
+
+package oj.ai;
+
+
+service AIServer {
+  // IsCanUseAIAsk 是否能询问AI
+  rpc IsCanUseAIAsk(IsCanUseAIAskReq) returns (IsCanUseAIAskRsp) {}
+  // Ask 询问AI
+  rpc Ask(AskReq) returns (AskRsp) {}
+  // QueryAskHistory 查询询问历史
+  rpc QueryAskHistory(QueryAskHistoryReq) returns (QueryAskHistoryRsp) {}
+}
+
+message IsCanUseAIAskReq{
+  int32 userID = 1; // 用户编号
+  int32 problemID = 2; // 问题编号
+}
+
+message IsCanUseAIAskRsp{
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+  bool isCan = 3; // 是否能使用AI
+}
+
+message AskReq{
+  string question = 1; // 问题
+  int32 questionType = 2; // 问题类型
+  int32 problemID = 3; // 问题编号
+}
+
+message AskRsp{
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+  string answer = 3; // 答案
+}
+
+message QueryAskHistoryReq{
+  int32 userID = 1; // 用户编号
+  int32 problemID = 2; // 问题编号
+  int32 page = 3; // 页
+  int32 limit = 4; // 页大小
+}
+
+message QueryAskHistoryRsp{
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+  repeated Reply replies = 3; // 答案
+}
+
+message CommonRsp {
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+}
+
+message Reply {
+  string answer = 1; // 答案
+  string createdTime = 2; // 回答时间
+}
