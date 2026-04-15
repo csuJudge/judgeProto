@@ -60,4 +60,5 @@ message CommonRsp {
 message Reply {
   string answer = 1; // 答案
   string createdTime = 2; // 回答时间
+  int32 replyType = 3; // 类型
 }
