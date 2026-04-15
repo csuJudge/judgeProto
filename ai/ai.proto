@@ -28,6 +28,8 @@ message AskReq{
   string question = 1; // 问题
   int32 questionType = 2; // 问题类型
   int32 problemID = 3; // 问题编号
+  int32 userID = 4; // 用户编号
+  int32 model = 5; // 选择的模型
 }
 
 message AskRsp{
@@ -47,6 +49,7 @@ message QueryAskHistoryRsp{
   string message = 1;  // 返回信息
   int32 code     = 2;  // 返回码
   repeated Reply replies = 3; // 答案
+  int32 count = 4; // 答案的数量
 }
 
 message CommonRsp {
