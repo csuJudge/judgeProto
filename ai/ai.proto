@@ -26,10 +26,11 @@ message IsCanUseAIAskRsp{
 
 message AskReq{
   string question = 1; // 问题
-  int32 questionType = 2; // 问题类型
-  int32 problemID = 3; // 问题编号
-  int32 userID = 4; // 用户编号
-  int32 model = 5; // 选择的模型
+  string code = 2; // 代码
+  int32 questionType = 3; // 问题类型
+  int32 problemID = 4; // 问题编号
+  int32 userID = 5; // 用户编号
+  int32 model = 6; // 选择的模型
 }
 
 message AskRsp{
