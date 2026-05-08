@@ -1,0 +1,25 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto/rcmd";
+
+package oj.rcmd;
+
+service RcmdServer {
+  rpc RcmdProblem(RcmdProblemReq) returns (RcmdProblemRsp) {}
+}
+
+message RcmdProblemReq{
+  int32 userID = 1; // 用户编号
+  int32 limit = 2; // 返回的数量
+}
+
+message RcmdProblemRsp{
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+  repeated ProblemInfo problems = 3; // 题目信息
+}
+
+message ProblemInfo{
+  int32 problemID = 1;  // 题目编号
+  string problemName = 2; // 题目名称
+  string rcmdReason = 3; // 推荐理由
+}
