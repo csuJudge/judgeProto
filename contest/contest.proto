@@ -79,6 +79,7 @@ message QueryContestListReq {
     int32 userID    = 3;  // 用户主键
     int32 queryType = 4;  // 查询的类型
     string classID = 5; // 班级编号
+    string name = 6; // 作业名称
 }
 
 message QueryContestListRsp {
@@ -86,6 +87,13 @@ message QueryContestListRsp {
     int32 code                = 2;  // 返回码
     repeated Contest contests = 3;  // 作业集合
     int32 total               = 4;  // 总数
+}
+
+message ContestStatistics{
+    int32 End = 1; // 已经结束
+    int32 notStart = 2; // 未开始
+    int32 running = 3; // 进行中
+    int32 participants = 4; // 参与人数
 }
 
 message QueryContestReq {
