@@ -568,10 +568,13 @@ func (x *QueryContestListReq) GetName() string {
 
 type QueryContestListRsp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`   // 返回信息
-	Code          int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`        // 返回码
-	Contests      []*Contest             `protobuf:"bytes,3,rep,name=contests,proto3" json:"contests,omitempty"` // 作业集合
-	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`      // 总数
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`              // 返回信息
+	Code          int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`                   // 返回码
+	Contests      []*Contest             `protobuf:"bytes,3,rep,name=contests,proto3" json:"contests,omitempty"`            // 作业集合
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`                 // 总数
+	EndCount      int32                  `protobuf:"varint,5,opt,name=EndCount,proto3" json:"EndCount,omitempty"`           // 已经结束
+	NotStartCount int32                  `protobuf:"varint,6,opt,name=notStartCount,proto3" json:"notStartCount,omitempty"` // 未开始
+	RunningCount  int32                  `protobuf:"varint,7,opt,name=runningCount,proto3" json:"runningCount,omitempty"`   // 进行中
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -634,70 +637,23 @@ func (x *QueryContestListRsp) GetTotal() int32 {
 	return 0
 }
 
-type ContestStatistics struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	End           int32                  `protobuf:"varint,1,opt,name=End,proto3" json:"End,omitempty"`                   // 已经结束
-	NotStart      int32                  `protobuf:"varint,2,opt,name=notStart,proto3" json:"notStart,omitempty"`         // 未开始
-	Running       int32                  `protobuf:"varint,3,opt,name=running,proto3" json:"running,omitempty"`           // 进行中
-	Participants  int32                  `protobuf:"varint,4,opt,name=participants,proto3" json:"participants,omitempty"` // 参与人数
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ContestStatistics) Reset() {
-	*x = ContestStatistics{}
-	mi := &file_contest_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ContestStatistics) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ContestStatistics) ProtoMessage() {}
-
-func (x *ContestStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_contest_proto_msgTypes[7]
+func (x *QueryContestListRsp) GetEndCount() int32 {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ContestStatistics.ProtoReflect.Descriptor instead.
-func (*ContestStatistics) Descriptor() ([]byte, []int) {
-	return file_contest_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *ContestStatistics) GetEnd() int32 {
-	if x != nil {
-		return x.End
+		return x.EndCount
 	}
 	return 0
 }
 
-func (x *ContestStatistics) GetNotStart() int32 {
+func (x *QueryContestListRsp) GetNotStartCount() int32 {
 	if x != nil {
-		return x.NotStart
+		return x.NotStartCount
 	}
 	return 0
 }
 
-func (x *ContestStatistics) GetRunning() int32 {
+func (x *QueryContestListRsp) GetRunningCount() int32 {
 	if x != nil {
-		return x.Running
-	}
-	return 0
-}
-
-func (x *ContestStatistics) GetParticipants() int32 {
-	if x != nil {
-		return x.Participants
+		return x.RunningCount
 	}
 	return 0
 }
@@ -713,7 +669,7 @@ type QueryContestReq struct {
 
 func (x *QueryContestReq) Reset() {
 	*x = QueryContestReq{}
-	mi := &file_contest_proto_msgTypes[8]
+	mi := &file_contest_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -725,7 +681,7 @@ func (x *QueryContestReq) String() string {
 func (*QueryContestReq) ProtoMessage() {}
 
 func (x *QueryContestReq) ProtoReflect() protoreflect.Message {
-	mi := &file_contest_proto_msgTypes[8]
+	mi := &file_contest_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -738,7 +694,7 @@ func (x *QueryContestReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryContestReq.ProtoReflect.Descriptor instead.
 func (*QueryContestReq) Descriptor() ([]byte, []int) {
-	return file_contest_proto_rawDescGZIP(), []int{8}
+	return file_contest_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *QueryContestReq) GetContestID() int32 {
@@ -774,7 +730,7 @@ type QueryContestRsp struct {
 
 func (x *QueryContestRsp) Reset() {
 	*x = QueryContestRsp{}
-	mi := &file_contest_proto_msgTypes[9]
+	mi := &file_contest_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -786,7 +742,7 @@ func (x *QueryContestRsp) String() string {
 func (*QueryContestRsp) ProtoMessage() {}
 
 func (x *QueryContestRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_contest_proto_msgTypes[9]
+	mi := &file_contest_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -799,7 +755,7 @@ func (x *QueryContestRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryContestRsp.ProtoReflect.Descriptor instead.
 func (*QueryContestRsp) Descriptor() ([]byte, []int) {
-	return file_contest_proto_rawDescGZIP(), []int{9}
+	return file_contest_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *QueryContestRsp) GetMessage() string {
@@ -832,26 +788,27 @@ func (x *QueryContestRsp) GetSee() bool {
 
 type Contest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ContestID     int32                  `protobuf:"varint,1,opt,name=contestID,proto3" json:"contestID,omitempty"`      // 作业编号
-	StartTime     string                 `protobuf:"bytes,2,opt,name=startTime,proto3" json:"startTime,omitempty"`       // 开始时间
-	EndTime       string                 `protobuf:"bytes,3,opt,name=endTime,proto3" json:"endTime,omitempty"`           // 结束时间
-	Title         string                 `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`               // 标题
-	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`   // 描述
-	LanguageMask  string                 `protobuf:"bytes,6,opt,name=languageMask,proto3" json:"languageMask,omitempty"` // 限制语言
-	Creator       string                 `protobuf:"bytes,7,opt,name=creator,proto3" json:"creator,omitempty"`           // 创建者
-	Problems      []*ContestProblem      `protobuf:"bytes,8,rep,name=problems,proto3" json:"problems,omitempty"`         // 题目列表
-	CreatedBy     int32                  `protobuf:"varint,9,opt,name=createdBy,proto3" json:"createdBy,omitempty"`      // 创建者编号
-	Private       int32                  `protobuf:"varint,10,opt,name=private,proto3" json:"private,omitempty"`         // 是否私有
-	Password      string                 `protobuf:"bytes,11,opt,name=password,proto3" json:"password,omitempty"`        // 密码
-	Enable        int32                  `protobuf:"varint,12,opt,name=enable,proto3" json:"enable,omitempty"`           // 是否结束
-	Classes       []*Class               `protobuf:"bytes,13,rep,name=classes,proto3" json:"classes,omitempty"`          // 作业的班级
+	ContestID     int32                  `protobuf:"varint,1,opt,name=contestID,proto3" json:"contestID,omitempty"`        // 作业编号
+	StartTime     string                 `protobuf:"bytes,2,opt,name=startTime,proto3" json:"startTime,omitempty"`         // 开始时间
+	EndTime       string                 `protobuf:"bytes,3,opt,name=endTime,proto3" json:"endTime,omitempty"`             // 结束时间
+	Title         string                 `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`                 // 标题
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`     // 描述
+	LanguageMask  string                 `protobuf:"bytes,6,opt,name=languageMask,proto3" json:"languageMask,omitempty"`   // 限制语言
+	Creator       string                 `protobuf:"bytes,7,opt,name=creator,proto3" json:"creator,omitempty"`             // 创建者
+	Problems      []*ContestProblem      `protobuf:"bytes,8,rep,name=problems,proto3" json:"problems,omitempty"`           // 题目列表
+	CreatedBy     int32                  `protobuf:"varint,9,opt,name=createdBy,proto3" json:"createdBy,omitempty"`        // 创建者编号
+	Private       int32                  `protobuf:"varint,10,opt,name=private,proto3" json:"private,omitempty"`           // 是否私有
+	Password      string                 `protobuf:"bytes,11,opt,name=password,proto3" json:"password,omitempty"`          // 密码
+	Enable        int32                  `protobuf:"varint,12,opt,name=enable,proto3" json:"enable,omitempty"`             // 是否结束
+	Classes       []*Class               `protobuf:"bytes,13,rep,name=classes,proto3" json:"classes,omitempty"`            // 作业的班级
+	Participants  int32                  `protobuf:"varint,14,opt,name=participants,proto3" json:"participants,omitempty"` // 参与人数
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Contest) Reset() {
 	*x = Contest{}
-	mi := &file_contest_proto_msgTypes[10]
+	mi := &file_contest_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -863,7 +820,7 @@ func (x *Contest) String() string {
 func (*Contest) ProtoMessage() {}
 
 func (x *Contest) ProtoReflect() protoreflect.Message {
-	mi := &file_contest_proto_msgTypes[10]
+	mi := &file_contest_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -876,7 +833,7 @@ func (x *Contest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Contest.ProtoReflect.Descriptor instead.
 func (*Contest) Descriptor() ([]byte, []int) {
-	return file_contest_proto_rawDescGZIP(), []int{10}
+	return file_contest_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Contest) GetContestID() int32 {
@@ -970,6 +927,13 @@ func (x *Contest) GetClasses() []*Class {
 	return nil
 }
 
+func (x *Contest) GetParticipants() int32 {
+	if x != nil {
+		return x.Participants
+	}
+	return 0
+}
+
 type Class struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ClassID       int32                  `protobuf:"varint,1,opt,name=classID,proto3" json:"classID,omitempty"`    // 班级编号
@@ -980,7 +944,7 @@ type Class struct {
 
 func (x *Class) Reset() {
 	*x = Class{}
-	mi := &file_contest_proto_msgTypes[11]
+	mi := &file_contest_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -992,7 +956,7 @@ func (x *Class) String() string {
 func (*Class) ProtoMessage() {}
 
 func (x *Class) ProtoReflect() protoreflect.Message {
-	mi := &file_contest_proto_msgTypes[11]
+	mi := &file_contest_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1005,7 +969,7 @@ func (x *Class) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Class.ProtoReflect.Descriptor instead.
 func (*Class) Descriptor() ([]byte, []int) {
-	return file_contest_proto_rawDescGZIP(), []int{11}
+	return file_contest_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *Class) GetClassID() int32 {
@@ -1032,7 +996,7 @@ type CommonRsp struct {
 
 func (x *CommonRsp) Reset() {
 	*x = CommonRsp{}
-	mi := &file_contest_proto_msgTypes[12]
+	mi := &file_contest_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1044,7 +1008,7 @@ func (x *CommonRsp) String() string {
 func (*CommonRsp) ProtoMessage() {}
 
 func (x *CommonRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_contest_proto_msgTypes[12]
+	mi := &file_contest_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1057,7 +1021,7 @@ func (x *CommonRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CommonRsp.ProtoReflect.Descriptor instead.
 func (*CommonRsp) Descriptor() ([]byte, []int) {
-	return file_contest_proto_rawDescGZIP(), []int{12}
+	return file_contest_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *CommonRsp) GetMessage() string {
@@ -1088,7 +1052,7 @@ type ContestProblem struct {
 
 func (x *ContestProblem) Reset() {
 	*x = ContestProblem{}
-	mi := &file_contest_proto_msgTypes[13]
+	mi := &file_contest_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1100,7 +1064,7 @@ func (x *ContestProblem) String() string {
 func (*ContestProblem) ProtoMessage() {}
 
 func (x *ContestProblem) ProtoReflect() protoreflect.Message {
-	mi := &file_contest_proto_msgTypes[13]
+	mi := &file_contest_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1113,7 +1077,7 @@ func (x *ContestProblem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ContestProblem.ProtoReflect.Descriptor instead.
 func (*ContestProblem) Descriptor() ([]byte, []int) {
-	return file_contest_proto_rawDescGZIP(), []int{13}
+	return file_contest_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ContestProblem) GetProblemID() int32 {
@@ -1212,17 +1176,15 @@ const file_contest_proto_rawDesc = "" +
 	"\x06userID\x18\x03 \x01(\x05R\x06userID\x12\x1c\n" +
 	"\tqueryType\x18\x04 \x01(\x05R\tqueryType\x12\x18\n" +
 	"\aclassID\x18\x05 \x01(\tR\aclassID\x12\x12\n" +
-	"\x04name\x18\x06 \x01(\tR\x04name\"\x8a\x01\n" +
+	"\x04name\x18\x06 \x01(\tR\x04name\"\xf0\x01\n" +
 	"\x13QueryContestListRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12/\n" +
 	"\bcontests\x18\x03 \x03(\v2\x13.oj.contest.ContestR\bcontests\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\"\x7f\n" +
-	"\x11ContestStatistics\x12\x10\n" +
-	"\x03End\x18\x01 \x01(\x05R\x03End\x12\x1a\n" +
-	"\bnotStart\x18\x02 \x01(\x05R\bnotStart\x12\x18\n" +
-	"\arunning\x18\x03 \x01(\x05R\arunning\x12\"\n" +
-	"\fparticipants\x18\x04 \x01(\x05R\fparticipants\"c\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x12\x1a\n" +
+	"\bEndCount\x18\x05 \x01(\x05R\bEndCount\x12$\n" +
+	"\rnotStartCount\x18\x06 \x01(\x05R\rnotStartCount\x12\"\n" +
+	"\frunningCount\x18\a \x01(\x05R\frunningCount\"c\n" +
 	"\x0fQueryContestReq\x12\x1c\n" +
 	"\tcontestID\x18\x01 \x01(\x05R\tcontestID\x12\x16\n" +
 	"\x06userID\x18\x02 \x01(\x05R\x06userID\x12\x1a\n" +
@@ -1231,7 +1193,7 @@ const file_contest_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12-\n" +
 	"\acontest\x18\x03 \x01(\v2\x13.oj.contest.ContestR\acontest\x12\x10\n" +
-	"\x03see\x18\x04 \x01(\bR\x03see\"\xa6\x03\n" +
+	"\x03see\x18\x04 \x01(\bR\x03see\"\xca\x03\n" +
 	"\aContest\x12\x1c\n" +
 	"\tcontestID\x18\x01 \x01(\x05R\tcontestID\x12\x1c\n" +
 	"\tstartTime\x18\x02 \x01(\tR\tstartTime\x12\x18\n" +
@@ -1246,7 +1208,8 @@ const file_contest_proto_rawDesc = "" +
 	" \x01(\x05R\aprivate\x12\x1a\n" +
 	"\bpassword\x18\v \x01(\tR\bpassword\x12\x16\n" +
 	"\x06enable\x18\f \x01(\x05R\x06enable\x12+\n" +
-	"\aclasses\x18\r \x03(\v2\x11.oj.contest.ClassR\aclasses\"?\n" +
+	"\aclasses\x18\r \x03(\v2\x11.oj.contest.ClassR\aclasses\x12\"\n" +
+	"\fparticipants\x18\x0e \x01(\x05R\fparticipants\"?\n" +
 	"\x05Class\x12\x18\n" +
 	"\aclassID\x18\x01 \x01(\x05R\aclassID\x12\x1c\n" +
 	"\tClassName\x18\x02 \x01(\tR\tClassName\"9\n" +
@@ -1287,7 +1250,7 @@ func file_contest_proto_rawDescGZIP() []byte {
 	return file_contest_proto_rawDescData
 }
 
-var file_contest_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_contest_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_contest_proto_goTypes = []any{
 	(*QueryContestLanguageMaskRsp)(nil),  // 0: oj.contest.QueryContestLanguageMaskRsp
 	(*QueryContestPrivilegeInfoRsp)(nil), // 1: oj.contest.QueryContestPrivilegeInfoRsp
@@ -1296,33 +1259,32 @@ var file_contest_proto_goTypes = []any{
 	(*UpdateContestStatusReq)(nil),       // 4: oj.contest.UpdateContestStatusReq
 	(*QueryContestListReq)(nil),          // 5: oj.contest.QueryContestListReq
 	(*QueryContestListRsp)(nil),          // 6: oj.contest.QueryContestListRsp
-	(*ContestStatistics)(nil),            // 7: oj.contest.ContestStatistics
-	(*QueryContestReq)(nil),              // 8: oj.contest.QueryContestReq
-	(*QueryContestRsp)(nil),              // 9: oj.contest.QueryContestRsp
-	(*Contest)(nil),                      // 10: oj.contest.Contest
-	(*Class)(nil),                        // 11: oj.contest.Class
-	(*CommonRsp)(nil),                    // 12: oj.contest.CommonRsp
-	(*ContestProblem)(nil),               // 13: oj.contest.ContestProblem
+	(*QueryContestReq)(nil),              // 7: oj.contest.QueryContestReq
+	(*QueryContestRsp)(nil),              // 8: oj.contest.QueryContestRsp
+	(*Contest)(nil),                      // 9: oj.contest.Contest
+	(*Class)(nil),                        // 10: oj.contest.Class
+	(*CommonRsp)(nil),                    // 11: oj.contest.CommonRsp
+	(*ContestProblem)(nil),               // 12: oj.contest.ContestProblem
 }
 var file_contest_proto_depIdxs = []int32{
-	10, // 0: oj.contest.QueryContestListRsp.contests:type_name -> oj.contest.Contest
-	10, // 1: oj.contest.QueryContestRsp.contest:type_name -> oj.contest.Contest
-	13, // 2: oj.contest.Contest.problems:type_name -> oj.contest.ContestProblem
-	11, // 3: oj.contest.Contest.classes:type_name -> oj.contest.Class
-	8,  // 4: oj.contest.ContestServer.QueryContest:input_type -> oj.contest.QueryContestReq
+	9,  // 0: oj.contest.QueryContestListRsp.contests:type_name -> oj.contest.Contest
+	9,  // 1: oj.contest.QueryContestRsp.contest:type_name -> oj.contest.Contest
+	12, // 2: oj.contest.Contest.problems:type_name -> oj.contest.ContestProblem
+	10, // 3: oj.contest.Contest.classes:type_name -> oj.contest.Class
+	7,  // 4: oj.contest.ContestServer.QueryContest:input_type -> oj.contest.QueryContestReq
 	5,  // 5: oj.contest.ContestServer.QueryContestList:input_type -> oj.contest.QueryContestListReq
 	5,  // 6: oj.contest.ContestServer.QueryMyContestList:input_type -> oj.contest.QueryContestListReq
 	4,  // 7: oj.contest.ContestServer.UpdateContestStatus:input_type -> oj.contest.UpdateContestStatusReq
 	2,  // 8: oj.contest.ContestServer.AddContest:input_type -> oj.contest.AddContestReq
 	3,  // 9: oj.contest.ContestServer.UpdateContest:input_type -> oj.contest.UpdateContestReq
-	8,  // 10: oj.contest.ContestServer.QueryContestPrivilegeInfo:input_type -> oj.contest.QueryContestReq
-	8,  // 11: oj.contest.ContestServer.QueryContestLanguageMask:input_type -> oj.contest.QueryContestReq
-	9,  // 12: oj.contest.ContestServer.QueryContest:output_type -> oj.contest.QueryContestRsp
+	7,  // 10: oj.contest.ContestServer.QueryContestPrivilegeInfo:input_type -> oj.contest.QueryContestReq
+	7,  // 11: oj.contest.ContestServer.QueryContestLanguageMask:input_type -> oj.contest.QueryContestReq
+	8,  // 12: oj.contest.ContestServer.QueryContest:output_type -> oj.contest.QueryContestRsp
 	6,  // 13: oj.contest.ContestServer.QueryContestList:output_type -> oj.contest.QueryContestListRsp
 	6,  // 14: oj.contest.ContestServer.QueryMyContestList:output_type -> oj.contest.QueryContestListRsp
-	12, // 15: oj.contest.ContestServer.UpdateContestStatus:output_type -> oj.contest.CommonRsp
-	12, // 16: oj.contest.ContestServer.AddContest:output_type -> oj.contest.CommonRsp
-	12, // 17: oj.contest.ContestServer.UpdateContest:output_type -> oj.contest.CommonRsp
+	11, // 15: oj.contest.ContestServer.UpdateContestStatus:output_type -> oj.contest.CommonRsp
+	11, // 16: oj.contest.ContestServer.AddContest:output_type -> oj.contest.CommonRsp
+	11, // 17: oj.contest.ContestServer.UpdateContest:output_type -> oj.contest.CommonRsp
 	1,  // 18: oj.contest.ContestServer.QueryContestPrivilegeInfo:output_type -> oj.contest.QueryContestPrivilegeInfoRsp
 	0,  // 19: oj.contest.ContestServer.QueryContestLanguageMask:output_type -> oj.contest.QueryContestLanguageMaskRsp
 	12, // [12:20] is the sub-list for method output_type
@@ -1343,7 +1305,7 @@ func file_contest_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contest_proto_rawDesc), len(file_contest_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

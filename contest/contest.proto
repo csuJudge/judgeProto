@@ -87,14 +87,11 @@ message QueryContestListRsp {
     int32 code                = 2;  // 返回码
     repeated Contest contests = 3;  // 作业集合
     int32 total               = 4;  // 总数
+    int32 EndCount = 5; // 已经结束
+    int32 notStartCount = 6; // 未开始
+    int32 runningCount = 7; // 进行中
 }
 
-message ContestStatistics{
-    int32 End = 1; // 已经结束
-    int32 notStart = 2; // 未开始
-    int32 running = 3; // 进行中
-    int32 participants = 4; // 参与人数
-}
 
 message QueryContestReq {
     int32 contestID = 1;  // 作业编号
@@ -123,6 +120,8 @@ message Contest {
     string password                  = 11;  // 密码
     int32 enable                     = 12;  // 是否结束
     repeated Class classes = 13; // 作业的班级
+    int32 participants = 14; // 参与人数
+
 }
 
 message Class {
