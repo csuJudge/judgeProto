@@ -318,6 +318,7 @@ type QueryNewsByPageSizeReq struct {
 	QueryType     int32                  `protobuf:"varint,4,opt,name=queryType,proto3" json:"queryType,omitempty"` // 查询类型
 	ClassIDs      string                 `protobuf:"bytes,5,opt,name=classIDs,proto3" json:"classIDs,omitempty"`    // 班级
 	Name          string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`            // 公告名称
+	Enable        int32                  `protobuf:"varint,7,opt,name=enable,proto3" json:"enable,omitempty"`       // 状态
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -392,6 +393,13 @@ func (x *QueryNewsByPageSizeReq) GetName() string {
 		return x.Name
 	}
 	return ""
+}
+
+func (x *QueryNewsByPageSizeReq) GetEnable() int32 {
+	if x != nil {
+		return x.Enable
+	}
+	return 0
 }
 
 type UpdateNewsPriorityReq struct {
@@ -797,14 +805,15 @@ const file_news_proto_rawDesc = "" +
 	"\x06enable\x18\x06 \x01(\x05R\x06enable\x12\x1a\n" +
 	"\bpriority\x18\a \x01(\x05R\bpriority\x12\x1a\n" +
 	"\bclassIDs\x18\b \x01(\tR\bclassIDs\x12\x1a\n" +
-	"\babstract\x18\t \x01(\tR\babstract\"\xa8\x01\n" +
+	"\babstract\x18\t \x01(\tR\babstract\"\xc0\x01\n" +
 	"\x16QueryNewsByPageSizeReq\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06userID\x18\x03 \x01(\x05R\x06userID\x12\x1c\n" +
 	"\tqueryType\x18\x04 \x01(\x05R\tqueryType\x12\x1a\n" +
 	"\bclassIDs\x18\x05 \x01(\tR\bclassIDs\x12\x12\n" +
-	"\x04name\x18\x06 \x01(\tR\x04name\"c\n" +
+	"\x04name\x18\x06 \x01(\tR\x04name\x12\x16\n" +
+	"\x06enable\x18\a \x01(\x05R\x06enable\"c\n" +
 	"\x15UpdateNewsPriorityReq\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\x05R\x06userID\x12\x16\n" +
 	"\x06newsID\x18\x02 \x01(\x05R\x06newsID\x12\x1a\n" +
