@@ -53,7 +53,7 @@ message QueryProblemTypeRsp{
 }
 
 message UserIDReq {
-    int32 userID = 1;  // 用户编号
+    int32 userID = 1;  // 用户id
 }
 
 message QueryAllMyContestProblemRsp{
