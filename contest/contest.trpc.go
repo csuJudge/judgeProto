@@ -35,6 +35,8 @@ type ContestServerService interface {
 	QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestReq) (*QueryContestPrivilegeInfoRsp, error)
 	// QueryContestLanguageMask QueryContestLanguageMask 查询作业语言列表
 	QueryContestLanguageMask(ctx context.Context, req *QueryContestReq) (*QueryContestLanguageMaskRsp, error)
+	// QueryContestFinishCount QueryContestFinishCount 计算作业完成数
+	QueryContestFinishCount(ctx context.Context, req *QueryContestReq) (*QueryContestFinishCountRsp, error)
 }
 
 func ContestServerService_QueryContest_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -181,6 +183,24 @@ func ContestServerService_QueryContestLanguageMask_Handler(svr interface{}, ctx 
 	return rsp, nil
 }
 
+func ContestServerService_QueryContestFinishCount_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryContestReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ContestServerService).QueryContestFinishCount(ctx, reqbody.(*QueryContestReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // ContestServerServer_ServiceDesc descriptor for server.RegisterService.
 var ContestServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.contest.ContestServer",
@@ -217,6 +237,10 @@ var ContestServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.contest.ContestServer/QueryContestLanguageMask",
 			Func: ContestServerService_QueryContestLanguageMask_Handler,
+		},
+		{
+			Name: "/oj.contest.ContestServer/QueryContestFinishCount",
+			Func: ContestServerService_QueryContestFinishCount_Handler,
 		},
 	},
 }
@@ -272,6 +296,11 @@ func (s *UnimplementedContestServer) QueryContestLanguageMask(ctx context.Contex
 	return nil, errors.New("rpc QueryContestLanguageMask of service ContestServer is not implemented")
 }
 
+// QueryContestFinishCount QueryContestFinishCount 计算作业完成数
+func (s *UnimplementedContestServer) QueryContestFinishCount(ctx context.Context, req *QueryContestReq) (*QueryContestFinishCountRsp, error) {
+	return nil, errors.New("rpc QueryContestFinishCount of service ContestServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -296,6 +325,8 @@ type ContestServerClientProxy interface {
 	QueryContestPrivilegeInfo(ctx context.Context, req *QueryContestReq, opts ...client.Option) (rsp *QueryContestPrivilegeInfoRsp, err error)
 	// QueryContestLanguageMask QueryContestLanguageMask 查询作业语言列表
 	QueryContestLanguageMask(ctx context.Context, req *QueryContestReq, opts ...client.Option) (rsp *QueryContestLanguageMaskRsp, err error)
+	// QueryContestFinishCount QueryContestFinishCount 计算作业完成数
+	QueryContestFinishCount(ctx context.Context, req *QueryContestReq, opts ...client.Option) (rsp *QueryContestFinishCountRsp, err error)
 }
 
 type ContestServerClientProxyImpl struct {
@@ -461,6 +492,26 @@ func (c *ContestServerClientProxyImpl) QueryContestLanguageMask(ctx context.Cont
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryContestLanguageMaskRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ContestServerClientProxyImpl) QueryContestFinishCount(ctx context.Context, req *QueryContestReq, opts ...client.Option) (*QueryContestFinishCountRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.contest.ContestServer/QueryContestFinishCount")
+	msg.WithCalleeServiceName(ContestServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ContestServer")
+	msg.WithCalleeMethod("QueryContestFinishCount")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryContestFinishCountRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

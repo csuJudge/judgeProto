@@ -20,6 +20,15 @@ service ContestServer {
     rpc QueryContestPrivilegeInfo(QueryContestReq) returns (QueryContestPrivilegeInfoRsp) {}
     // QueryContestLanguageMask 查询作业语言列表
     rpc QueryContestLanguageMask(QueryContestReq)returns (QueryContestLanguageMaskRsp){}
+    // QueryContestFinishCount 计算作业完成数
+    rpc QueryContestFinishCount(QueryContestReq) returns (QueryContestFinishCountRsp){}
+}
+
+message QueryContestFinishCountRsp{
+    string message        = 1;  // 返回信息
+    int32 code            = 2;  // 返回码
+    int32 finishCount = 3; // 完成数
+    int32 problemCount = 4; // 题目数
 }
 
 message QueryContestLanguageMaskRsp{
