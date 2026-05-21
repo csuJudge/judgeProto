@@ -138,9 +138,10 @@ message QueryProblemListReq {
     int32 limit      = 2;  // 页大小
     int32 userID     = 3;  // 用户编号
     string condition = 4;  // 条件（名称或者编号）
-    int32 knowledge = 5;  // 知识点
+    string knowledge = 5;  // 知识点
     string course    = 6;  // 课程
     int32 queryType = 7; // 请求类型
+    int32 difficulty = 8; // 难度
 }
 
 message QueryProblemListRsp {
@@ -253,6 +254,7 @@ message ProblemList {
     int32 difficulty = 5;  // 难度
     float passRate   = 6;  // 通过率
     int32 isDone     = 7;  // 是否做完
+    string knowledge = 8; // 知识点
 }
 
 message QueryAllProblemRsp {

@@ -195,6 +195,21 @@ func (mr *MockUserServerServiceMockRecorder) QueryUserPrivilege(ctx, req any) *g
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserPrivilege", reflect.TypeOf((*MockUserServerService)(nil).QueryUserPrivilege), ctx, req)
 }
 
+// QueryUserProblemCount mocks base method.
+func (m *MockUserServerService) QueryUserProblemCount(ctx context.Context, req *QueryUserPrivilegeReq) (*QueryUserProblemCountRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryUserProblemCount", ctx, req)
+	ret0, _ := ret[0].(*QueryUserProblemCountRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserProblemCount indicates an expected call of QueryUserProblemCount.
+func (mr *MockUserServerServiceMockRecorder) QueryUserProblemCount(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserProblemCount", reflect.TypeOf((*MockUserServerService)(nil).QueryUserProblemCount), ctx, req)
+}
+
 // QueryUserRank mocks base method.
 func (m *MockUserServerService) QueryUserRank(ctx context.Context, req *QueryUserRankReq) (*QueryUserRankRsp, error) {
 	m.ctrl.T.Helper()
@@ -541,6 +556,26 @@ func (mr *MockUserServerClientProxyMockRecorder) QueryUserPrivilege(ctx, req any
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserPrivilege", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryUserPrivilege), varargs...)
+}
+
+// QueryUserProblemCount mocks base method.
+func (m *MockUserServerClientProxy) QueryUserProblemCount(ctx context.Context, req *QueryUserPrivilegeReq, opts ...client.Option) (*QueryUserProblemCountRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryUserProblemCount", varargs...)
+	ret0, _ := ret[0].(*QueryUserProblemCountRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserProblemCount indicates an expected call of QueryUserProblemCount.
+func (mr *MockUserServerClientProxyMockRecorder) QueryUserProblemCount(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserProblemCount", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryUserProblemCount), varargs...)
 }
 
 // QueryUserRank mocks base method.
