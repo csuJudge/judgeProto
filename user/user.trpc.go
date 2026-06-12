@@ -55,8 +55,8 @@ type UserServerService interface {
 	UpdateClassUser(ctx context.Context, req *UpdateClassUserReq) (*CommonRsp, error)
 	// QueryClassUser QueryClassUser 查询班级用户
 	QueryClassUser(ctx context.Context, req *QueryClassUserReq) (*QueryClassUserRsp, error)
-	// QueryUserProblemCount QueryUserProblemCount 查询用户的题目统计
-	QueryUserProblemCount(ctx context.Context, req *QueryUserPrivilegeReq) (*QueryUserProblemCountRsp, error)
+	// QueryNeedBeFocusedStudent QueryNeedBeFocusedStudent 查询被关注的学生
+	QueryNeedBeFocusedStudent(ctx context.Context, req *QueryUserReq) (*QueryNeedBeFocusedStudentRsp, error)
 }
 
 func UserServerService_QueryUserPrivilege_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -383,14 +383,14 @@ func UserServerService_QueryClassUser_Handler(svr interface{}, ctx context.Conte
 	return rsp, nil
 }
 
-func UserServerService_QueryUserProblemCount_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &QueryUserPrivilegeReq{}
+func UserServerService_QueryNeedBeFocusedStudent_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryUserReq{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(UserServerService).QueryUserProblemCount(ctx, reqbody.(*QueryUserPrivilegeReq))
+		return svr.(UserServerService).QueryNeedBeFocusedStudent(ctx, reqbody.(*QueryUserReq))
 	}
 
 	var rsp interface{}
@@ -479,8 +479,8 @@ var UserServerServer_ServiceDesc = server.ServiceDesc{
 			Func: UserServerService_QueryClassUser_Handler,
 		},
 		{
-			Name: "/oj.user.UserServer/QueryUserProblemCount",
-			Func: UserServerService_QueryUserProblemCount_Handler,
+			Name: "/oj.user.UserServer/QueryNeedBeFocusedStudent",
+			Func: UserServerService_QueryNeedBeFocusedStudent_Handler,
 		},
 	},
 }
@@ -586,9 +586,9 @@ func (s *UnimplementedUserServer) QueryClassUser(ctx context.Context, req *Query
 	return nil, errors.New("rpc QueryClassUser of service UserServer is not implemented")
 }
 
-// QueryUserProblemCount QueryUserProblemCount 查询用户的题目统计
-func (s *UnimplementedUserServer) QueryUserProblemCount(ctx context.Context, req *QueryUserPrivilegeReq) (*QueryUserProblemCountRsp, error) {
-	return nil, errors.New("rpc QueryUserProblemCount of service UserServer is not implemented")
+// QueryNeedBeFocusedStudent QueryNeedBeFocusedStudent 查询被关注的学生
+func (s *UnimplementedUserServer) QueryNeedBeFocusedStudent(ctx context.Context, req *QueryUserReq) (*QueryNeedBeFocusedStudentRsp, error) {
+	return nil, errors.New("rpc QueryNeedBeFocusedStudent of service UserServer is not implemented")
 }
 
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
@@ -635,8 +635,8 @@ type UserServerClientProxy interface {
 	UpdateClassUser(ctx context.Context, req *UpdateClassUserReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryClassUser QueryClassUser 查询班级用户
 	QueryClassUser(ctx context.Context, req *QueryClassUserReq, opts ...client.Option) (rsp *QueryClassUserRsp, err error)
-	// QueryUserProblemCount QueryUserProblemCount 查询用户的题目统计
-	QueryUserProblemCount(ctx context.Context, req *QueryUserPrivilegeReq, opts ...client.Option) (rsp *QueryUserProblemCountRsp, err error)
+	// QueryNeedBeFocusedStudent QueryNeedBeFocusedStudent 查询被关注的学生
+	QueryNeedBeFocusedStudent(ctx context.Context, req *QueryUserReq, opts ...client.Option) (rsp *QueryNeedBeFocusedStudentRsp, err error)
 }
 
 type UserServerClientProxyImpl struct {
@@ -1008,20 +1008,20 @@ func (c *UserServerClientProxyImpl) QueryClassUser(ctx context.Context, req *Que
 	return rsp, nil
 }
 
-func (c *UserServerClientProxyImpl) QueryUserProblemCount(ctx context.Context, req *QueryUserPrivilegeReq, opts ...client.Option) (*QueryUserProblemCountRsp, error) {
+func (c *UserServerClientProxyImpl) QueryNeedBeFocusedStudent(ctx context.Context, req *QueryUserReq, opts ...client.Option) (*QueryNeedBeFocusedStudentRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/oj.user.UserServer/QueryUserProblemCount")
+	msg.WithClientRPCName("/oj.user.UserServer/QueryNeedBeFocusedStudent")
 	msg.WithCalleeServiceName(UserServerServer_ServiceDesc.ServiceName)
 	msg.WithCalleeApp("")
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("UserServer")
-	msg.WithCalleeMethod("QueryUserProblemCount")
+	msg.WithCalleeMethod("QueryNeedBeFocusedStudent")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &QueryUserProblemCountRsp{}
+	rsp := &QueryNeedBeFocusedStudentRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

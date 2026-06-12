@@ -90,6 +90,21 @@ func (mr *MockContestServerServiceMockRecorder) QueryContestFinishCount(ctx, req
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestFinishCount", reflect.TypeOf((*MockContestServerService)(nil).QueryContestFinishCount), ctx, req)
 }
 
+// QueryContestFinishStatus mocks base method.
+func (m *MockContestServerService) QueryContestFinishStatus(ctx context.Context, req *QueryContestListReq) (*QueryContestFinishStatusRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryContestFinishStatus", ctx, req)
+	ret0, _ := ret[0].(*QueryContestFinishStatusRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestFinishStatus indicates an expected call of QueryContestFinishStatus.
+func (mr *MockContestServerServiceMockRecorder) QueryContestFinishStatus(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestFinishStatus", reflect.TypeOf((*MockContestServerService)(nil).QueryContestFinishStatus), ctx, req)
+}
+
 // QueryContestLanguageMask mocks base method.
 func (m *MockContestServerService) QueryContestLanguageMask(ctx context.Context, req *QueryContestReq) (*QueryContestLanguageMaskRsp, error) {
 	m.ctrl.T.Helper()
@@ -266,6 +281,26 @@ func (mr *MockContestServerClientProxyMockRecorder) QueryContestFinishCount(ctx,
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestFinishCount", reflect.TypeOf((*MockContestServerClientProxy)(nil).QueryContestFinishCount), varargs...)
+}
+
+// QueryContestFinishStatus mocks base method.
+func (m *MockContestServerClientProxy) QueryContestFinishStatus(ctx context.Context, req *QueryContestListReq, opts ...client.Option) (*QueryContestFinishStatusRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryContestFinishStatus", varargs...)
+	ret0, _ := ret[0].(*QueryContestFinishStatusRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContestFinishStatus indicates an expected call of QueryContestFinishStatus.
+func (mr *MockContestServerClientProxyMockRecorder) QueryContestFinishStatus(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContestFinishStatus", reflect.TypeOf((*MockContestServerClientProxy)(nil).QueryContestFinishStatus), varargs...)
 }
 
 // QueryContestLanguageMask mocks base method.

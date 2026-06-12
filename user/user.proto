@@ -40,17 +40,16 @@ service UserServer {
     rpc UpdateClassUser(UpdateClassUserReq) returns (CommonRsp) {}
     // QueryClassUser 查询班级用户
     rpc QueryClassUser(QueryClassUserReq) returns (QueryClassUserRsp) {}
-    // QueryUserProblemCount 查询用户的题目统计
-    rpc QueryUserProblemCount(QueryUserPrivilegeReq) returns (QueryUserProblemCountRsp){}
+    // QueryNeedBeFocusedStudent 查询被关注的学生
+    rpc QueryNeedBeFocusedStudent(QueryUserReq)returns (QueryNeedBeFocusedStudentRsp){}
 }
 
-message QueryUserProblemCountRsp{
+message QueryNeedBeFocusedStudentRsp{
     string message = 1;  // 返回信息
     int32 code     = 2;  // 返回码
-    int32 acceptCount = 3; // 正确数
-    int32 submitCount = 4; // 提交数
-    int32 todayAcceptCount = 5; // 今日提交数
-    int32 rank = 6; // 排名
+    repeated User fewestProblemStudent = 3; // 最少做题数学生
+    repeated User fewestPassRateStudent = 4; // 最小通过率时间
+    repeated  User LongestNotAnsweredStudent = 5; // 最长未提交的学生
 }
 
 message QueryUserSolvedRankRsp{
@@ -207,7 +206,7 @@ message RegisterUserReq{
     int32 registerType = 11; // 注册
     string captcha = 12; // 验证码
     string captchaID = 13; // 验证码ID
- }
+}
 
 message AddUserReq {
     int32 userID    = 1;  // 用户编号（创建者）

@@ -22,32 +22,31 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type QueryUserProblemCountRsp struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Message          string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`                    // 返回信息
-	Code             int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`                         // 返回码
-	AcceptCount      int32                  `protobuf:"varint,3,opt,name=acceptCount,proto3" json:"acceptCount,omitempty"`           // 正确数
-	SubmitCount      int32                  `protobuf:"varint,4,opt,name=submitCount,proto3" json:"submitCount,omitempty"`           // 提交数
-	TodayAcceptCount int32                  `protobuf:"varint,5,opt,name=todayAcceptCount,proto3" json:"todayAcceptCount,omitempty"` // 今日提交数
-	Rank             int32                  `protobuf:"varint,6,opt,name=rank,proto3" json:"rank,omitempty"`                         // 排名
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+type QueryNeedBeFocusedStudentRsp struct {
+	state                     protoimpl.MessageState `protogen:"open.v1"`
+	Message                   string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`                                     // 返回信息
+	Code                      int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`                                          // 返回码
+	FewestProblemStudent      []*User                `protobuf:"bytes,3,rep,name=fewestProblemStudent,proto3" json:"fewestProblemStudent,omitempty"`           // 最少做题数学生
+	FewestPassRateStudent     []*User                `protobuf:"bytes,4,rep,name=fewestPassRateStudent,proto3" json:"fewestPassRateStudent,omitempty"`         // 最小通过率时间
+	LongestNotAnsweredStudent []*User                `protobuf:"bytes,5,rep,name=LongestNotAnsweredStudent,proto3" json:"LongestNotAnsweredStudent,omitempty"` // 最长未提交的学生
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
-func (x *QueryUserProblemCountRsp) Reset() {
-	*x = QueryUserProblemCountRsp{}
+func (x *QueryNeedBeFocusedStudentRsp) Reset() {
+	*x = QueryNeedBeFocusedStudentRsp{}
 	mi := &file_user_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *QueryUserProblemCountRsp) String() string {
+func (x *QueryNeedBeFocusedStudentRsp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryUserProblemCountRsp) ProtoMessage() {}
+func (*QueryNeedBeFocusedStudentRsp) ProtoMessage() {}
 
-func (x *QueryUserProblemCountRsp) ProtoReflect() protoreflect.Message {
+func (x *QueryNeedBeFocusedStudentRsp) ProtoReflect() protoreflect.Message {
 	mi := &file_user_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -59,51 +58,44 @@ func (x *QueryUserProblemCountRsp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QueryUserProblemCountRsp.ProtoReflect.Descriptor instead.
-func (*QueryUserProblemCountRsp) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryNeedBeFocusedStudentRsp.ProtoReflect.Descriptor instead.
+func (*QueryNeedBeFocusedStudentRsp) Descriptor() ([]byte, []int) {
 	return file_user_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *QueryUserProblemCountRsp) GetMessage() string {
+func (x *QueryNeedBeFocusedStudentRsp) GetMessage() string {
 	if x != nil {
 		return x.Message
 	}
 	return ""
 }
 
-func (x *QueryUserProblemCountRsp) GetCode() int32 {
+func (x *QueryNeedBeFocusedStudentRsp) GetCode() int32 {
 	if x != nil {
 		return x.Code
 	}
 	return 0
 }
 
-func (x *QueryUserProblemCountRsp) GetAcceptCount() int32 {
+func (x *QueryNeedBeFocusedStudentRsp) GetFewestProblemStudent() []*User {
 	if x != nil {
-		return x.AcceptCount
+		return x.FewestProblemStudent
 	}
-	return 0
+	return nil
 }
 
-func (x *QueryUserProblemCountRsp) GetSubmitCount() int32 {
+func (x *QueryNeedBeFocusedStudentRsp) GetFewestPassRateStudent() []*User {
 	if x != nil {
-		return x.SubmitCount
+		return x.FewestPassRateStudent
 	}
-	return 0
+	return nil
 }
 
-func (x *QueryUserProblemCountRsp) GetTodayAcceptCount() int32 {
+func (x *QueryNeedBeFocusedStudentRsp) GetLongestNotAnsweredStudent() []*User {
 	if x != nil {
-		return x.TodayAcceptCount
+		return x.LongestNotAnsweredStudent
 	}
-	return 0
-}
-
-func (x *QueryUserProblemCountRsp) GetRank() int32 {
-	if x != nil {
-		return x.Rank
-	}
-	return 0
+	return nil
 }
 
 type QueryUserSolvedRankRsp struct {
@@ -2367,14 +2359,13 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\aoj.user\"\xcc\x01\n" +
-	"\x18QueryUserProblemCountRsp\x12\x18\n" +
+	"user.proto\x12\aoj.user\"\xa1\x02\n" +
+	"\x1cQueryNeedBeFocusedStudentRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\x05R\x04code\x12 \n" +
-	"\vacceptCount\x18\x03 \x01(\x05R\vacceptCount\x12 \n" +
-	"\vsubmitCount\x18\x04 \x01(\x05R\vsubmitCount\x12*\n" +
-	"\x10todayAcceptCount\x18\x05 \x01(\x05R\x10todayAcceptCount\x12\x12\n" +
-	"\x04rank\x18\x06 \x01(\x05R\x04rank\">\n" +
+	"\x04code\x18\x02 \x01(\x05R\x04code\x12A\n" +
+	"\x14fewestProblemStudent\x18\x03 \x03(\v2\r.oj.user.UserR\x14fewestProblemStudent\x12C\n" +
+	"\x15fewestPassRateStudent\x18\x04 \x03(\v2\r.oj.user.UserR\x15fewestPassRateStudent\x12K\n" +
+	"\x19LongestNotAnsweredStudent\x18\x05 \x03(\v2\r.oj.user.UserR\x19LongestNotAnsweredStudent\">\n" +
 	"\x16QueryUserSolvedRankRsp\x12\x12\n" +
 	"\x04rank\x18\x01 \x01(\x05R\x04rank\x12\x10\n" +
 	"\x03gap\x18\x02 \x01(\x05R\x03gap\"\xb8\x01\n" +
@@ -2556,7 +2547,7 @@ const file_user_proto_rawDesc = "" +
 	"courseName\"?\n" +
 	"\x05Class\x12\x18\n" +
 	"\aclassID\x18\x01 \x01(\x05R\aclassID\x12\x1c\n" +
-	"\tclassName\x18\x02 \x01(\tR\tclassName2\xc7\n" +
+	"\tclassName\x18\x02 \x01(\tR\tclassName2\xc6\n" +
 	"\n" +
 	"\n" +
 	"UserServer\x12V\n" +
@@ -2578,8 +2569,8 @@ const file_user_proto_rawDesc = "" +
 	"\fQueryTeacher\x12\x18.oj.user.QueryTeacherReq\x1a\x18.oj.user.QueryAllUserRsp\"\x00\x12S\n" +
 	"\x11QueryClassTeacher\x12\x1d.oj.user.QueryClassTeacherReq\x1a\x1d.oj.user.QueryClassTeacherRsp\"\x00\x12D\n" +
 	"\x0fUpdateClassUser\x12\x1b.oj.user.UpdateClassUserReq\x1a\x12.oj.user.CommonRsp\"\x00\x12J\n" +
-	"\x0eQueryClassUser\x12\x1a.oj.user.QueryClassUserReq\x1a\x1a.oj.user.QueryClassUserRsp\"\x00\x12\\\n" +
-	"\x15QueryUserProblemCount\x12\x1e.oj.user.QueryUserPrivilegeReq\x1a!.oj.user.QueryUserProblemCountRsp\"\x00B%Z#github.com/csuJudge/judgeProto/userb\x06proto3"
+	"\x0eQueryClassUser\x12\x1a.oj.user.QueryClassUserReq\x1a\x1a.oj.user.QueryClassUserRsp\"\x00\x12[\n" +
+	"\x19QueryNeedBeFocusedStudent\x12\x15.oj.user.QueryUserReq\x1a%.oj.user.QueryNeedBeFocusedStudentRsp\"\x00B%Z#github.com/csuJudge/judgeProto/userb\x06proto3"
 
 var (
 	file_user_proto_rawDescOnce sync.Once
@@ -2595,92 +2586,95 @@ func file_user_proto_rawDescGZIP() []byte {
 
 var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_user_proto_goTypes = []any{
-	(*QueryUserProblemCountRsp)(nil), // 0: oj.user.QueryUserProblemCountRsp
-	(*QueryUserSolvedRankRsp)(nil),   // 1: oj.user.QueryUserSolvedRankRsp
-	(*RegisterUserRsp)(nil),          // 2: oj.user.RegisterUserRsp
-	(*QueryClassUserReq)(nil),        // 3: oj.user.QueryClassUserReq
-	(*QueryClassUserRsp)(nil),        // 4: oj.user.QueryClassUserRsp
-	(*UpdateClassUserReq)(nil),       // 5: oj.user.UpdateClassUserReq
-	(*QueryClassTeacherReq)(nil),     // 6: oj.user.QueryClassTeacherReq
-	(*TeacherInfo)(nil),              // 7: oj.user.TeacherInfo
-	(*QueryClassTeacherRsp)(nil),     // 8: oj.user.QueryClassTeacherRsp
-	(*QueryTeacherReq)(nil),          // 9: oj.user.QueryTeacherReq
-	(*UpdateMyInfoReq)(nil),          // 10: oj.user.UpdateMyInfoReq
-	(*IsLoginReq)(nil),               // 11: oj.user.IsLoginReq
-	(*IsLoginRsp)(nil),               // 12: oj.user.IsLoginRsp
-	(*LoginReq)(nil),                 // 13: oj.user.LoginReq
-	(*LoginRsp)(nil),                 // 14: oj.user.LoginRsp
-	(*UpdateUserReq)(nil),            // 15: oj.user.UpdateUserReq
-	(*QueryAllUserRsp)(nil),          // 16: oj.user.QueryAllUserRsp
-	(*QueryUserRankReq)(nil),         // 17: oj.user.QueryUserRankReq
-	(*QueryUserReq)(nil),             // 18: oj.user.QueryUserReq
-	(*UserRank)(nil),                 // 19: oj.user.UserRank
-	(*QueryUserRankRsp)(nil),         // 20: oj.user.QueryUserRankRsp
-	(*RegisterUserReq)(nil),          // 21: oj.user.RegisterUserReq
-	(*AddUserReq)(nil),               // 22: oj.user.AddUserReq
-	(*QueryUserInfoReq)(nil),         // 23: oj.user.QueryUserInfoReq
-	(*QueryUserInfoRsp)(nil),         // 24: oj.user.QueryUserInfoRsp
-	(*UpdateUserPasswordReq)(nil),    // 25: oj.user.UpdateUserPasswordReq
-	(*UpdateUserStatusReq)(nil),      // 26: oj.user.UpdateUserStatusReq
-	(*QueryUserPrivilegeReq)(nil),    // 27: oj.user.QueryUserPrivilegeReq
-	(*QueryUserPrivilegeRsp)(nil),    // 28: oj.user.QueryUserPrivilegeRsp
-	(*CommonRsp)(nil),                // 29: oj.user.CommonRsp
-	(*User)(nil),                     // 30: oj.user.User
-	(*Course)(nil),                   // 31: oj.user.Course
-	(*Class)(nil),                    // 32: oj.user.Class
+	(*QueryNeedBeFocusedStudentRsp)(nil), // 0: oj.user.QueryNeedBeFocusedStudentRsp
+	(*QueryUserSolvedRankRsp)(nil),       // 1: oj.user.QueryUserSolvedRankRsp
+	(*RegisterUserRsp)(nil),              // 2: oj.user.RegisterUserRsp
+	(*QueryClassUserReq)(nil),            // 3: oj.user.QueryClassUserReq
+	(*QueryClassUserRsp)(nil),            // 4: oj.user.QueryClassUserRsp
+	(*UpdateClassUserReq)(nil),           // 5: oj.user.UpdateClassUserReq
+	(*QueryClassTeacherReq)(nil),         // 6: oj.user.QueryClassTeacherReq
+	(*TeacherInfo)(nil),                  // 7: oj.user.TeacherInfo
+	(*QueryClassTeacherRsp)(nil),         // 8: oj.user.QueryClassTeacherRsp
+	(*QueryTeacherReq)(nil),              // 9: oj.user.QueryTeacherReq
+	(*UpdateMyInfoReq)(nil),              // 10: oj.user.UpdateMyInfoReq
+	(*IsLoginReq)(nil),                   // 11: oj.user.IsLoginReq
+	(*IsLoginRsp)(nil),                   // 12: oj.user.IsLoginRsp
+	(*LoginReq)(nil),                     // 13: oj.user.LoginReq
+	(*LoginRsp)(nil),                     // 14: oj.user.LoginRsp
+	(*UpdateUserReq)(nil),                // 15: oj.user.UpdateUserReq
+	(*QueryAllUserRsp)(nil),              // 16: oj.user.QueryAllUserRsp
+	(*QueryUserRankReq)(nil),             // 17: oj.user.QueryUserRankReq
+	(*QueryUserReq)(nil),                 // 18: oj.user.QueryUserReq
+	(*UserRank)(nil),                     // 19: oj.user.UserRank
+	(*QueryUserRankRsp)(nil),             // 20: oj.user.QueryUserRankRsp
+	(*RegisterUserReq)(nil),              // 21: oj.user.RegisterUserReq
+	(*AddUserReq)(nil),                   // 22: oj.user.AddUserReq
+	(*QueryUserInfoReq)(nil),             // 23: oj.user.QueryUserInfoReq
+	(*QueryUserInfoRsp)(nil),             // 24: oj.user.QueryUserInfoRsp
+	(*UpdateUserPasswordReq)(nil),        // 25: oj.user.UpdateUserPasswordReq
+	(*UpdateUserStatusReq)(nil),          // 26: oj.user.UpdateUserStatusReq
+	(*QueryUserPrivilegeReq)(nil),        // 27: oj.user.QueryUserPrivilegeReq
+	(*QueryUserPrivilegeRsp)(nil),        // 28: oj.user.QueryUserPrivilegeRsp
+	(*CommonRsp)(nil),                    // 29: oj.user.CommonRsp
+	(*User)(nil),                         // 30: oj.user.User
+	(*Course)(nil),                       // 31: oj.user.Course
+	(*Class)(nil),                        // 32: oj.user.Class
 }
 var file_user_proto_depIdxs = []int32{
-	30, // 0: oj.user.RegisterUserRsp.user:type_name -> oj.user.User
-	30, // 1: oj.user.QueryClassUserRsp.users:type_name -> oj.user.User
-	7,  // 2: oj.user.QueryClassTeacherRsp.teachers:type_name -> oj.user.TeacherInfo
-	30, // 3: oj.user.LoginRsp.user:type_name -> oj.user.User
-	30, // 4: oj.user.QueryAllUserRsp.users:type_name -> oj.user.User
-	19, // 5: oj.user.QueryUserRankRsp.totalRank:type_name -> oj.user.UserRank
-	19, // 6: oj.user.QueryUserRankRsp.classRank:type_name -> oj.user.UserRank
-	30, // 7: oj.user.QueryUserInfoRsp.user:type_name -> oj.user.User
-	27, // 8: oj.user.UserServer.QueryUserPrivilege:input_type -> oj.user.QueryUserPrivilegeReq
-	25, // 9: oj.user.UserServer.UpdateUserPassword:input_type -> oj.user.UpdateUserPasswordReq
-	26, // 10: oj.user.UserServer.UpdateUserStatus:input_type -> oj.user.UpdateUserStatusReq
-	23, // 11: oj.user.UserServer.QueryUserInfo:input_type -> oj.user.QueryUserInfoReq
-	22, // 12: oj.user.UserServer.AddUser:input_type -> oj.user.AddUserReq
-	21, // 13: oj.user.UserServer.RegisterUser:input_type -> oj.user.RegisterUserReq
-	22, // 14: oj.user.UserServer.AddClassUser:input_type -> oj.user.AddUserReq
-	17, // 15: oj.user.UserServer.QueryUserRank:input_type -> oj.user.QueryUserRankReq
-	9,  // 16: oj.user.UserServer.QueryUserSolvedRank:input_type -> oj.user.QueryTeacherReq
-	18, // 17: oj.user.UserServer.QueryAllUser:input_type -> oj.user.QueryUserReq
-	15, // 18: oj.user.UserServer.UpdateUser:input_type -> oj.user.UpdateUserReq
-	13, // 19: oj.user.UserServer.Login:input_type -> oj.user.LoginReq
-	11, // 20: oj.user.UserServer.IsLogin:input_type -> oj.user.IsLoginReq
-	10, // 21: oj.user.UserServer.UpdateMyInfo:input_type -> oj.user.UpdateMyInfoReq
-	9,  // 22: oj.user.UserServer.QueryTeacher:input_type -> oj.user.QueryTeacherReq
-	6,  // 23: oj.user.UserServer.QueryClassTeacher:input_type -> oj.user.QueryClassTeacherReq
-	5,  // 24: oj.user.UserServer.UpdateClassUser:input_type -> oj.user.UpdateClassUserReq
-	3,  // 25: oj.user.UserServer.QueryClassUser:input_type -> oj.user.QueryClassUserReq
-	27, // 26: oj.user.UserServer.QueryUserProblemCount:input_type -> oj.user.QueryUserPrivilegeReq
-	28, // 27: oj.user.UserServer.QueryUserPrivilege:output_type -> oj.user.QueryUserPrivilegeRsp
-	29, // 28: oj.user.UserServer.UpdateUserPassword:output_type -> oj.user.CommonRsp
-	29, // 29: oj.user.UserServer.UpdateUserStatus:output_type -> oj.user.CommonRsp
-	24, // 30: oj.user.UserServer.QueryUserInfo:output_type -> oj.user.QueryUserInfoRsp
-	29, // 31: oj.user.UserServer.AddUser:output_type -> oj.user.CommonRsp
-	2,  // 32: oj.user.UserServer.RegisterUser:output_type -> oj.user.RegisterUserRsp
-	29, // 33: oj.user.UserServer.AddClassUser:output_type -> oj.user.CommonRsp
-	20, // 34: oj.user.UserServer.QueryUserRank:output_type -> oj.user.QueryUserRankRsp
-	1,  // 35: oj.user.UserServer.QueryUserSolvedRank:output_type -> oj.user.QueryUserSolvedRankRsp
-	16, // 36: oj.user.UserServer.QueryAllUser:output_type -> oj.user.QueryAllUserRsp
-	29, // 37: oj.user.UserServer.UpdateUser:output_type -> oj.user.CommonRsp
-	14, // 38: oj.user.UserServer.Login:output_type -> oj.user.LoginRsp
-	12, // 39: oj.user.UserServer.IsLogin:output_type -> oj.user.IsLoginRsp
-	29, // 40: oj.user.UserServer.UpdateMyInfo:output_type -> oj.user.CommonRsp
-	16, // 41: oj.user.UserServer.QueryTeacher:output_type -> oj.user.QueryAllUserRsp
-	8,  // 42: oj.user.UserServer.QueryClassTeacher:output_type -> oj.user.QueryClassTeacherRsp
-	29, // 43: oj.user.UserServer.UpdateClassUser:output_type -> oj.user.CommonRsp
-	4,  // 44: oj.user.UserServer.QueryClassUser:output_type -> oj.user.QueryClassUserRsp
-	0,  // 45: oj.user.UserServer.QueryUserProblemCount:output_type -> oj.user.QueryUserProblemCountRsp
-	27, // [27:46] is the sub-list for method output_type
-	8,  // [8:27] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	30, // 0: oj.user.QueryNeedBeFocusedStudentRsp.fewestProblemStudent:type_name -> oj.user.User
+	30, // 1: oj.user.QueryNeedBeFocusedStudentRsp.fewestPassRateStudent:type_name -> oj.user.User
+	30, // 2: oj.user.QueryNeedBeFocusedStudentRsp.LongestNotAnsweredStudent:type_name -> oj.user.User
+	30, // 3: oj.user.RegisterUserRsp.user:type_name -> oj.user.User
+	30, // 4: oj.user.QueryClassUserRsp.users:type_name -> oj.user.User
+	7,  // 5: oj.user.QueryClassTeacherRsp.teachers:type_name -> oj.user.TeacherInfo
+	30, // 6: oj.user.LoginRsp.user:type_name -> oj.user.User
+	30, // 7: oj.user.QueryAllUserRsp.users:type_name -> oj.user.User
+	19, // 8: oj.user.QueryUserRankRsp.totalRank:type_name -> oj.user.UserRank
+	19, // 9: oj.user.QueryUserRankRsp.classRank:type_name -> oj.user.UserRank
+	30, // 10: oj.user.QueryUserInfoRsp.user:type_name -> oj.user.User
+	27, // 11: oj.user.UserServer.QueryUserPrivilege:input_type -> oj.user.QueryUserPrivilegeReq
+	25, // 12: oj.user.UserServer.UpdateUserPassword:input_type -> oj.user.UpdateUserPasswordReq
+	26, // 13: oj.user.UserServer.UpdateUserStatus:input_type -> oj.user.UpdateUserStatusReq
+	23, // 14: oj.user.UserServer.QueryUserInfo:input_type -> oj.user.QueryUserInfoReq
+	22, // 15: oj.user.UserServer.AddUser:input_type -> oj.user.AddUserReq
+	21, // 16: oj.user.UserServer.RegisterUser:input_type -> oj.user.RegisterUserReq
+	22, // 17: oj.user.UserServer.AddClassUser:input_type -> oj.user.AddUserReq
+	17, // 18: oj.user.UserServer.QueryUserRank:input_type -> oj.user.QueryUserRankReq
+	9,  // 19: oj.user.UserServer.QueryUserSolvedRank:input_type -> oj.user.QueryTeacherReq
+	18, // 20: oj.user.UserServer.QueryAllUser:input_type -> oj.user.QueryUserReq
+	15, // 21: oj.user.UserServer.UpdateUser:input_type -> oj.user.UpdateUserReq
+	13, // 22: oj.user.UserServer.Login:input_type -> oj.user.LoginReq
+	11, // 23: oj.user.UserServer.IsLogin:input_type -> oj.user.IsLoginReq
+	10, // 24: oj.user.UserServer.UpdateMyInfo:input_type -> oj.user.UpdateMyInfoReq
+	9,  // 25: oj.user.UserServer.QueryTeacher:input_type -> oj.user.QueryTeacherReq
+	6,  // 26: oj.user.UserServer.QueryClassTeacher:input_type -> oj.user.QueryClassTeacherReq
+	5,  // 27: oj.user.UserServer.UpdateClassUser:input_type -> oj.user.UpdateClassUserReq
+	3,  // 28: oj.user.UserServer.QueryClassUser:input_type -> oj.user.QueryClassUserReq
+	18, // 29: oj.user.UserServer.QueryNeedBeFocusedStudent:input_type -> oj.user.QueryUserReq
+	28, // 30: oj.user.UserServer.QueryUserPrivilege:output_type -> oj.user.QueryUserPrivilegeRsp
+	29, // 31: oj.user.UserServer.UpdateUserPassword:output_type -> oj.user.CommonRsp
+	29, // 32: oj.user.UserServer.UpdateUserStatus:output_type -> oj.user.CommonRsp
+	24, // 33: oj.user.UserServer.QueryUserInfo:output_type -> oj.user.QueryUserInfoRsp
+	29, // 34: oj.user.UserServer.AddUser:output_type -> oj.user.CommonRsp
+	2,  // 35: oj.user.UserServer.RegisterUser:output_type -> oj.user.RegisterUserRsp
+	29, // 36: oj.user.UserServer.AddClassUser:output_type -> oj.user.CommonRsp
+	20, // 37: oj.user.UserServer.QueryUserRank:output_type -> oj.user.QueryUserRankRsp
+	1,  // 38: oj.user.UserServer.QueryUserSolvedRank:output_type -> oj.user.QueryUserSolvedRankRsp
+	16, // 39: oj.user.UserServer.QueryAllUser:output_type -> oj.user.QueryAllUserRsp
+	29, // 40: oj.user.UserServer.UpdateUser:output_type -> oj.user.CommonRsp
+	14, // 41: oj.user.UserServer.Login:output_type -> oj.user.LoginRsp
+	12, // 42: oj.user.UserServer.IsLogin:output_type -> oj.user.IsLoginRsp
+	29, // 43: oj.user.UserServer.UpdateMyInfo:output_type -> oj.user.CommonRsp
+	16, // 44: oj.user.UserServer.QueryTeacher:output_type -> oj.user.QueryAllUserRsp
+	8,  // 45: oj.user.UserServer.QueryClassTeacher:output_type -> oj.user.QueryClassTeacherRsp
+	29, // 46: oj.user.UserServer.UpdateClassUser:output_type -> oj.user.CommonRsp
+	4,  // 47: oj.user.UserServer.QueryClassUser:output_type -> oj.user.QueryClassUserRsp
+	0,  // 48: oj.user.UserServer.QueryNeedBeFocusedStudent:output_type -> oj.user.QueryNeedBeFocusedStudentRsp
+	30, // [30:49] is the sub-list for method output_type
+	11, // [11:30] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }

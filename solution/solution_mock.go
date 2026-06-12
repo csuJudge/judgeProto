@@ -341,6 +341,21 @@ func (mr *MockSolutionServerServiceMockRecorder) QueryLatestCode(ctx, req any) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryLatestCode", reflect.TypeOf((*MockSolutionServerService)(nil).QueryLatestCode), ctx, req)
 }
 
+// QueryLongestNotAnsweredTime mocks base method.
+func (m *MockSolutionServerService) QueryLongestNotAnsweredTime(ctx context.Context, req *UserIDReq) (*QueryLongestNotAnsweredTimeRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryLongestNotAnsweredTime", ctx, req)
+	ret0, _ := ret[0].(*QueryLongestNotAnsweredTimeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryLongestNotAnsweredTime indicates an expected call of QueryLongestNotAnsweredTime.
+func (mr *MockSolutionServerServiceMockRecorder) QueryLongestNotAnsweredTime(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryLongestNotAnsweredTime", reflect.TypeOf((*MockSolutionServerService)(nil).QueryLongestNotAnsweredTime), ctx, req)
+}
+
 // QueryMyLanguageDistribution mocks base method.
 func (m *MockSolutionServerService) QueryMyLanguageDistribution(ctx context.Context, req *UserIDReq) (*QueryMyLanguageDistributionRsp, error) {
 	m.ctrl.T.Helper()
@@ -384,6 +399,21 @@ func (m *MockSolutionServerService) QueryMySolutionRecord(ctx context.Context, r
 func (mr *MockSolutionServerServiceMockRecorder) QueryMySolutionRecord(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryMySolutionRecord", reflect.TypeOf((*MockSolutionServerService)(nil).QueryMySolutionRecord), ctx, req)
+}
+
+// QueryProblemSolvedRank mocks base method.
+func (m *MockSolutionServerService) QueryProblemSolvedRank(ctx context.Context, req *UserIDReq) (*QueryProblemSolvedRankRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryProblemSolvedRank", ctx, req)
+	ret0, _ := ret[0].(*QueryProblemSolvedRankRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryProblemSolvedRank indicates an expected call of QueryProblemSolvedRank.
+func (mr *MockSolutionServerServiceMockRecorder) QueryProblemSolvedRank(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryProblemSolvedRank", reflect.TypeOf((*MockSolutionServerService)(nil).QueryProblemSolvedRank), ctx, req)
 }
 
 // QueryRuntimeInfo mocks base method.
@@ -940,6 +970,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) QueryLatestCode(ctx, req an
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryLatestCode", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryLatestCode), varargs...)
 }
 
+// QueryLongestNotAnsweredTime mocks base method.
+func (m *MockSolutionServerClientProxy) QueryLongestNotAnsweredTime(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryLongestNotAnsweredTimeRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryLongestNotAnsweredTime", varargs...)
+	ret0, _ := ret[0].(*QueryLongestNotAnsweredTimeRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryLongestNotAnsweredTime indicates an expected call of QueryLongestNotAnsweredTime.
+func (mr *MockSolutionServerClientProxyMockRecorder) QueryLongestNotAnsweredTime(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryLongestNotAnsweredTime", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryLongestNotAnsweredTime), varargs...)
+}
+
 // QueryMyLanguageDistribution mocks base method.
 func (m *MockSolutionServerClientProxy) QueryMyLanguageDistribution(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryMyLanguageDistributionRsp, error) {
 	m.ctrl.T.Helper()
@@ -998,6 +1048,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) QueryMySolutionRecord(ctx, 
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryMySolutionRecord", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryMySolutionRecord), varargs...)
+}
+
+// QueryProblemSolvedRank mocks base method.
+func (m *MockSolutionServerClientProxy) QueryProblemSolvedRank(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryProblemSolvedRankRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryProblemSolvedRank", varargs...)
+	ret0, _ := ret[0].(*QueryProblemSolvedRankRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryProblemSolvedRank indicates an expected call of QueryProblemSolvedRank.
+func (mr *MockSolutionServerClientProxyMockRecorder) QueryProblemSolvedRank(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryProblemSolvedRank", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryProblemSolvedRank), varargs...)
 }
 
 // QueryRuntimeInfo mocks base method.

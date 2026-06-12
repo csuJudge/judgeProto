@@ -157,6 +157,10 @@ type SolutionServerService interface {
 	QueryMyLanguageDistribution(ctx context.Context, req *UserIDReq) (*QueryMyLanguageDistributionRsp, error)
 	// CountUserKnowledgeSolution CountUserTimeRangeSolution 统计用户知识点分布数据
 	CountUserKnowledgeSolution(ctx context.Context, req *UserIDReq) (*CountUserKnowledgeSolutionRsp, error)
+	// QueryProblemSolvedRank QueryProblemSolvedRank 查询用户做题数排名
+	QueryProblemSolvedRank(ctx context.Context, req *UserIDReq) (*QueryProblemSolvedRankRsp, error)
+	// QueryLongestNotAnsweredTime QueryProblemSolvedRank 查询用户做题数排名
+	QueryLongestNotAnsweredTime(ctx context.Context, req *UserIDReq) (*QueryLongestNotAnsweredTimeRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -645,6 +649,42 @@ func SolutionServerService_CountUserKnowledgeSolution_Handler(svr interface{}, c
 	return rsp, nil
 }
 
+func SolutionServerService_QueryProblemSolvedRank_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UserIDReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryProblemSolvedRank(ctx, reqbody.(*UserIDReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func SolutionServerService_QueryLongestNotAnsweredTime_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UserIDReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryLongestNotAnsweredTime(ctx, reqbody.(*UserIDReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -757,6 +797,14 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/CountUserKnowledgeSolution",
 			Func: SolutionServerService_CountUserKnowledgeSolution_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryProblemSolvedRank",
+			Func: SolutionServerService_QueryProblemSolvedRank_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryLongestNotAnsweredTime",
+			Func: SolutionServerService_QueryLongestNotAnsweredTime_Handler,
 		},
 	},
 }
@@ -919,6 +967,16 @@ func (s *UnimplementedSolutionServer) CountUserKnowledgeSolution(ctx context.Con
 	return nil, errors.New("rpc CountUserKnowledgeSolution of service SolutionServer is not implemented")
 }
 
+// QueryProblemSolvedRank QueryProblemSolvedRank 查询用户做题数排名
+func (s *UnimplementedSolutionServer) QueryProblemSolvedRank(ctx context.Context, req *UserIDReq) (*QueryProblemSolvedRankRsp, error) {
+	return nil, errors.New("rpc QueryProblemSolvedRank of service SolutionServer is not implemented")
+}
+
+// QueryLongestNotAnsweredTime QueryProblemSolvedRank 查询用户做题数排名
+func (s *UnimplementedSolutionServer) QueryLongestNotAnsweredTime(ctx context.Context, req *UserIDReq) (*QueryLongestNotAnsweredTimeRsp, error) {
+	return nil, errors.New("rpc QueryLongestNotAnsweredTime of service SolutionServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -1049,6 +1107,10 @@ type SolutionServerClientProxy interface {
 	QueryMyLanguageDistribution(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryMyLanguageDistributionRsp, err error)
 	// CountUserKnowledgeSolution CountUserTimeRangeSolution 统计用户知识点分布数据
 	CountUserKnowledgeSolution(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *CountUserKnowledgeSolutionRsp, err error)
+	// QueryProblemSolvedRank QueryProblemSolvedRank 查询用户做题数排名
+	QueryProblemSolvedRank(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryProblemSolvedRankRsp, err error)
+	// QueryLongestNotAnsweredTime QueryProblemSolvedRank 查询用户做题数排名
+	QueryLongestNotAnsweredTime(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryLongestNotAnsweredTimeRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -1594,6 +1656,46 @@ func (c *SolutionServerClientProxyImpl) CountUserKnowledgeSolution(ctx context.C
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CountUserKnowledgeSolutionRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryProblemSolvedRank(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryProblemSolvedRankRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryProblemSolvedRank")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryProblemSolvedRank")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryProblemSolvedRankRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryLongestNotAnsweredTime(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryLongestNotAnsweredTimeRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryLongestNotAnsweredTime")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryLongestNotAnsweredTime")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryLongestNotAnsweredTimeRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

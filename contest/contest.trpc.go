@@ -37,6 +37,8 @@ type ContestServerService interface {
 	QueryContestLanguageMask(ctx context.Context, req *QueryContestReq) (*QueryContestLanguageMaskRsp, error)
 	// QueryContestFinishCount QueryContestFinishCount 计算作业完成数
 	QueryContestFinishCount(ctx context.Context, req *QueryContestReq) (*QueryContestFinishCountRsp, error)
+	// QueryContestFinishStatus QueryContestFinishStatus 查询作业完成情况
+	QueryContestFinishStatus(ctx context.Context, req *QueryContestListReq) (*QueryContestFinishStatusRsp, error)
 }
 
 func ContestServerService_QueryContest_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -201,6 +203,24 @@ func ContestServerService_QueryContestFinishCount_Handler(svr interface{}, ctx c
 	return rsp, nil
 }
 
+func ContestServerService_QueryContestFinishStatus_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryContestListReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ContestServerService).QueryContestFinishStatus(ctx, reqbody.(*QueryContestListReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // ContestServerServer_ServiceDesc descriptor for server.RegisterService.
 var ContestServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.contest.ContestServer",
@@ -241,6 +261,10 @@ var ContestServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.contest.ContestServer/QueryContestFinishCount",
 			Func: ContestServerService_QueryContestFinishCount_Handler,
+		},
+		{
+			Name: "/oj.contest.ContestServer/QueryContestFinishStatus",
+			Func: ContestServerService_QueryContestFinishStatus_Handler,
 		},
 	},
 }
@@ -301,6 +325,11 @@ func (s *UnimplementedContestServer) QueryContestFinishCount(ctx context.Context
 	return nil, errors.New("rpc QueryContestFinishCount of service ContestServer is not implemented")
 }
 
+// QueryContestFinishStatus QueryContestFinishStatus 查询作业完成情况
+func (s *UnimplementedContestServer) QueryContestFinishStatus(ctx context.Context, req *QueryContestListReq) (*QueryContestFinishStatusRsp, error) {
+	return nil, errors.New("rpc QueryContestFinishStatus of service ContestServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -327,6 +356,8 @@ type ContestServerClientProxy interface {
 	QueryContestLanguageMask(ctx context.Context, req *QueryContestReq, opts ...client.Option) (rsp *QueryContestLanguageMaskRsp, err error)
 	// QueryContestFinishCount QueryContestFinishCount 计算作业完成数
 	QueryContestFinishCount(ctx context.Context, req *QueryContestReq, opts ...client.Option) (rsp *QueryContestFinishCountRsp, err error)
+	// QueryContestFinishStatus QueryContestFinishStatus 查询作业完成情况
+	QueryContestFinishStatus(ctx context.Context, req *QueryContestListReq, opts ...client.Option) (rsp *QueryContestFinishStatusRsp, err error)
 }
 
 type ContestServerClientProxyImpl struct {
@@ -512,6 +543,26 @@ func (c *ContestServerClientProxyImpl) QueryContestFinishCount(ctx context.Conte
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryContestFinishCountRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ContestServerClientProxyImpl) QueryContestFinishStatus(ctx context.Context, req *QueryContestListReq, opts ...client.Option) (*QueryContestFinishStatusRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.contest.ContestServer/QueryContestFinishStatus")
+	msg.WithCalleeServiceName(ContestServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ContestServer")
+	msg.WithCalleeMethod("QueryContestFinishStatus")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryContestFinishStatusRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
