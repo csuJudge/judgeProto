@@ -28,6 +28,8 @@ type ContestFinishStatus struct {
 	Participants     int32                  `protobuf:"varint,2,opt,name=participants,proto3" json:"participants,omitempty"`         // 参与人数
 	NeedParticipants int32                  `protobuf:"varint,3,opt,name=needParticipants,proto3" json:"needParticipants,omitempty"` // 应参与人数
 	LowestProblem    []*ContestProblem      `protobuf:"bytes,4,rep,name=lowestProblem,proto3" json:"lowestProblem,omitempty"`        // 通过率最低的三个题
+	Name             string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`                          // 作业名称
+	EndTime          string                 `protobuf:"bytes,6,opt,name=endTime,proto3" json:"endTime,omitempty"`                    // 结束时间
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -88,6 +90,20 @@ func (x *ContestFinishStatus) GetLowestProblem() []*ContestProblem {
 		return x.LowestProblem
 	}
 	return nil
+}
+
+func (x *ContestFinishStatus) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ContestFinishStatus) GetEndTime() string {
+	if x != nil {
+		return x.EndTime
+	}
+	return ""
 }
 
 type QueryContestFinishStatusRsp struct {
@@ -1331,12 +1347,14 @@ var File_contest_proto protoreflect.FileDescriptor
 const file_contest_proto_rawDesc = "" +
 	"\n" +
 	"\rcontest.proto\x12\n" +
-	"oj.contest\"\xc9\x01\n" +
+	"oj.contest\"\xf7\x01\n" +
 	"\x13ContestFinishStatus\x12 \n" +
 	"\vfinishCount\x18\x01 \x01(\x05R\vfinishCount\x12\"\n" +
 	"\fparticipants\x18\x02 \x01(\x05R\fparticipants\x12*\n" +
 	"\x10needParticipants\x18\x03 \x01(\x05R\x10needParticipants\x12@\n" +
-	"\rlowestProblem\x18\x04 \x03(\v2\x1a.oj.contest.ContestProblemR\rlowestProblem\"\x9c\x01\n" +
+	"\rlowestProblem\x18\x04 \x03(\v2\x1a.oj.contest.ContestProblemR\rlowestProblem\x12\x12\n" +
+	"\x04name\x18\x05 \x01(\tR\x04name\x12\x18\n" +
+	"\aendTime\x18\x06 \x01(\tR\aendTime\"\x9c\x01\n" +
 	"\x1bQueryContestFinishStatusRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x129\n" +
