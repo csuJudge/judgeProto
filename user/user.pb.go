@@ -2187,23 +2187,24 @@ func (x *CommonRsp) GetCode() int32 {
 }
 
 type User struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserID        int32                  `protobuf:"varint,1,opt,name=userID,proto3" json:"userID,omitempty"`               // 用户编号
-	UserName      string                 `protobuf:"bytes,2,opt,name=userName,proto3" json:"userName,omitempty"`            // 用户名称
-	UserEmail     string                 `protobuf:"bytes,3,opt,name=userEmail,proto3" json:"userEmail,omitempty"`          // 用户邮箱
-	UserPhone     string                 `protobuf:"bytes,4,opt,name=userPhone,proto3" json:"userPhone,omitempty"`          // 用户电话
-	UserClass     string                 `protobuf:"bytes,5,opt,name=userClass,proto3" json:"userClass,omitempty"`          // 用户班级
-	UserPrivilege int32                  `protobuf:"varint,6,opt,name=userPrivilege,proto3" json:"userPrivilege,omitempty"` // 用户权限
-	LoginTime     string                 `protobuf:"bytes,7,opt,name=loginTime,proto3" json:"loginTime,omitempty"`          // 上次登录时间
-	LoginIP       string                 `protobuf:"bytes,8,opt,name=loginIP,proto3" json:"loginIP,omitempty"`              // 上次登录的IP
-	SubmitCount   int32                  `protobuf:"varint,9,opt,name=submitCount,proto3" json:"submitCount,omitempty"`     // 提交的数量
-	SolvedCount   int32                  `protobuf:"varint,10,opt,name=solvedCount,proto3" json:"solvedCount,omitempty"`    // 解决的数量
-	UserNumber    string                 `protobuf:"bytes,11,opt,name=userNumber,proto3" json:"userNumber,omitempty"`       // 学工号
-	Enable        int32                  `protobuf:"varint,12,opt,name=enable,proto3" json:"enable,omitempty"`              // 是否可用
-	Course        string                 `protobuf:"bytes,13,opt,name=course,proto3" json:"course,omitempty"`               // 课程
-	Class         string                 `protobuf:"bytes,14,opt,name=class,proto3" json:"class,omitempty"`                 // 班级
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	UserID                 int32                  `protobuf:"varint,1,opt,name=userID,proto3" json:"userID,omitempty"`                                  // 用户编号
+	UserName               string                 `protobuf:"bytes,2,opt,name=userName,proto3" json:"userName,omitempty"`                               // 用户名称
+	UserEmail              string                 `protobuf:"bytes,3,opt,name=userEmail,proto3" json:"userEmail,omitempty"`                             // 用户邮箱
+	UserPhone              string                 `protobuf:"bytes,4,opt,name=userPhone,proto3" json:"userPhone,omitempty"`                             // 用户电话
+	UserClass              string                 `protobuf:"bytes,5,opt,name=userClass,proto3" json:"userClass,omitempty"`                             // 用户班级
+	UserPrivilege          int32                  `protobuf:"varint,6,opt,name=userPrivilege,proto3" json:"userPrivilege,omitempty"`                    // 用户权限
+	LoginTime              string                 `protobuf:"bytes,7,opt,name=loginTime,proto3" json:"loginTime,omitempty"`                             // 上次登录时间
+	LoginIP                string                 `protobuf:"bytes,8,opt,name=loginIP,proto3" json:"loginIP,omitempty"`                                 // 上次登录的IP
+	SubmitCount            int32                  `protobuf:"varint,9,opt,name=submitCount,proto3" json:"submitCount,omitempty"`                        // 提交的数量
+	SolvedCount            int32                  `protobuf:"varint,10,opt,name=solvedCount,proto3" json:"solvedCount,omitempty"`                       // 解决的数量
+	UserNumber             string                 `protobuf:"bytes,11,opt,name=userNumber,proto3" json:"userNumber,omitempty"`                          // 学工号
+	Enable                 int32                  `protobuf:"varint,12,opt,name=enable,proto3" json:"enable,omitempty"`                                 // 是否可用
+	Course                 string                 `protobuf:"bytes,13,opt,name=course,proto3" json:"course,omitempty"`                                  // 课程
+	Class                  string                 `protobuf:"bytes,14,opt,name=class,proto3" json:"class,omitempty"`                                    // 班级
+	LongestNotAnsweredTime int32                  `protobuf:"varint,15,opt,name=longestNotAnsweredTime,proto3" json:"longestNotAnsweredTime,omitempty"` // 最长未做题时间
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *User) Reset() {
@@ -2332,6 +2333,13 @@ func (x *User) GetClass() string {
 		return x.Class
 	}
 	return ""
+}
+
+func (x *User) GetLongestNotAnsweredTime() int32 {
+	if x != nil {
+		return x.LongestNotAnsweredTime
+	}
+	return 0
 }
 
 type Course struct {
@@ -2612,7 +2620,7 @@ const file_user_proto_rawDesc = "" +
 	"\tprivilege\x18\x03 \x01(\x05R\tprivilege\"9\n" +
 	"\tCommonRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\x05R\x04code\"\x9c\x03\n" +
+	"\x04code\x18\x02 \x01(\x05R\x04code\"\xd4\x03\n" +
 	"\x04User\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\x05R\x06userID\x12\x1a\n" +
 	"\buserName\x18\x02 \x01(\tR\buserName\x12\x1c\n" +
@@ -2630,7 +2638,8 @@ const file_user_proto_rawDesc = "" +
 	"userNumber\x12\x16\n" +
 	"\x06enable\x18\f \x01(\x05R\x06enable\x12\x16\n" +
 	"\x06course\x18\r \x01(\tR\x06course\x12\x14\n" +
-	"\x05class\x18\x0e \x01(\tR\x05class\"D\n" +
+	"\x05class\x18\x0e \x01(\tR\x05class\x126\n" +
+	"\x16longestNotAnsweredTime\x18\x0f \x01(\x05R\x16longestNotAnsweredTime\"D\n" +
 	"\x06Course\x12\x1a\n" +
 	"\bcourseID\x18\x01 \x01(\x05R\bcourseID\x12\x1e\n" +
 	"\n" +

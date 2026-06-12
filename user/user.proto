@@ -285,6 +285,7 @@ message User {
     int32 enable        = 12;  // 是否可用
     string course = 13; // 课程
     string class = 14; // 班级
+    int32 longestNotAnsweredTime = 15; // 最长未做题时间
 }
 
 message Course {
