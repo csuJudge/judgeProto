@@ -57,6 +57,8 @@ type UserServerService interface {
 	QueryClassUser(ctx context.Context, req *QueryClassUserReq) (*QueryClassUserRsp, error)
 	// QueryNeedBeFocusedStudent QueryNeedBeFocusedStudent 查询被关注的学生
 	QueryNeedBeFocusedStudent(ctx context.Context, req *QueryUserReq) (*QueryNeedBeFocusedStudentRsp, error)
+	// QueryUserProblemCount QueryUserProblemCount 查询用户的题目统计
+	QueryUserProblemCount(ctx context.Context, req *QueryUserPrivilegeReq) (*QueryUserProblemCountRsp, error)
 }
 
 func UserServerService_QueryUserPrivilege_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -401,6 +403,24 @@ func UserServerService_QueryNeedBeFocusedStudent_Handler(svr interface{}, ctx co
 	return rsp, nil
 }
 
+func UserServerService_QueryUserProblemCount_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryUserPrivilegeReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(UserServerService).QueryUserProblemCount(ctx, reqbody.(*QueryUserPrivilegeReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // UserServerServer_ServiceDesc descriptor for server.RegisterService.
 var UserServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.user.UserServer",
@@ -481,6 +501,10 @@ var UserServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.user.UserServer/QueryNeedBeFocusedStudent",
 			Func: UserServerService_QueryNeedBeFocusedStudent_Handler,
+		},
+		{
+			Name: "/oj.user.UserServer/QueryUserProblemCount",
+			Func: UserServerService_QueryUserProblemCount_Handler,
 		},
 	},
 }
@@ -591,6 +615,11 @@ func (s *UnimplementedUserServer) QueryNeedBeFocusedStudent(ctx context.Context,
 	return nil, errors.New("rpc QueryNeedBeFocusedStudent of service UserServer is not implemented")
 }
 
+// QueryUserProblemCount QueryUserProblemCount 查询用户的题目统计
+func (s *UnimplementedUserServer) QueryUserProblemCount(ctx context.Context, req *QueryUserPrivilegeReq) (*QueryUserProblemCountRsp, error) {
+	return nil, errors.New("rpc QueryUserProblemCount of service UserServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -637,6 +666,8 @@ type UserServerClientProxy interface {
 	QueryClassUser(ctx context.Context, req *QueryClassUserReq, opts ...client.Option) (rsp *QueryClassUserRsp, err error)
 	// QueryNeedBeFocusedStudent QueryNeedBeFocusedStudent 查询被关注的学生
 	QueryNeedBeFocusedStudent(ctx context.Context, req *QueryUserReq, opts ...client.Option) (rsp *QueryNeedBeFocusedStudentRsp, err error)
+	// QueryUserProblemCount QueryUserProblemCount 查询用户的题目统计
+	QueryUserProblemCount(ctx context.Context, req *QueryUserPrivilegeReq, opts ...client.Option) (rsp *QueryUserProblemCountRsp, err error)
 }
 
 type UserServerClientProxyImpl struct {
@@ -1022,6 +1053,26 @@ func (c *UserServerClientProxyImpl) QueryNeedBeFocusedStudent(ctx context.Contex
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryNeedBeFocusedStudentRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *UserServerClientProxyImpl) QueryUserProblemCount(ctx context.Context, req *QueryUserPrivilegeReq, opts ...client.Option) (*QueryUserProblemCountRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.user.UserServer/QueryUserProblemCount")
+	msg.WithCalleeServiceName(UserServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("UserServer")
+	msg.WithCalleeMethod("QueryUserProblemCount")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryUserProblemCountRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
