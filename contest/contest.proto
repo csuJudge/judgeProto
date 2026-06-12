@@ -26,13 +26,18 @@ service ContestServer {
     rpc  QueryContestFinishStatus(QueryContestListReq) returns (QueryContestFinishStatusRsp){}
 }
 
+message ContestFinishStatus{
+    int32 finishCount = 1; // 完成数
+    int32 participants = 2; // 参与人数
+    int32 needParticipants = 3; // 应参与人数
+    repeated ContestProblem lowestProblem = 4;// 通过率最低的三个题
+}
+
 message QueryContestFinishStatusRsp{
     string message        = 1;  // 返回信息
     int32 code            = 2;  // 返回码
-    int32 finishCount = 3; // 完成数
-    int32 participants = 4; // 参与人数
-    int32 needParticipants = 5; // 应参与人数
-    repeated ContestProblem lowestProblem = 6;// 通过率最低的三个题
+    repeated ContestFinishStatus contest = 3; // 作业完成情况
+    int32 total = 4; // 总数
 }
 
 message QueryContestFinishCountRsp{
