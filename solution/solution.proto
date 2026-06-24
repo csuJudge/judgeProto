@@ -70,6 +70,8 @@ service SolutionServer {
     rpc QueryProblemSolvedRank(UserIDReq)returns (QueryProblemSolvedRankRsp){}
     // QueryProblemSolvedRank 查询用户做题数排名
     rpc QueryLongestNotAnsweredTime(UserIDReq)returns (QueryLongestNotAnsweredTimeRsp){}
+
+    rpc QueryUserActions(UserIDReq)returns(QueryAllUserSolutionRsp){}
 }
 
 message QueryLongestNotAnsweredTimeRsp{

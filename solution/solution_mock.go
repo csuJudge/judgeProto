@@ -521,6 +521,21 @@ func (mr *MockSolutionServerServiceMockRecorder) QueryTodaySolution(ctx, req any
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryTodaySolution", reflect.TypeOf((*MockSolutionServerService)(nil).QueryTodaySolution), ctx, req)
 }
 
+// QueryUserActions mocks base method.
+func (m *MockSolutionServerService) QueryUserActions(ctx context.Context, req *UserIDReq) (*QueryAllUserSolutionRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryUserActions", ctx, req)
+	ret0, _ := ret[0].(*QueryAllUserSolutionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserActions indicates an expected call of QueryUserActions.
+func (mr *MockSolutionServerServiceMockRecorder) QueryUserActions(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserActions", reflect.TypeOf((*MockSolutionServerService)(nil).QueryUserActions), ctx, req)
+}
+
 // QueryUserContestSubmission mocks base method.
 func (m *MockSolutionServerService) QueryUserContestSubmission(ctx context.Context, req *QueryUserContestSubmissionReq) (*QueryUserContestSubmissionRsp, error) {
 	m.ctrl.T.Helper()
@@ -1208,6 +1223,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) QueryTodaySolution(ctx, req
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryTodaySolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryTodaySolution), varargs...)
+}
+
+// QueryUserActions mocks base method.
+func (m *MockSolutionServerClientProxy) QueryUserActions(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryAllUserSolutionRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryUserActions", varargs...)
+	ret0, _ := ret[0].(*QueryAllUserSolutionRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserActions indicates an expected call of QueryUserActions.
+func (mr *MockSolutionServerClientProxyMockRecorder) QueryUserActions(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserActions", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryUserActions), varargs...)
 }
 
 // QueryUserContestSubmission mocks base method.

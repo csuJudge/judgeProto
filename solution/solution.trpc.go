@@ -161,6 +161,8 @@ type SolutionServerService interface {
 	QueryProblemSolvedRank(ctx context.Context, req *UserIDReq) (*QueryProblemSolvedRankRsp, error)
 	// QueryLongestNotAnsweredTime QueryProblemSolvedRank 查询用户做题数排名
 	QueryLongestNotAnsweredTime(ctx context.Context, req *UserIDReq) (*QueryLongestNotAnsweredTimeRsp, error)
+
+	QueryUserActions(ctx context.Context, req *UserIDReq) (*QueryAllUserSolutionRsp, error)
 }
 
 func SolutionServerService_CountUserProblemSolution_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -685,6 +687,24 @@ func SolutionServerService_QueryLongestNotAnsweredTime_Handler(svr interface{}, 
 	return rsp, nil
 }
 
+func SolutionServerService_QueryUserActions_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UserIDReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryUserActions(ctx, reqbody.(*UserIDReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // SolutionServerServer_ServiceDesc descriptor for server.RegisterService.
 var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.solution.SolutionServer",
@@ -805,6 +825,10 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.solution.SolutionServer/QueryLongestNotAnsweredTime",
 			Func: SolutionServerService_QueryLongestNotAnsweredTime_Handler,
+		},
+		{
+			Name: "/oj.solution.SolutionServer/QueryUserActions",
+			Func: SolutionServerService_QueryUserActions_Handler,
 		},
 	},
 }
@@ -976,6 +1000,9 @@ func (s *UnimplementedSolutionServer) QueryProblemSolvedRank(ctx context.Context
 func (s *UnimplementedSolutionServer) QueryLongestNotAnsweredTime(ctx context.Context, req *UserIDReq) (*QueryLongestNotAnsweredTimeRsp, error) {
 	return nil, errors.New("rpc QueryLongestNotAnsweredTime of service SolutionServer is not implemented")
 }
+func (s *UnimplementedSolutionServer) QueryUserActions(ctx context.Context, req *UserIDReq) (*QueryAllUserSolutionRsp, error) {
+	return nil, errors.New("rpc QueryUserActions of service SolutionServer is not implemented")
+}
 
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
@@ -1111,6 +1138,8 @@ type SolutionServerClientProxy interface {
 	QueryProblemSolvedRank(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryProblemSolvedRankRsp, err error)
 	// QueryLongestNotAnsweredTime QueryProblemSolvedRank 查询用户做题数排名
 	QueryLongestNotAnsweredTime(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryLongestNotAnsweredTimeRsp, err error)
+
+	QueryUserActions(ctx context.Context, req *UserIDReq, opts ...client.Option) (rsp *QueryAllUserSolutionRsp, err error)
 }
 
 type SolutionServerClientProxyImpl struct {
@@ -1696,6 +1725,26 @@ func (c *SolutionServerClientProxyImpl) QueryLongestNotAnsweredTime(ctx context.
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryLongestNotAnsweredTimeRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryUserActions(ctx context.Context, req *UserIDReq, opts ...client.Option) (*QueryAllUserSolutionRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.solution.SolutionServer/QueryUserActions")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryUserActions")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryAllUserSolutionRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
