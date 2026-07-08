@@ -3,10 +3,6 @@ option go_package = "github.com/csuJudge/judgeProto/solution";
 
 package oj.solution;
 
-service CodeServer {
-    rpc AddCode(AddCodeReq) returns (CommonRsp) {}
-}
-
 service KeyActionServer {
     rpc AddKeyAction(AddKeyActionReq) returns (CommonRsp) {}
 }
@@ -309,13 +305,7 @@ message ContestSolutionData {
     int32 solvedCount = 7;  // 正确数
 }
 
-message AddCodeReq {
-    int32 problemID = 1;  // 问题编号
-    int32 language = 2;  // 语言类型
-    int32 userID = 3;  // 用户编号
-    string code = 4;  // 代码
-    string codeName = 5;  // 代码名称
-}
+
 
 message AddKeyActionReq {
     int32 problemID = 1;  // 问题编号

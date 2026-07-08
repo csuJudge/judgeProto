@@ -1,0 +1,22 @@
+syntax = "proto3";
+option go_package = "github.com/csuJudge/judgeProto/code";
+
+package oj.code;
+
+service CodeServer {
+  rpc AddCode(AddCodeReq) returns (CommonRsp) {}
+}
+
+message AddCodeReq {
+  int32 problemID = 1;  // 问题编号
+  int32 language = 2;  // 语言类型
+  int32 userID = 3;  // 用户编号
+  string code = 4;  // 代码
+  string codeName = 5;  // 代码名称
+  int32 saveType = 6; // 保存类型
+}
+
+message CommonRsp {
+  string message = 1;  // 返回信息
+  int32 code = 2;  // 返回码
+}
