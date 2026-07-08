@@ -17,49 +17,6 @@ import (
 	client "trpc.group/trpc-go/trpc-go/client"
 )
 
-// MockKeyActionServerService is a mock of KeyActionServerService interface.
-type MockKeyActionServerService struct {
-	ctrl     *gomock.Controller
-	recorder *MockKeyActionServerServiceMockRecorder
-}
-
-// MockKeyActionServerServiceMockRecorder is the mock recorder for MockKeyActionServerService.
-type MockKeyActionServerServiceMockRecorder struct {
-	mock *MockKeyActionServerService
-}
-
-// NewMockKeyActionServerService creates a new mock instance.
-func NewMockKeyActionServerService(ctrl *gomock.Controller) *MockKeyActionServerService {
-	mock := &MockKeyActionServerService{ctrl: ctrl}
-	mock.recorder = &MockKeyActionServerServiceMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockKeyActionServerService) EXPECT() *MockKeyActionServerServiceMockRecorder {
-	return m.recorder
-}
-
-// ISGOMOCK indicates that this struct is a gomock mock.
-func (m *MockKeyActionServerService) ISGOMOCK() struct{} {
-	return struct{}{}
-}
-
-// AddKeyAction mocks base method.
-func (m *MockKeyActionServerService) AddKeyAction(ctx context.Context, req *AddKeyActionReq) (*CommonRsp, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AddKeyAction", ctx, req)
-	ret0, _ := ret[0].(*CommonRsp)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// AddKeyAction indicates an expected call of AddKeyAction.
-func (mr *MockKeyActionServerServiceMockRecorder) AddKeyAction(ctx, req any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddKeyAction", reflect.TypeOf((*MockKeyActionServerService)(nil).AddKeyAction), ctx, req)
-}
-
 // MockSolutionServerService is a mock of SolutionServerService interface.
 type MockSolutionServerService struct {
 	ctrl     *gomock.Controller
@@ -536,54 +493,6 @@ func (m *MockSolutionServerService) RejudgeSolution(ctx context.Context, req *Re
 func (mr *MockSolutionServerServiceMockRecorder) RejudgeSolution(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RejudgeSolution", reflect.TypeOf((*MockSolutionServerService)(nil).RejudgeSolution), ctx, req)
-}
-
-// MockKeyActionServerClientProxy is a mock of KeyActionServerClientProxy interface.
-type MockKeyActionServerClientProxy struct {
-	ctrl     *gomock.Controller
-	recorder *MockKeyActionServerClientProxyMockRecorder
-}
-
-// MockKeyActionServerClientProxyMockRecorder is the mock recorder for MockKeyActionServerClientProxy.
-type MockKeyActionServerClientProxyMockRecorder struct {
-	mock *MockKeyActionServerClientProxy
-}
-
-// NewMockKeyActionServerClientProxy creates a new mock instance.
-func NewMockKeyActionServerClientProxy(ctrl *gomock.Controller) *MockKeyActionServerClientProxy {
-	mock := &MockKeyActionServerClientProxy{ctrl: ctrl}
-	mock.recorder = &MockKeyActionServerClientProxyMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockKeyActionServerClientProxy) EXPECT() *MockKeyActionServerClientProxyMockRecorder {
-	return m.recorder
-}
-
-// ISGOMOCK indicates that this struct is a gomock mock.
-func (m *MockKeyActionServerClientProxy) ISGOMOCK() struct{} {
-	return struct{}{}
-}
-
-// AddKeyAction mocks base method.
-func (m *MockKeyActionServerClientProxy) AddKeyAction(ctx context.Context, req *AddKeyActionReq, opts ...client.Option) (*CommonRsp, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, req}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "AddKeyAction", varargs...)
-	ret0, _ := ret[0].(*CommonRsp)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// AddKeyAction indicates an expected call of AddKeyAction.
-func (mr *MockKeyActionServerClientProxyMockRecorder) AddKeyAction(ctx, req any, opts ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddKeyAction", reflect.TypeOf((*MockKeyActionServerClientProxy)(nil).AddKeyAction), varargs...)
 }
 
 // MockSolutionServerClientProxy is a mock of SolutionServerClientProxy interface.

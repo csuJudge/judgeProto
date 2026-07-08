@@ -2346,82 +2346,6 @@ func (x *ContestSolutionData) GetSolvedCount() int32 {
 	return 0
 }
 
-type AddKeyActionReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProblemID     int32                  `protobuf:"varint,1,opt,name=problemID,proto3" json:"problemID,omitempty"` // 问题编号
-	Language      int32                  `protobuf:"varint,2,opt,name=language,proto3" json:"language,omitempty"`   // 语言类型
-	UserID        int32                  `protobuf:"varint,3,opt,name=userID,proto3" json:"userID,omitempty"`       // 用户编号
-	Action        string                 `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"`        // 击键行为
-	StartTime     string                 `protobuf:"bytes,5,opt,name=startTime,proto3" json:"startTime,omitempty"`  // 开始时间
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AddKeyActionReq) Reset() {
-	*x = AddKeyActionReq{}
-	mi := &file_solution_proto_msgTypes[37]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AddKeyActionReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddKeyActionReq) ProtoMessage() {}
-
-func (x *AddKeyActionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[37]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddKeyActionReq.ProtoReflect.Descriptor instead.
-func (*AddKeyActionReq) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{37}
-}
-
-func (x *AddKeyActionReq) GetProblemID() int32 {
-	if x != nil {
-		return x.ProblemID
-	}
-	return 0
-}
-
-func (x *AddKeyActionReq) GetLanguage() int32 {
-	if x != nil {
-		return x.Language
-	}
-	return 0
-}
-
-func (x *AddKeyActionReq) GetUserID() int32 {
-	if x != nil {
-		return x.UserID
-	}
-	return 0
-}
-
-func (x *AddKeyActionReq) GetAction() string {
-	if x != nil {
-		return x.Action
-	}
-	return ""
-}
-
-func (x *AddKeyActionReq) GetStartTime() string {
-	if x != nil {
-		return x.StartTime
-	}
-	return ""
-}
-
 type AddSolutionRsp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`        // 返回信息
@@ -2433,7 +2357,7 @@ type AddSolutionRsp struct {
 
 func (x *AddSolutionRsp) Reset() {
 	*x = AddSolutionRsp{}
-	mi := &file_solution_proto_msgTypes[38]
+	mi := &file_solution_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2445,7 +2369,7 @@ func (x *AddSolutionRsp) String() string {
 func (*AddSolutionRsp) ProtoMessage() {}
 
 func (x *AddSolutionRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[38]
+	mi := &file_solution_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2458,7 +2382,7 @@ func (x *AddSolutionRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddSolutionRsp.ProtoReflect.Descriptor instead.
 func (*AddSolutionRsp) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{38}
+	return file_solution_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *AddSolutionRsp) GetMessage() string {
@@ -2500,7 +2424,7 @@ type QuerySolutionReq struct {
 
 func (x *QuerySolutionReq) Reset() {
 	*x = QuerySolutionReq{}
-	mi := &file_solution_proto_msgTypes[39]
+	mi := &file_solution_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2512,7 +2436,7 @@ func (x *QuerySolutionReq) String() string {
 func (*QuerySolutionReq) ProtoMessage() {}
 
 func (x *QuerySolutionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[39]
+	mi := &file_solution_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2525,7 +2449,7 @@ func (x *QuerySolutionReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuerySolutionReq.ProtoReflect.Descriptor instead.
 func (*QuerySolutionReq) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{39}
+	return file_solution_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *QuerySolutionReq) GetContestID() int32 {
@@ -2610,7 +2534,7 @@ type QuerySolutionRsp struct {
 
 func (x *QuerySolutionRsp) Reset() {
 	*x = QuerySolutionRsp{}
-	mi := &file_solution_proto_msgTypes[40]
+	mi := &file_solution_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2622,7 +2546,7 @@ func (x *QuerySolutionRsp) String() string {
 func (*QuerySolutionRsp) ProtoMessage() {}
 
 func (x *QuerySolutionRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[40]
+	mi := &file_solution_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2635,7 +2559,7 @@ func (x *QuerySolutionRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuerySolutionRsp.ProtoReflect.Descriptor instead.
 func (*QuerySolutionRsp) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{40}
+	return file_solution_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *QuerySolutionRsp) GetMessage() string {
@@ -2676,7 +2600,7 @@ type QueryUserProblemSolutionReq struct {
 
 func (x *QueryUserProblemSolutionReq) Reset() {
 	*x = QueryUserProblemSolutionReq{}
-	mi := &file_solution_proto_msgTypes[41]
+	mi := &file_solution_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2688,7 +2612,7 @@ func (x *QueryUserProblemSolutionReq) String() string {
 func (*QueryUserProblemSolutionReq) ProtoMessage() {}
 
 func (x *QueryUserProblemSolutionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[41]
+	mi := &file_solution_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2701,7 +2625,7 @@ func (x *QueryUserProblemSolutionReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserProblemSolutionReq.ProtoReflect.Descriptor instead.
 func (*QueryUserProblemSolutionReq) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{41}
+	return file_solution_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *QueryUserProblemSolutionReq) GetUserID() int32 {
@@ -2730,7 +2654,7 @@ type QueryUserProblemSolutionRsp struct {
 
 func (x *QueryUserProblemSolutionRsp) Reset() {
 	*x = QueryUserProblemSolutionRsp{}
-	mi := &file_solution_proto_msgTypes[42]
+	mi := &file_solution_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2742,7 +2666,7 @@ func (x *QueryUserProblemSolutionRsp) String() string {
 func (*QueryUserProblemSolutionRsp) ProtoMessage() {}
 
 func (x *QueryUserProblemSolutionRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[42]
+	mi := &file_solution_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2755,7 +2679,7 @@ func (x *QueryUserProblemSolutionRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserProblemSolutionRsp.ProtoReflect.Descriptor instead.
 func (*QueryUserProblemSolutionRsp) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{42}
+	return file_solution_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *QueryUserProblemSolutionRsp) GetMessage() string {
@@ -2805,7 +2729,7 @@ type AddSolutionReq struct {
 
 func (x *AddSolutionReq) Reset() {
 	*x = AddSolutionReq{}
-	mi := &file_solution_proto_msgTypes[43]
+	mi := &file_solution_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2817,7 +2741,7 @@ func (x *AddSolutionReq) String() string {
 func (*AddSolutionReq) ProtoMessage() {}
 
 func (x *AddSolutionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[43]
+	mi := &file_solution_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2830,7 +2754,7 @@ func (x *AddSolutionReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddSolutionReq.ProtoReflect.Descriptor instead.
 func (*AddSolutionReq) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{43}
+	return file_solution_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *AddSolutionReq) GetProblemID() int32 {
@@ -2922,7 +2846,7 @@ type QuerySimListReq struct {
 
 func (x *QuerySimListReq) Reset() {
 	*x = QuerySimListReq{}
-	mi := &file_solution_proto_msgTypes[44]
+	mi := &file_solution_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2934,7 +2858,7 @@ func (x *QuerySimListReq) String() string {
 func (*QuerySimListReq) ProtoMessage() {}
 
 func (x *QuerySimListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[44]
+	mi := &file_solution_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2947,7 +2871,7 @@ func (x *QuerySimListReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuerySimListReq.ProtoReflect.Descriptor instead.
 func (*QuerySimListReq) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{44}
+	return file_solution_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *QuerySimListReq) GetContestID() int32 {
@@ -2990,7 +2914,7 @@ type QuerySimListRsp struct {
 
 func (x *QuerySimListRsp) Reset() {
 	*x = QuerySimListRsp{}
-	mi := &file_solution_proto_msgTypes[45]
+	mi := &file_solution_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3002,7 +2926,7 @@ func (x *QuerySimListRsp) String() string {
 func (*QuerySimListRsp) ProtoMessage() {}
 
 func (x *QuerySimListRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[45]
+	mi := &file_solution_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3015,7 +2939,7 @@ func (x *QuerySimListRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuerySimListRsp.ProtoReflect.Descriptor instead.
 func (*QuerySimListRsp) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{45}
+	return file_solution_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *QuerySimListRsp) GetMessage() string {
@@ -3057,7 +2981,7 @@ type QuerySimSolutionDataReq struct {
 
 func (x *QuerySimSolutionDataReq) Reset() {
 	*x = QuerySimSolutionDataReq{}
-	mi := &file_solution_proto_msgTypes[46]
+	mi := &file_solution_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3069,7 +2993,7 @@ func (x *QuerySimSolutionDataReq) String() string {
 func (*QuerySimSolutionDataReq) ProtoMessage() {}
 
 func (x *QuerySimSolutionDataReq) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[46]
+	mi := &file_solution_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3082,7 +3006,7 @@ func (x *QuerySimSolutionDataReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuerySimSolutionDataReq.ProtoReflect.Descriptor instead.
 func (*QuerySimSolutionDataReq) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{46}
+	return file_solution_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *QuerySimSolutionDataReq) GetSolutionID() int32 {
@@ -3118,7 +3042,7 @@ type QuerySimSolutionDataRsp struct {
 
 func (x *QuerySimSolutionDataRsp) Reset() {
 	*x = QuerySimSolutionDataRsp{}
-	mi := &file_solution_proto_msgTypes[47]
+	mi := &file_solution_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3130,7 +3054,7 @@ func (x *QuerySimSolutionDataRsp) String() string {
 func (*QuerySimSolutionDataRsp) ProtoMessage() {}
 
 func (x *QuerySimSolutionDataRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[47]
+	mi := &file_solution_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3143,7 +3067,7 @@ func (x *QuerySimSolutionDataRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuerySimSolutionDataRsp.ProtoReflect.Descriptor instead.
 func (*QuerySimSolutionDataRsp) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{47}
+	return file_solution_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *QuerySimSolutionDataRsp) GetMessage() string {
@@ -3187,7 +3111,7 @@ type Sim struct {
 
 func (x *Sim) Reset() {
 	*x = Sim{}
-	mi := &file_solution_proto_msgTypes[48]
+	mi := &file_solution_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3199,7 +3123,7 @@ func (x *Sim) String() string {
 func (*Sim) ProtoMessage() {}
 
 func (x *Sim) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[48]
+	mi := &file_solution_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3212,7 +3136,7 @@ func (x *Sim) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Sim.ProtoReflect.Descriptor instead.
 func (*Sim) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{48}
+	return file_solution_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *Sim) GetProblemName() string {
@@ -3260,7 +3184,7 @@ type QueryLatestCodeReq struct {
 
 func (x *QueryLatestCodeReq) Reset() {
 	*x = QueryLatestCodeReq{}
-	mi := &file_solution_proto_msgTypes[49]
+	mi := &file_solution_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3272,7 +3196,7 @@ func (x *QueryLatestCodeReq) String() string {
 func (*QueryLatestCodeReq) ProtoMessage() {}
 
 func (x *QueryLatestCodeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[49]
+	mi := &file_solution_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3285,7 +3209,7 @@ func (x *QueryLatestCodeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryLatestCodeReq.ProtoReflect.Descriptor instead.
 func (*QueryLatestCodeReq) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{49}
+	return file_solution_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *QueryLatestCodeReq) GetProblemID() int32 {
@@ -3313,7 +3237,7 @@ type QueryLatestCodeRsp struct {
 
 func (x *QueryLatestCodeRsp) Reset() {
 	*x = QueryLatestCodeRsp{}
-	mi := &file_solution_proto_msgTypes[50]
+	mi := &file_solution_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3325,7 +3249,7 @@ func (x *QueryLatestCodeRsp) String() string {
 func (*QueryLatestCodeRsp) ProtoMessage() {}
 
 func (x *QueryLatestCodeRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[50]
+	mi := &file_solution_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3338,7 +3262,7 @@ func (x *QueryLatestCodeRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryLatestCodeRsp.ProtoReflect.Descriptor instead.
 func (*QueryLatestCodeRsp) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{50}
+	return file_solution_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *QueryLatestCodeRsp) GetMessage() string {
@@ -3373,7 +3297,7 @@ type QuerySourceCodeReq struct {
 
 func (x *QuerySourceCodeReq) Reset() {
 	*x = QuerySourceCodeReq{}
-	mi := &file_solution_proto_msgTypes[51]
+	mi := &file_solution_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3385,7 +3309,7 @@ func (x *QuerySourceCodeReq) String() string {
 func (*QuerySourceCodeReq) ProtoMessage() {}
 
 func (x *QuerySourceCodeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[51]
+	mi := &file_solution_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3398,7 +3322,7 @@ func (x *QuerySourceCodeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuerySourceCodeReq.ProtoReflect.Descriptor instead.
 func (*QuerySourceCodeReq) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{51}
+	return file_solution_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *QuerySourceCodeReq) GetSolutionID() int32 {
@@ -3433,7 +3357,7 @@ type QuerySourceCodeRsp struct {
 
 func (x *QuerySourceCodeRsp) Reset() {
 	*x = QuerySourceCodeRsp{}
-	mi := &file_solution_proto_msgTypes[52]
+	mi := &file_solution_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3445,7 +3369,7 @@ func (x *QuerySourceCodeRsp) String() string {
 func (*QuerySourceCodeRsp) ProtoMessage() {}
 
 func (x *QuerySourceCodeRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[52]
+	mi := &file_solution_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3458,7 +3382,7 @@ func (x *QuerySourceCodeRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuerySourceCodeRsp.ProtoReflect.Descriptor instead.
 func (*QuerySourceCodeRsp) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{52}
+	return file_solution_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *QuerySourceCodeRsp) GetMessage() string {
@@ -3492,7 +3416,7 @@ type QuerySolutionResultReq struct {
 
 func (x *QuerySolutionResultReq) Reset() {
 	*x = QuerySolutionResultReq{}
-	mi := &file_solution_proto_msgTypes[53]
+	mi := &file_solution_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3504,7 +3428,7 @@ func (x *QuerySolutionResultReq) String() string {
 func (*QuerySolutionResultReq) ProtoMessage() {}
 
 func (x *QuerySolutionResultReq) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[53]
+	mi := &file_solution_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3517,7 +3441,7 @@ func (x *QuerySolutionResultReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuerySolutionResultReq.ProtoReflect.Descriptor instead.
 func (*QuerySolutionResultReq) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{53}
+	return file_solution_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *QuerySolutionResultReq) GetSolutionID() int32 {
@@ -3546,7 +3470,7 @@ type QuerySolutionResultRsp struct {
 
 func (x *QuerySolutionResultRsp) Reset() {
 	*x = QuerySolutionResultRsp{}
-	mi := &file_solution_proto_msgTypes[54]
+	mi := &file_solution_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3558,7 +3482,7 @@ func (x *QuerySolutionResultRsp) String() string {
 func (*QuerySolutionResultRsp) ProtoMessage() {}
 
 func (x *QuerySolutionResultRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[54]
+	mi := &file_solution_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3571,7 +3495,7 @@ func (x *QuerySolutionResultRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuerySolutionResultRsp.ProtoReflect.Descriptor instead.
 func (*QuerySolutionResultRsp) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{54}
+	return file_solution_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *QuerySolutionResultRsp) GetMessage() string {
@@ -3613,7 +3537,7 @@ type QueryRuntimeInfoReq struct {
 
 func (x *QueryRuntimeInfoReq) Reset() {
 	*x = QueryRuntimeInfoReq{}
-	mi := &file_solution_proto_msgTypes[55]
+	mi := &file_solution_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3625,7 +3549,7 @@ func (x *QueryRuntimeInfoReq) String() string {
 func (*QueryRuntimeInfoReq) ProtoMessage() {}
 
 func (x *QueryRuntimeInfoReq) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[55]
+	mi := &file_solution_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3638,7 +3562,7 @@ func (x *QueryRuntimeInfoReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryRuntimeInfoReq.ProtoReflect.Descriptor instead.
 func (*QueryRuntimeInfoReq) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{55}
+	return file_solution_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *QueryRuntimeInfoReq) GetSolutionID() int32 {
@@ -3674,7 +3598,7 @@ type QueryRuntimeInfoRsp struct {
 
 func (x *QueryRuntimeInfoRsp) Reset() {
 	*x = QueryRuntimeInfoRsp{}
-	mi := &file_solution_proto_msgTypes[56]
+	mi := &file_solution_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3686,7 +3610,7 @@ func (x *QueryRuntimeInfoRsp) String() string {
 func (*QueryRuntimeInfoRsp) ProtoMessage() {}
 
 func (x *QueryRuntimeInfoRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[56]
+	mi := &file_solution_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3699,7 +3623,7 @@ func (x *QueryRuntimeInfoRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryRuntimeInfoRsp.ProtoReflect.Descriptor instead.
 func (*QueryRuntimeInfoRsp) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{56}
+	return file_solution_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *QueryRuntimeInfoRsp) GetMessage() string {
@@ -3741,7 +3665,7 @@ type RejudgeSolutionReq struct {
 
 func (x *RejudgeSolutionReq) Reset() {
 	*x = RejudgeSolutionReq{}
-	mi := &file_solution_proto_msgTypes[57]
+	mi := &file_solution_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3753,7 +3677,7 @@ func (x *RejudgeSolutionReq) String() string {
 func (*RejudgeSolutionReq) ProtoMessage() {}
 
 func (x *RejudgeSolutionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[57]
+	mi := &file_solution_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3766,7 +3690,7 @@ func (x *RejudgeSolutionReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RejudgeSolutionReq.ProtoReflect.Descriptor instead.
 func (*RejudgeSolutionReq) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{57}
+	return file_solution_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *RejudgeSolutionReq) GetUserID() int32 {
@@ -3800,7 +3724,7 @@ type CommonRsp struct {
 
 func (x *CommonRsp) Reset() {
 	*x = CommonRsp{}
-	mi := &file_solution_proto_msgTypes[58]
+	mi := &file_solution_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3812,7 +3736,7 @@ func (x *CommonRsp) String() string {
 func (*CommonRsp) ProtoMessage() {}
 
 func (x *CommonRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[58]
+	mi := &file_solution_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3825,7 +3749,7 @@ func (x *CommonRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CommonRsp.ProtoReflect.Descriptor instead.
 func (*CommonRsp) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{58}
+	return file_solution_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *CommonRsp) GetMessage() string {
@@ -3852,7 +3776,7 @@ type CountUserProblemSolutionReq struct {
 
 func (x *CountUserProblemSolutionReq) Reset() {
 	*x = CountUserProblemSolutionReq{}
-	mi := &file_solution_proto_msgTypes[59]
+	mi := &file_solution_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3864,7 +3788,7 @@ func (x *CountUserProblemSolutionReq) String() string {
 func (*CountUserProblemSolutionReq) ProtoMessage() {}
 
 func (x *CountUserProblemSolutionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[59]
+	mi := &file_solution_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3877,7 +3801,7 @@ func (x *CountUserProblemSolutionReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountUserProblemSolutionReq.ProtoReflect.Descriptor instead.
 func (*CountUserProblemSolutionReq) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{59}
+	return file_solution_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *CountUserProblemSolutionReq) GetUserID() int32 {
@@ -3906,7 +3830,7 @@ type CountUserProblemSolutionRsp struct {
 
 func (x *CountUserProblemSolutionRsp) Reset() {
 	*x = CountUserProblemSolutionRsp{}
-	mi := &file_solution_proto_msgTypes[60]
+	mi := &file_solution_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3918,7 +3842,7 @@ func (x *CountUserProblemSolutionRsp) String() string {
 func (*CountUserProblemSolutionRsp) ProtoMessage() {}
 
 func (x *CountUserProblemSolutionRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[60]
+	mi := &file_solution_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3931,7 +3855,7 @@ func (x *CountUserProblemSolutionRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountUserProblemSolutionRsp.ProtoReflect.Descriptor instead.
 func (*CountUserProblemSolutionRsp) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{60}
+	return file_solution_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *CountUserProblemSolutionRsp) GetMessage() string {
@@ -3987,7 +3911,7 @@ type Solution struct {
 
 func (x *Solution) Reset() {
 	*x = Solution{}
-	mi := &file_solution_proto_msgTypes[61]
+	mi := &file_solution_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3999,7 +3923,7 @@ func (x *Solution) String() string {
 func (*Solution) ProtoMessage() {}
 
 func (x *Solution) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[61]
+	mi := &file_solution_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4012,7 +3936,7 @@ func (x *Solution) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Solution.ProtoReflect.Descriptor instead.
 func (*Solution) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{61}
+	return file_solution_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *Solution) GetSolutionID() int32 {
@@ -4148,7 +4072,7 @@ type Code struct {
 
 func (x *Code) Reset() {
 	*x = Code{}
-	mi := &file_solution_proto_msgTypes[62]
+	mi := &file_solution_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4160,7 +4084,7 @@ func (x *Code) String() string {
 func (*Code) ProtoMessage() {}
 
 func (x *Code) ProtoReflect() protoreflect.Message {
-	mi := &file_solution_proto_msgTypes[62]
+	mi := &file_solution_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4173,7 +4097,7 @@ func (x *Code) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Code.ProtoReflect.Descriptor instead.
 func (*Code) Descriptor() ([]byte, []int) {
-	return file_solution_proto_rawDescGZIP(), []int{62}
+	return file_solution_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *Code) GetCodeID() int32 {
@@ -4403,13 +4327,7 @@ const file_solution_proto_rawDesc = "" +
 	"\vcreatedTime\x18\x04 \x01(\tR\vcreatedTime\x12\x12\n" +
 	"\x04name\x18\x05 \x01(\tR\x04name\x12 \n" +
 	"\vsubmitCount\x18\x06 \x01(\x05R\vsubmitCount\x12 \n" +
-	"\vsolvedCount\x18\a \x01(\x05R\vsolvedCount\"\x99\x01\n" +
-	"\x0fAddKeyActionReq\x12\x1c\n" +
-	"\tproblemID\x18\x01 \x01(\x05R\tproblemID\x12\x1a\n" +
-	"\blanguage\x18\x02 \x01(\x05R\blanguage\x12\x16\n" +
-	"\x06userID\x18\x03 \x01(\x05R\x06userID\x12\x16\n" +
-	"\x06action\x18\x04 \x01(\tR\x06action\x12\x1c\n" +
-	"\tstartTime\x18\x05 \x01(\tR\tstartTime\"^\n" +
+	"\vsolvedCount\x18\a \x01(\x05R\vsolvedCount\"^\n" +
 	"\x0eAddSolutionRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12\x1e\n" +
@@ -4567,9 +4485,7 @@ const file_solution_proto_rawDesc = "" +
 	"\bcodeName\x18\x03 \x01(\tR\bcodeName\x12\x1a\n" +
 	"\bcodeType\x18\x04 \x01(\x05R\bcodeType\x12\x1c\n" +
 	"\tcreatTime\x18\x05 \x01(\tR\tcreatTime\x12\x1a\n" +
-	"\buserName\x18\x06 \x01(\tR\buserName2Y\n" +
-	"\x0fKeyActionServer\x12F\n" +
-	"\fAddKeyAction\x12\x1c.oj.solution.AddKeyActionReq\x1a\x16.oj.solution.CommonRsp\"\x002\x8c\x17\n" +
+	"\buserName\x18\x06 \x01(\tR\buserName2\x8c\x17\n" +
 	"\x0eSolutionServer\x12p\n" +
 	"\x18CountUserProblemSolution\x12(.oj.solution.CountUserProblemSolutionReq\x1a(.oj.solution.CountUserProblemSolutionRsp\"\x00\x12L\n" +
 	"\x0fRejudgeSolution\x12\x1f.oj.solution.RejudgeSolutionReq\x1a\x16.oj.solution.CommonRsp\"\x00\x12X\n" +
@@ -4614,7 +4530,7 @@ func file_solution_proto_rawDescGZIP() []byte {
 	return file_solution_proto_rawDescData
 }
 
-var file_solution_proto_msgTypes = make([]protoimpl.MessageInfo, 63)
+var file_solution_proto_msgTypes = make([]protoimpl.MessageInfo, 62)
 var file_solution_proto_goTypes = []any{
 	(*QueryLongestNotAnsweredTimeRsp)(nil),    // 0: oj.solution.QueryLongestNotAnsweredTimeRsp
 	(*QueryProblemSolvedRankRsp)(nil),         // 1: oj.solution.QueryProblemSolvedRankRsp
@@ -4653,32 +4569,31 @@ var file_solution_proto_goTypes = []any{
 	(*Problem)(nil),                           // 34: oj.solution.Problem
 	(*Rank)(nil),                              // 35: oj.solution.Rank
 	(*ContestSolutionData)(nil),               // 36: oj.solution.ContestSolutionData
-	(*AddKeyActionReq)(nil),                   // 37: oj.solution.AddKeyActionReq
-	(*AddSolutionRsp)(nil),                    // 38: oj.solution.AddSolutionRsp
-	(*QuerySolutionReq)(nil),                  // 39: oj.solution.QuerySolutionReq
-	(*QuerySolutionRsp)(nil),                  // 40: oj.solution.QuerySolutionRsp
-	(*QueryUserProblemSolutionReq)(nil),       // 41: oj.solution.QueryUserProblemSolutionReq
-	(*QueryUserProblemSolutionRsp)(nil),       // 42: oj.solution.QueryUserProblemSolutionRsp
-	(*AddSolutionReq)(nil),                    // 43: oj.solution.AddSolutionReq
-	(*QuerySimListReq)(nil),                   // 44: oj.solution.QuerySimListReq
-	(*QuerySimListRsp)(nil),                   // 45: oj.solution.QuerySimListRsp
-	(*QuerySimSolutionDataReq)(nil),           // 46: oj.solution.QuerySimSolutionDataReq
-	(*QuerySimSolutionDataRsp)(nil),           // 47: oj.solution.QuerySimSolutionDataRsp
-	(*Sim)(nil),                               // 48: oj.solution.Sim
-	(*QueryLatestCodeReq)(nil),                // 49: oj.solution.QueryLatestCodeReq
-	(*QueryLatestCodeRsp)(nil),                // 50: oj.solution.QueryLatestCodeRsp
-	(*QuerySourceCodeReq)(nil),                // 51: oj.solution.QuerySourceCodeReq
-	(*QuerySourceCodeRsp)(nil),                // 52: oj.solution.QuerySourceCodeRsp
-	(*QuerySolutionResultReq)(nil),            // 53: oj.solution.QuerySolutionResultReq
-	(*QuerySolutionResultRsp)(nil),            // 54: oj.solution.QuerySolutionResultRsp
-	(*QueryRuntimeInfoReq)(nil),               // 55: oj.solution.QueryRuntimeInfoReq
-	(*QueryRuntimeInfoRsp)(nil),               // 56: oj.solution.QueryRuntimeInfoRsp
-	(*RejudgeSolutionReq)(nil),                // 57: oj.solution.RejudgeSolutionReq
-	(*CommonRsp)(nil),                         // 58: oj.solution.CommonRsp
-	(*CountUserProblemSolutionReq)(nil),       // 59: oj.solution.CountUserProblemSolutionReq
-	(*CountUserProblemSolutionRsp)(nil),       // 60: oj.solution.CountUserProblemSolutionRsp
-	(*Solution)(nil),                          // 61: oj.solution.Solution
-	(*Code)(nil),                              // 62: oj.solution.Code
+	(*AddSolutionRsp)(nil),                    // 37: oj.solution.AddSolutionRsp
+	(*QuerySolutionReq)(nil),                  // 38: oj.solution.QuerySolutionReq
+	(*QuerySolutionRsp)(nil),                  // 39: oj.solution.QuerySolutionRsp
+	(*QueryUserProblemSolutionReq)(nil),       // 40: oj.solution.QueryUserProblemSolutionReq
+	(*QueryUserProblemSolutionRsp)(nil),       // 41: oj.solution.QueryUserProblemSolutionRsp
+	(*AddSolutionReq)(nil),                    // 42: oj.solution.AddSolutionReq
+	(*QuerySimListReq)(nil),                   // 43: oj.solution.QuerySimListReq
+	(*QuerySimListRsp)(nil),                   // 44: oj.solution.QuerySimListRsp
+	(*QuerySimSolutionDataReq)(nil),           // 45: oj.solution.QuerySimSolutionDataReq
+	(*QuerySimSolutionDataRsp)(nil),           // 46: oj.solution.QuerySimSolutionDataRsp
+	(*Sim)(nil),                               // 47: oj.solution.Sim
+	(*QueryLatestCodeReq)(nil),                // 48: oj.solution.QueryLatestCodeReq
+	(*QueryLatestCodeRsp)(nil),                // 49: oj.solution.QueryLatestCodeRsp
+	(*QuerySourceCodeReq)(nil),                // 50: oj.solution.QuerySourceCodeReq
+	(*QuerySourceCodeRsp)(nil),                // 51: oj.solution.QuerySourceCodeRsp
+	(*QuerySolutionResultReq)(nil),            // 52: oj.solution.QuerySolutionResultReq
+	(*QuerySolutionResultRsp)(nil),            // 53: oj.solution.QuerySolutionResultRsp
+	(*QueryRuntimeInfoReq)(nil),               // 54: oj.solution.QueryRuntimeInfoReq
+	(*QueryRuntimeInfoRsp)(nil),               // 55: oj.solution.QueryRuntimeInfoRsp
+	(*RejudgeSolutionReq)(nil),                // 56: oj.solution.RejudgeSolutionReq
+	(*CommonRsp)(nil),                         // 57: oj.solution.CommonRsp
+	(*CountUserProblemSolutionReq)(nil),       // 58: oj.solution.CountUserProblemSolutionReq
+	(*CountUserProblemSolutionRsp)(nil),       // 59: oj.solution.CountUserProblemSolutionRsp
+	(*Solution)(nil),                          // 60: oj.solution.Solution
+	(*Code)(nil),                              // 61: oj.solution.Code
 }
 var file_solution_proto_depIdxs = []int32{
 	2,  // 0: oj.solution.QueryLongestNotAnsweredTimeRsp.LongestNotAnsweredTimeUser:type_name -> oj.solution.User
@@ -4689,8 +4604,8 @@ var file_solution_proto_depIdxs = []int32{
 	9,  // 5: oj.solution.CountUserSolutionRsp.userSolution:type_name -> oj.solution.UserSolution
 	31, // 6: oj.solution.UserSolution.statistics:type_name -> oj.solution.ClassifiedSolution
 	31, // 7: oj.solution.CountProblemSolutionStatisticsRsp.statistics:type_name -> oj.solution.ClassifiedSolution
-	61, // 8: oj.solution.CountProblemSolutionStatisticsRsp.solutions:type_name -> oj.solution.Solution
-	61, // 9: oj.solution.QueryAllUserSolutionRsp.solutions:type_name -> oj.solution.Solution
+	60, // 8: oj.solution.CountProblemSolutionStatisticsRsp.solutions:type_name -> oj.solution.Solution
+	60, // 9: oj.solution.QueryAllUserSolutionRsp.solutions:type_name -> oj.solution.Solution
 	14, // 10: oj.solution.QueryContestCompletionStatusRsp.statuses:type_name -> oj.solution.CompletionStatus
 	19, // 11: oj.solution.QueryUserContestSubmissionRsp.condition:type_name -> oj.solution.UserProblemCondition
 	31, // 12: oj.solution.QueryTodaySolutionRsp.statistics:type_name -> oj.solution.ClassifiedSolution
@@ -4702,76 +4617,74 @@ var file_solution_proto_depIdxs = []int32{
 	34, // 18: oj.solution.QueryContestRankDataRsp.problems:type_name -> oj.solution.Problem
 	35, // 19: oj.solution.QueryContestRankDataRsp.ranks:type_name -> oj.solution.Rank
 	36, // 20: oj.solution.Rank.solutionData:type_name -> oj.solution.ContestSolutionData
-	61, // 21: oj.solution.QuerySolutionRsp.solution:type_name -> oj.solution.Solution
-	48, // 22: oj.solution.QuerySimListRsp.sim:type_name -> oj.solution.Sim
-	61, // 23: oj.solution.QuerySimSolutionDataRsp.solution:type_name -> oj.solution.Solution
-	61, // 24: oj.solution.QuerySimSolutionDataRsp.simSolution:type_name -> oj.solution.Solution
-	62, // 25: oj.solution.QueryLatestCodeRsp.lastCode:type_name -> oj.solution.Code
-	61, // 26: oj.solution.QuerySourceCodeRsp.solution:type_name -> oj.solution.Solution
-	37, // 27: oj.solution.KeyActionServer.AddKeyAction:input_type -> oj.solution.AddKeyActionReq
-	59, // 28: oj.solution.SolutionServer.CountUserProblemSolution:input_type -> oj.solution.CountUserProblemSolutionReq
-	57, // 29: oj.solution.SolutionServer.RejudgeSolution:input_type -> oj.solution.RejudgeSolutionReq
-	55, // 30: oj.solution.SolutionServer.QueryRuntimeInfo:input_type -> oj.solution.QueryRuntimeInfoReq
-	53, // 31: oj.solution.SolutionServer.QuerySolutionResult:input_type -> oj.solution.QuerySolutionResultReq
-	51, // 32: oj.solution.SolutionServer.QuerySourceCode:input_type -> oj.solution.QuerySourceCodeReq
-	49, // 33: oj.solution.SolutionServer.QueryLatestCode:input_type -> oj.solution.QueryLatestCodeReq
-	44, // 34: oj.solution.SolutionServer.QuerySimList:input_type -> oj.solution.QuerySimListReq
-	46, // 35: oj.solution.SolutionServer.QuerySimSolutionData:input_type -> oj.solution.QuerySimSolutionDataReq
-	43, // 36: oj.solution.SolutionServer.AddSolution:input_type -> oj.solution.AddSolutionReq
-	41, // 37: oj.solution.SolutionServer.QueryUserProblemSolution:input_type -> oj.solution.QueryUserProblemSolutionReq
-	39, // 38: oj.solution.SolutionServer.QuerySolution:input_type -> oj.solution.QuerySolutionReq
-	43, // 39: oj.solution.SolutionServer.AddTestSolution:input_type -> oj.solution.AddSolutionReq
-	32, // 40: oj.solution.SolutionServer.QueryContestRankData:input_type -> oj.solution.QueryContestRankDataReq
-	17, // 41: oj.solution.SolutionServer.QueryUserContestSubmission:input_type -> oj.solution.QueryUserContestSubmissionReq
-	27, // 42: oj.solution.SolutionServer.CountContestProblemSubmission:input_type -> oj.solution.CountContestProblemSubmissionReq
-	23, // 43: oj.solution.SolutionServer.QueryMySolutionRecord:input_type -> oj.solution.QueryMySolutionRecordReq
-	23, // 44: oj.solution.SolutionServer.CountMySolution:input_type -> oj.solution.QueryMySolutionRecordReq
-	21, // 45: oj.solution.SolutionServer.QueryTodaySolution:input_type -> oj.solution.QueryTodaySolutionReq
-	15, // 46: oj.solution.SolutionServer.CalSolutionDifference:input_type -> oj.solution.CalSolutionDifferenceReq
-	27, // 47: oj.solution.SolutionServer.CountContestSubmission:input_type -> oj.solution.CountContestProblemSubmissionReq
-	26, // 48: oj.solution.SolutionServer.QueryContestCompletionStatus:input_type -> oj.solution.QueryRankDataReq
-	11, // 49: oj.solution.SolutionServer.QueryAllUserSolution:input_type -> oj.solution.QueryAllUserSolutionReq
-	11, // 50: oj.solution.SolutionServer.CountProblemSolutionStatistics:input_type -> oj.solution.QueryAllUserSolutionReq
-	7,  // 51: oj.solution.SolutionServer.CountUserSolution:input_type -> oj.solution.CountUserSolutionReq
-	22, // 52: oj.solution.SolutionServer.QueryMySolution:input_type -> oj.solution.UserIDReq
-	22, // 53: oj.solution.SolutionServer.QueryMyLanguageDistribution:input_type -> oj.solution.UserIDReq
-	22, // 54: oj.solution.SolutionServer.CountUserKnowledgeSolution:input_type -> oj.solution.UserIDReq
-	22, // 55: oj.solution.SolutionServer.QueryProblemSolvedRank:input_type -> oj.solution.UserIDReq
-	22, // 56: oj.solution.SolutionServer.QueryLongestNotAnsweredTime:input_type -> oj.solution.UserIDReq
-	22, // 57: oj.solution.SolutionServer.QueryUserActions:input_type -> oj.solution.UserIDReq
-	58, // 58: oj.solution.KeyActionServer.AddKeyAction:output_type -> oj.solution.CommonRsp
-	60, // 59: oj.solution.SolutionServer.CountUserProblemSolution:output_type -> oj.solution.CountUserProblemSolutionRsp
-	58, // 60: oj.solution.SolutionServer.RejudgeSolution:output_type -> oj.solution.CommonRsp
-	56, // 61: oj.solution.SolutionServer.QueryRuntimeInfo:output_type -> oj.solution.QueryRuntimeInfoRsp
-	54, // 62: oj.solution.SolutionServer.QuerySolutionResult:output_type -> oj.solution.QuerySolutionResultRsp
-	52, // 63: oj.solution.SolutionServer.QuerySourceCode:output_type -> oj.solution.QuerySourceCodeRsp
-	50, // 64: oj.solution.SolutionServer.QueryLatestCode:output_type -> oj.solution.QueryLatestCodeRsp
-	45, // 65: oj.solution.SolutionServer.QuerySimList:output_type -> oj.solution.QuerySimListRsp
-	47, // 66: oj.solution.SolutionServer.QuerySimSolutionData:output_type -> oj.solution.QuerySimSolutionDataRsp
-	38, // 67: oj.solution.SolutionServer.AddSolution:output_type -> oj.solution.AddSolutionRsp
-	42, // 68: oj.solution.SolutionServer.QueryUserProblemSolution:output_type -> oj.solution.QueryUserProblemSolutionRsp
-	40, // 69: oj.solution.SolutionServer.QuerySolution:output_type -> oj.solution.QuerySolutionRsp
-	38, // 70: oj.solution.SolutionServer.AddTestSolution:output_type -> oj.solution.AddSolutionRsp
-	33, // 71: oj.solution.SolutionServer.QueryContestRankData:output_type -> oj.solution.QueryContestRankDataRsp
-	18, // 72: oj.solution.SolutionServer.QueryUserContestSubmission:output_type -> oj.solution.QueryUserContestSubmissionRsp
-	28, // 73: oj.solution.SolutionServer.CountContestProblemSubmission:output_type -> oj.solution.CountContestProblemSubmissionRsp
-	24, // 74: oj.solution.SolutionServer.QueryMySolutionRecord:output_type -> oj.solution.QueryMySolutionRecordRsp
-	30, // 75: oj.solution.SolutionServer.CountMySolution:output_type -> oj.solution.CountContestSubmissionRsp
-	20, // 76: oj.solution.SolutionServer.QueryTodaySolution:output_type -> oj.solution.QueryTodaySolutionRsp
-	16, // 77: oj.solution.SolutionServer.CalSolutionDifference:output_type -> oj.solution.CalSolutionDifferenceRsp
-	30, // 78: oj.solution.SolutionServer.CountContestSubmission:output_type -> oj.solution.CountContestSubmissionRsp
-	13, // 79: oj.solution.SolutionServer.QueryContestCompletionStatus:output_type -> oj.solution.QueryContestCompletionStatusRsp
-	12, // 80: oj.solution.SolutionServer.QueryAllUserSolution:output_type -> oj.solution.QueryAllUserSolutionRsp
-	10, // 81: oj.solution.SolutionServer.CountProblemSolutionStatistics:output_type -> oj.solution.CountProblemSolutionStatisticsRsp
-	8,  // 82: oj.solution.SolutionServer.CountUserSolution:output_type -> oj.solution.CountUserSolutionRsp
-	40, // 83: oj.solution.SolutionServer.QueryMySolution:output_type -> oj.solution.QuerySolutionRsp
-	5,  // 84: oj.solution.SolutionServer.QueryMyLanguageDistribution:output_type -> oj.solution.QueryMyLanguageDistributionRsp
-	3,  // 85: oj.solution.SolutionServer.CountUserKnowledgeSolution:output_type -> oj.solution.CountUserKnowledgeSolutionRsp
-	1,  // 86: oj.solution.SolutionServer.QueryProblemSolvedRank:output_type -> oj.solution.QueryProblemSolvedRankRsp
-	0,  // 87: oj.solution.SolutionServer.QueryLongestNotAnsweredTime:output_type -> oj.solution.QueryLongestNotAnsweredTimeRsp
-	12, // 88: oj.solution.SolutionServer.QueryUserActions:output_type -> oj.solution.QueryAllUserSolutionRsp
-	58, // [58:89] is the sub-list for method output_type
-	27, // [27:58] is the sub-list for method input_type
+	60, // 21: oj.solution.QuerySolutionRsp.solution:type_name -> oj.solution.Solution
+	47, // 22: oj.solution.QuerySimListRsp.sim:type_name -> oj.solution.Sim
+	60, // 23: oj.solution.QuerySimSolutionDataRsp.solution:type_name -> oj.solution.Solution
+	60, // 24: oj.solution.QuerySimSolutionDataRsp.simSolution:type_name -> oj.solution.Solution
+	61, // 25: oj.solution.QueryLatestCodeRsp.lastCode:type_name -> oj.solution.Code
+	60, // 26: oj.solution.QuerySourceCodeRsp.solution:type_name -> oj.solution.Solution
+	58, // 27: oj.solution.SolutionServer.CountUserProblemSolution:input_type -> oj.solution.CountUserProblemSolutionReq
+	56, // 28: oj.solution.SolutionServer.RejudgeSolution:input_type -> oj.solution.RejudgeSolutionReq
+	54, // 29: oj.solution.SolutionServer.QueryRuntimeInfo:input_type -> oj.solution.QueryRuntimeInfoReq
+	52, // 30: oj.solution.SolutionServer.QuerySolutionResult:input_type -> oj.solution.QuerySolutionResultReq
+	50, // 31: oj.solution.SolutionServer.QuerySourceCode:input_type -> oj.solution.QuerySourceCodeReq
+	48, // 32: oj.solution.SolutionServer.QueryLatestCode:input_type -> oj.solution.QueryLatestCodeReq
+	43, // 33: oj.solution.SolutionServer.QuerySimList:input_type -> oj.solution.QuerySimListReq
+	45, // 34: oj.solution.SolutionServer.QuerySimSolutionData:input_type -> oj.solution.QuerySimSolutionDataReq
+	42, // 35: oj.solution.SolutionServer.AddSolution:input_type -> oj.solution.AddSolutionReq
+	40, // 36: oj.solution.SolutionServer.QueryUserProblemSolution:input_type -> oj.solution.QueryUserProblemSolutionReq
+	38, // 37: oj.solution.SolutionServer.QuerySolution:input_type -> oj.solution.QuerySolutionReq
+	42, // 38: oj.solution.SolutionServer.AddTestSolution:input_type -> oj.solution.AddSolutionReq
+	32, // 39: oj.solution.SolutionServer.QueryContestRankData:input_type -> oj.solution.QueryContestRankDataReq
+	17, // 40: oj.solution.SolutionServer.QueryUserContestSubmission:input_type -> oj.solution.QueryUserContestSubmissionReq
+	27, // 41: oj.solution.SolutionServer.CountContestProblemSubmission:input_type -> oj.solution.CountContestProblemSubmissionReq
+	23, // 42: oj.solution.SolutionServer.QueryMySolutionRecord:input_type -> oj.solution.QueryMySolutionRecordReq
+	23, // 43: oj.solution.SolutionServer.CountMySolution:input_type -> oj.solution.QueryMySolutionRecordReq
+	21, // 44: oj.solution.SolutionServer.QueryTodaySolution:input_type -> oj.solution.QueryTodaySolutionReq
+	15, // 45: oj.solution.SolutionServer.CalSolutionDifference:input_type -> oj.solution.CalSolutionDifferenceReq
+	27, // 46: oj.solution.SolutionServer.CountContestSubmission:input_type -> oj.solution.CountContestProblemSubmissionReq
+	26, // 47: oj.solution.SolutionServer.QueryContestCompletionStatus:input_type -> oj.solution.QueryRankDataReq
+	11, // 48: oj.solution.SolutionServer.QueryAllUserSolution:input_type -> oj.solution.QueryAllUserSolutionReq
+	11, // 49: oj.solution.SolutionServer.CountProblemSolutionStatistics:input_type -> oj.solution.QueryAllUserSolutionReq
+	7,  // 50: oj.solution.SolutionServer.CountUserSolution:input_type -> oj.solution.CountUserSolutionReq
+	22, // 51: oj.solution.SolutionServer.QueryMySolution:input_type -> oj.solution.UserIDReq
+	22, // 52: oj.solution.SolutionServer.QueryMyLanguageDistribution:input_type -> oj.solution.UserIDReq
+	22, // 53: oj.solution.SolutionServer.CountUserKnowledgeSolution:input_type -> oj.solution.UserIDReq
+	22, // 54: oj.solution.SolutionServer.QueryProblemSolvedRank:input_type -> oj.solution.UserIDReq
+	22, // 55: oj.solution.SolutionServer.QueryLongestNotAnsweredTime:input_type -> oj.solution.UserIDReq
+	22, // 56: oj.solution.SolutionServer.QueryUserActions:input_type -> oj.solution.UserIDReq
+	59, // 57: oj.solution.SolutionServer.CountUserProblemSolution:output_type -> oj.solution.CountUserProblemSolutionRsp
+	57, // 58: oj.solution.SolutionServer.RejudgeSolution:output_type -> oj.solution.CommonRsp
+	55, // 59: oj.solution.SolutionServer.QueryRuntimeInfo:output_type -> oj.solution.QueryRuntimeInfoRsp
+	53, // 60: oj.solution.SolutionServer.QuerySolutionResult:output_type -> oj.solution.QuerySolutionResultRsp
+	51, // 61: oj.solution.SolutionServer.QuerySourceCode:output_type -> oj.solution.QuerySourceCodeRsp
+	49, // 62: oj.solution.SolutionServer.QueryLatestCode:output_type -> oj.solution.QueryLatestCodeRsp
+	44, // 63: oj.solution.SolutionServer.QuerySimList:output_type -> oj.solution.QuerySimListRsp
+	46, // 64: oj.solution.SolutionServer.QuerySimSolutionData:output_type -> oj.solution.QuerySimSolutionDataRsp
+	37, // 65: oj.solution.SolutionServer.AddSolution:output_type -> oj.solution.AddSolutionRsp
+	41, // 66: oj.solution.SolutionServer.QueryUserProblemSolution:output_type -> oj.solution.QueryUserProblemSolutionRsp
+	39, // 67: oj.solution.SolutionServer.QuerySolution:output_type -> oj.solution.QuerySolutionRsp
+	37, // 68: oj.solution.SolutionServer.AddTestSolution:output_type -> oj.solution.AddSolutionRsp
+	33, // 69: oj.solution.SolutionServer.QueryContestRankData:output_type -> oj.solution.QueryContestRankDataRsp
+	18, // 70: oj.solution.SolutionServer.QueryUserContestSubmission:output_type -> oj.solution.QueryUserContestSubmissionRsp
+	28, // 71: oj.solution.SolutionServer.CountContestProblemSubmission:output_type -> oj.solution.CountContestProblemSubmissionRsp
+	24, // 72: oj.solution.SolutionServer.QueryMySolutionRecord:output_type -> oj.solution.QueryMySolutionRecordRsp
+	30, // 73: oj.solution.SolutionServer.CountMySolution:output_type -> oj.solution.CountContestSubmissionRsp
+	20, // 74: oj.solution.SolutionServer.QueryTodaySolution:output_type -> oj.solution.QueryTodaySolutionRsp
+	16, // 75: oj.solution.SolutionServer.CalSolutionDifference:output_type -> oj.solution.CalSolutionDifferenceRsp
+	30, // 76: oj.solution.SolutionServer.CountContestSubmission:output_type -> oj.solution.CountContestSubmissionRsp
+	13, // 77: oj.solution.SolutionServer.QueryContestCompletionStatus:output_type -> oj.solution.QueryContestCompletionStatusRsp
+	12, // 78: oj.solution.SolutionServer.QueryAllUserSolution:output_type -> oj.solution.QueryAllUserSolutionRsp
+	10, // 79: oj.solution.SolutionServer.CountProblemSolutionStatistics:output_type -> oj.solution.CountProblemSolutionStatisticsRsp
+	8,  // 80: oj.solution.SolutionServer.CountUserSolution:output_type -> oj.solution.CountUserSolutionRsp
+	39, // 81: oj.solution.SolutionServer.QueryMySolution:output_type -> oj.solution.QuerySolutionRsp
+	5,  // 82: oj.solution.SolutionServer.QueryMyLanguageDistribution:output_type -> oj.solution.QueryMyLanguageDistributionRsp
+	3,  // 83: oj.solution.SolutionServer.CountUserKnowledgeSolution:output_type -> oj.solution.CountUserKnowledgeSolutionRsp
+	1,  // 84: oj.solution.SolutionServer.QueryProblemSolvedRank:output_type -> oj.solution.QueryProblemSolvedRankRsp
+	0,  // 85: oj.solution.SolutionServer.QueryLongestNotAnsweredTime:output_type -> oj.solution.QueryLongestNotAnsweredTimeRsp
+	12, // 86: oj.solution.SolutionServer.QueryUserActions:output_type -> oj.solution.QueryAllUserSolutionRsp
+	57, // [57:87] is the sub-list for method output_type
+	27, // [27:57] is the sub-list for method input_type
 	27, // [27:27] is the sub-list for extension type_name
 	27, // [27:27] is the sub-list for extension extendee
 	0,  // [0:27] is the sub-list for field type_name
@@ -4788,9 +4701,9 @@ func file_solution_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_solution_proto_rawDesc), len(file_solution_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   63,
+			NumMessages:   62,
 			NumExtensions: 0,
-			NumServices:   2,
+			NumServices:   1,
 		},
 		GoTypes:           file_solution_proto_goTypes,
 		DependencyIndexes: file_solution_proto_depIdxs,

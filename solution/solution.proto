@@ -3,9 +3,6 @@ option go_package = "github.com/csuJudge/judgeProto/solution";
 
 package oj.solution;
 
-service KeyActionServer {
-    rpc AddKeyAction(AddKeyActionReq) returns (CommonRsp) {}
-}
 
 service SolutionServer {
     // CountUserProblemSolution 计算用户题目的提交次数
@@ -303,16 +300,6 @@ message ContestSolutionData {
     string name = 5;  // 题目名称
     int32 submitCount = 6;  // 提交数
     int32 solvedCount = 7;  // 正确数
-}
-
-
-
-message AddKeyActionReq {
-    int32 problemID = 1;  // 问题编号
-    int32 language = 2;  // 语言类型
-    int32 userID = 3;  // 用户编号
-    string action = 4;  // 击键行为
-    string startTime = 5;  // 开始时间
 }
 
 message AddSolutionRsp {

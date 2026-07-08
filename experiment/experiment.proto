@@ -25,6 +25,7 @@ message AddCodeReq{
   string  fileName = 5; // 代码名称
   int32 solutionType = 6; // 提交类型
   string remoteIP = 7; // 提交IP
+  int32 addType = 8; // 提交类型
 }
 
 message QueryCodeReq{

@@ -17,48 +17,6 @@ import (
 
 // START ======================================= Server Service Definition ======================================= START
 
-// KeyActionServerService defines service.
-type KeyActionServerService interface {
-	AddKeyAction(ctx context.Context, req *AddKeyActionReq) (*CommonRsp, error)
-}
-
-func KeyActionServerService_AddKeyAction_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &AddKeyActionReq{}
-	filters, err := f(req)
-	if err != nil {
-		return nil, err
-	}
-	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(KeyActionServerService).AddKeyAction(ctx, reqbody.(*AddKeyActionReq))
-	}
-
-	var rsp interface{}
-	rsp, err = filters.Filter(ctx, req, handleFunc)
-	if err != nil {
-		return nil, err
-	}
-	return rsp, nil
-}
-
-// KeyActionServerServer_ServiceDesc descriptor for server.RegisterService.
-var KeyActionServerServer_ServiceDesc = server.ServiceDesc{
-	ServiceName: "oj.solution.KeyActionServer",
-	HandlerType: ((*KeyActionServerService)(nil)),
-	Methods: []server.Method{
-		{
-			Name: "/oj.solution.KeyActionServer/AddKeyAction",
-			Func: KeyActionServerService_AddKeyAction_Handler,
-		},
-	},
-}
-
-// RegisterKeyActionServerService registers service.
-func RegisterKeyActionServerService(s server.Service, svr KeyActionServerService) {
-	if err := s.Register(&KeyActionServerServer_ServiceDesc, svr); err != nil {
-		panic(fmt.Sprintf("KeyActionServer register error:%v", err))
-	}
-}
-
 // SolutionServerService defines service.
 type SolutionServerService interface {
 	// CountUserProblemSolution CountUserProblemSolution 计算用户题目的提交次数
@@ -800,12 +758,6 @@ func RegisterSolutionServerService(s server.Service, svr SolutionServerService) 
 
 // START --------------------------------- Default Unimplemented Server Service --------------------------------- START
 
-type UnimplementedKeyActionServer struct{}
-
-func (s *UnimplementedKeyActionServer) AddKeyAction(ctx context.Context, req *AddKeyActionReq) (*CommonRsp, error) {
-	return nil, errors.New("rpc AddKeyAction of service KeyActionServer is not implemented")
-}
-
 type UnimplementedSolutionServer struct{}
 
 // CountUserProblemSolution CountUserProblemSolution 计算用户题目的提交次数
@@ -961,40 +913,6 @@ func (s *UnimplementedSolutionServer) QueryUserActions(ctx context.Context, req 
 // END ======================================= Server Service Definition ======================================= END
 
 // START ======================================= Client Service Definition ======================================= START
-
-// KeyActionServerClientProxy defines service client proxy
-type KeyActionServerClientProxy interface {
-	AddKeyAction(ctx context.Context, req *AddKeyActionReq, opts ...client.Option) (rsp *CommonRsp, err error)
-}
-
-type KeyActionServerClientProxyImpl struct {
-	client client.Client
-	opts   []client.Option
-}
-
-var NewKeyActionServerClientProxy = func(opts ...client.Option) KeyActionServerClientProxy {
-	return &KeyActionServerClientProxyImpl{client: client.DefaultClient, opts: opts}
-}
-
-func (c *KeyActionServerClientProxyImpl) AddKeyAction(ctx context.Context, req *AddKeyActionReq, opts ...client.Option) (*CommonRsp, error) {
-	ctx, msg := codec.WithCloneMessage(ctx)
-	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/oj.solution.KeyActionServer/AddKeyAction")
-	msg.WithCalleeServiceName(KeyActionServerServer_ServiceDesc.ServiceName)
-	msg.WithCalleeApp("")
-	msg.WithCalleeServer("")
-	msg.WithCalleeService("KeyActionServer")
-	msg.WithCalleeMethod("AddKeyAction")
-	msg.WithSerializationType(codec.SerializationTypePB)
-	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
-	callopts = append(callopts, c.opts...)
-	callopts = append(callopts, opts...)
-	rsp := &CommonRsp{}
-	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
-		return nil, err
-	}
-	return rsp, nil
-}
 
 // SolutionServerClientProxy defines service client proxy
 type SolutionServerClientProxy interface {
