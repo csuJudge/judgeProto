@@ -25,6 +25,8 @@ type ExperimentServerService interface {
 	AddCode(ctx context.Context, req *AddCodeReq) (*CommonRsp, error)
 	// QueryCode QueryCode 查询代码
 	QueryCode(ctx context.Context, req *QueryCodeReq) (*QueryCodeRsp, error)
+	// QueryMyCodeList QueryMyCodeList 查询我的代码列表
+	QueryMyCodeList(ctx context.Context, req *QueryMyCodeListReq) (*QueryMyCodeListRsp, error)
 }
 
 func ExperimentServerService_AddKeyAction_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -81,6 +83,24 @@ func ExperimentServerService_QueryCode_Handler(svr interface{}, ctx context.Cont
 	return rsp, nil
 }
 
+func ExperimentServerService_QueryMyCodeList_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryMyCodeListReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ExperimentServerService).QueryMyCodeList(ctx, reqbody.(*QueryMyCodeListReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // ExperimentServerServer_ServiceDesc descriptor for server.RegisterService.
 var ExperimentServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.experiment.ExperimentServer",
@@ -97,6 +117,10 @@ var ExperimentServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.experiment.ExperimentServer/QueryCode",
 			Func: ExperimentServerService_QueryCode_Handler,
+		},
+		{
+			Name: "/oj.experiment.ExperimentServer/QueryMyCodeList",
+			Func: ExperimentServerService_QueryMyCodeList_Handler,
 		},
 	},
 }
@@ -127,6 +151,11 @@ func (s *UnimplementedExperimentServer) QueryCode(ctx context.Context, req *Quer
 	return nil, errors.New("rpc QueryCode of service ExperimentServer is not implemented")
 }
 
+// QueryMyCodeList QueryMyCodeList 查询我的代码列表
+func (s *UnimplementedExperimentServer) QueryMyCodeList(ctx context.Context, req *QueryMyCodeListReq) (*QueryMyCodeListRsp, error) {
+	return nil, errors.New("rpc QueryMyCodeList of service ExperimentServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -141,6 +170,8 @@ type ExperimentServerClientProxy interface {
 	AddCode(ctx context.Context, req *AddCodeReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryCode QueryCode 查询代码
 	QueryCode(ctx context.Context, req *QueryCodeReq, opts ...client.Option) (rsp *QueryCodeRsp, err error)
+	// QueryMyCodeList QueryMyCodeList 查询我的代码列表
+	QueryMyCodeList(ctx context.Context, req *QueryMyCodeListReq, opts ...client.Option) (rsp *QueryMyCodeListRsp, err error)
 }
 
 type ExperimentServerClientProxyImpl struct {
@@ -206,6 +237,26 @@ func (c *ExperimentServerClientProxyImpl) QueryCode(ctx context.Context, req *Qu
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryCodeRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ExperimentServerClientProxyImpl) QueryMyCodeList(ctx context.Context, req *QueryMyCodeListReq, opts ...client.Option) (*QueryMyCodeListRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.experiment.ExperimentServer/QueryMyCodeList")
+	msg.WithCalleeServiceName(ExperimentServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ExperimentServer")
+	msg.WithCalleeMethod("QueryMyCodeList")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryMyCodeListRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

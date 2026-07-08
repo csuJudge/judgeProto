@@ -22,6 +22,66 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type QueryMyCodeListReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`     // 页
+	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`   // 页大小
+	UserID        int32                  `protobuf:"varint,3,opt,name=userID,proto3" json:"userID,omitempty"` // 用户编号
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *QueryMyCodeListReq) Reset() {
+	*x = QueryMyCodeListReq{}
+	mi := &file_experiment_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QueryMyCodeListReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QueryMyCodeListReq) ProtoMessage() {}
+
+func (x *QueryMyCodeListReq) ProtoReflect() protoreflect.Message {
+	mi := &file_experiment_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QueryMyCodeListReq.ProtoReflect.Descriptor instead.
+func (*QueryMyCodeListReq) Descriptor() ([]byte, []int) {
+	return file_experiment_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *QueryMyCodeListReq) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *QueryMyCodeListReq) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *QueryMyCodeListReq) GetUserID() int32 {
+	if x != nil {
+		return x.UserID
+	}
+	return 0
+}
+
 type CommonRsp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"` // 返回信息
@@ -32,7 +92,7 @@ type CommonRsp struct {
 
 func (x *CommonRsp) Reset() {
 	*x = CommonRsp{}
-	mi := &file_experiment_proto_msgTypes[0]
+	mi := &file_experiment_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44,7 +104,7 @@ func (x *CommonRsp) String() string {
 func (*CommonRsp) ProtoMessage() {}
 
 func (x *CommonRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_experiment_proto_msgTypes[0]
+	mi := &file_experiment_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +117,7 @@ func (x *CommonRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CommonRsp.ProtoReflect.Descriptor instead.
 func (*CommonRsp) Descriptor() ([]byte, []int) {
-	return file_experiment_proto_rawDescGZIP(), []int{0}
+	return file_experiment_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CommonRsp) GetMessage() string {
@@ -90,7 +150,7 @@ type AddCodeReq struct {
 
 func (x *AddCodeReq) Reset() {
 	*x = AddCodeReq{}
-	mi := &file_experiment_proto_msgTypes[1]
+	mi := &file_experiment_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -102,7 +162,7 @@ func (x *AddCodeReq) String() string {
 func (*AddCodeReq) ProtoMessage() {}
 
 func (x *AddCodeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_experiment_proto_msgTypes[1]
+	mi := &file_experiment_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -115,7 +175,7 @@ func (x *AddCodeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddCodeReq.ProtoReflect.Descriptor instead.
 func (*AddCodeReq) Descriptor() ([]byte, []int) {
-	return file_experiment_proto_rawDescGZIP(), []int{1}
+	return file_experiment_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AddCodeReq) GetProblemID() int32 {
@@ -184,7 +244,7 @@ type QueryCodeReq struct {
 
 func (x *QueryCodeReq) Reset() {
 	*x = QueryCodeReq{}
-	mi := &file_experiment_proto_msgTypes[2]
+	mi := &file_experiment_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -196,7 +256,7 @@ func (x *QueryCodeReq) String() string {
 func (*QueryCodeReq) ProtoMessage() {}
 
 func (x *QueryCodeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_experiment_proto_msgTypes[2]
+	mi := &file_experiment_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -209,7 +269,7 @@ func (x *QueryCodeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryCodeReq.ProtoReflect.Descriptor instead.
 func (*QueryCodeReq) Descriptor() ([]byte, []int) {
-	return file_experiment_proto_rawDescGZIP(), []int{2}
+	return file_experiment_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *QueryCodeReq) GetProblemID() int32 {
@@ -237,7 +297,7 @@ type QueryCodeRsp struct {
 
 func (x *QueryCodeRsp) Reset() {
 	*x = QueryCodeRsp{}
-	mi := &file_experiment_proto_msgTypes[3]
+	mi := &file_experiment_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -249,7 +309,7 @@ func (x *QueryCodeRsp) String() string {
 func (*QueryCodeRsp) ProtoMessage() {}
 
 func (x *QueryCodeRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_experiment_proto_msgTypes[3]
+	mi := &file_experiment_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -262,7 +322,7 @@ func (x *QueryCodeRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryCodeRsp.ProtoReflect.Descriptor instead.
 func (*QueryCodeRsp) Descriptor() ([]byte, []int) {
-	return file_experiment_proto_rawDescGZIP(), []int{3}
+	return file_experiment_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *QueryCodeRsp) GetMessage() string {
@@ -301,7 +361,7 @@ type AddKeyActionReq struct {
 
 func (x *AddKeyActionReq) Reset() {
 	*x = AddKeyActionReq{}
-	mi := &file_experiment_proto_msgTypes[4]
+	mi := &file_experiment_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -313,7 +373,7 @@ func (x *AddKeyActionReq) String() string {
 func (*AddKeyActionReq) ProtoMessage() {}
 
 func (x *AddKeyActionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_experiment_proto_msgTypes[4]
+	mi := &file_experiment_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -326,7 +386,7 @@ func (x *AddKeyActionReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddKeyActionReq.ProtoReflect.Descriptor instead.
 func (*AddKeyActionReq) Descriptor() ([]byte, []int) {
-	return file_experiment_proto_rawDescGZIP(), []int{4}
+	return file_experiment_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *AddKeyActionReq) GetAction() string {
@@ -380,15 +440,17 @@ func (x *AddKeyActionReq) GetRemoteIP() string {
 
 type Code struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Language      int32                  `protobuf:"varint,1,opt,name=Language,proto3" json:"Language,omitempty"` // 语言
-	Code          string                 `protobuf:"bytes,2,opt,name=Code,proto3" json:"Code,omitempty"`          // 代码
+	Language      int32                  `protobuf:"varint,1,opt,name=Language,proto3" json:"Language,omitempty"`      // 语言
+	Code          string                 `protobuf:"bytes,2,opt,name=Code,proto3" json:"Code,omitempty"`               // 代码
+	AddType       int32                  `protobuf:"varint,3,opt,name=addType,proto3" json:"addType,omitempty"`        // 添加的类型
+	CreatedTime   string                 `protobuf:"bytes,4,opt,name=createdTime,proto3" json:"createdTime,omitempty"` // 创建的时间
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Code) Reset() {
 	*x = Code{}
-	mi := &file_experiment_proto_msgTypes[5]
+	mi := &file_experiment_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -400,7 +462,7 @@ func (x *Code) String() string {
 func (*Code) ProtoMessage() {}
 
 func (x *Code) ProtoReflect() protoreflect.Message {
-	mi := &file_experiment_proto_msgTypes[5]
+	mi := &file_experiment_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -413,7 +475,7 @@ func (x *Code) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Code.ProtoReflect.Descriptor instead.
 func (*Code) Descriptor() ([]byte, []int) {
-	return file_experiment_proto_rawDescGZIP(), []int{5}
+	return file_experiment_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Code) GetLanguage() int32 {
@@ -430,11 +492,97 @@ func (x *Code) GetCode() string {
 	return ""
 }
 
+func (x *Code) GetAddType() int32 {
+	if x != nil {
+		return x.AddType
+	}
+	return 0
+}
+
+func (x *Code) GetCreatedTime() string {
+	if x != nil {
+		return x.CreatedTime
+	}
+	return ""
+}
+
+type QueryMyCodeListRsp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`   // 返回信息
+	Code          int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`        // 返回码
+	UserCode      []*Code                `protobuf:"bytes,3,rep,name=userCode,proto3" json:"userCode,omitempty"` // 代码
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`      // 总数
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *QueryMyCodeListRsp) Reset() {
+	*x = QueryMyCodeListRsp{}
+	mi := &file_experiment_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QueryMyCodeListRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QueryMyCodeListRsp) ProtoMessage() {}
+
+func (x *QueryMyCodeListRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_experiment_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QueryMyCodeListRsp.ProtoReflect.Descriptor instead.
+func (*QueryMyCodeListRsp) Descriptor() ([]byte, []int) {
+	return file_experiment_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *QueryMyCodeListRsp) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *QueryMyCodeListRsp) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *QueryMyCodeListRsp) GetUserCode() []*Code {
+	if x != nil {
+		return x.UserCode
+	}
+	return nil
+}
+
+func (x *QueryMyCodeListRsp) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 var File_experiment_proto protoreflect.FileDescriptor
 
 const file_experiment_proto_rawDesc = "" +
 	"\n" +
-	"\x10experiment.proto\x12\roj.experiment\"9\n" +
+	"\x10experiment.proto\x12\roj.experiment\"V\n" +
+	"\x12QueryMyCodeListReq\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x14\n" +
+	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x16\n" +
+	"\x06userID\x18\x03 \x01(\x05R\x06userID\"9\n" +
 	"\tCommonRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\"\xe8\x01\n" +
@@ -464,14 +612,22 @@ const file_experiment_proto_rawDesc = "" +
 	"\tproblemID\x18\x04 \x01(\x05R\tproblemID\x12\x16\n" +
 	"\x06userID\x18\x05 \x01(\x05R\x06userID\x12\"\n" +
 	"\fsolutionType\x18\x06 \x01(\x05R\fsolutionType\x12\x1a\n" +
-	"\bremoteIP\x18\a \x01(\tR\bremoteIP\"6\n" +
+	"\bremoteIP\x18\a \x01(\tR\bremoteIP\"r\n" +
 	"\x04Code\x12\x1a\n" +
 	"\bLanguage\x18\x01 \x01(\x05R\bLanguage\x12\x12\n" +
-	"\x04Code\x18\x02 \x01(\tR\x04Code2\xe9\x01\n" +
+	"\x04Code\x18\x02 \x01(\tR\x04Code\x12\x18\n" +
+	"\aaddType\x18\x03 \x01(\x05R\aaddType\x12 \n" +
+	"\vcreatedTime\x18\x04 \x01(\tR\vcreatedTime\"\x89\x01\n" +
+	"\x12QueryMyCodeListRsp\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\x05R\x04code\x12/\n" +
+	"\buserCode\x18\x03 \x03(\v2\x13.oj.experiment.CodeR\buserCode\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total2\xc4\x02\n" +
 	"\x10ExperimentServer\x12J\n" +
 	"\fAddKeyAction\x12\x1e.oj.experiment.AddKeyActionReq\x1a\x18.oj.experiment.CommonRsp\"\x00\x12@\n" +
 	"\aAddCode\x12\x19.oj.experiment.AddCodeReq\x1a\x18.oj.experiment.CommonRsp\"\x00\x12G\n" +
-	"\tQueryCode\x12\x1b.oj.experiment.QueryCodeReq\x1a\x1b.oj.experiment.QueryCodeRsp\"\x00B+Z)github.com/csuJudge/judgeProto/experimentb\x06proto3"
+	"\tQueryCode\x12\x1b.oj.experiment.QueryCodeReq\x1a\x1b.oj.experiment.QueryCodeRsp\"\x00\x12Y\n" +
+	"\x0fQueryMyCodeList\x12!.oj.experiment.QueryMyCodeListReq\x1a!.oj.experiment.QueryMyCodeListRsp\"\x00B+Z)github.com/csuJudge/judgeProto/experimentb\x06proto3"
 
 var (
 	file_experiment_proto_rawDescOnce sync.Once
@@ -485,28 +641,33 @@ func file_experiment_proto_rawDescGZIP() []byte {
 	return file_experiment_proto_rawDescData
 }
 
-var file_experiment_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_experiment_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_experiment_proto_goTypes = []any{
-	(*CommonRsp)(nil),       // 0: oj.experiment.CommonRsp
-	(*AddCodeReq)(nil),      // 1: oj.experiment.AddCodeReq
-	(*QueryCodeReq)(nil),    // 2: oj.experiment.QueryCodeReq
-	(*QueryCodeRsp)(nil),    // 3: oj.experiment.QueryCodeRsp
-	(*AddKeyActionReq)(nil), // 4: oj.experiment.AddKeyActionReq
-	(*Code)(nil),            // 5: oj.experiment.Code
+	(*QueryMyCodeListReq)(nil), // 0: oj.experiment.QueryMyCodeListReq
+	(*CommonRsp)(nil),          // 1: oj.experiment.CommonRsp
+	(*AddCodeReq)(nil),         // 2: oj.experiment.AddCodeReq
+	(*QueryCodeReq)(nil),       // 3: oj.experiment.QueryCodeReq
+	(*QueryCodeRsp)(nil),       // 4: oj.experiment.QueryCodeRsp
+	(*AddKeyActionReq)(nil),    // 5: oj.experiment.AddKeyActionReq
+	(*Code)(nil),               // 6: oj.experiment.Code
+	(*QueryMyCodeListRsp)(nil), // 7: oj.experiment.QueryMyCodeListRsp
 }
 var file_experiment_proto_depIdxs = []int32{
-	5, // 0: oj.experiment.QueryCodeRsp.userCode:type_name -> oj.experiment.Code
-	4, // 1: oj.experiment.ExperimentServer.AddKeyAction:input_type -> oj.experiment.AddKeyActionReq
-	1, // 2: oj.experiment.ExperimentServer.AddCode:input_type -> oj.experiment.AddCodeReq
-	2, // 3: oj.experiment.ExperimentServer.QueryCode:input_type -> oj.experiment.QueryCodeReq
-	0, // 4: oj.experiment.ExperimentServer.AddKeyAction:output_type -> oj.experiment.CommonRsp
-	0, // 5: oj.experiment.ExperimentServer.AddCode:output_type -> oj.experiment.CommonRsp
-	3, // 6: oj.experiment.ExperimentServer.QueryCode:output_type -> oj.experiment.QueryCodeRsp
-	4, // [4:7] is the sub-list for method output_type
-	1, // [1:4] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	6, // 0: oj.experiment.QueryCodeRsp.userCode:type_name -> oj.experiment.Code
+	6, // 1: oj.experiment.QueryMyCodeListRsp.userCode:type_name -> oj.experiment.Code
+	5, // 2: oj.experiment.ExperimentServer.AddKeyAction:input_type -> oj.experiment.AddKeyActionReq
+	2, // 3: oj.experiment.ExperimentServer.AddCode:input_type -> oj.experiment.AddCodeReq
+	3, // 4: oj.experiment.ExperimentServer.QueryCode:input_type -> oj.experiment.QueryCodeReq
+	0, // 5: oj.experiment.ExperimentServer.QueryMyCodeList:input_type -> oj.experiment.QueryMyCodeListReq
+	1, // 6: oj.experiment.ExperimentServer.AddKeyAction:output_type -> oj.experiment.CommonRsp
+	1, // 7: oj.experiment.ExperimentServer.AddCode:output_type -> oj.experiment.CommonRsp
+	4, // 8: oj.experiment.ExperimentServer.QueryCode:output_type -> oj.experiment.QueryCodeRsp
+	7, // 9: oj.experiment.ExperimentServer.QueryMyCodeList:output_type -> oj.experiment.QueryMyCodeListRsp
+	6, // [6:10] is the sub-list for method output_type
+	2, // [2:6] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_experiment_proto_init() }
@@ -520,7 +681,7 @@ func file_experiment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_experiment_proto_rawDesc), len(file_experiment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

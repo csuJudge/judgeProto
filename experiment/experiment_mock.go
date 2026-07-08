@@ -90,6 +90,21 @@ func (mr *MockExperimentServerServiceMockRecorder) QueryCode(ctx, req any) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryCode", reflect.TypeOf((*MockExperimentServerService)(nil).QueryCode), ctx, req)
 }
 
+// QueryMyCodeList mocks base method.
+func (m *MockExperimentServerService) QueryMyCodeList(ctx context.Context, req *QueryMyCodeListReq) (*QueryMyCodeListRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryMyCodeList", ctx, req)
+	ret0, _ := ret[0].(*QueryMyCodeListRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryMyCodeList indicates an expected call of QueryMyCodeList.
+func (mr *MockExperimentServerServiceMockRecorder) QueryMyCodeList(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryMyCodeList", reflect.TypeOf((*MockExperimentServerService)(nil).QueryMyCodeList), ctx, req)
+}
+
 // MockExperimentServerClientProxy is a mock of ExperimentServerClientProxy interface.
 type MockExperimentServerClientProxy struct {
 	ctrl     *gomock.Controller
@@ -176,4 +191,24 @@ func (mr *MockExperimentServerClientProxyMockRecorder) QueryCode(ctx, req any, o
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryCode", reflect.TypeOf((*MockExperimentServerClientProxy)(nil).QueryCode), varargs...)
+}
+
+// QueryMyCodeList mocks base method.
+func (m *MockExperimentServerClientProxy) QueryMyCodeList(ctx context.Context, req *QueryMyCodeListReq, opts ...client.Option) (*QueryMyCodeListRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryMyCodeList", varargs...)
+	ret0, _ := ret[0].(*QueryMyCodeListRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryMyCodeList indicates an expected call of QueryMyCodeList.
+func (mr *MockExperimentServerClientProxyMockRecorder) QueryMyCodeList(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryMyCodeList", reflect.TypeOf((*MockExperimentServerClientProxy)(nil).QueryMyCodeList), varargs...)
 }

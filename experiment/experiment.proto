@@ -10,6 +10,14 @@ service ExperimentServer {
   rpc AddCode(AddCodeReq) returns (CommonRsp) {}
   // QueryCode 查询代码
   rpc QueryCode(QueryCodeReq) returns (QueryCodeRsp) {}
+  // QueryMyCodeList 查询我的代码列表
+  rpc QueryMyCodeList(QueryMyCodeListReq)returns(QueryMyCodeListRsp){}
+}
+
+message QueryMyCodeListReq{
+  int32 page = 1; // 页
+  int32 limit = 2; // 页大小
+  int32 userID = 3; // 用户编号
 }
 
 message CommonRsp {
@@ -52,4 +60,13 @@ message AddKeyActionReq{
 message Code{
   int32 Language = 1; // 语言
   string Code = 2; // 代码
+  int32 addType = 3; // 添加的类型
+  string createdTime = 4; // 创建的时间
+}
+
+message QueryMyCodeListRsp{
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+  repeated Code userCode = 3; // 代码
+  int32 total = 4; // 总数
 }
