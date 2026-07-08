@@ -24,9 +24,10 @@ const (
 
 type QueryMyCodeListReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`     // 页
-	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`   // 页大小
-	UserID        int32                  `protobuf:"varint,3,opt,name=userID,proto3" json:"userID,omitempty"` // 用户编号
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`           // 页
+	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`         // 页大小
+	UserID        int32                  `protobuf:"varint,3,opt,name=userID,proto3" json:"userID,omitempty"`       // 用户编号
+	ProblemID     int32                  `protobuf:"varint,4,opt,name=problemID,proto3" json:"problemID,omitempty"` // 题目编号
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -78,6 +79,13 @@ func (x *QueryMyCodeListReq) GetLimit() int32 {
 func (x *QueryMyCodeListReq) GetUserID() int32 {
 	if x != nil {
 		return x.UserID
+	}
+	return 0
+}
+
+func (x *QueryMyCodeListReq) GetProblemID() int32 {
+	if x != nil {
+		return x.ProblemID
 	}
 	return 0
 }
@@ -578,11 +586,12 @@ var File_experiment_proto protoreflect.FileDescriptor
 
 const file_experiment_proto_rawDesc = "" +
 	"\n" +
-	"\x10experiment.proto\x12\roj.experiment\"V\n" +
+	"\x10experiment.proto\x12\roj.experiment\"t\n" +
 	"\x12QueryMyCodeListReq\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x16\n" +
-	"\x06userID\x18\x03 \x01(\x05R\x06userID\"9\n" +
+	"\x06userID\x18\x03 \x01(\x05R\x06userID\x12\x1c\n" +
+	"\tproblemID\x18\x04 \x01(\x05R\tproblemID\"9\n" +
 	"\tCommonRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\"\xe8\x01\n" +
