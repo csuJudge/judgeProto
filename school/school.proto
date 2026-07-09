@@ -228,6 +228,8 @@ message Term {
     string creator     = 4;  // 创建者
     int32 enable       = 5;  // 状态
     int32 isPresent    = 6;  // 是否当前学期
+    string startTime = 7; // 开始时间
+    string endTime = 8; // 结束时间
 }
 
 message SetPresentTermReq {
@@ -371,12 +373,16 @@ message UpdateTermReq {
     int32 userID       = 2;  // 用户编号
     string description = 3;  // 描述
     int32 termID       = 4;  // 学期编号
+    string startTime = 5; // 开始时间
+    string endTime = 6; // 结束时间
 }
 
 message AddTermReq {
     string name        = 1;  // 名称
     int32 userID       = 2;  // 用户编号
     string description = 3;  // 描述
+    string startTime = 4; // 开始时间
+    string endTime = 5; // 结束时间
 }
 
 message AddCourseReq {
