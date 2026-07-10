@@ -169,4 +169,5 @@ message ContestProblem {
     int32 solved       = 4;  // 解决
     int32 submission   = 5;  // 提交
     int32 difficulty   = 6;  // 难度
+    int32 score = 7; // 得分
 }
