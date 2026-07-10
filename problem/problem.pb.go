@@ -1130,6 +1130,7 @@ type ContestProblem struct {
 	Solved        int32                  `protobuf:"varint,4,opt,name=solved,proto3" json:"solved,omitempty"`         // 解决
 	Submission    int32                  `protobuf:"varint,5,opt,name=submission,proto3" json:"submission,omitempty"` // 提交
 	Difficulty    int32                  `protobuf:"varint,6,opt,name=difficulty,proto3" json:"difficulty,omitempty"` // 难度
+	Score         int32                  `protobuf:"varint,7,opt,name=score,proto3" json:"score,omitempty"`           // 得分
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1202,6 +1203,13 @@ func (x *ContestProblem) GetSubmission() int32 {
 func (x *ContestProblem) GetDifficulty() int32 {
 	if x != nil {
 		return x.Difficulty
+	}
+	return 0
+}
+
+func (x *ContestProblem) GetScore() int32 {
+	if x != nil {
+		return x.Score
 	}
 	return 0
 }
@@ -3512,7 +3520,7 @@ const file_problem_proto_rawDesc = "" +
 	"\x19QueryContestProblemReqRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x126\n" +
-	"\bproblems\x18\x03 \x03(\v2\x1a.oj.problem.ContestProblemR\bproblems\"\xb2\x01\n" +
+	"\bproblems\x18\x03 \x03(\v2\x1a.oj.problem.ContestProblemR\bproblems\"\xc8\x01\n" +
 	"\x0eContestProblem\x12\x1c\n" +
 	"\tproblemID\x18\x01 \x01(\x05R\tproblemID\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
@@ -3523,7 +3531,8 @@ const file_problem_proto_rawDesc = "" +
 	"submission\x12\x1e\n" +
 	"\n" +
 	"difficulty\x18\x06 \x01(\x05R\n" +
-	"difficulty\"f\n" +
+	"difficulty\x12\x14\n" +
+	"\x05score\x18\a \x01(\x05R\x05score\"f\n" +
 	"\x16UpdateProblemStatusReq\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\x05R\x06userID\x12\x1c\n" +
 	"\tproblemID\x18\x02 \x01(\x05R\tproblemID\x12\x16\n" +

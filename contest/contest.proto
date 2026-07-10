@@ -148,6 +148,7 @@ message Contest {
     int32 enable                     = 12;  // 是否结束
     repeated Class classes = 13; // 作业的班级
     int32 participants = 14; // 参与人数
+    int32 canUpdate = 15; // 是否能被更新
 
 }
 
