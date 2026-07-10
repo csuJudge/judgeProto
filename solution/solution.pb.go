@@ -2086,6 +2086,7 @@ type Problem struct {
 	Difficulty    int32                  `protobuf:"varint,4,opt,name=difficulty,proto3" json:"difficulty,omitempty"` // 难度
 	TimeCost      int32                  `protobuf:"varint,5,opt,name=timeCost,proto3" json:"timeCost,omitempty"`     // 耗时
 	MemoryCost    int32                  `protobuf:"varint,6,opt,name=memoryCost,proto3" json:"memoryCost,omitempty"` // 消耗的内存
+	Score         int32                  `protobuf:"varint,7,opt,name=score,proto3" json:"score,omitempty"`           // 得分
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2158,6 +2159,13 @@ func (x *Problem) GetTimeCost() int32 {
 func (x *Problem) GetMemoryCost() int32 {
 	if x != nil {
 		return x.MemoryCost
+	}
+	return 0
+}
+
+func (x *Problem) GetScore() int32 {
+	if x != nil {
+		return x.Score
 	}
 	return 0
 }
@@ -4300,7 +4308,7 @@ const file_solution_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x120\n" +
 	"\bproblems\x18\x03 \x03(\v2\x14.oj.solution.ProblemR\bproblems\x12'\n" +
-	"\x05ranks\x18\x04 \x03(\v2\x11.oj.solution.RankR\x05ranks\"\xb3\x01\n" +
+	"\x05ranks\x18\x04 \x03(\v2\x11.oj.solution.RankR\x05ranks\"\xc9\x01\n" +
 	"\aProblem\x12\x1c\n" +
 	"\tproblemID\x18\x01 \x01(\x05R\tproblemID\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
@@ -4311,7 +4319,8 @@ const file_solution_proto_rawDesc = "" +
 	"\btimeCost\x18\x05 \x01(\x05R\btimeCost\x12\x1e\n" +
 	"\n" +
 	"memoryCost\x18\x06 \x01(\x05R\n" +
-	"memoryCost\"\xe4\x01\n" +
+	"memoryCost\x12\x14\n" +
+	"\x05score\x18\a \x01(\x05R\x05score\"\xe4\x01\n" +
 	"\x04Rank\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
 	"\x06userID\x18\x02 \x01(\x05R\x06userID\x12 \n" +

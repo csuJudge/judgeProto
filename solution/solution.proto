@@ -65,6 +65,7 @@ service SolutionServer {
     rpc QueryLongestNotAnsweredTime(UserIDReq)returns (QueryLongestNotAnsweredTimeRsp){}
 
     rpc QueryUserActions(UserIDReq)returns(QueryAllUserSolutionRsp){}
+
 }
 
 message QueryLongestNotAnsweredTimeRsp{
@@ -280,6 +281,7 @@ message Problem {
     int32 difficulty = 4; // 难度
     int32 timeCost = 5; // 耗时
     int32 memoryCost = 6; // 消耗的内存
+    int32 score = 7; // 得分
 }
 
 message Rank {
