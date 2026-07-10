@@ -186,6 +186,7 @@ message QueryUserContestSubmissionRsp {
 message UserProblemCondition {
     int32 problemID = 1;  // 题目编号
     int32 isDone = 2;  // 是否做完
+    int32 passRate = 3; // 通过率
 }
 
 message QueryTodaySolutionRsp {
