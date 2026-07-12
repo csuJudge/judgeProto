@@ -1174,7 +1174,7 @@ type UserProblemCondition struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ProblemID     int32                  `protobuf:"varint,1,opt,name=problemID,proto3" json:"problemID,omitempty"` // 题目编号
 	IsDone        int32                  `protobuf:"varint,2,opt,name=isDone,proto3" json:"isDone,omitempty"`       // 是否做完
-	PassRate      int32                  `protobuf:"varint,3,opt,name=passRate,proto3" json:"passRate,omitempty"`   // 通过率
+	PassRate      float32                `protobuf:"fixed32,3,opt,name=passRate,proto3" json:"passRate,omitempty"`  // 通过率
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1223,7 +1223,7 @@ func (x *UserProblemCondition) GetIsDone() int32 {
 	return 0
 }
 
-func (x *UserProblemCondition) GetPassRate() int32 {
+func (x *UserProblemCondition) GetPassRate() float32 {
 	if x != nil {
 		return x.PassRate
 	}
@@ -4251,7 +4251,7 @@ const file_solution_proto_rawDesc = "" +
 	"\x14UserProblemCondition\x12\x1c\n" +
 	"\tproblemID\x18\x01 \x01(\x05R\tproblemID\x12\x16\n" +
 	"\x06isDone\x18\x02 \x01(\x05R\x06isDone\x12\x1a\n" +
-	"\bpassRate\x18\x03 \x01(\x05R\bpassRate\"\xce\x01\n" +
+	"\bpassRate\x18\x03 \x01(\x02R\bpassRate\"\xce\x01\n" +
 	"\x15QueryTodaySolutionRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12?\n" +
