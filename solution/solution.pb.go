@@ -639,13 +639,16 @@ func (x *UserSolution) GetDate() string {
 }
 
 type CountProblemSolutionStatisticsRsp struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`       // 返回信息
-	Code          int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`            // 返回码
-	Statistics    *ClassifiedSolution    `protobuf:"bytes,3,opt,name=statistics,proto3" json:"statistics,omitempty"` // 统计数据
-	Solutions     []*Solution            `protobuf:"bytes,4,rep,name=solutions,proto3" json:"solutions,omitempty"`   // 提交
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Message            string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`                       // 返回信息
+	Code               int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`                            // 返回码
+	Statistics         *ClassifiedSolution    `protobuf:"bytes,3,opt,name=statistics,proto3" json:"statistics,omitempty"`                 // 统计数据
+	MinLengthSolutions []*Solution            `protobuf:"bytes,4,rep,name=minLengthSolutions,proto3" json:"minLengthSolutions,omitempty"` // 提交
+	MinTimeSolutions   []*Solution            `protobuf:"bytes,5,rep,name=minTimeSolutions,proto3" json:"minTimeSolutions,omitempty"`     // 提交
+	MinMemorySolutions []*Solution            `protobuf:"bytes,6,rep,name=minMemorySolutions,proto3" json:"minMemorySolutions,omitempty"` // 提交
+	LatestSolutions    []*Solution            `protobuf:"bytes,7,rep,name=latestSolutions,proto3" json:"latestSolutions,omitempty"`       // 提交
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *CountProblemSolutionStatisticsRsp) Reset() {
@@ -699,9 +702,30 @@ func (x *CountProblemSolutionStatisticsRsp) GetStatistics() *ClassifiedSolution 
 	return nil
 }
 
-func (x *CountProblemSolutionStatisticsRsp) GetSolutions() []*Solution {
+func (x *CountProblemSolutionStatisticsRsp) GetMinLengthSolutions() []*Solution {
 	if x != nil {
-		return x.Solutions
+		return x.MinLengthSolutions
+	}
+	return nil
+}
+
+func (x *CountProblemSolutionStatisticsRsp) GetMinTimeSolutions() []*Solution {
+	if x != nil {
+		return x.MinTimeSolutions
+	}
+	return nil
+}
+
+func (x *CountProblemSolutionStatisticsRsp) GetMinMemorySolutions() []*Solution {
+	if x != nil {
+		return x.MinMemorySolutions
+	}
+	return nil
+}
+
+func (x *CountProblemSolutionStatisticsRsp) GetLatestSolutions() []*Solution {
+	if x != nil {
+		return x.LatestSolutions
 	}
 	return nil
 }
@@ -4208,14 +4232,17 @@ const file_solution_proto_rawDesc = "" +
 	"statistics\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
 	"\x06number\x18\x03 \x01(\tR\x06number\x12\x12\n" +
-	"\x04date\x18\x04 \x01(\tR\x04date\"\xc7\x01\n" +
+	"\x04date\x18\x04 \x01(\tR\x04date\"\xa4\x03\n" +
 	"!CountProblemSolutionStatisticsRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12?\n" +
 	"\n" +
 	"statistics\x18\x03 \x01(\v2\x1f.oj.solution.ClassifiedSolutionR\n" +
-	"statistics\x123\n" +
-	"\tsolutions\x18\x04 \x03(\v2\x15.oj.solution.SolutionR\tsolutions\"O\n" +
+	"statistics\x12E\n" +
+	"\x12minLengthSolutions\x18\x04 \x03(\v2\x15.oj.solution.SolutionR\x12minLengthSolutions\x12A\n" +
+	"\x10minTimeSolutions\x18\x05 \x03(\v2\x15.oj.solution.SolutionR\x10minTimeSolutions\x12E\n" +
+	"\x12minMemorySolutions\x18\x06 \x03(\v2\x15.oj.solution.SolutionR\x12minMemorySolutions\x12?\n" +
+	"\x0flatestSolutions\x18\a \x03(\v2\x15.oj.solution.SolutionR\x0flatestSolutions\"O\n" +
 	"\x17QueryAllUserSolutionReq\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\x05R\x06userID\x12\x1c\n" +
 	"\tproblemID\x18\x02 \x01(\x05R\tproblemID\"|\n" +
@@ -4622,90 +4649,93 @@ var file_solution_proto_depIdxs = []int32{
 	9,  // 5: oj.solution.CountUserSolutionRsp.userSolution:type_name -> oj.solution.UserSolution
 	31, // 6: oj.solution.UserSolution.statistics:type_name -> oj.solution.ClassifiedSolution
 	31, // 7: oj.solution.CountProblemSolutionStatisticsRsp.statistics:type_name -> oj.solution.ClassifiedSolution
-	60, // 8: oj.solution.CountProblemSolutionStatisticsRsp.solutions:type_name -> oj.solution.Solution
-	60, // 9: oj.solution.QueryAllUserSolutionRsp.solutions:type_name -> oj.solution.Solution
-	14, // 10: oj.solution.QueryContestCompletionStatusRsp.statuses:type_name -> oj.solution.CompletionStatus
-	19, // 11: oj.solution.QueryUserContestSubmissionRsp.condition:type_name -> oj.solution.UserProblemCondition
-	31, // 12: oj.solution.QueryTodaySolutionRsp.statistics:type_name -> oj.solution.ClassifiedSolution
-	34, // 13: oj.solution.QueryMySolutionRecordRsp.acceptProblems:type_name -> oj.solution.Problem
-	34, // 14: oj.solution.QueryMySolutionRecordRsp.unAcceptProblems:type_name -> oj.solution.Problem
-	29, // 15: oj.solution.CountContestProblemSubmissionRsp.statistics:type_name -> oj.solution.ProblemClassifiedSolution
-	31, // 16: oj.solution.ProblemClassifiedSolution.statistics:type_name -> oj.solution.ClassifiedSolution
-	31, // 17: oj.solution.CountContestSubmissionRsp.statistics:type_name -> oj.solution.ClassifiedSolution
-	34, // 18: oj.solution.QueryContestRankDataRsp.problems:type_name -> oj.solution.Problem
-	35, // 19: oj.solution.QueryContestRankDataRsp.ranks:type_name -> oj.solution.Rank
-	36, // 20: oj.solution.Rank.solutionData:type_name -> oj.solution.ContestSolutionData
-	60, // 21: oj.solution.QuerySolutionRsp.solution:type_name -> oj.solution.Solution
-	47, // 22: oj.solution.QuerySimListRsp.sim:type_name -> oj.solution.Sim
-	60, // 23: oj.solution.QuerySimSolutionDataRsp.solution:type_name -> oj.solution.Solution
-	60, // 24: oj.solution.QuerySimSolutionDataRsp.simSolution:type_name -> oj.solution.Solution
-	61, // 25: oj.solution.QueryLatestCodeRsp.lastCode:type_name -> oj.solution.Code
-	60, // 26: oj.solution.QuerySourceCodeRsp.solution:type_name -> oj.solution.Solution
-	58, // 27: oj.solution.SolutionServer.CountUserProblemSolution:input_type -> oj.solution.CountUserProblemSolutionReq
-	56, // 28: oj.solution.SolutionServer.RejudgeSolution:input_type -> oj.solution.RejudgeSolutionReq
-	54, // 29: oj.solution.SolutionServer.QueryRuntimeInfo:input_type -> oj.solution.QueryRuntimeInfoReq
-	52, // 30: oj.solution.SolutionServer.QuerySolutionResult:input_type -> oj.solution.QuerySolutionResultReq
-	50, // 31: oj.solution.SolutionServer.QuerySourceCode:input_type -> oj.solution.QuerySourceCodeReq
-	48, // 32: oj.solution.SolutionServer.QueryLatestCode:input_type -> oj.solution.QueryLatestCodeReq
-	43, // 33: oj.solution.SolutionServer.QuerySimList:input_type -> oj.solution.QuerySimListReq
-	45, // 34: oj.solution.SolutionServer.QuerySimSolutionData:input_type -> oj.solution.QuerySimSolutionDataReq
-	42, // 35: oj.solution.SolutionServer.AddSolution:input_type -> oj.solution.AddSolutionReq
-	40, // 36: oj.solution.SolutionServer.QueryUserProblemSolution:input_type -> oj.solution.QueryUserProblemSolutionReq
-	38, // 37: oj.solution.SolutionServer.QuerySolution:input_type -> oj.solution.QuerySolutionReq
-	42, // 38: oj.solution.SolutionServer.AddTestSolution:input_type -> oj.solution.AddSolutionReq
-	32, // 39: oj.solution.SolutionServer.QueryContestRankData:input_type -> oj.solution.QueryContestRankDataReq
-	17, // 40: oj.solution.SolutionServer.QueryUserContestSubmission:input_type -> oj.solution.QueryUserContestSubmissionReq
-	27, // 41: oj.solution.SolutionServer.CountContestProblemSubmission:input_type -> oj.solution.CountContestProblemSubmissionReq
-	23, // 42: oj.solution.SolutionServer.QueryMySolutionRecord:input_type -> oj.solution.QueryMySolutionRecordReq
-	23, // 43: oj.solution.SolutionServer.CountMySolution:input_type -> oj.solution.QueryMySolutionRecordReq
-	21, // 44: oj.solution.SolutionServer.QueryTodaySolution:input_type -> oj.solution.QueryTodaySolutionReq
-	15, // 45: oj.solution.SolutionServer.CalSolutionDifference:input_type -> oj.solution.CalSolutionDifferenceReq
-	27, // 46: oj.solution.SolutionServer.CountContestSubmission:input_type -> oj.solution.CountContestProblemSubmissionReq
-	26, // 47: oj.solution.SolutionServer.QueryContestCompletionStatus:input_type -> oj.solution.QueryRankDataReq
-	11, // 48: oj.solution.SolutionServer.QueryAllUserSolution:input_type -> oj.solution.QueryAllUserSolutionReq
-	11, // 49: oj.solution.SolutionServer.CountProblemSolutionStatistics:input_type -> oj.solution.QueryAllUserSolutionReq
-	7,  // 50: oj.solution.SolutionServer.CountUserSolution:input_type -> oj.solution.CountUserSolutionReq
-	22, // 51: oj.solution.SolutionServer.QueryMySolution:input_type -> oj.solution.UserIDReq
-	22, // 52: oj.solution.SolutionServer.QueryMyLanguageDistribution:input_type -> oj.solution.UserIDReq
-	22, // 53: oj.solution.SolutionServer.CountUserKnowledgeSolution:input_type -> oj.solution.UserIDReq
-	22, // 54: oj.solution.SolutionServer.QueryProblemSolvedRank:input_type -> oj.solution.UserIDReq
-	22, // 55: oj.solution.SolutionServer.QueryLongestNotAnsweredTime:input_type -> oj.solution.UserIDReq
-	22, // 56: oj.solution.SolutionServer.QueryUserActions:input_type -> oj.solution.UserIDReq
-	59, // 57: oj.solution.SolutionServer.CountUserProblemSolution:output_type -> oj.solution.CountUserProblemSolutionRsp
-	57, // 58: oj.solution.SolutionServer.RejudgeSolution:output_type -> oj.solution.CommonRsp
-	55, // 59: oj.solution.SolutionServer.QueryRuntimeInfo:output_type -> oj.solution.QueryRuntimeInfoRsp
-	53, // 60: oj.solution.SolutionServer.QuerySolutionResult:output_type -> oj.solution.QuerySolutionResultRsp
-	51, // 61: oj.solution.SolutionServer.QuerySourceCode:output_type -> oj.solution.QuerySourceCodeRsp
-	49, // 62: oj.solution.SolutionServer.QueryLatestCode:output_type -> oj.solution.QueryLatestCodeRsp
-	44, // 63: oj.solution.SolutionServer.QuerySimList:output_type -> oj.solution.QuerySimListRsp
-	46, // 64: oj.solution.SolutionServer.QuerySimSolutionData:output_type -> oj.solution.QuerySimSolutionDataRsp
-	37, // 65: oj.solution.SolutionServer.AddSolution:output_type -> oj.solution.AddSolutionRsp
-	41, // 66: oj.solution.SolutionServer.QueryUserProblemSolution:output_type -> oj.solution.QueryUserProblemSolutionRsp
-	39, // 67: oj.solution.SolutionServer.QuerySolution:output_type -> oj.solution.QuerySolutionRsp
-	37, // 68: oj.solution.SolutionServer.AddTestSolution:output_type -> oj.solution.AddSolutionRsp
-	33, // 69: oj.solution.SolutionServer.QueryContestRankData:output_type -> oj.solution.QueryContestRankDataRsp
-	18, // 70: oj.solution.SolutionServer.QueryUserContestSubmission:output_type -> oj.solution.QueryUserContestSubmissionRsp
-	28, // 71: oj.solution.SolutionServer.CountContestProblemSubmission:output_type -> oj.solution.CountContestProblemSubmissionRsp
-	24, // 72: oj.solution.SolutionServer.QueryMySolutionRecord:output_type -> oj.solution.QueryMySolutionRecordRsp
-	30, // 73: oj.solution.SolutionServer.CountMySolution:output_type -> oj.solution.CountContestSubmissionRsp
-	20, // 74: oj.solution.SolutionServer.QueryTodaySolution:output_type -> oj.solution.QueryTodaySolutionRsp
-	16, // 75: oj.solution.SolutionServer.CalSolutionDifference:output_type -> oj.solution.CalSolutionDifferenceRsp
-	30, // 76: oj.solution.SolutionServer.CountContestSubmission:output_type -> oj.solution.CountContestSubmissionRsp
-	13, // 77: oj.solution.SolutionServer.QueryContestCompletionStatus:output_type -> oj.solution.QueryContestCompletionStatusRsp
-	12, // 78: oj.solution.SolutionServer.QueryAllUserSolution:output_type -> oj.solution.QueryAllUserSolutionRsp
-	10, // 79: oj.solution.SolutionServer.CountProblemSolutionStatistics:output_type -> oj.solution.CountProblemSolutionStatisticsRsp
-	8,  // 80: oj.solution.SolutionServer.CountUserSolution:output_type -> oj.solution.CountUserSolutionRsp
-	39, // 81: oj.solution.SolutionServer.QueryMySolution:output_type -> oj.solution.QuerySolutionRsp
-	5,  // 82: oj.solution.SolutionServer.QueryMyLanguageDistribution:output_type -> oj.solution.QueryMyLanguageDistributionRsp
-	3,  // 83: oj.solution.SolutionServer.CountUserKnowledgeSolution:output_type -> oj.solution.CountUserKnowledgeSolutionRsp
-	1,  // 84: oj.solution.SolutionServer.QueryProblemSolvedRank:output_type -> oj.solution.QueryProblemSolvedRankRsp
-	0,  // 85: oj.solution.SolutionServer.QueryLongestNotAnsweredTime:output_type -> oj.solution.QueryLongestNotAnsweredTimeRsp
-	12, // 86: oj.solution.SolutionServer.QueryUserActions:output_type -> oj.solution.QueryAllUserSolutionRsp
-	57, // [57:87] is the sub-list for method output_type
-	27, // [27:57] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	60, // 8: oj.solution.CountProblemSolutionStatisticsRsp.minLengthSolutions:type_name -> oj.solution.Solution
+	60, // 9: oj.solution.CountProblemSolutionStatisticsRsp.minTimeSolutions:type_name -> oj.solution.Solution
+	60, // 10: oj.solution.CountProblemSolutionStatisticsRsp.minMemorySolutions:type_name -> oj.solution.Solution
+	60, // 11: oj.solution.CountProblemSolutionStatisticsRsp.latestSolutions:type_name -> oj.solution.Solution
+	60, // 12: oj.solution.QueryAllUserSolutionRsp.solutions:type_name -> oj.solution.Solution
+	14, // 13: oj.solution.QueryContestCompletionStatusRsp.statuses:type_name -> oj.solution.CompletionStatus
+	19, // 14: oj.solution.QueryUserContestSubmissionRsp.condition:type_name -> oj.solution.UserProblemCondition
+	31, // 15: oj.solution.QueryTodaySolutionRsp.statistics:type_name -> oj.solution.ClassifiedSolution
+	34, // 16: oj.solution.QueryMySolutionRecordRsp.acceptProblems:type_name -> oj.solution.Problem
+	34, // 17: oj.solution.QueryMySolutionRecordRsp.unAcceptProblems:type_name -> oj.solution.Problem
+	29, // 18: oj.solution.CountContestProblemSubmissionRsp.statistics:type_name -> oj.solution.ProblemClassifiedSolution
+	31, // 19: oj.solution.ProblemClassifiedSolution.statistics:type_name -> oj.solution.ClassifiedSolution
+	31, // 20: oj.solution.CountContestSubmissionRsp.statistics:type_name -> oj.solution.ClassifiedSolution
+	34, // 21: oj.solution.QueryContestRankDataRsp.problems:type_name -> oj.solution.Problem
+	35, // 22: oj.solution.QueryContestRankDataRsp.ranks:type_name -> oj.solution.Rank
+	36, // 23: oj.solution.Rank.solutionData:type_name -> oj.solution.ContestSolutionData
+	60, // 24: oj.solution.QuerySolutionRsp.solution:type_name -> oj.solution.Solution
+	47, // 25: oj.solution.QuerySimListRsp.sim:type_name -> oj.solution.Sim
+	60, // 26: oj.solution.QuerySimSolutionDataRsp.solution:type_name -> oj.solution.Solution
+	60, // 27: oj.solution.QuerySimSolutionDataRsp.simSolution:type_name -> oj.solution.Solution
+	61, // 28: oj.solution.QueryLatestCodeRsp.lastCode:type_name -> oj.solution.Code
+	60, // 29: oj.solution.QuerySourceCodeRsp.solution:type_name -> oj.solution.Solution
+	58, // 30: oj.solution.SolutionServer.CountUserProblemSolution:input_type -> oj.solution.CountUserProblemSolutionReq
+	56, // 31: oj.solution.SolutionServer.RejudgeSolution:input_type -> oj.solution.RejudgeSolutionReq
+	54, // 32: oj.solution.SolutionServer.QueryRuntimeInfo:input_type -> oj.solution.QueryRuntimeInfoReq
+	52, // 33: oj.solution.SolutionServer.QuerySolutionResult:input_type -> oj.solution.QuerySolutionResultReq
+	50, // 34: oj.solution.SolutionServer.QuerySourceCode:input_type -> oj.solution.QuerySourceCodeReq
+	48, // 35: oj.solution.SolutionServer.QueryLatestCode:input_type -> oj.solution.QueryLatestCodeReq
+	43, // 36: oj.solution.SolutionServer.QuerySimList:input_type -> oj.solution.QuerySimListReq
+	45, // 37: oj.solution.SolutionServer.QuerySimSolutionData:input_type -> oj.solution.QuerySimSolutionDataReq
+	42, // 38: oj.solution.SolutionServer.AddSolution:input_type -> oj.solution.AddSolutionReq
+	40, // 39: oj.solution.SolutionServer.QueryUserProblemSolution:input_type -> oj.solution.QueryUserProblemSolutionReq
+	38, // 40: oj.solution.SolutionServer.QuerySolution:input_type -> oj.solution.QuerySolutionReq
+	42, // 41: oj.solution.SolutionServer.AddTestSolution:input_type -> oj.solution.AddSolutionReq
+	32, // 42: oj.solution.SolutionServer.QueryContestRankData:input_type -> oj.solution.QueryContestRankDataReq
+	17, // 43: oj.solution.SolutionServer.QueryUserContestSubmission:input_type -> oj.solution.QueryUserContestSubmissionReq
+	27, // 44: oj.solution.SolutionServer.CountContestProblemSubmission:input_type -> oj.solution.CountContestProblemSubmissionReq
+	23, // 45: oj.solution.SolutionServer.QueryMySolutionRecord:input_type -> oj.solution.QueryMySolutionRecordReq
+	23, // 46: oj.solution.SolutionServer.CountMySolution:input_type -> oj.solution.QueryMySolutionRecordReq
+	21, // 47: oj.solution.SolutionServer.QueryTodaySolution:input_type -> oj.solution.QueryTodaySolutionReq
+	15, // 48: oj.solution.SolutionServer.CalSolutionDifference:input_type -> oj.solution.CalSolutionDifferenceReq
+	27, // 49: oj.solution.SolutionServer.CountContestSubmission:input_type -> oj.solution.CountContestProblemSubmissionReq
+	26, // 50: oj.solution.SolutionServer.QueryContestCompletionStatus:input_type -> oj.solution.QueryRankDataReq
+	11, // 51: oj.solution.SolutionServer.QueryAllUserSolution:input_type -> oj.solution.QueryAllUserSolutionReq
+	11, // 52: oj.solution.SolutionServer.CountProblemSolutionStatistics:input_type -> oj.solution.QueryAllUserSolutionReq
+	7,  // 53: oj.solution.SolutionServer.CountUserSolution:input_type -> oj.solution.CountUserSolutionReq
+	22, // 54: oj.solution.SolutionServer.QueryMySolution:input_type -> oj.solution.UserIDReq
+	22, // 55: oj.solution.SolutionServer.QueryMyLanguageDistribution:input_type -> oj.solution.UserIDReq
+	22, // 56: oj.solution.SolutionServer.CountUserKnowledgeSolution:input_type -> oj.solution.UserIDReq
+	22, // 57: oj.solution.SolutionServer.QueryProblemSolvedRank:input_type -> oj.solution.UserIDReq
+	22, // 58: oj.solution.SolutionServer.QueryLongestNotAnsweredTime:input_type -> oj.solution.UserIDReq
+	22, // 59: oj.solution.SolutionServer.QueryUserActions:input_type -> oj.solution.UserIDReq
+	59, // 60: oj.solution.SolutionServer.CountUserProblemSolution:output_type -> oj.solution.CountUserProblemSolutionRsp
+	57, // 61: oj.solution.SolutionServer.RejudgeSolution:output_type -> oj.solution.CommonRsp
+	55, // 62: oj.solution.SolutionServer.QueryRuntimeInfo:output_type -> oj.solution.QueryRuntimeInfoRsp
+	53, // 63: oj.solution.SolutionServer.QuerySolutionResult:output_type -> oj.solution.QuerySolutionResultRsp
+	51, // 64: oj.solution.SolutionServer.QuerySourceCode:output_type -> oj.solution.QuerySourceCodeRsp
+	49, // 65: oj.solution.SolutionServer.QueryLatestCode:output_type -> oj.solution.QueryLatestCodeRsp
+	44, // 66: oj.solution.SolutionServer.QuerySimList:output_type -> oj.solution.QuerySimListRsp
+	46, // 67: oj.solution.SolutionServer.QuerySimSolutionData:output_type -> oj.solution.QuerySimSolutionDataRsp
+	37, // 68: oj.solution.SolutionServer.AddSolution:output_type -> oj.solution.AddSolutionRsp
+	41, // 69: oj.solution.SolutionServer.QueryUserProblemSolution:output_type -> oj.solution.QueryUserProblemSolutionRsp
+	39, // 70: oj.solution.SolutionServer.QuerySolution:output_type -> oj.solution.QuerySolutionRsp
+	37, // 71: oj.solution.SolutionServer.AddTestSolution:output_type -> oj.solution.AddSolutionRsp
+	33, // 72: oj.solution.SolutionServer.QueryContestRankData:output_type -> oj.solution.QueryContestRankDataRsp
+	18, // 73: oj.solution.SolutionServer.QueryUserContestSubmission:output_type -> oj.solution.QueryUserContestSubmissionRsp
+	28, // 74: oj.solution.SolutionServer.CountContestProblemSubmission:output_type -> oj.solution.CountContestProblemSubmissionRsp
+	24, // 75: oj.solution.SolutionServer.QueryMySolutionRecord:output_type -> oj.solution.QueryMySolutionRecordRsp
+	30, // 76: oj.solution.SolutionServer.CountMySolution:output_type -> oj.solution.CountContestSubmissionRsp
+	20, // 77: oj.solution.SolutionServer.QueryTodaySolution:output_type -> oj.solution.QueryTodaySolutionRsp
+	16, // 78: oj.solution.SolutionServer.CalSolutionDifference:output_type -> oj.solution.CalSolutionDifferenceRsp
+	30, // 79: oj.solution.SolutionServer.CountContestSubmission:output_type -> oj.solution.CountContestSubmissionRsp
+	13, // 80: oj.solution.SolutionServer.QueryContestCompletionStatus:output_type -> oj.solution.QueryContestCompletionStatusRsp
+	12, // 81: oj.solution.SolutionServer.QueryAllUserSolution:output_type -> oj.solution.QueryAllUserSolutionRsp
+	10, // 82: oj.solution.SolutionServer.CountProblemSolutionStatistics:output_type -> oj.solution.CountProblemSolutionStatisticsRsp
+	8,  // 83: oj.solution.SolutionServer.CountUserSolution:output_type -> oj.solution.CountUserSolutionRsp
+	39, // 84: oj.solution.SolutionServer.QueryMySolution:output_type -> oj.solution.QuerySolutionRsp
+	5,  // 85: oj.solution.SolutionServer.QueryMyLanguageDistribution:output_type -> oj.solution.QueryMyLanguageDistributionRsp
+	3,  // 86: oj.solution.SolutionServer.CountUserKnowledgeSolution:output_type -> oj.solution.CountUserKnowledgeSolutionRsp
+	1,  // 87: oj.solution.SolutionServer.QueryProblemSolvedRank:output_type -> oj.solution.QueryProblemSolvedRankRsp
+	0,  // 88: oj.solution.SolutionServer.QueryLongestNotAnsweredTime:output_type -> oj.solution.QueryLongestNotAnsweredTimeRsp
+	12, // 89: oj.solution.SolutionServer.QueryUserActions:output_type -> oj.solution.QueryAllUserSolutionRsp
+	60, // [60:90] is the sub-list for method output_type
+	30, // [30:60] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_solution_proto_init() }

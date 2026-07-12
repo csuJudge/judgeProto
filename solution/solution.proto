@@ -134,7 +134,10 @@ message CountProblemSolutionStatisticsRsp {
     string message = 1;  // 返回信息
     int32 code = 2;  // 返回码
     ClassifiedSolution statistics = 3;  // 统计数据
-    repeated Solution solutions = 4;  // 提交
+    repeated Solution minLengthSolutions = 4;  // 提交
+    repeated Solution minTimeSolutions = 5;  // 提交
+    repeated Solution minMemorySolutions = 6;  // 提交
+    repeated Solution latestSolutions = 7;  // 提交
 }
 
 message QueryAllUserSolutionReq {
