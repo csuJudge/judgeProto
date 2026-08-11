@@ -399,6 +399,7 @@ type AddContestReq struct {
 	Problems      string                 `protobuf:"bytes,9,opt,name=problems,proto3" json:"problems,omitempty"`         // 题目列表
 	People        string                 `protobuf:"bytes,10,opt,name=people,proto3" json:"people,omitempty"`            // 人员
 	ClassID       string                 `protobuf:"bytes,11,opt,name=classID,proto3" json:"classID,omitempty"`          // 班级
+	Mode          int32                  `protobuf:"varint,12,opt,name=mode,proto3" json:"mode,omitempty"`               // 模式
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -510,6 +511,13 @@ func (x *AddContestReq) GetClassID() string {
 	return ""
 }
 
+func (x *AddContestReq) GetMode() int32 {
+	if x != nil {
+		return x.Mode
+	}
+	return 0
+}
+
 type UpdateContestReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ContestID     int32                  `protobuf:"varint,1,opt,name=contestID,proto3" json:"contestID,omitempty"`      // 作业编号
@@ -524,6 +532,7 @@ type UpdateContestReq struct {
 	Problems      string                 `protobuf:"bytes,10,opt,name=problems,proto3" json:"problems,omitempty"`        // 题目列表
 	People        string                 `protobuf:"bytes,11,opt,name=people,proto3" json:"people,omitempty"`            // 人员
 	ClassID       string                 `protobuf:"bytes,12,opt,name=classID,proto3" json:"classID,omitempty"`          // 班级
+	Mode          int32                  `protobuf:"varint,13,opt,name=mode,proto3" json:"mode,omitempty"`               // 模式
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -640,6 +649,13 @@ func (x *UpdateContestReq) GetClassID() string {
 		return x.ClassID
 	}
 	return ""
+}
+
+func (x *UpdateContestReq) GetMode() int32 {
+	if x != nil {
+		return x.Mode
+	}
+	return 0
 }
 
 type UpdateContestStatusReq struct {
@@ -1023,6 +1039,7 @@ type Contest struct {
 	Classes       []*Class               `protobuf:"bytes,13,rep,name=classes,proto3" json:"classes,omitempty"`            // 作业的班级
 	Participants  int32                  `protobuf:"varint,14,opt,name=participants,proto3" json:"participants,omitempty"` // 参与人数
 	CanUpdate     int32                  `protobuf:"varint,15,opt,name=canUpdate,proto3" json:"canUpdate,omitempty"`       // 是否能被更新
+	Mode          int32                  `protobuf:"varint,16,opt,name=mode,proto3" json:"mode,omitempty"`                 // 模式
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1158,6 +1175,13 @@ func (x *Contest) GetParticipants() int32 {
 func (x *Contest) GetCanUpdate() int32 {
 	if x != nil {
 		return x.CanUpdate
+	}
+	return 0
+}
+
+func (x *Contest) GetMode() int32 {
+	if x != nil {
+		return x.Mode
 	}
 	return 0
 }
@@ -1399,7 +1423,7 @@ const file_contest_proto_rawDesc = "" +
 	"\x0econtestProblem\x18\x03 \x01(\tR\x0econtestProblem\x12 \n" +
 	"\vcontestUser\x18\x04 \x01(\tR\vcontestUser\x12\x18\n" +
 	"\aprivate\x18\x05 \x01(\x05R\aprivate\x12\"\n" +
-	"\fcontestClass\x18\x06 \x01(\tR\fcontestClass\"\xbf\x02\n" +
+	"\fcontestClass\x18\x06 \x01(\tR\fcontestClass\"\xd3\x02\n" +
 	"\rAddContestReq\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\x05R\x06userID\x12\x1c\n" +
 	"\tstartTime\x18\x02 \x01(\tR\tstartTime\x12\x18\n" +
@@ -1412,7 +1436,8 @@ const file_contest_proto_rawDesc = "" +
 	"\bproblems\x18\t \x01(\tR\bproblems\x12\x16\n" +
 	"\x06people\x18\n" +
 	" \x01(\tR\x06people\x12\x18\n" +
-	"\aclassID\x18\v \x01(\tR\aclassID\"\xe0\x02\n" +
+	"\aclassID\x18\v \x01(\tR\aclassID\x12\x12\n" +
+	"\x04mode\x18\f \x01(\x05R\x04mode\"\xf4\x02\n" +
 	"\x10UpdateContestReq\x12\x1c\n" +
 	"\tcontestID\x18\x01 \x01(\x05R\tcontestID\x12\x16\n" +
 	"\x06userID\x18\x02 \x01(\x05R\x06userID\x12\x1c\n" +
@@ -1426,7 +1451,8 @@ const file_contest_proto_rawDesc = "" +
 	"\bproblems\x18\n" +
 	" \x01(\tR\bproblems\x12\x16\n" +
 	"\x06people\x18\v \x01(\tR\x06people\x12\x18\n" +
-	"\aclassID\x18\f \x01(\tR\aclassID\"f\n" +
+	"\aclassID\x18\f \x01(\tR\aclassID\x12\x12\n" +
+	"\x04mode\x18\r \x01(\x05R\x04mode\"f\n" +
 	"\x16UpdateContestStatusReq\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\x05R\x06userID\x12\x1c\n" +
 	"\tcontestID\x18\x02 \x01(\x05R\tcontestID\x12\x16\n" +
@@ -1454,7 +1480,7 @@ const file_contest_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12-\n" +
 	"\acontest\x18\x03 \x01(\v2\x13.oj.contest.ContestR\acontest\x12\x10\n" +
-	"\x03see\x18\x04 \x01(\bR\x03see\"\xe8\x03\n" +
+	"\x03see\x18\x04 \x01(\bR\x03see\"\xfc\x03\n" +
 	"\aContest\x12\x1c\n" +
 	"\tcontestID\x18\x01 \x01(\x05R\tcontestID\x12\x1c\n" +
 	"\tstartTime\x18\x02 \x01(\tR\tstartTime\x12\x18\n" +
@@ -1471,7 +1497,8 @@ const file_contest_proto_rawDesc = "" +
 	"\x06enable\x18\f \x01(\x05R\x06enable\x12+\n" +
 	"\aclasses\x18\r \x03(\v2\x11.oj.contest.ClassR\aclasses\x12\"\n" +
 	"\fparticipants\x18\x0e \x01(\x05R\fparticipants\x12\x1c\n" +
-	"\tcanUpdate\x18\x0f \x01(\x05R\tcanUpdate\"?\n" +
+	"\tcanUpdate\x18\x0f \x01(\x05R\tcanUpdate\x12\x12\n" +
+	"\x04mode\x18\x10 \x01(\x05R\x04mode\"?\n" +
 	"\x05Class\x12\x18\n" +
 	"\aclassID\x18\x01 \x01(\x05R\aclassID\x12\x1c\n" +
 	"\tClassName\x18\x02 \x01(\tR\tClassName\"9\n" +

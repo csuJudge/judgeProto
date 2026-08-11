@@ -23,7 +23,7 @@ service ContestServer {
     // QueryContestFinishCount 计算作业完成数
     rpc QueryContestFinishCount(QueryContestReq) returns (QueryContestFinishCountRsp){}
     // QueryContestFinishStatus 查询作业完成情况
-    rpc  QueryContestFinishStatus(QueryContestListReq) returns (QueryContestFinishStatusRsp){}
+    rpc QueryContestFinishStatus(QueryContestListReq) returns (QueryContestFinishStatusRsp){}
 }
 
 message ContestFinishStatus{
@@ -77,6 +77,8 @@ message AddContestReq {
     string problems     = 9;   // 题目列表
     string people       = 10;  // 人员
     string classID      = 11;  // 班级
+    int32 mode = 12; // 模式
+
 }
 
 message UpdateContestReq {
@@ -92,6 +94,8 @@ message UpdateContestReq {
     string problems     = 10;  // 题目列表
     string people       = 11;  // 人员
     string classID      = 12;  // 班级
+    int32 mode = 13; // 模式
+
 }
 
 message UpdateContestStatusReq {
@@ -149,7 +153,7 @@ message Contest {
     repeated Class classes = 13; // 作业的班级
     int32 participants = 14; // 参与人数
     int32 canUpdate = 15; // 是否能被更新
-
+    int32 mode = 16; // 模式
 }
 
 message Class {
