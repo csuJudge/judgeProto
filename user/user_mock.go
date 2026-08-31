@@ -75,6 +75,21 @@ func (mr *MockUserServerServiceMockRecorder) AddUser(ctx, req any) *gomock.Call 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddUser", reflect.TypeOf((*MockUserServerService)(nil).AddUser), ctx, req)
 }
 
+// ImportUser mocks base method.
+func (m *MockUserServerService) ImportUser(ctx context.Context, req *ImportUserReq) (*ImportUserRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ImportUser", ctx, req)
+	ret0, _ := ret[0].(*ImportUserRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ImportUser indicates an expected call of ImportUser.
+func (mr *MockUserServerServiceMockRecorder) ImportUser(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImportUser", reflect.TypeOf((*MockUserServerService)(nil).ImportUser), ctx, req)
+}
+
 // IsLogin mocks base method.
 func (m *MockUserServerService) IsLogin(ctx context.Context, req *IsLoginReq) (*IsLoginRsp, error) {
 	m.ctrl.T.Helper()
@@ -411,6 +426,26 @@ func (mr *MockUserServerClientProxyMockRecorder) AddUser(ctx, req any, opts ...a
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddUser", reflect.TypeOf((*MockUserServerClientProxy)(nil).AddUser), varargs...)
+}
+
+// ImportUser mocks base method.
+func (m *MockUserServerClientProxy) ImportUser(ctx context.Context, req *ImportUserReq, opts ...client.Option) (*ImportUserRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ImportUser", varargs...)
+	ret0, _ := ret[0].(*ImportUserRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ImportUser indicates an expected call of ImportUser.
+func (mr *MockUserServerClientProxyMockRecorder) ImportUser(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImportUser", reflect.TypeOf((*MockUserServerClientProxy)(nil).ImportUser), varargs...)
 }
 
 // IsLogin mocks base method.

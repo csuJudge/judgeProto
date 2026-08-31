@@ -44,6 +44,24 @@ service UserServer {
     rpc QueryNeedBeFocusedStudent(QueryUserReq)returns (QueryNeedBeFocusedStudentRsp){}
     // QueryUserProblemCount 查询用户的题目统计
     rpc QueryUserProblemCount(QueryUserPrivilegeReq) returns (QueryUserProblemCountRsp){}
+    // ImportUser 导入用户
+    rpc ImportUser(ImportUserReq) returns (ImportUserRsp){}
+}
+
+message ImportUserReq{
+    string users = 1; // 用户列表
+    int32 userID = 2; // 用户编号
+}
+
+message ImportUserRsp{
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+    repeated importResult results = 3; // 结果
+}
+
+message importResult{
+    int32 code = 1; // 导入结果
+    string message = 2; // 导入信息
 }
 
 message QueryUserProblemCountRsp{

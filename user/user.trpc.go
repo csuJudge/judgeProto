@@ -59,6 +59,8 @@ type UserServerService interface {
 	QueryNeedBeFocusedStudent(ctx context.Context, req *QueryUserReq) (*QueryNeedBeFocusedStudentRsp, error)
 	// QueryUserProblemCount QueryUserProblemCount 查询用户的题目统计
 	QueryUserProblemCount(ctx context.Context, req *QueryUserPrivilegeReq) (*QueryUserProblemCountRsp, error)
+	// ImportUser ImportUser 导入用户
+	ImportUser(ctx context.Context, req *ImportUserReq) (*ImportUserRsp, error)
 }
 
 func UserServerService_QueryUserPrivilege_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -421,6 +423,24 @@ func UserServerService_QueryUserProblemCount_Handler(svr interface{}, ctx contex
 	return rsp, nil
 }
 
+func UserServerService_ImportUser_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &ImportUserReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(UserServerService).ImportUser(ctx, reqbody.(*ImportUserReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // UserServerServer_ServiceDesc descriptor for server.RegisterService.
 var UserServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.user.UserServer",
@@ -505,6 +525,10 @@ var UserServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.user.UserServer/QueryUserProblemCount",
 			Func: UserServerService_QueryUserProblemCount_Handler,
+		},
+		{
+			Name: "/oj.user.UserServer/ImportUser",
+			Func: UserServerService_ImportUser_Handler,
 		},
 	},
 }
@@ -620,6 +644,11 @@ func (s *UnimplementedUserServer) QueryUserProblemCount(ctx context.Context, req
 	return nil, errors.New("rpc QueryUserProblemCount of service UserServer is not implemented")
 }
 
+// ImportUser ImportUser 导入用户
+func (s *UnimplementedUserServer) ImportUser(ctx context.Context, req *ImportUserReq) (*ImportUserRsp, error) {
+	return nil, errors.New("rpc ImportUser of service UserServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -668,6 +697,8 @@ type UserServerClientProxy interface {
 	QueryNeedBeFocusedStudent(ctx context.Context, req *QueryUserReq, opts ...client.Option) (rsp *QueryNeedBeFocusedStudentRsp, err error)
 	// QueryUserProblemCount QueryUserProblemCount 查询用户的题目统计
 	QueryUserProblemCount(ctx context.Context, req *QueryUserPrivilegeReq, opts ...client.Option) (rsp *QueryUserProblemCountRsp, err error)
+	// ImportUser ImportUser 导入用户
+	ImportUser(ctx context.Context, req *ImportUserReq, opts ...client.Option) (rsp *ImportUserRsp, err error)
 }
 
 type UserServerClientProxyImpl struct {
@@ -1073,6 +1104,26 @@ func (c *UserServerClientProxyImpl) QueryUserProblemCount(ctx context.Context, r
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryUserProblemCountRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *UserServerClientProxyImpl) ImportUser(ctx context.Context, req *ImportUserReq, opts ...client.Option) (*ImportUserRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.user.UserServer/ImportUser")
+	msg.WithCalleeServiceName(UserServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("UserServer")
+	msg.WithCalleeMethod("ImportUser")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &ImportUserRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

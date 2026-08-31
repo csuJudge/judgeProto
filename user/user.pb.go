@@ -22,6 +22,170 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ImportUserReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Users         string                 `protobuf:"bytes,1,opt,name=users,proto3" json:"users,omitempty"`    // 用户列表
+	UserID        int32                  `protobuf:"varint,2,opt,name=userID,proto3" json:"userID,omitempty"` // 用户编号
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ImportUserReq) Reset() {
+	*x = ImportUserReq{}
+	mi := &file_user_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ImportUserReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ImportUserReq) ProtoMessage() {}
+
+func (x *ImportUserReq) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ImportUserReq.ProtoReflect.Descriptor instead.
+func (*ImportUserReq) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ImportUserReq) GetUsers() string {
+	if x != nil {
+		return x.Users
+	}
+	return ""
+}
+
+func (x *ImportUserReq) GetUserID() int32 {
+	if x != nil {
+		return x.UserID
+	}
+	return 0
+}
+
+type ImportUserRsp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"` // 返回信息
+	Code          int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`      // 返回码
+	Results       []*ImportResult        `protobuf:"bytes,3,rep,name=results,proto3" json:"results,omitempty"` // 结果
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ImportUserRsp) Reset() {
+	*x = ImportUserRsp{}
+	mi := &file_user_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ImportUserRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ImportUserRsp) ProtoMessage() {}
+
+func (x *ImportUserRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ImportUserRsp.ProtoReflect.Descriptor instead.
+func (*ImportUserRsp) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ImportUserRsp) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *ImportUserRsp) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *ImportUserRsp) GetResults() []*ImportResult {
+	if x != nil {
+		return x.Results
+	}
+	return nil
+}
+
+type ImportResult struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`      // 导入结果
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"` // 导入信息
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ImportResult) Reset() {
+	*x = ImportResult{}
+	mi := &file_user_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ImportResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ImportResult) ProtoMessage() {}
+
+func (x *ImportResult) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ImportResult.ProtoReflect.Descriptor instead.
+func (*ImportResult) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ImportResult) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *ImportResult) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 type QueryUserProblemCountRsp struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Message          string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`                    // 返回信息
@@ -36,7 +200,7 @@ type QueryUserProblemCountRsp struct {
 
 func (x *QueryUserProblemCountRsp) Reset() {
 	*x = QueryUserProblemCountRsp{}
-	mi := &file_user_proto_msgTypes[0]
+	mi := &file_user_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -48,7 +212,7 @@ func (x *QueryUserProblemCountRsp) String() string {
 func (*QueryUserProblemCountRsp) ProtoMessage() {}
 
 func (x *QueryUserProblemCountRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[0]
+	mi := &file_user_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61,7 +225,7 @@ func (x *QueryUserProblemCountRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserProblemCountRsp.ProtoReflect.Descriptor instead.
 func (*QueryUserProblemCountRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{0}
+	return file_user_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *QueryUserProblemCountRsp) GetMessage() string {
@@ -119,7 +283,7 @@ type QueryNeedBeFocusedStudentRsp struct {
 
 func (x *QueryNeedBeFocusedStudentRsp) Reset() {
 	*x = QueryNeedBeFocusedStudentRsp{}
-	mi := &file_user_proto_msgTypes[1]
+	mi := &file_user_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -131,7 +295,7 @@ func (x *QueryNeedBeFocusedStudentRsp) String() string {
 func (*QueryNeedBeFocusedStudentRsp) ProtoMessage() {}
 
 func (x *QueryNeedBeFocusedStudentRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[1]
+	mi := &file_user_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -144,7 +308,7 @@ func (x *QueryNeedBeFocusedStudentRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryNeedBeFocusedStudentRsp.ProtoReflect.Descriptor instead.
 func (*QueryNeedBeFocusedStudentRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{1}
+	return file_user_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *QueryNeedBeFocusedStudentRsp) GetMessage() string {
@@ -192,7 +356,7 @@ type QueryUserSolvedRankRsp struct {
 
 func (x *QueryUserSolvedRankRsp) Reset() {
 	*x = QueryUserSolvedRankRsp{}
-	mi := &file_user_proto_msgTypes[2]
+	mi := &file_user_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -204,7 +368,7 @@ func (x *QueryUserSolvedRankRsp) String() string {
 func (*QueryUserSolvedRankRsp) ProtoMessage() {}
 
 func (x *QueryUserSolvedRankRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[2]
+	mi := &file_user_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -217,7 +381,7 @@ func (x *QueryUserSolvedRankRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserSolvedRankRsp.ProtoReflect.Descriptor instead.
 func (*QueryUserSolvedRankRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{2}
+	return file_user_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *QueryUserSolvedRankRsp) GetRank() int32 {
@@ -248,7 +412,7 @@ type RegisterUserRsp struct {
 
 func (x *RegisterUserRsp) Reset() {
 	*x = RegisterUserRsp{}
-	mi := &file_user_proto_msgTypes[3]
+	mi := &file_user_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -260,7 +424,7 @@ func (x *RegisterUserRsp) String() string {
 func (*RegisterUserRsp) ProtoMessage() {}
 
 func (x *RegisterUserRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[3]
+	mi := &file_user_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -273,7 +437,7 @@ func (x *RegisterUserRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterUserRsp.ProtoReflect.Descriptor instead.
 func (*RegisterUserRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{3}
+	return file_user_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *RegisterUserRsp) GetMessage() string {
@@ -330,7 +494,7 @@ type QueryClassUserReq struct {
 
 func (x *QueryClassUserReq) Reset() {
 	*x = QueryClassUserReq{}
-	mi := &file_user_proto_msgTypes[4]
+	mi := &file_user_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -342,7 +506,7 @@ func (x *QueryClassUserReq) String() string {
 func (*QueryClassUserReq) ProtoMessage() {}
 
 func (x *QueryClassUserReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[4]
+	mi := &file_user_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -355,7 +519,7 @@ func (x *QueryClassUserReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryClassUserReq.ProtoReflect.Descriptor instead.
 func (*QueryClassUserReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{4}
+	return file_user_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *QueryClassUserReq) GetClassID() int32 {
@@ -398,7 +562,7 @@ type QueryClassUserRsp struct {
 
 func (x *QueryClassUserRsp) Reset() {
 	*x = QueryClassUserRsp{}
-	mi := &file_user_proto_msgTypes[5]
+	mi := &file_user_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -410,7 +574,7 @@ func (x *QueryClassUserRsp) String() string {
 func (*QueryClassUserRsp) ProtoMessage() {}
 
 func (x *QueryClassUserRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[5]
+	mi := &file_user_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -423,7 +587,7 @@ func (x *QueryClassUserRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryClassUserRsp.ProtoReflect.Descriptor instead.
 func (*QueryClassUserRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{5}
+	return file_user_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *QueryClassUserRsp) GetMessage() string {
@@ -465,7 +629,7 @@ type UpdateClassUserReq struct {
 
 func (x *UpdateClassUserReq) Reset() {
 	*x = UpdateClassUserReq{}
-	mi := &file_user_proto_msgTypes[6]
+	mi := &file_user_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -477,7 +641,7 @@ func (x *UpdateClassUserReq) String() string {
 func (*UpdateClassUserReq) ProtoMessage() {}
 
 func (x *UpdateClassUserReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[6]
+	mi := &file_user_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -490,7 +654,7 @@ func (x *UpdateClassUserReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClassUserReq.ProtoReflect.Descriptor instead.
 func (*UpdateClassUserReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{6}
+	return file_user_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpdateClassUserReq) GetClassID() int32 {
@@ -524,7 +688,7 @@ type QueryClassTeacherReq struct {
 
 func (x *QueryClassTeacherReq) Reset() {
 	*x = QueryClassTeacherReq{}
-	mi := &file_user_proto_msgTypes[7]
+	mi := &file_user_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -536,7 +700,7 @@ func (x *QueryClassTeacherReq) String() string {
 func (*QueryClassTeacherReq) ProtoMessage() {}
 
 func (x *QueryClassTeacherReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[7]
+	mi := &file_user_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -549,7 +713,7 @@ func (x *QueryClassTeacherReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryClassTeacherReq.ProtoReflect.Descriptor instead.
 func (*QueryClassTeacherReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{7}
+	return file_user_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *QueryClassTeacherReq) GetUserID() int32 {
@@ -576,7 +740,7 @@ type TeacherInfo struct {
 
 func (x *TeacherInfo) Reset() {
 	*x = TeacherInfo{}
-	mi := &file_user_proto_msgTypes[8]
+	mi := &file_user_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -588,7 +752,7 @@ func (x *TeacherInfo) String() string {
 func (*TeacherInfo) ProtoMessage() {}
 
 func (x *TeacherInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[8]
+	mi := &file_user_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -601,7 +765,7 @@ func (x *TeacherInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeacherInfo.ProtoReflect.Descriptor instead.
 func (*TeacherInfo) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{8}
+	return file_user_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *TeacherInfo) GetUserID() int32 {
@@ -629,7 +793,7 @@ type QueryClassTeacherRsp struct {
 
 func (x *QueryClassTeacherRsp) Reset() {
 	*x = QueryClassTeacherRsp{}
-	mi := &file_user_proto_msgTypes[9]
+	mi := &file_user_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -641,7 +805,7 @@ func (x *QueryClassTeacherRsp) String() string {
 func (*QueryClassTeacherRsp) ProtoMessage() {}
 
 func (x *QueryClassTeacherRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[9]
+	mi := &file_user_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -654,7 +818,7 @@ func (x *QueryClassTeacherRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryClassTeacherRsp.ProtoReflect.Descriptor instead.
 func (*QueryClassTeacherRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{9}
+	return file_user_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *QueryClassTeacherRsp) GetMessage() string {
@@ -687,7 +851,7 @@ type QueryTeacherReq struct {
 
 func (x *QueryTeacherReq) Reset() {
 	*x = QueryTeacherReq{}
-	mi := &file_user_proto_msgTypes[10]
+	mi := &file_user_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -699,7 +863,7 @@ func (x *QueryTeacherReq) String() string {
 func (*QueryTeacherReq) ProtoMessage() {}
 
 func (x *QueryTeacherReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[10]
+	mi := &file_user_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -712,7 +876,7 @@ func (x *QueryTeacherReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryTeacherReq.ProtoReflect.Descriptor instead.
 func (*QueryTeacherReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{10}
+	return file_user_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *QueryTeacherReq) GetUserID() int32 {
@@ -735,7 +899,7 @@ type UpdateMyInfoReq struct {
 
 func (x *UpdateMyInfoReq) Reset() {
 	*x = UpdateMyInfoReq{}
-	mi := &file_user_proto_msgTypes[11]
+	mi := &file_user_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -747,7 +911,7 @@ func (x *UpdateMyInfoReq) String() string {
 func (*UpdateMyInfoReq) ProtoMessage() {}
 
 func (x *UpdateMyInfoReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[11]
+	mi := &file_user_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -760,7 +924,7 @@ func (x *UpdateMyInfoReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMyInfoReq.ProtoReflect.Descriptor instead.
 func (*UpdateMyInfoReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{11}
+	return file_user_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UpdateMyInfoReq) GetUserID() int32 {
@@ -808,7 +972,7 @@ type IsLoginReq struct {
 
 func (x *IsLoginReq) Reset() {
 	*x = IsLoginReq{}
-	mi := &file_user_proto_msgTypes[12]
+	mi := &file_user_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -820,7 +984,7 @@ func (x *IsLoginReq) String() string {
 func (*IsLoginReq) ProtoMessage() {}
 
 func (x *IsLoginReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[12]
+	mi := &file_user_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -833,7 +997,7 @@ func (x *IsLoginReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsLoginReq.ProtoReflect.Descriptor instead.
 func (*IsLoginReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{12}
+	return file_user_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *IsLoginReq) GetUserID() int32 {
@@ -861,7 +1025,7 @@ type IsLoginRsp struct {
 
 func (x *IsLoginRsp) Reset() {
 	*x = IsLoginRsp{}
-	mi := &file_user_proto_msgTypes[13]
+	mi := &file_user_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -873,7 +1037,7 @@ func (x *IsLoginRsp) String() string {
 func (*IsLoginRsp) ProtoMessage() {}
 
 func (x *IsLoginRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[13]
+	mi := &file_user_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -886,7 +1050,7 @@ func (x *IsLoginRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsLoginRsp.ProtoReflect.Descriptor instead.
 func (*IsLoginRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{13}
+	return file_user_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *IsLoginRsp) GetMessage() string {
@@ -923,7 +1087,7 @@ type LoginReq struct {
 
 func (x *LoginReq) Reset() {
 	*x = LoginReq{}
-	mi := &file_user_proto_msgTypes[14]
+	mi := &file_user_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -935,7 +1099,7 @@ func (x *LoginReq) String() string {
 func (*LoginReq) ProtoMessage() {}
 
 func (x *LoginReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[14]
+	mi := &file_user_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -948,7 +1112,7 @@ func (x *LoginReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginReq.ProtoReflect.Descriptor instead.
 func (*LoginReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{14}
+	return file_user_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *LoginReq) GetNumber() string {
@@ -998,7 +1162,7 @@ type LoginRsp struct {
 
 func (x *LoginRsp) Reset() {
 	*x = LoginRsp{}
-	mi := &file_user_proto_msgTypes[15]
+	mi := &file_user_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1010,7 +1174,7 @@ func (x *LoginRsp) String() string {
 func (*LoginRsp) ProtoMessage() {}
 
 func (x *LoginRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[15]
+	mi := &file_user_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1023,7 +1187,7 @@ func (x *LoginRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginRsp.ProtoReflect.Descriptor instead.
 func (*LoginRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{15}
+	return file_user_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *LoginRsp) GetMessage() string {
@@ -1071,7 +1235,7 @@ type UpdateUserReq struct {
 
 func (x *UpdateUserReq) Reset() {
 	*x = UpdateUserReq{}
-	mi := &file_user_proto_msgTypes[16]
+	mi := &file_user_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1083,7 +1247,7 @@ func (x *UpdateUserReq) String() string {
 func (*UpdateUserReq) ProtoMessage() {}
 
 func (x *UpdateUserReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[16]
+	mi := &file_user_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1096,7 +1260,7 @@ func (x *UpdateUserReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserReq.ProtoReflect.Descriptor instead.
 func (*UpdateUserReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{16}
+	return file_user_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *UpdateUserReq) GetUserID() int32 {
@@ -1174,7 +1338,7 @@ type QueryAllUserRsp struct {
 
 func (x *QueryAllUserRsp) Reset() {
 	*x = QueryAllUserRsp{}
-	mi := &file_user_proto_msgTypes[17]
+	mi := &file_user_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1186,7 +1350,7 @@ func (x *QueryAllUserRsp) String() string {
 func (*QueryAllUserRsp) ProtoMessage() {}
 
 func (x *QueryAllUserRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[17]
+	mi := &file_user_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1199,7 +1363,7 @@ func (x *QueryAllUserRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryAllUserRsp.ProtoReflect.Descriptor instead.
 func (*QueryAllUserRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{17}
+	return file_user_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *QueryAllUserRsp) GetMessage() string {
@@ -1241,7 +1405,7 @@ type QueryUserRankReq struct {
 
 func (x *QueryUserRankReq) Reset() {
 	*x = QueryUserRankReq{}
-	mi := &file_user_proto_msgTypes[18]
+	mi := &file_user_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1253,7 +1417,7 @@ func (x *QueryUserRankReq) String() string {
 func (*QueryUserRankReq) ProtoMessage() {}
 
 func (x *QueryUserRankReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[18]
+	mi := &file_user_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1266,7 +1430,7 @@ func (x *QueryUserRankReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserRankReq.ProtoReflect.Descriptor instead.
 func (*QueryUserRankReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{18}
+	return file_user_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *QueryUserRankReq) GetPage() int32 {
@@ -1302,7 +1466,7 @@ type QueryUserReq struct {
 
 func (x *QueryUserReq) Reset() {
 	*x = QueryUserReq{}
-	mi := &file_user_proto_msgTypes[19]
+	mi := &file_user_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1314,7 +1478,7 @@ func (x *QueryUserReq) String() string {
 func (*QueryUserReq) ProtoMessage() {}
 
 func (x *QueryUserReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[19]
+	mi := &file_user_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1327,7 +1491,7 @@ func (x *QueryUserReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserReq.ProtoReflect.Descriptor instead.
 func (*QueryUserReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{19}
+	return file_user_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *QueryUserReq) GetPage() int32 {
@@ -1373,7 +1537,7 @@ type UserRank struct {
 
 func (x *UserRank) Reset() {
 	*x = UserRank{}
-	mi := &file_user_proto_msgTypes[20]
+	mi := &file_user_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1385,7 +1549,7 @@ func (x *UserRank) String() string {
 func (*UserRank) ProtoMessage() {}
 
 func (x *UserRank) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[20]
+	mi := &file_user_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1398,7 +1562,7 @@ func (x *UserRank) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserRank.ProtoReflect.Descriptor instead.
 func (*UserRank) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{20}
+	return file_user_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *UserRank) GetUserID() int32 {
@@ -1464,7 +1628,7 @@ type QueryUserRankRsp struct {
 
 func (x *QueryUserRankRsp) Reset() {
 	*x = QueryUserRankRsp{}
-	mi := &file_user_proto_msgTypes[21]
+	mi := &file_user_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1476,7 +1640,7 @@ func (x *QueryUserRankRsp) String() string {
 func (*QueryUserRankRsp) ProtoMessage() {}
 
 func (x *QueryUserRankRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[21]
+	mi := &file_user_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1489,7 +1653,7 @@ func (x *QueryUserRankRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserRankRsp.ProtoReflect.Descriptor instead.
 func (*QueryUserRankRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{21}
+	return file_user_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *QueryUserRankRsp) GetMessage() string {
@@ -1555,7 +1719,7 @@ type RegisterUserReq struct {
 
 func (x *RegisterUserReq) Reset() {
 	*x = RegisterUserReq{}
-	mi := &file_user_proto_msgTypes[22]
+	mi := &file_user_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1567,7 +1731,7 @@ func (x *RegisterUserReq) String() string {
 func (*RegisterUserReq) ProtoMessage() {}
 
 func (x *RegisterUserReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[22]
+	mi := &file_user_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1580,7 +1744,7 @@ func (x *RegisterUserReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterUserReq.ProtoReflect.Descriptor instead.
 func (*RegisterUserReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{22}
+	return file_user_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *RegisterUserReq) GetUserID() int32 {
@@ -1692,7 +1856,7 @@ type AddUserReq struct {
 
 func (x *AddUserReq) Reset() {
 	*x = AddUserReq{}
-	mi := &file_user_proto_msgTypes[23]
+	mi := &file_user_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1704,7 +1868,7 @@ func (x *AddUserReq) String() string {
 func (*AddUserReq) ProtoMessage() {}
 
 func (x *AddUserReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[23]
+	mi := &file_user_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1717,7 +1881,7 @@ func (x *AddUserReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddUserReq.ProtoReflect.Descriptor instead.
 func (*AddUserReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{23}
+	return file_user_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *AddUserReq) GetUserID() int32 {
@@ -1799,7 +1963,7 @@ type QueryUserInfoReq struct {
 
 func (x *QueryUserInfoReq) Reset() {
 	*x = QueryUserInfoReq{}
-	mi := &file_user_proto_msgTypes[24]
+	mi := &file_user_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1811,7 +1975,7 @@ func (x *QueryUserInfoReq) String() string {
 func (*QueryUserInfoReq) ProtoMessage() {}
 
 func (x *QueryUserInfoReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[24]
+	mi := &file_user_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1824,7 +1988,7 @@ func (x *QueryUserInfoReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserInfoReq.ProtoReflect.Descriptor instead.
 func (*QueryUserInfoReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{24}
+	return file_user_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *QueryUserInfoReq) GetUserID() int32 {
@@ -1845,7 +2009,7 @@ type QueryUserInfoRsp struct {
 
 func (x *QueryUserInfoRsp) Reset() {
 	*x = QueryUserInfoRsp{}
-	mi := &file_user_proto_msgTypes[25]
+	mi := &file_user_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1857,7 +2021,7 @@ func (x *QueryUserInfoRsp) String() string {
 func (*QueryUserInfoRsp) ProtoMessage() {}
 
 func (x *QueryUserInfoRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[25]
+	mi := &file_user_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1870,7 +2034,7 @@ func (x *QueryUserInfoRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserInfoRsp.ProtoReflect.Descriptor instead.
 func (*QueryUserInfoRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{25}
+	return file_user_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *QueryUserInfoRsp) GetMessage() string {
@@ -1907,7 +2071,7 @@ type UpdateUserPasswordReq struct {
 
 func (x *UpdateUserPasswordReq) Reset() {
 	*x = UpdateUserPasswordReq{}
-	mi := &file_user_proto_msgTypes[26]
+	mi := &file_user_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1919,7 +2083,7 @@ func (x *UpdateUserPasswordReq) String() string {
 func (*UpdateUserPasswordReq) ProtoMessage() {}
 
 func (x *UpdateUserPasswordReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[26]
+	mi := &file_user_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1932,7 +2096,7 @@ func (x *UpdateUserPasswordReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserPasswordReq.ProtoReflect.Descriptor instead.
 func (*UpdateUserPasswordReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{26}
+	return file_user_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *UpdateUserPasswordReq) GetUpdateBy() int32 {
@@ -1981,7 +2145,7 @@ type UpdateUserStatusReq struct {
 
 func (x *UpdateUserStatusReq) Reset() {
 	*x = UpdateUserStatusReq{}
-	mi := &file_user_proto_msgTypes[27]
+	mi := &file_user_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1993,7 +2157,7 @@ func (x *UpdateUserStatusReq) String() string {
 func (*UpdateUserStatusReq) ProtoMessage() {}
 
 func (x *UpdateUserStatusReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[27]
+	mi := &file_user_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2006,7 +2170,7 @@ func (x *UpdateUserStatusReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserStatusReq.ProtoReflect.Descriptor instead.
 func (*UpdateUserStatusReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{27}
+	return file_user_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *UpdateUserStatusReq) GetUpdateBy() int32 {
@@ -2039,7 +2203,7 @@ type QueryUserPrivilegeReq struct {
 
 func (x *QueryUserPrivilegeReq) Reset() {
 	*x = QueryUserPrivilegeReq{}
-	mi := &file_user_proto_msgTypes[28]
+	mi := &file_user_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2051,7 +2215,7 @@ func (x *QueryUserPrivilegeReq) String() string {
 func (*QueryUserPrivilegeReq) ProtoMessage() {}
 
 func (x *QueryUserPrivilegeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[28]
+	mi := &file_user_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2064,7 +2228,7 @@ func (x *QueryUserPrivilegeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserPrivilegeReq.ProtoReflect.Descriptor instead.
 func (*QueryUserPrivilegeReq) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{28}
+	return file_user_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *QueryUserPrivilegeReq) GetUserID() int32 {
@@ -2085,7 +2249,7 @@ type QueryUserPrivilegeRsp struct {
 
 func (x *QueryUserPrivilegeRsp) Reset() {
 	*x = QueryUserPrivilegeRsp{}
-	mi := &file_user_proto_msgTypes[29]
+	mi := &file_user_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2097,7 +2261,7 @@ func (x *QueryUserPrivilegeRsp) String() string {
 func (*QueryUserPrivilegeRsp) ProtoMessage() {}
 
 func (x *QueryUserPrivilegeRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[29]
+	mi := &file_user_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2110,7 +2274,7 @@ func (x *QueryUserPrivilegeRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserPrivilegeRsp.ProtoReflect.Descriptor instead.
 func (*QueryUserPrivilegeRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{29}
+	return file_user_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *QueryUserPrivilegeRsp) GetMessage() string {
@@ -2144,7 +2308,7 @@ type CommonRsp struct {
 
 func (x *CommonRsp) Reset() {
 	*x = CommonRsp{}
-	mi := &file_user_proto_msgTypes[30]
+	mi := &file_user_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2156,7 +2320,7 @@ func (x *CommonRsp) String() string {
 func (*CommonRsp) ProtoMessage() {}
 
 func (x *CommonRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[30]
+	mi := &file_user_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2169,7 +2333,7 @@ func (x *CommonRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CommonRsp.ProtoReflect.Descriptor instead.
 func (*CommonRsp) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{30}
+	return file_user_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *CommonRsp) GetMessage() string {
@@ -2209,7 +2373,7 @@ type User struct {
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_user_proto_msgTypes[31]
+	mi := &file_user_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2221,7 +2385,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[31]
+	mi := &file_user_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2234,7 +2398,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{31}
+	return file_user_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *User) GetUserID() int32 {
@@ -2352,7 +2516,7 @@ type Course struct {
 
 func (x *Course) Reset() {
 	*x = Course{}
-	mi := &file_user_proto_msgTypes[32]
+	mi := &file_user_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2364,7 +2528,7 @@ func (x *Course) String() string {
 func (*Course) ProtoMessage() {}
 
 func (x *Course) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[32]
+	mi := &file_user_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2377,7 +2541,7 @@ func (x *Course) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Course.ProtoReflect.Descriptor instead.
 func (*Course) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{32}
+	return file_user_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *Course) GetCourseID() int32 {
@@ -2404,7 +2568,7 @@ type Class struct {
 
 func (x *Class) Reset() {
 	*x = Class{}
-	mi := &file_user_proto_msgTypes[33]
+	mi := &file_user_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2416,7 +2580,7 @@ func (x *Class) String() string {
 func (*Class) ProtoMessage() {}
 
 func (x *Class) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[33]
+	mi := &file_user_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2429,7 +2593,7 @@ func (x *Class) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Class.ProtoReflect.Descriptor instead.
 func (*Class) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{33}
+	return file_user_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *Class) GetClassID() int32 {
@@ -2451,7 +2615,17 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\aoj.user\"\xcc\x01\n" +
+	"user.proto\x12\aoj.user\"=\n" +
+	"\rImportUserReq\x12\x14\n" +
+	"\x05users\x18\x01 \x01(\tR\x05users\x12\x16\n" +
+	"\x06userID\x18\x02 \x01(\x05R\x06userID\"n\n" +
+	"\rImportUserRsp\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\x05R\x04code\x12/\n" +
+	"\aresults\x18\x03 \x03(\v2\x15.oj.user.importResultR\aresults\"<\n" +
+	"\fimportResult\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xcc\x01\n" +
 	"\x18QueryUserProblemCountRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12 \n" +
@@ -2647,7 +2821,7 @@ const file_user_proto_rawDesc = "" +
 	"courseName\"?\n" +
 	"\x05Class\x12\x18\n" +
 	"\aclassID\x18\x01 \x01(\x05R\aclassID\x12\x1c\n" +
-	"\tclassName\x18\x02 \x01(\tR\tclassName2\xa4\v\n" +
+	"\tclassName\x18\x02 \x01(\tR\tclassName2\xe4\v\n" +
 	"\n" +
 	"UserServer\x12V\n" +
 	"\x12QueryUserPrivilege\x12\x1e.oj.user.QueryUserPrivilegeReq\x1a\x1e.oj.user.QueryUserPrivilegeRsp\"\x00\x12J\n" +
@@ -2670,7 +2844,9 @@ const file_user_proto_rawDesc = "" +
 	"\x0fUpdateClassUser\x12\x1b.oj.user.UpdateClassUserReq\x1a\x12.oj.user.CommonRsp\"\x00\x12J\n" +
 	"\x0eQueryClassUser\x12\x1a.oj.user.QueryClassUserReq\x1a\x1a.oj.user.QueryClassUserRsp\"\x00\x12[\n" +
 	"\x19QueryNeedBeFocusedStudent\x12\x15.oj.user.QueryUserReq\x1a%.oj.user.QueryNeedBeFocusedStudentRsp\"\x00\x12\\\n" +
-	"\x15QueryUserProblemCount\x12\x1e.oj.user.QueryUserPrivilegeReq\x1a!.oj.user.QueryUserProblemCountRsp\"\x00B%Z#github.com/csuJudge/judgeProto/userb\x06proto3"
+	"\x15QueryUserProblemCount\x12\x1e.oj.user.QueryUserPrivilegeReq\x1a!.oj.user.QueryUserProblemCountRsp\"\x00\x12>\n" +
+	"\n" +
+	"ImportUser\x12\x16.oj.user.ImportUserReq\x1a\x16.oj.user.ImportUserRsp\"\x00B%Z#github.com/csuJudge/judgeProto/userb\x06proto3"
 
 var (
 	file_user_proto_rawDescOnce sync.Once
@@ -2684,100 +2860,106 @@ func file_user_proto_rawDescGZIP() []byte {
 	return file_user_proto_rawDescData
 }
 
-var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
 var file_user_proto_goTypes = []any{
-	(*QueryUserProblemCountRsp)(nil),     // 0: oj.user.QueryUserProblemCountRsp
-	(*QueryNeedBeFocusedStudentRsp)(nil), // 1: oj.user.QueryNeedBeFocusedStudentRsp
-	(*QueryUserSolvedRankRsp)(nil),       // 2: oj.user.QueryUserSolvedRankRsp
-	(*RegisterUserRsp)(nil),              // 3: oj.user.RegisterUserRsp
-	(*QueryClassUserReq)(nil),            // 4: oj.user.QueryClassUserReq
-	(*QueryClassUserRsp)(nil),            // 5: oj.user.QueryClassUserRsp
-	(*UpdateClassUserReq)(nil),           // 6: oj.user.UpdateClassUserReq
-	(*QueryClassTeacherReq)(nil),         // 7: oj.user.QueryClassTeacherReq
-	(*TeacherInfo)(nil),                  // 8: oj.user.TeacherInfo
-	(*QueryClassTeacherRsp)(nil),         // 9: oj.user.QueryClassTeacherRsp
-	(*QueryTeacherReq)(nil),              // 10: oj.user.QueryTeacherReq
-	(*UpdateMyInfoReq)(nil),              // 11: oj.user.UpdateMyInfoReq
-	(*IsLoginReq)(nil),                   // 12: oj.user.IsLoginReq
-	(*IsLoginRsp)(nil),                   // 13: oj.user.IsLoginRsp
-	(*LoginReq)(nil),                     // 14: oj.user.LoginReq
-	(*LoginRsp)(nil),                     // 15: oj.user.LoginRsp
-	(*UpdateUserReq)(nil),                // 16: oj.user.UpdateUserReq
-	(*QueryAllUserRsp)(nil),              // 17: oj.user.QueryAllUserRsp
-	(*QueryUserRankReq)(nil),             // 18: oj.user.QueryUserRankReq
-	(*QueryUserReq)(nil),                 // 19: oj.user.QueryUserReq
-	(*UserRank)(nil),                     // 20: oj.user.UserRank
-	(*QueryUserRankRsp)(nil),             // 21: oj.user.QueryUserRankRsp
-	(*RegisterUserReq)(nil),              // 22: oj.user.RegisterUserReq
-	(*AddUserReq)(nil),                   // 23: oj.user.AddUserReq
-	(*QueryUserInfoReq)(nil),             // 24: oj.user.QueryUserInfoReq
-	(*QueryUserInfoRsp)(nil),             // 25: oj.user.QueryUserInfoRsp
-	(*UpdateUserPasswordReq)(nil),        // 26: oj.user.UpdateUserPasswordReq
-	(*UpdateUserStatusReq)(nil),          // 27: oj.user.UpdateUserStatusReq
-	(*QueryUserPrivilegeReq)(nil),        // 28: oj.user.QueryUserPrivilegeReq
-	(*QueryUserPrivilegeRsp)(nil),        // 29: oj.user.QueryUserPrivilegeRsp
-	(*CommonRsp)(nil),                    // 30: oj.user.CommonRsp
-	(*User)(nil),                         // 31: oj.user.User
-	(*Course)(nil),                       // 32: oj.user.Course
-	(*Class)(nil),                        // 33: oj.user.Class
+	(*ImportUserReq)(nil),                // 0: oj.user.ImportUserReq
+	(*ImportUserRsp)(nil),                // 1: oj.user.ImportUserRsp
+	(*ImportResult)(nil),                 // 2: oj.user.importResult
+	(*QueryUserProblemCountRsp)(nil),     // 3: oj.user.QueryUserProblemCountRsp
+	(*QueryNeedBeFocusedStudentRsp)(nil), // 4: oj.user.QueryNeedBeFocusedStudentRsp
+	(*QueryUserSolvedRankRsp)(nil),       // 5: oj.user.QueryUserSolvedRankRsp
+	(*RegisterUserRsp)(nil),              // 6: oj.user.RegisterUserRsp
+	(*QueryClassUserReq)(nil),            // 7: oj.user.QueryClassUserReq
+	(*QueryClassUserRsp)(nil),            // 8: oj.user.QueryClassUserRsp
+	(*UpdateClassUserReq)(nil),           // 9: oj.user.UpdateClassUserReq
+	(*QueryClassTeacherReq)(nil),         // 10: oj.user.QueryClassTeacherReq
+	(*TeacherInfo)(nil),                  // 11: oj.user.TeacherInfo
+	(*QueryClassTeacherRsp)(nil),         // 12: oj.user.QueryClassTeacherRsp
+	(*QueryTeacherReq)(nil),              // 13: oj.user.QueryTeacherReq
+	(*UpdateMyInfoReq)(nil),              // 14: oj.user.UpdateMyInfoReq
+	(*IsLoginReq)(nil),                   // 15: oj.user.IsLoginReq
+	(*IsLoginRsp)(nil),                   // 16: oj.user.IsLoginRsp
+	(*LoginReq)(nil),                     // 17: oj.user.LoginReq
+	(*LoginRsp)(nil),                     // 18: oj.user.LoginRsp
+	(*UpdateUserReq)(nil),                // 19: oj.user.UpdateUserReq
+	(*QueryAllUserRsp)(nil),              // 20: oj.user.QueryAllUserRsp
+	(*QueryUserRankReq)(nil),             // 21: oj.user.QueryUserRankReq
+	(*QueryUserReq)(nil),                 // 22: oj.user.QueryUserReq
+	(*UserRank)(nil),                     // 23: oj.user.UserRank
+	(*QueryUserRankRsp)(nil),             // 24: oj.user.QueryUserRankRsp
+	(*RegisterUserReq)(nil),              // 25: oj.user.RegisterUserReq
+	(*AddUserReq)(nil),                   // 26: oj.user.AddUserReq
+	(*QueryUserInfoReq)(nil),             // 27: oj.user.QueryUserInfoReq
+	(*QueryUserInfoRsp)(nil),             // 28: oj.user.QueryUserInfoRsp
+	(*UpdateUserPasswordReq)(nil),        // 29: oj.user.UpdateUserPasswordReq
+	(*UpdateUserStatusReq)(nil),          // 30: oj.user.UpdateUserStatusReq
+	(*QueryUserPrivilegeReq)(nil),        // 31: oj.user.QueryUserPrivilegeReq
+	(*QueryUserPrivilegeRsp)(nil),        // 32: oj.user.QueryUserPrivilegeRsp
+	(*CommonRsp)(nil),                    // 33: oj.user.CommonRsp
+	(*User)(nil),                         // 34: oj.user.User
+	(*Course)(nil),                       // 35: oj.user.Course
+	(*Class)(nil),                        // 36: oj.user.Class
 }
 var file_user_proto_depIdxs = []int32{
-	31, // 0: oj.user.QueryNeedBeFocusedStudentRsp.fewestProblemStudent:type_name -> oj.user.User
-	31, // 1: oj.user.QueryNeedBeFocusedStudentRsp.fewestPassRateStudent:type_name -> oj.user.User
-	31, // 2: oj.user.QueryNeedBeFocusedStudentRsp.LongestNotAnsweredStudent:type_name -> oj.user.User
-	31, // 3: oj.user.RegisterUserRsp.user:type_name -> oj.user.User
-	31, // 4: oj.user.QueryClassUserRsp.users:type_name -> oj.user.User
-	8,  // 5: oj.user.QueryClassTeacherRsp.teachers:type_name -> oj.user.TeacherInfo
-	31, // 6: oj.user.LoginRsp.user:type_name -> oj.user.User
-	31, // 7: oj.user.QueryAllUserRsp.users:type_name -> oj.user.User
-	20, // 8: oj.user.QueryUserRankRsp.totalRank:type_name -> oj.user.UserRank
-	20, // 9: oj.user.QueryUserRankRsp.classRank:type_name -> oj.user.UserRank
-	31, // 10: oj.user.QueryUserInfoRsp.user:type_name -> oj.user.User
-	28, // 11: oj.user.UserServer.QueryUserPrivilege:input_type -> oj.user.QueryUserPrivilegeReq
-	26, // 12: oj.user.UserServer.UpdateUserPassword:input_type -> oj.user.UpdateUserPasswordReq
-	27, // 13: oj.user.UserServer.UpdateUserStatus:input_type -> oj.user.UpdateUserStatusReq
-	24, // 14: oj.user.UserServer.QueryUserInfo:input_type -> oj.user.QueryUserInfoReq
-	23, // 15: oj.user.UserServer.AddUser:input_type -> oj.user.AddUserReq
-	22, // 16: oj.user.UserServer.RegisterUser:input_type -> oj.user.RegisterUserReq
-	23, // 17: oj.user.UserServer.AddClassUser:input_type -> oj.user.AddUserReq
-	18, // 18: oj.user.UserServer.QueryUserRank:input_type -> oj.user.QueryUserRankReq
-	10, // 19: oj.user.UserServer.QueryUserSolvedRank:input_type -> oj.user.QueryTeacherReq
-	19, // 20: oj.user.UserServer.QueryAllUser:input_type -> oj.user.QueryUserReq
-	16, // 21: oj.user.UserServer.UpdateUser:input_type -> oj.user.UpdateUserReq
-	14, // 22: oj.user.UserServer.Login:input_type -> oj.user.LoginReq
-	12, // 23: oj.user.UserServer.IsLogin:input_type -> oj.user.IsLoginReq
-	11, // 24: oj.user.UserServer.UpdateMyInfo:input_type -> oj.user.UpdateMyInfoReq
-	10, // 25: oj.user.UserServer.QueryTeacher:input_type -> oj.user.QueryTeacherReq
-	7,  // 26: oj.user.UserServer.QueryClassTeacher:input_type -> oj.user.QueryClassTeacherReq
-	6,  // 27: oj.user.UserServer.UpdateClassUser:input_type -> oj.user.UpdateClassUserReq
-	4,  // 28: oj.user.UserServer.QueryClassUser:input_type -> oj.user.QueryClassUserReq
-	19, // 29: oj.user.UserServer.QueryNeedBeFocusedStudent:input_type -> oj.user.QueryUserReq
-	28, // 30: oj.user.UserServer.QueryUserProblemCount:input_type -> oj.user.QueryUserPrivilegeReq
-	29, // 31: oj.user.UserServer.QueryUserPrivilege:output_type -> oj.user.QueryUserPrivilegeRsp
-	30, // 32: oj.user.UserServer.UpdateUserPassword:output_type -> oj.user.CommonRsp
-	30, // 33: oj.user.UserServer.UpdateUserStatus:output_type -> oj.user.CommonRsp
-	25, // 34: oj.user.UserServer.QueryUserInfo:output_type -> oj.user.QueryUserInfoRsp
-	30, // 35: oj.user.UserServer.AddUser:output_type -> oj.user.CommonRsp
-	3,  // 36: oj.user.UserServer.RegisterUser:output_type -> oj.user.RegisterUserRsp
-	30, // 37: oj.user.UserServer.AddClassUser:output_type -> oj.user.CommonRsp
-	21, // 38: oj.user.UserServer.QueryUserRank:output_type -> oj.user.QueryUserRankRsp
-	2,  // 39: oj.user.UserServer.QueryUserSolvedRank:output_type -> oj.user.QueryUserSolvedRankRsp
-	17, // 40: oj.user.UserServer.QueryAllUser:output_type -> oj.user.QueryAllUserRsp
-	30, // 41: oj.user.UserServer.UpdateUser:output_type -> oj.user.CommonRsp
-	15, // 42: oj.user.UserServer.Login:output_type -> oj.user.LoginRsp
-	13, // 43: oj.user.UserServer.IsLogin:output_type -> oj.user.IsLoginRsp
-	30, // 44: oj.user.UserServer.UpdateMyInfo:output_type -> oj.user.CommonRsp
-	17, // 45: oj.user.UserServer.QueryTeacher:output_type -> oj.user.QueryAllUserRsp
-	9,  // 46: oj.user.UserServer.QueryClassTeacher:output_type -> oj.user.QueryClassTeacherRsp
-	30, // 47: oj.user.UserServer.UpdateClassUser:output_type -> oj.user.CommonRsp
-	5,  // 48: oj.user.UserServer.QueryClassUser:output_type -> oj.user.QueryClassUserRsp
-	1,  // 49: oj.user.UserServer.QueryNeedBeFocusedStudent:output_type -> oj.user.QueryNeedBeFocusedStudentRsp
-	0,  // 50: oj.user.UserServer.QueryUserProblemCount:output_type -> oj.user.QueryUserProblemCountRsp
-	31, // [31:51] is the sub-list for method output_type
-	11, // [11:31] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	2,  // 0: oj.user.ImportUserRsp.results:type_name -> oj.user.importResult
+	34, // 1: oj.user.QueryNeedBeFocusedStudentRsp.fewestProblemStudent:type_name -> oj.user.User
+	34, // 2: oj.user.QueryNeedBeFocusedStudentRsp.fewestPassRateStudent:type_name -> oj.user.User
+	34, // 3: oj.user.QueryNeedBeFocusedStudentRsp.LongestNotAnsweredStudent:type_name -> oj.user.User
+	34, // 4: oj.user.RegisterUserRsp.user:type_name -> oj.user.User
+	34, // 5: oj.user.QueryClassUserRsp.users:type_name -> oj.user.User
+	11, // 6: oj.user.QueryClassTeacherRsp.teachers:type_name -> oj.user.TeacherInfo
+	34, // 7: oj.user.LoginRsp.user:type_name -> oj.user.User
+	34, // 8: oj.user.QueryAllUserRsp.users:type_name -> oj.user.User
+	23, // 9: oj.user.QueryUserRankRsp.totalRank:type_name -> oj.user.UserRank
+	23, // 10: oj.user.QueryUserRankRsp.classRank:type_name -> oj.user.UserRank
+	34, // 11: oj.user.QueryUserInfoRsp.user:type_name -> oj.user.User
+	31, // 12: oj.user.UserServer.QueryUserPrivilege:input_type -> oj.user.QueryUserPrivilegeReq
+	29, // 13: oj.user.UserServer.UpdateUserPassword:input_type -> oj.user.UpdateUserPasswordReq
+	30, // 14: oj.user.UserServer.UpdateUserStatus:input_type -> oj.user.UpdateUserStatusReq
+	27, // 15: oj.user.UserServer.QueryUserInfo:input_type -> oj.user.QueryUserInfoReq
+	26, // 16: oj.user.UserServer.AddUser:input_type -> oj.user.AddUserReq
+	25, // 17: oj.user.UserServer.RegisterUser:input_type -> oj.user.RegisterUserReq
+	26, // 18: oj.user.UserServer.AddClassUser:input_type -> oj.user.AddUserReq
+	21, // 19: oj.user.UserServer.QueryUserRank:input_type -> oj.user.QueryUserRankReq
+	13, // 20: oj.user.UserServer.QueryUserSolvedRank:input_type -> oj.user.QueryTeacherReq
+	22, // 21: oj.user.UserServer.QueryAllUser:input_type -> oj.user.QueryUserReq
+	19, // 22: oj.user.UserServer.UpdateUser:input_type -> oj.user.UpdateUserReq
+	17, // 23: oj.user.UserServer.Login:input_type -> oj.user.LoginReq
+	15, // 24: oj.user.UserServer.IsLogin:input_type -> oj.user.IsLoginReq
+	14, // 25: oj.user.UserServer.UpdateMyInfo:input_type -> oj.user.UpdateMyInfoReq
+	13, // 26: oj.user.UserServer.QueryTeacher:input_type -> oj.user.QueryTeacherReq
+	10, // 27: oj.user.UserServer.QueryClassTeacher:input_type -> oj.user.QueryClassTeacherReq
+	9,  // 28: oj.user.UserServer.UpdateClassUser:input_type -> oj.user.UpdateClassUserReq
+	7,  // 29: oj.user.UserServer.QueryClassUser:input_type -> oj.user.QueryClassUserReq
+	22, // 30: oj.user.UserServer.QueryNeedBeFocusedStudent:input_type -> oj.user.QueryUserReq
+	31, // 31: oj.user.UserServer.QueryUserProblemCount:input_type -> oj.user.QueryUserPrivilegeReq
+	0,  // 32: oj.user.UserServer.ImportUser:input_type -> oj.user.ImportUserReq
+	32, // 33: oj.user.UserServer.QueryUserPrivilege:output_type -> oj.user.QueryUserPrivilegeRsp
+	33, // 34: oj.user.UserServer.UpdateUserPassword:output_type -> oj.user.CommonRsp
+	33, // 35: oj.user.UserServer.UpdateUserStatus:output_type -> oj.user.CommonRsp
+	28, // 36: oj.user.UserServer.QueryUserInfo:output_type -> oj.user.QueryUserInfoRsp
+	33, // 37: oj.user.UserServer.AddUser:output_type -> oj.user.CommonRsp
+	6,  // 38: oj.user.UserServer.RegisterUser:output_type -> oj.user.RegisterUserRsp
+	33, // 39: oj.user.UserServer.AddClassUser:output_type -> oj.user.CommonRsp
+	24, // 40: oj.user.UserServer.QueryUserRank:output_type -> oj.user.QueryUserRankRsp
+	5,  // 41: oj.user.UserServer.QueryUserSolvedRank:output_type -> oj.user.QueryUserSolvedRankRsp
+	20, // 42: oj.user.UserServer.QueryAllUser:output_type -> oj.user.QueryAllUserRsp
+	33, // 43: oj.user.UserServer.UpdateUser:output_type -> oj.user.CommonRsp
+	18, // 44: oj.user.UserServer.Login:output_type -> oj.user.LoginRsp
+	16, // 45: oj.user.UserServer.IsLogin:output_type -> oj.user.IsLoginRsp
+	33, // 46: oj.user.UserServer.UpdateMyInfo:output_type -> oj.user.CommonRsp
+	20, // 47: oj.user.UserServer.QueryTeacher:output_type -> oj.user.QueryAllUserRsp
+	12, // 48: oj.user.UserServer.QueryClassTeacher:output_type -> oj.user.QueryClassTeacherRsp
+	33, // 49: oj.user.UserServer.UpdateClassUser:output_type -> oj.user.CommonRsp
+	8,  // 50: oj.user.UserServer.QueryClassUser:output_type -> oj.user.QueryClassUserRsp
+	4,  // 51: oj.user.UserServer.QueryNeedBeFocusedStudent:output_type -> oj.user.QueryNeedBeFocusedStudentRsp
+	3,  // 52: oj.user.UserServer.QueryUserProblemCount:output_type -> oj.user.QueryUserProblemCountRsp
+	1,  // 53: oj.user.UserServer.ImportUser:output_type -> oj.user.ImportUserRsp
+	33, // [33:54] is the sub-list for method output_type
+	12, // [12:33] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }
@@ -2791,7 +2973,7 @@ func file_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_proto_rawDesc), len(file_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   34,
+			NumMessages:   37,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
