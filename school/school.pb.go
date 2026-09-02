@@ -470,118 +470,6 @@ func (x *MyClass) GetClassName() string {
 	return ""
 }
 
-type QueryCourseKnowledgeReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	CourseID      int32                  `protobuf:"varint,1,opt,name=courseID,proto3" json:"courseID,omitempty"` // 课程编号
-	UserID        int32                  `protobuf:"varint,2,opt,name=userID,proto3" json:"userID,omitempty"`     // 用户编号
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *QueryCourseKnowledgeReq) Reset() {
-	*x = QueryCourseKnowledgeReq{}
-	mi := &file_school_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *QueryCourseKnowledgeReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*QueryCourseKnowledgeReq) ProtoMessage() {}
-
-func (x *QueryCourseKnowledgeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use QueryCourseKnowledgeReq.ProtoReflect.Descriptor instead.
-func (*QueryCourseKnowledgeReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *QueryCourseKnowledgeReq) GetCourseID() int32 {
-	if x != nil {
-		return x.CourseID
-	}
-	return 0
-}
-
-func (x *QueryCourseKnowledgeReq) GetUserID() int32 {
-	if x != nil {
-		return x.UserID
-	}
-	return 0
-}
-
-type QueryCourseKnowledgeRsp struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`     // 返回信息
-	Code          int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`          // 返回码
-	Knowledge     []*Knowledge           `protobuf:"bytes,3,rep,name=knowledge,proto3" json:"knowledge,omitempty"` // 知识点
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *QueryCourseKnowledgeRsp) Reset() {
-	*x = QueryCourseKnowledgeRsp{}
-	mi := &file_school_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *QueryCourseKnowledgeRsp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*QueryCourseKnowledgeRsp) ProtoMessage() {}
-
-func (x *QueryCourseKnowledgeRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use QueryCourseKnowledgeRsp.ProtoReflect.Descriptor instead.
-func (*QueryCourseKnowledgeRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *QueryCourseKnowledgeRsp) GetMessage() string {
-	if x != nil {
-		return x.Message
-	}
-	return ""
-}
-
-func (x *QueryCourseKnowledgeRsp) GetCode() int32 {
-	if x != nil {
-		return x.Code
-	}
-	return 0
-}
-
-func (x *QueryCourseKnowledgeRsp) GetKnowledge() []*Knowledge {
-	if x != nil {
-		return x.Knowledge
-	}
-	return nil
-}
-
 type Knowledge struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`    // 知识点主键
@@ -592,7 +480,7 @@ type Knowledge struct {
 
 func (x *Knowledge) Reset() {
 	*x = Knowledge{}
-	mi := &file_school_proto_msgTypes[10]
+	mi := &file_school_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -604,7 +492,7 @@ func (x *Knowledge) String() string {
 func (*Knowledge) ProtoMessage() {}
 
 func (x *Knowledge) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[10]
+	mi := &file_school_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -617,7 +505,7 @@ func (x *Knowledge) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Knowledge.ProtoReflect.Descriptor instead.
 func (*Knowledge) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{10}
+	return file_school_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Knowledge) GetId() int32 {
@@ -644,7 +532,7 @@ type QueryCourseClassReq struct {
 
 func (x *QueryCourseClassReq) Reset() {
 	*x = QueryCourseClassReq{}
-	mi := &file_school_proto_msgTypes[11]
+	mi := &file_school_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -656,7 +544,7 @@ func (x *QueryCourseClassReq) String() string {
 func (*QueryCourseClassReq) ProtoMessage() {}
 
 func (x *QueryCourseClassReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[11]
+	mi := &file_school_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -669,7 +557,7 @@ func (x *QueryCourseClassReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryCourseClassReq.ProtoReflect.Descriptor instead.
 func (*QueryCourseClassReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{11}
+	return file_school_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *QueryCourseClassReq) GetCourseID() string {
@@ -698,7 +586,7 @@ type QueryCourseClassRsp struct {
 
 func (x *QueryCourseClassRsp) Reset() {
 	*x = QueryCourseClassRsp{}
-	mi := &file_school_proto_msgTypes[12]
+	mi := &file_school_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -710,7 +598,7 @@ func (x *QueryCourseClassRsp) String() string {
 func (*QueryCourseClassRsp) ProtoMessage() {}
 
 func (x *QueryCourseClassRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[12]
+	mi := &file_school_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -723,7 +611,7 @@ func (x *QueryCourseClassRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryCourseClassRsp.ProtoReflect.Descriptor instead.
 func (*QueryCourseClassRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{12}
+	return file_school_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *QueryCourseClassRsp) GetMessage() string {
@@ -764,7 +652,7 @@ type QueryContestClassUserReq struct {
 
 func (x *QueryContestClassUserReq) Reset() {
 	*x = QueryContestClassUserReq{}
-	mi := &file_school_proto_msgTypes[13]
+	mi := &file_school_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -776,7 +664,7 @@ func (x *QueryContestClassUserReq) String() string {
 func (*QueryContestClassUserReq) ProtoMessage() {}
 
 func (x *QueryContestClassUserReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[13]
+	mi := &file_school_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -789,7 +677,7 @@ func (x *QueryContestClassUserReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryContestClassUserReq.ProtoReflect.Descriptor instead.
 func (*QueryContestClassUserReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{13}
+	return file_school_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *QueryContestClassUserReq) GetContestID() int32 {
@@ -817,7 +705,7 @@ type QueryContestClassUserRsp struct {
 
 func (x *QueryContestClassUserRsp) Reset() {
 	*x = QueryContestClassUserRsp{}
-	mi := &file_school_proto_msgTypes[14]
+	mi := &file_school_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -829,7 +717,7 @@ func (x *QueryContestClassUserRsp) String() string {
 func (*QueryContestClassUserRsp) ProtoMessage() {}
 
 func (x *QueryContestClassUserRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[14]
+	mi := &file_school_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -842,7 +730,7 @@ func (x *QueryContestClassUserRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryContestClassUserRsp.ProtoReflect.Descriptor instead.
 func (*QueryContestClassUserRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{14}
+	return file_school_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *QueryContestClassUserRsp) GetMessage() string {
@@ -876,7 +764,7 @@ type QueryCourseReq struct {
 
 func (x *QueryCourseReq) Reset() {
 	*x = QueryCourseReq{}
-	mi := &file_school_proto_msgTypes[15]
+	mi := &file_school_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -888,7 +776,7 @@ func (x *QueryCourseReq) String() string {
 func (*QueryCourseReq) ProtoMessage() {}
 
 func (x *QueryCourseReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[15]
+	mi := &file_school_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -901,7 +789,7 @@ func (x *QueryCourseReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryCourseReq.ProtoReflect.Descriptor instead.
 func (*QueryCourseReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{15}
+	return file_school_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *QueryCourseReq) GetCourseID() int32 {
@@ -929,7 +817,7 @@ type QueryCourseRsp struct {
 
 func (x *QueryCourseRsp) Reset() {
 	*x = QueryCourseRsp{}
-	mi := &file_school_proto_msgTypes[16]
+	mi := &file_school_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -941,7 +829,7 @@ func (x *QueryCourseRsp) String() string {
 func (*QueryCourseRsp) ProtoMessage() {}
 
 func (x *QueryCourseRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[16]
+	mi := &file_school_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -954,7 +842,7 @@ func (x *QueryCourseRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryCourseRsp.ProtoReflect.Descriptor instead.
 func (*QueryCourseRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{16}
+	return file_school_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *QueryCourseRsp) GetMessage() string {
@@ -988,7 +876,7 @@ type QueryTermReq struct {
 
 func (x *QueryTermReq) Reset() {
 	*x = QueryTermReq{}
-	mi := &file_school_proto_msgTypes[17]
+	mi := &file_school_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1000,7 +888,7 @@ func (x *QueryTermReq) String() string {
 func (*QueryTermReq) ProtoMessage() {}
 
 func (x *QueryTermReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[17]
+	mi := &file_school_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1013,7 +901,7 @@ func (x *QueryTermReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryTermReq.ProtoReflect.Descriptor instead.
 func (*QueryTermReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{17}
+	return file_school_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *QueryTermReq) GetTermID() int32 {
@@ -1041,7 +929,7 @@ type QueryTermRsp struct {
 
 func (x *QueryTermRsp) Reset() {
 	*x = QueryTermRsp{}
-	mi := &file_school_proto_msgTypes[18]
+	mi := &file_school_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1053,7 +941,7 @@ func (x *QueryTermRsp) String() string {
 func (*QueryTermRsp) ProtoMessage() {}
 
 func (x *QueryTermRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[18]
+	mi := &file_school_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1066,7 +954,7 @@ func (x *QueryTermRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryTermRsp.ProtoReflect.Descriptor instead.
 func (*QueryTermRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{18}
+	return file_school_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *QueryTermRsp) GetMessage() string {
@@ -1102,7 +990,7 @@ type QueryCoursePageSizeRsp struct {
 
 func (x *QueryCoursePageSizeRsp) Reset() {
 	*x = QueryCoursePageSizeRsp{}
-	mi := &file_school_proto_msgTypes[19]
+	mi := &file_school_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1114,7 +1002,7 @@ func (x *QueryCoursePageSizeRsp) String() string {
 func (*QueryCoursePageSizeRsp) ProtoMessage() {}
 
 func (x *QueryCoursePageSizeRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[19]
+	mi := &file_school_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1127,7 +1015,7 @@ func (x *QueryCoursePageSizeRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryCoursePageSizeRsp.ProtoReflect.Descriptor instead.
 func (*QueryCoursePageSizeRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{19}
+	return file_school_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *QueryCoursePageSizeRsp) GetMessage() string {
@@ -1170,7 +1058,7 @@ type QueryCoursePageSizeReq struct {
 
 func (x *QueryCoursePageSizeReq) Reset() {
 	*x = QueryCoursePageSizeReq{}
-	mi := &file_school_proto_msgTypes[20]
+	mi := &file_school_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1182,7 +1070,7 @@ func (x *QueryCoursePageSizeReq) String() string {
 func (*QueryCoursePageSizeReq) ProtoMessage() {}
 
 func (x *QueryCoursePageSizeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[20]
+	mi := &file_school_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1195,7 +1083,7 @@ func (x *QueryCoursePageSizeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryCoursePageSizeReq.ProtoReflect.Descriptor instead.
 func (*QueryCoursePageSizeReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{20}
+	return file_school_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *QueryCoursePageSizeReq) GetPage() int32 {
@@ -1237,7 +1125,7 @@ type QueryAllTermReq struct {
 
 func (x *QueryAllTermReq) Reset() {
 	*x = QueryAllTermReq{}
-	mi := &file_school_proto_msgTypes[21]
+	mi := &file_school_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1249,7 +1137,7 @@ func (x *QueryAllTermReq) String() string {
 func (*QueryAllTermReq) ProtoMessage() {}
 
 func (x *QueryAllTermReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[21]
+	mi := &file_school_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1262,7 +1150,7 @@ func (x *QueryAllTermReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryAllTermReq.ProtoReflect.Descriptor instead.
 func (*QueryAllTermReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{21}
+	return file_school_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *QueryAllTermReq) GetPage() int32 {
@@ -1298,7 +1186,7 @@ type QueryAllTermRsp struct {
 
 func (x *QueryAllTermRsp) Reset() {
 	*x = QueryAllTermRsp{}
-	mi := &file_school_proto_msgTypes[22]
+	mi := &file_school_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1310,7 +1198,7 @@ func (x *QueryAllTermRsp) String() string {
 func (*QueryAllTermRsp) ProtoMessage() {}
 
 func (x *QueryAllTermRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[22]
+	mi := &file_school_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1323,7 +1211,7 @@ func (x *QueryAllTermRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryAllTermRsp.ProtoReflect.Descriptor instead.
 func (*QueryAllTermRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{22}
+	return file_school_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *QueryAllTermRsp) GetMessage() string {
@@ -1363,7 +1251,7 @@ type UserIDReq struct {
 
 func (x *UserIDReq) Reset() {
 	*x = UserIDReq{}
-	mi := &file_school_proto_msgTypes[23]
+	mi := &file_school_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1375,7 +1263,7 @@ func (x *UserIDReq) String() string {
 func (*UserIDReq) ProtoMessage() {}
 
 func (x *UserIDReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[23]
+	mi := &file_school_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1388,7 +1276,7 @@ func (x *UserIDReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserIDReq.ProtoReflect.Descriptor instead.
 func (*UserIDReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{23}
+	return file_school_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *UserIDReq) GetUserID() int32 {
@@ -1409,7 +1297,7 @@ type QueryPresentTermRsp struct {
 
 func (x *QueryPresentTermRsp) Reset() {
 	*x = QueryPresentTermRsp{}
-	mi := &file_school_proto_msgTypes[24]
+	mi := &file_school_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1421,7 +1309,7 @@ func (x *QueryPresentTermRsp) String() string {
 func (*QueryPresentTermRsp) ProtoMessage() {}
 
 func (x *QueryPresentTermRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[24]
+	mi := &file_school_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1434,7 +1322,7 @@ func (x *QueryPresentTermRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryPresentTermRsp.ProtoReflect.Descriptor instead.
 func (*QueryPresentTermRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{24}
+	return file_school_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *QueryPresentTermRsp) GetMessage() string {
@@ -1474,7 +1362,7 @@ type Term struct {
 
 func (x *Term) Reset() {
 	*x = Term{}
-	mi := &file_school_proto_msgTypes[25]
+	mi := &file_school_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1486,7 +1374,7 @@ func (x *Term) String() string {
 func (*Term) ProtoMessage() {}
 
 func (x *Term) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[25]
+	mi := &file_school_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1499,7 +1387,7 @@ func (x *Term) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Term.ProtoReflect.Descriptor instead.
 func (*Term) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{25}
+	return file_school_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *Term) GetTermID() int32 {
@@ -1568,7 +1456,7 @@ type SetPresentTermReq struct {
 
 func (x *SetPresentTermReq) Reset() {
 	*x = SetPresentTermReq{}
-	mi := &file_school_proto_msgTypes[26]
+	mi := &file_school_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1580,7 +1468,7 @@ func (x *SetPresentTermReq) String() string {
 func (*SetPresentTermReq) ProtoMessage() {}
 
 func (x *SetPresentTermReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[26]
+	mi := &file_school_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1593,7 +1481,7 @@ func (x *SetPresentTermReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetPresentTermReq.ProtoReflect.Descriptor instead.
 func (*SetPresentTermReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{26}
+	return file_school_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *SetPresentTermReq) GetTermID() int32 {
@@ -1621,7 +1509,7 @@ type UpdateTermStatusReq struct {
 
 func (x *UpdateTermStatusReq) Reset() {
 	*x = UpdateTermStatusReq{}
-	mi := &file_school_proto_msgTypes[27]
+	mi := &file_school_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1633,7 +1521,7 @@ func (x *UpdateTermStatusReq) String() string {
 func (*UpdateTermStatusReq) ProtoMessage() {}
 
 func (x *UpdateTermStatusReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[27]
+	mi := &file_school_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1646,7 +1534,7 @@ func (x *UpdateTermStatusReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTermStatusReq.ProtoReflect.Descriptor instead.
 func (*UpdateTermStatusReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{27}
+	return file_school_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *UpdateTermStatusReq) GetUserID() int32 {
@@ -1681,7 +1569,7 @@ type UpdateCourseStatusReq struct {
 
 func (x *UpdateCourseStatusReq) Reset() {
 	*x = UpdateCourseStatusReq{}
-	mi := &file_school_proto_msgTypes[28]
+	mi := &file_school_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1693,7 +1581,7 @@ func (x *UpdateCourseStatusReq) String() string {
 func (*UpdateCourseStatusReq) ProtoMessage() {}
 
 func (x *UpdateCourseStatusReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[28]
+	mi := &file_school_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1706,7 +1594,7 @@ func (x *UpdateCourseStatusReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCourseStatusReq.ProtoReflect.Descriptor instead.
 func (*UpdateCourseStatusReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{28}
+	return file_school_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *UpdateCourseStatusReq) GetCourseID() int32 {
@@ -1742,7 +1630,7 @@ type UpdateCourseReq struct {
 
 func (x *UpdateCourseReq) Reset() {
 	*x = UpdateCourseReq{}
-	mi := &file_school_proto_msgTypes[29]
+	mi := &file_school_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1754,7 +1642,7 @@ func (x *UpdateCourseReq) String() string {
 func (*UpdateCourseReq) ProtoMessage() {}
 
 func (x *UpdateCourseReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[29]
+	mi := &file_school_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1767,7 +1655,7 @@ func (x *UpdateCourseReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCourseReq.ProtoReflect.Descriptor instead.
 func (*UpdateCourseReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{29}
+	return file_school_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *UpdateCourseReq) GetName() string {
@@ -1809,7 +1697,7 @@ type QueryClassPageSizeReq struct {
 
 func (x *QueryClassPageSizeReq) Reset() {
 	*x = QueryClassPageSizeReq{}
-	mi := &file_school_proto_msgTypes[30]
+	mi := &file_school_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1821,7 +1709,7 @@ func (x *QueryClassPageSizeReq) String() string {
 func (*QueryClassPageSizeReq) ProtoMessage() {}
 
 func (x *QueryClassPageSizeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[30]
+	mi := &file_school_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1834,7 +1722,7 @@ func (x *QueryClassPageSizeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryClassPageSizeReq.ProtoReflect.Descriptor instead.
 func (*QueryClassPageSizeReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{30}
+	return file_school_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *QueryClassPageSizeReq) GetPage() int32 {
@@ -1868,7 +1756,7 @@ type QueryClassReq struct {
 
 func (x *QueryClassReq) Reset() {
 	*x = QueryClassReq{}
-	mi := &file_school_proto_msgTypes[31]
+	mi := &file_school_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1880,7 +1768,7 @@ func (x *QueryClassReq) String() string {
 func (*QueryClassReq) ProtoMessage() {}
 
 func (x *QueryClassReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[31]
+	mi := &file_school_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1893,7 +1781,7 @@ func (x *QueryClassReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryClassReq.ProtoReflect.Descriptor instead.
 func (*QueryClassReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{31}
+	return file_school_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *QueryClassReq) GetClassID() int32 {
@@ -1920,7 +1808,7 @@ type TeacherInfo struct {
 
 func (x *TeacherInfo) Reset() {
 	*x = TeacherInfo{}
-	mi := &file_school_proto_msgTypes[32]
+	mi := &file_school_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1932,7 +1820,7 @@ func (x *TeacherInfo) String() string {
 func (*TeacherInfo) ProtoMessage() {}
 
 func (x *TeacherInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[32]
+	mi := &file_school_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1945,7 +1833,7 @@ func (x *TeacherInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeacherInfo.ProtoReflect.Descriptor instead.
 func (*TeacherInfo) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{32}
+	return file_school_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *TeacherInfo) GetUserID() int32 {
@@ -1980,7 +1868,7 @@ type Class struct {
 
 func (x *Class) Reset() {
 	*x = Class{}
-	mi := &file_school_proto_msgTypes[33]
+	mi := &file_school_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1992,7 +1880,7 @@ func (x *Class) String() string {
 func (*Class) ProtoMessage() {}
 
 func (x *Class) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[33]
+	mi := &file_school_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2005,7 +1893,7 @@ func (x *Class) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Class.ProtoReflect.Descriptor instead.
 func (*Class) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{33}
+	return file_school_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *Class) GetCreatedBy() int32 {
@@ -2089,7 +1977,7 @@ type QueryClassRsp struct {
 
 func (x *QueryClassRsp) Reset() {
 	*x = QueryClassRsp{}
-	mi := &file_school_proto_msgTypes[34]
+	mi := &file_school_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2101,7 +1989,7 @@ func (x *QueryClassRsp) String() string {
 func (*QueryClassRsp) ProtoMessage() {}
 
 func (x *QueryClassRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[34]
+	mi := &file_school_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2114,7 +2002,7 @@ func (x *QueryClassRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryClassRsp.ProtoReflect.Descriptor instead.
 func (*QueryClassRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{34}
+	return file_school_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *QueryClassRsp) GetMessage() string {
@@ -2150,7 +2038,7 @@ type QueryClassPageSizeRsp struct {
 
 func (x *QueryClassPageSizeRsp) Reset() {
 	*x = QueryClassPageSizeRsp{}
-	mi := &file_school_proto_msgTypes[35]
+	mi := &file_school_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2162,7 +2050,7 @@ func (x *QueryClassPageSizeRsp) String() string {
 func (*QueryClassPageSizeRsp) ProtoMessage() {}
 
 func (x *QueryClassPageSizeRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[35]
+	mi := &file_school_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2175,7 +2063,7 @@ func (x *QueryClassPageSizeRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryClassPageSizeRsp.ProtoReflect.Descriptor instead.
 func (*QueryClassPageSizeRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{35}
+	return file_school_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *QueryClassPageSizeRsp) GetMessage() string {
@@ -2218,7 +2106,7 @@ type QueryClassUserReq struct {
 
 func (x *QueryClassUserReq) Reset() {
 	*x = QueryClassUserReq{}
-	mi := &file_school_proto_msgTypes[36]
+	mi := &file_school_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2230,7 +2118,7 @@ func (x *QueryClassUserReq) String() string {
 func (*QueryClassUserReq) ProtoMessage() {}
 
 func (x *QueryClassUserReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[36]
+	mi := &file_school_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2243,7 +2131,7 @@ func (x *QueryClassUserReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryClassUserReq.ProtoReflect.Descriptor instead.
 func (*QueryClassUserReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{36}
+	return file_school_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *QueryClassUserReq) GetClassID() int32 {
@@ -2286,7 +2174,7 @@ type QueryClassUserRsp struct {
 
 func (x *QueryClassUserRsp) Reset() {
 	*x = QueryClassUserRsp{}
-	mi := &file_school_proto_msgTypes[37]
+	mi := &file_school_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2298,7 +2186,7 @@ func (x *QueryClassUserRsp) String() string {
 func (*QueryClassUserRsp) ProtoMessage() {}
 
 func (x *QueryClassUserRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[37]
+	mi := &file_school_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2311,7 +2199,7 @@ func (x *QueryClassUserRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryClassUserRsp.ProtoReflect.Descriptor instead.
 func (*QueryClassUserRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{37}
+	return file_school_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *QueryClassUserRsp) GetMessage() string {
@@ -2364,7 +2252,7 @@ type User struct {
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_school_proto_msgTypes[38]
+	mi := &file_school_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2376,7 +2264,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[38]
+	mi := &file_school_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2389,7 +2277,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{38}
+	return file_school_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *User) GetUserID() int32 {
@@ -2501,7 +2389,7 @@ type UpdateClassUserReq struct {
 
 func (x *UpdateClassUserReq) Reset() {
 	*x = UpdateClassUserReq{}
-	mi := &file_school_proto_msgTypes[39]
+	mi := &file_school_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2513,7 +2401,7 @@ func (x *UpdateClassUserReq) String() string {
 func (*UpdateClassUserReq) ProtoMessage() {}
 
 func (x *UpdateClassUserReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[39]
+	mi := &file_school_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2526,7 +2414,7 @@ func (x *UpdateClassUserReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClassUserReq.ProtoReflect.Descriptor instead.
 func (*UpdateClassUserReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{39}
+	return file_school_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *UpdateClassUserReq) GetClassID() int32 {
@@ -2561,7 +2449,7 @@ type UpdateClassStatusReq struct {
 
 func (x *UpdateClassStatusReq) Reset() {
 	*x = UpdateClassStatusReq{}
-	mi := &file_school_proto_msgTypes[40]
+	mi := &file_school_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2573,7 +2461,7 @@ func (x *UpdateClassStatusReq) String() string {
 func (*UpdateClassStatusReq) ProtoMessage() {}
 
 func (x *UpdateClassStatusReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[40]
+	mi := &file_school_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2586,7 +2474,7 @@ func (x *UpdateClassStatusReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClassStatusReq.ProtoReflect.Descriptor instead.
 func (*UpdateClassStatusReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{40}
+	return file_school_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *UpdateClassStatusReq) GetUserID() int32 {
@@ -2624,7 +2512,7 @@ type UpdateClassReq struct {
 
 func (x *UpdateClassReq) Reset() {
 	*x = UpdateClassReq{}
-	mi := &file_school_proto_msgTypes[41]
+	mi := &file_school_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2636,7 +2524,7 @@ func (x *UpdateClassReq) String() string {
 func (*UpdateClassReq) ProtoMessage() {}
 
 func (x *UpdateClassReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[41]
+	mi := &file_school_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2649,7 +2537,7 @@ func (x *UpdateClassReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClassReq.ProtoReflect.Descriptor instead.
 func (*UpdateClassReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{41}
+	return file_school_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *UpdateClassReq) GetUserID() int32 {
@@ -2707,7 +2595,7 @@ type AddClassReq struct {
 
 func (x *AddClassReq) Reset() {
 	*x = AddClassReq{}
-	mi := &file_school_proto_msgTypes[42]
+	mi := &file_school_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2719,7 +2607,7 @@ func (x *AddClassReq) String() string {
 func (*AddClassReq) ProtoMessage() {}
 
 func (x *AddClassReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[42]
+	mi := &file_school_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2732,7 +2620,7 @@ func (x *AddClassReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClassReq.ProtoReflect.Descriptor instead.
 func (*AddClassReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{42}
+	return file_school_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *AddClassReq) GetUserID() int32 {
@@ -2779,7 +2667,7 @@ type QueryUserClassReq struct {
 
 func (x *QueryUserClassReq) Reset() {
 	*x = QueryUserClassReq{}
-	mi := &file_school_proto_msgTypes[43]
+	mi := &file_school_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2791,7 +2679,7 @@ func (x *QueryUserClassReq) String() string {
 func (*QueryUserClassReq) ProtoMessage() {}
 
 func (x *QueryUserClassReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[43]
+	mi := &file_school_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2804,7 +2692,7 @@ func (x *QueryUserClassReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserClassReq.ProtoReflect.Descriptor instead.
 func (*QueryUserClassReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{43}
+	return file_school_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *QueryUserClassReq) GetUserID() int32 {
@@ -2825,7 +2713,7 @@ type QueryUserClassRsp struct {
 
 func (x *QueryUserClassRsp) Reset() {
 	*x = QueryUserClassRsp{}
-	mi := &file_school_proto_msgTypes[44]
+	mi := &file_school_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2837,7 +2725,7 @@ func (x *QueryUserClassRsp) String() string {
 func (*QueryUserClassRsp) ProtoMessage() {}
 
 func (x *QueryUserClassRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[44]
+	mi := &file_school_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2850,7 +2738,7 @@ func (x *QueryUserClassRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryUserClassRsp.ProtoReflect.Descriptor instead.
 func (*QueryUserClassRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{44}
+	return file_school_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *QueryUserClassRsp) GetMessage() string {
@@ -2888,7 +2776,7 @@ type UpdateTermReq struct {
 
 func (x *UpdateTermReq) Reset() {
 	*x = UpdateTermReq{}
-	mi := &file_school_proto_msgTypes[45]
+	mi := &file_school_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2900,7 +2788,7 @@ func (x *UpdateTermReq) String() string {
 func (*UpdateTermReq) ProtoMessage() {}
 
 func (x *UpdateTermReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[45]
+	mi := &file_school_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2913,7 +2801,7 @@ func (x *UpdateTermReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTermReq.ProtoReflect.Descriptor instead.
 func (*UpdateTermReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{45}
+	return file_school_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *UpdateTermReq) GetName() string {
@@ -2971,7 +2859,7 @@ type AddTermReq struct {
 
 func (x *AddTermReq) Reset() {
 	*x = AddTermReq{}
-	mi := &file_school_proto_msgTypes[46]
+	mi := &file_school_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2983,7 +2871,7 @@ func (x *AddTermReq) String() string {
 func (*AddTermReq) ProtoMessage() {}
 
 func (x *AddTermReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[46]
+	mi := &file_school_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2996,7 +2884,7 @@ func (x *AddTermReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddTermReq.ProtoReflect.Descriptor instead.
 func (*AddTermReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{46}
+	return file_school_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *AddTermReq) GetName() string {
@@ -3045,7 +2933,7 @@ type AddCourseReq struct {
 
 func (x *AddCourseReq) Reset() {
 	*x = AddCourseReq{}
-	mi := &file_school_proto_msgTypes[47]
+	mi := &file_school_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3057,7 +2945,7 @@ func (x *AddCourseReq) String() string {
 func (*AddCourseReq) ProtoMessage() {}
 
 func (x *AddCourseReq) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[47]
+	mi := &file_school_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3070,7 +2958,7 @@ func (x *AddCourseReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddCourseReq.ProtoReflect.Descriptor instead.
 func (*AddCourseReq) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{47}
+	return file_school_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *AddCourseReq) GetName() string {
@@ -3104,7 +2992,7 @@ type CommonRsp struct {
 
 func (x *CommonRsp) Reset() {
 	*x = CommonRsp{}
-	mi := &file_school_proto_msgTypes[48]
+	mi := &file_school_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3116,7 +3004,7 @@ func (x *CommonRsp) String() string {
 func (*CommonRsp) ProtoMessage() {}
 
 func (x *CommonRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[48]
+	mi := &file_school_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3129,7 +3017,7 @@ func (x *CommonRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CommonRsp.ProtoReflect.Descriptor instead.
 func (*CommonRsp) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{48}
+	return file_school_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *CommonRsp) GetMessage() string {
@@ -3159,7 +3047,7 @@ type Course struct {
 
 func (x *Course) Reset() {
 	*x = Course{}
-	mi := &file_school_proto_msgTypes[49]
+	mi := &file_school_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3171,7 +3059,7 @@ func (x *Course) String() string {
 func (*Course) ProtoMessage() {}
 
 func (x *Course) ProtoReflect() protoreflect.Message {
-	mi := &file_school_proto_msgTypes[49]
+	mi := &file_school_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3184,7 +3072,7 @@ func (x *Course) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Course.ProtoReflect.Descriptor instead.
 func (*Course) Descriptor() ([]byte, []int) {
-	return file_school_proto_rawDescGZIP(), []int{49}
+	return file_school_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *Course) GetName() string {
@@ -3256,14 +3144,7 @@ const file_school_proto_rawDesc = "" +
 	"\x06enable\x18\x04 \x01(\x05R\x06enable\"A\n" +
 	"\aMyClass\x12\x18\n" +
 	"\aclassID\x18\x01 \x01(\x05R\aclassID\x12\x1c\n" +
-	"\tclassName\x18\x02 \x01(\tR\tclassName\"M\n" +
-	"\x17QueryCourseKnowledgeReq\x12\x1a\n" +
-	"\bcourseID\x18\x01 \x01(\x05R\bcourseID\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\x05R\x06userID\"{\n" +
-	"\x17QueryCourseKnowledgeRsp\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\x05R\x04code\x122\n" +
-	"\tknowledge\x18\x03 \x03(\v2\x14.oj.school.KnowledgeR\tknowledge\"/\n" +
+	"\tclassName\x18\x02 \x01(\tR\tclassName\"/\n" +
 	"\tKnowledge\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"I\n" +
@@ -3458,18 +3339,15 @@ const file_school_proto_rawDesc = "" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bcourseID\x18\x03 \x01(\x05R\bcourseID\x12\x18\n" +
 	"\acreator\x18\x04 \x01(\tR\acreator\x12\x16\n" +
-	"\x06enable\x18\x05 \x01(\x05R\x06enable2\xc9\x06\n" +
+	"\x06enable\x18\x05 \x01(\x05R\x06enable2\xb9\x04\n" +
 	"\fCourseServer\x12<\n" +
 	"\tAddCourse\x12\x17.oj.school.AddCourseReq\x1a\x14.oj.school.CommonRsp\"\x00\x12B\n" +
 	"\fUpdateCourse\x12\x1a.oj.school.UpdateCourseReq\x1a\x14.oj.school.CommonRsp\"\x00\x12N\n" +
 	"\x12UpdateCourseStatus\x12 .oj.school.UpdateCourseStatusReq\x1a\x14.oj.school.CommonRsp\"\x00\x12X\n" +
 	"\x0eQueryAllCourse\x12!.oj.school.QueryCoursePageSizeReq\x1a!.oj.school.QueryCoursePageSizeRsp\"\x00\x12W\n" +
 	"\rQueryMyCourse\x12!.oj.school.QueryCoursePageSizeReq\x1a!.oj.school.QueryCoursePageSizeRsp\"\x00\x12E\n" +
-	"\vQueryCourse\x12\x19.oj.school.QueryCourseReq\x1a\x19.oj.school.QueryCourseRsp\"\x00\x12`\n" +
-	"\x14QueryCourseKnowledge\x12\".oj.school.QueryCourseKnowledgeReq\x1a\".oj.school.QueryCourseKnowledgeRsp\"\x00\x12]\n" +
-	"\x13QueryCoursePageSize\x12!.oj.school.QueryCoursePageSizeReq\x1a!.oj.school.QueryCoursePageSizeRsp\"\x00\x12O\n" +
-	"\x0fQueryTermCourse\x12\x17.oj.school.QueryTermReq\x1a!.oj.school.QueryCoursePageSizeRsp\"\x00\x12[\n" +
-	"\x14QueryAllRelationData\x12!.oj.school.QueryCoursePageSizeReq\x1a\x1e.oj.school.QueryAllRelationRsp\"\x002\xff\t\n" +
+	"\vQueryCourse\x12\x19.oj.school.QueryCourseReq\x1a\x19.oj.school.QueryCourseRsp\"\x00\x12]\n" +
+	"\x13QueryCoursePageSize\x12!.oj.school.QueryCoursePageSizeReq\x1a!.oj.school.QueryCoursePageSizeRsp\"\x002\xff\t\n" +
 	"\vClassServer\x12N\n" +
 	"\x0eQueryUserClass\x12\x1c.oj.school.QueryUserClassReq\x1a\x1c.oj.school.QueryUserClassRsp\"\x00\x12:\n" +
 	"\bAddClass\x12\x16.oj.school.AddClassReq\x1a\x14.oj.school.CommonRsp\"\x00\x12@\n" +
@@ -3511,7 +3389,7 @@ func file_school_proto_rawDescGZIP() []byte {
 	return file_school_proto_rawDescData
 }
 
-var file_school_proto_msgTypes = make([]protoimpl.MessageInfo, 50)
+var file_school_proto_msgTypes = make([]protoimpl.MessageInfo, 48)
 var file_school_proto_goTypes = []any{
 	(*CountClassUserReq)(nil),        // 0: oj.school.CountClassUserReq
 	(*CountClassUserRsp)(nil),        // 1: oj.school.CountClassUserRsp
@@ -3521,138 +3399,129 @@ var file_school_proto_goTypes = []any{
 	(*QueryMyClassRsp)(nil),          // 5: oj.school.QueryMyClassRsp
 	(*RelationData)(nil),             // 6: oj.school.RelationData
 	(*MyClass)(nil),                  // 7: oj.school.MyClass
-	(*QueryCourseKnowledgeReq)(nil),  // 8: oj.school.QueryCourseKnowledgeReq
-	(*QueryCourseKnowledgeRsp)(nil),  // 9: oj.school.QueryCourseKnowledgeRsp
-	(*Knowledge)(nil),                // 10: oj.school.Knowledge
-	(*QueryCourseClassReq)(nil),      // 11: oj.school.QueryCourseClassReq
-	(*QueryCourseClassRsp)(nil),      // 12: oj.school.QueryCourseClassRsp
-	(*QueryContestClassUserReq)(nil), // 13: oj.school.QueryContestClassUserReq
-	(*QueryContestClassUserRsp)(nil), // 14: oj.school.QueryContestClassUserRsp
-	(*QueryCourseReq)(nil),           // 15: oj.school.QueryCourseReq
-	(*QueryCourseRsp)(nil),           // 16: oj.school.QueryCourseRsp
-	(*QueryTermReq)(nil),             // 17: oj.school.QueryTermReq
-	(*QueryTermRsp)(nil),             // 18: oj.school.QueryTermRsp
-	(*QueryCoursePageSizeRsp)(nil),   // 19: oj.school.QueryCoursePageSizeRsp
-	(*QueryCoursePageSizeReq)(nil),   // 20: oj.school.QueryCoursePageSizeReq
-	(*QueryAllTermReq)(nil),          // 21: oj.school.QueryAllTermReq
-	(*QueryAllTermRsp)(nil),          // 22: oj.school.QueryAllTermRsp
-	(*UserIDReq)(nil),                // 23: oj.school.UserIDReq
-	(*QueryPresentTermRsp)(nil),      // 24: oj.school.QueryPresentTermRsp
-	(*Term)(nil),                     // 25: oj.school.Term
-	(*SetPresentTermReq)(nil),        // 26: oj.school.SetPresentTermReq
-	(*UpdateTermStatusReq)(nil),      // 27: oj.school.UpdateTermStatusReq
-	(*UpdateCourseStatusReq)(nil),    // 28: oj.school.UpdateCourseStatusReq
-	(*UpdateCourseReq)(nil),          // 29: oj.school.UpdateCourseReq
-	(*QueryClassPageSizeReq)(nil),    // 30: oj.school.QueryClassPageSizeReq
-	(*QueryClassReq)(nil),            // 31: oj.school.QueryClassReq
-	(*TeacherInfo)(nil),              // 32: oj.school.TeacherInfo
-	(*Class)(nil),                    // 33: oj.school.Class
-	(*QueryClassRsp)(nil),            // 34: oj.school.QueryClassRsp
-	(*QueryClassPageSizeRsp)(nil),    // 35: oj.school.QueryClassPageSizeRsp
-	(*QueryClassUserReq)(nil),        // 36: oj.school.QueryClassUserReq
-	(*QueryClassUserRsp)(nil),        // 37: oj.school.QueryClassUserRsp
-	(*User)(nil),                     // 38: oj.school.User
-	(*UpdateClassUserReq)(nil),       // 39: oj.school.UpdateClassUserReq
-	(*UpdateClassStatusReq)(nil),     // 40: oj.school.UpdateClassStatusReq
-	(*UpdateClassReq)(nil),           // 41: oj.school.UpdateClassReq
-	(*AddClassReq)(nil),              // 42: oj.school.AddClassReq
-	(*QueryUserClassReq)(nil),        // 43: oj.school.QueryUserClassReq
-	(*QueryUserClassRsp)(nil),        // 44: oj.school.QueryUserClassRsp
-	(*UpdateTermReq)(nil),            // 45: oj.school.UpdateTermReq
-	(*AddTermReq)(nil),               // 46: oj.school.AddTermReq
-	(*AddCourseReq)(nil),             // 47: oj.school.AddCourseReq
-	(*CommonRsp)(nil),                // 48: oj.school.CommonRsp
-	(*Course)(nil),                   // 49: oj.school.Course
+	(*Knowledge)(nil),                // 8: oj.school.Knowledge
+	(*QueryCourseClassReq)(nil),      // 9: oj.school.QueryCourseClassReq
+	(*QueryCourseClassRsp)(nil),      // 10: oj.school.QueryCourseClassRsp
+	(*QueryContestClassUserReq)(nil), // 11: oj.school.QueryContestClassUserReq
+	(*QueryContestClassUserRsp)(nil), // 12: oj.school.QueryContestClassUserRsp
+	(*QueryCourseReq)(nil),           // 13: oj.school.QueryCourseReq
+	(*QueryCourseRsp)(nil),           // 14: oj.school.QueryCourseRsp
+	(*QueryTermReq)(nil),             // 15: oj.school.QueryTermReq
+	(*QueryTermRsp)(nil),             // 16: oj.school.QueryTermRsp
+	(*QueryCoursePageSizeRsp)(nil),   // 17: oj.school.QueryCoursePageSizeRsp
+	(*QueryCoursePageSizeReq)(nil),   // 18: oj.school.QueryCoursePageSizeReq
+	(*QueryAllTermReq)(nil),          // 19: oj.school.QueryAllTermReq
+	(*QueryAllTermRsp)(nil),          // 20: oj.school.QueryAllTermRsp
+	(*UserIDReq)(nil),                // 21: oj.school.UserIDReq
+	(*QueryPresentTermRsp)(nil),      // 22: oj.school.QueryPresentTermRsp
+	(*Term)(nil),                     // 23: oj.school.Term
+	(*SetPresentTermReq)(nil),        // 24: oj.school.SetPresentTermReq
+	(*UpdateTermStatusReq)(nil),      // 25: oj.school.UpdateTermStatusReq
+	(*UpdateCourseStatusReq)(nil),    // 26: oj.school.UpdateCourseStatusReq
+	(*UpdateCourseReq)(nil),          // 27: oj.school.UpdateCourseReq
+	(*QueryClassPageSizeReq)(nil),    // 28: oj.school.QueryClassPageSizeReq
+	(*QueryClassReq)(nil),            // 29: oj.school.QueryClassReq
+	(*TeacherInfo)(nil),              // 30: oj.school.TeacherInfo
+	(*Class)(nil),                    // 31: oj.school.Class
+	(*QueryClassRsp)(nil),            // 32: oj.school.QueryClassRsp
+	(*QueryClassPageSizeRsp)(nil),    // 33: oj.school.QueryClassPageSizeRsp
+	(*QueryClassUserReq)(nil),        // 34: oj.school.QueryClassUserReq
+	(*QueryClassUserRsp)(nil),        // 35: oj.school.QueryClassUserRsp
+	(*User)(nil),                     // 36: oj.school.User
+	(*UpdateClassUserReq)(nil),       // 37: oj.school.UpdateClassUserReq
+	(*UpdateClassStatusReq)(nil),     // 38: oj.school.UpdateClassStatusReq
+	(*UpdateClassReq)(nil),           // 39: oj.school.UpdateClassReq
+	(*AddClassReq)(nil),              // 40: oj.school.AddClassReq
+	(*QueryUserClassReq)(nil),        // 41: oj.school.QueryUserClassReq
+	(*QueryUserClassRsp)(nil),        // 42: oj.school.QueryUserClassRsp
+	(*UpdateTermReq)(nil),            // 43: oj.school.UpdateTermReq
+	(*AddTermReq)(nil),               // 44: oj.school.AddTermReq
+	(*AddCourseReq)(nil),             // 45: oj.school.AddCourseReq
+	(*CommonRsp)(nil),                // 46: oj.school.CommonRsp
+	(*Course)(nil),                   // 47: oj.school.Course
 }
 var file_school_proto_depIdxs = []int32{
-	33, // 0: oj.school.QueryAllClassRsp.classes:type_name -> oj.school.Class
+	31, // 0: oj.school.QueryAllClassRsp.classes:type_name -> oj.school.Class
 	6,  // 1: oj.school.QueryAllRelationRsp.datas:type_name -> oj.school.RelationData
 	7,  // 2: oj.school.QueryMyClassRsp.classes:type_name -> oj.school.MyClass
-	10, // 3: oj.school.QueryCourseKnowledgeRsp.knowledge:type_name -> oj.school.Knowledge
-	33, // 4: oj.school.QueryCourseClassRsp.class:type_name -> oj.school.Class
-	38, // 5: oj.school.QueryContestClassUserRsp.user:type_name -> oj.school.User
-	49, // 6: oj.school.QueryCourseRsp.course:type_name -> oj.school.Course
-	25, // 7: oj.school.QueryTermRsp.term:type_name -> oj.school.Term
-	49, // 8: oj.school.QueryCoursePageSizeRsp.course:type_name -> oj.school.Course
-	25, // 9: oj.school.QueryAllTermRsp.term:type_name -> oj.school.Term
-	25, // 10: oj.school.QueryPresentTermRsp.term:type_name -> oj.school.Term
-	49, // 11: oj.school.Class.course:type_name -> oj.school.Course
-	32, // 12: oj.school.Class.teachers:type_name -> oj.school.TeacherInfo
-	25, // 13: oj.school.Class.term:type_name -> oj.school.Term
-	33, // 14: oj.school.QueryClassRsp.class:type_name -> oj.school.Class
-	33, // 15: oj.school.QueryClassPageSizeRsp.class:type_name -> oj.school.Class
-	38, // 16: oj.school.QueryClassUserRsp.users:type_name -> oj.school.User
-	47, // 17: oj.school.CourseServer.AddCourse:input_type -> oj.school.AddCourseReq
-	29, // 18: oj.school.CourseServer.UpdateCourse:input_type -> oj.school.UpdateCourseReq
-	28, // 19: oj.school.CourseServer.UpdateCourseStatus:input_type -> oj.school.UpdateCourseStatusReq
-	20, // 20: oj.school.CourseServer.QueryAllCourse:input_type -> oj.school.QueryCoursePageSizeReq
-	20, // 21: oj.school.CourseServer.QueryMyCourse:input_type -> oj.school.QueryCoursePageSizeReq
-	15, // 22: oj.school.CourseServer.QueryCourse:input_type -> oj.school.QueryCourseReq
-	8,  // 23: oj.school.CourseServer.QueryCourseKnowledge:input_type -> oj.school.QueryCourseKnowledgeReq
-	20, // 24: oj.school.CourseServer.QueryCoursePageSize:input_type -> oj.school.QueryCoursePageSizeReq
-	17, // 25: oj.school.CourseServer.QueryTermCourse:input_type -> oj.school.QueryTermReq
-	20, // 26: oj.school.CourseServer.QueryAllRelationData:input_type -> oj.school.QueryCoursePageSizeReq
-	43, // 27: oj.school.ClassServer.QueryUserClass:input_type -> oj.school.QueryUserClassReq
-	42, // 28: oj.school.ClassServer.AddClass:input_type -> oj.school.AddClassReq
-	41, // 29: oj.school.ClassServer.UpdateClass:input_type -> oj.school.UpdateClassReq
-	40, // 30: oj.school.ClassServer.UpdateClassStatus:input_type -> oj.school.UpdateClassStatusReq
-	39, // 31: oj.school.ClassServer.UpdateClassUser:input_type -> oj.school.UpdateClassUserReq
-	36, // 32: oj.school.ClassServer.QueryClassUser:input_type -> oj.school.QueryClassUserReq
-	30, // 33: oj.school.ClassServer.QueryClassPageSize:input_type -> oj.school.QueryClassPageSizeReq
-	31, // 34: oj.school.ClassServer.QueryClass:input_type -> oj.school.QueryClassReq
-	13, // 35: oj.school.ClassServer.QueryContestClassUser:input_type -> oj.school.QueryContestClassUserReq
-	23, // 36: oj.school.ClassServer.QueryMyClass:input_type -> oj.school.UserIDReq
-	3,  // 37: oj.school.ClassServer.QueryContestClass:input_type -> oj.school.QueryContestClassReq
-	11, // 38: oj.school.ClassServer.QueryCourseClass:input_type -> oj.school.QueryCourseClassReq
-	23, // 39: oj.school.ClassServer.QueryAllClass:input_type -> oj.school.UserIDReq
-	20, // 40: oj.school.ClassServer.QueryAllRelationCourse:input_type -> oj.school.QueryCoursePageSizeReq
-	0,  // 41: oj.school.ClassServer.CountClassUser:input_type -> oj.school.CountClassUserReq
-	31, // 42: oj.school.ClassServer.QueryAllMyClassUser:input_type -> oj.school.QueryClassReq
-	46, // 43: oj.school.TermServer.AddTerm:input_type -> oj.school.AddTermReq
-	45, // 44: oj.school.TermServer.UpdateTerm:input_type -> oj.school.UpdateTermReq
-	27, // 45: oj.school.TermServer.UpdateTermStatus:input_type -> oj.school.UpdateTermStatusReq
-	26, // 46: oj.school.TermServer.SetPresentTerm:input_type -> oj.school.SetPresentTermReq
-	23, // 47: oj.school.TermServer.QueryPresentTerm:input_type -> oj.school.UserIDReq
-	21, // 48: oj.school.TermServer.QueryAllTerm:input_type -> oj.school.QueryAllTermReq
-	17, // 49: oj.school.TermServer.QueryTerm:input_type -> oj.school.QueryTermReq
-	48, // 50: oj.school.CourseServer.AddCourse:output_type -> oj.school.CommonRsp
-	48, // 51: oj.school.CourseServer.UpdateCourse:output_type -> oj.school.CommonRsp
-	48, // 52: oj.school.CourseServer.UpdateCourseStatus:output_type -> oj.school.CommonRsp
-	19, // 53: oj.school.CourseServer.QueryAllCourse:output_type -> oj.school.QueryCoursePageSizeRsp
-	19, // 54: oj.school.CourseServer.QueryMyCourse:output_type -> oj.school.QueryCoursePageSizeRsp
-	16, // 55: oj.school.CourseServer.QueryCourse:output_type -> oj.school.QueryCourseRsp
-	9,  // 56: oj.school.CourseServer.QueryCourseKnowledge:output_type -> oj.school.QueryCourseKnowledgeRsp
-	19, // 57: oj.school.CourseServer.QueryCoursePageSize:output_type -> oj.school.QueryCoursePageSizeRsp
-	19, // 58: oj.school.CourseServer.QueryTermCourse:output_type -> oj.school.QueryCoursePageSizeRsp
-	4,  // 59: oj.school.CourseServer.QueryAllRelationData:output_type -> oj.school.QueryAllRelationRsp
-	44, // 60: oj.school.ClassServer.QueryUserClass:output_type -> oj.school.QueryUserClassRsp
-	48, // 61: oj.school.ClassServer.AddClass:output_type -> oj.school.CommonRsp
-	48, // 62: oj.school.ClassServer.UpdateClass:output_type -> oj.school.CommonRsp
-	48, // 63: oj.school.ClassServer.UpdateClassStatus:output_type -> oj.school.CommonRsp
-	48, // 64: oj.school.ClassServer.UpdateClassUser:output_type -> oj.school.CommonRsp
-	37, // 65: oj.school.ClassServer.QueryClassUser:output_type -> oj.school.QueryClassUserRsp
-	35, // 66: oj.school.ClassServer.QueryClassPageSize:output_type -> oj.school.QueryClassPageSizeRsp
-	34, // 67: oj.school.ClassServer.QueryClass:output_type -> oj.school.QueryClassRsp
-	14, // 68: oj.school.ClassServer.QueryContestClassUser:output_type -> oj.school.QueryContestClassUserRsp
-	5,  // 69: oj.school.ClassServer.QueryMyClass:output_type -> oj.school.QueryMyClassRsp
-	5,  // 70: oj.school.ClassServer.QueryContestClass:output_type -> oj.school.QueryMyClassRsp
-	12, // 71: oj.school.ClassServer.QueryCourseClass:output_type -> oj.school.QueryCourseClassRsp
-	4,  // 72: oj.school.ClassServer.QueryAllClass:output_type -> oj.school.QueryAllRelationRsp
-	4,  // 73: oj.school.ClassServer.QueryAllRelationCourse:output_type -> oj.school.QueryAllRelationRsp
-	1,  // 74: oj.school.ClassServer.CountClassUser:output_type -> oj.school.CountClassUserRsp
-	37, // 75: oj.school.ClassServer.QueryAllMyClassUser:output_type -> oj.school.QueryClassUserRsp
-	48, // 76: oj.school.TermServer.AddTerm:output_type -> oj.school.CommonRsp
-	48, // 77: oj.school.TermServer.UpdateTerm:output_type -> oj.school.CommonRsp
-	48, // 78: oj.school.TermServer.UpdateTermStatus:output_type -> oj.school.CommonRsp
-	48, // 79: oj.school.TermServer.SetPresentTerm:output_type -> oj.school.CommonRsp
-	24, // 80: oj.school.TermServer.QueryPresentTerm:output_type -> oj.school.QueryPresentTermRsp
-	22, // 81: oj.school.TermServer.QueryAllTerm:output_type -> oj.school.QueryAllTermRsp
-	18, // 82: oj.school.TermServer.QueryTerm:output_type -> oj.school.QueryTermRsp
-	50, // [50:83] is the sub-list for method output_type
-	17, // [17:50] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	31, // 3: oj.school.QueryCourseClassRsp.class:type_name -> oj.school.Class
+	36, // 4: oj.school.QueryContestClassUserRsp.user:type_name -> oj.school.User
+	47, // 5: oj.school.QueryCourseRsp.course:type_name -> oj.school.Course
+	23, // 6: oj.school.QueryTermRsp.term:type_name -> oj.school.Term
+	47, // 7: oj.school.QueryCoursePageSizeRsp.course:type_name -> oj.school.Course
+	23, // 8: oj.school.QueryAllTermRsp.term:type_name -> oj.school.Term
+	23, // 9: oj.school.QueryPresentTermRsp.term:type_name -> oj.school.Term
+	47, // 10: oj.school.Class.course:type_name -> oj.school.Course
+	30, // 11: oj.school.Class.teachers:type_name -> oj.school.TeacherInfo
+	23, // 12: oj.school.Class.term:type_name -> oj.school.Term
+	31, // 13: oj.school.QueryClassRsp.class:type_name -> oj.school.Class
+	31, // 14: oj.school.QueryClassPageSizeRsp.class:type_name -> oj.school.Class
+	36, // 15: oj.school.QueryClassUserRsp.users:type_name -> oj.school.User
+	45, // 16: oj.school.CourseServer.AddCourse:input_type -> oj.school.AddCourseReq
+	27, // 17: oj.school.CourseServer.UpdateCourse:input_type -> oj.school.UpdateCourseReq
+	26, // 18: oj.school.CourseServer.UpdateCourseStatus:input_type -> oj.school.UpdateCourseStatusReq
+	18, // 19: oj.school.CourseServer.QueryAllCourse:input_type -> oj.school.QueryCoursePageSizeReq
+	18, // 20: oj.school.CourseServer.QueryMyCourse:input_type -> oj.school.QueryCoursePageSizeReq
+	13, // 21: oj.school.CourseServer.QueryCourse:input_type -> oj.school.QueryCourseReq
+	18, // 22: oj.school.CourseServer.QueryCoursePageSize:input_type -> oj.school.QueryCoursePageSizeReq
+	41, // 23: oj.school.ClassServer.QueryUserClass:input_type -> oj.school.QueryUserClassReq
+	40, // 24: oj.school.ClassServer.AddClass:input_type -> oj.school.AddClassReq
+	39, // 25: oj.school.ClassServer.UpdateClass:input_type -> oj.school.UpdateClassReq
+	38, // 26: oj.school.ClassServer.UpdateClassStatus:input_type -> oj.school.UpdateClassStatusReq
+	37, // 27: oj.school.ClassServer.UpdateClassUser:input_type -> oj.school.UpdateClassUserReq
+	34, // 28: oj.school.ClassServer.QueryClassUser:input_type -> oj.school.QueryClassUserReq
+	28, // 29: oj.school.ClassServer.QueryClassPageSize:input_type -> oj.school.QueryClassPageSizeReq
+	29, // 30: oj.school.ClassServer.QueryClass:input_type -> oj.school.QueryClassReq
+	11, // 31: oj.school.ClassServer.QueryContestClassUser:input_type -> oj.school.QueryContestClassUserReq
+	21, // 32: oj.school.ClassServer.QueryMyClass:input_type -> oj.school.UserIDReq
+	3,  // 33: oj.school.ClassServer.QueryContestClass:input_type -> oj.school.QueryContestClassReq
+	9,  // 34: oj.school.ClassServer.QueryCourseClass:input_type -> oj.school.QueryCourseClassReq
+	21, // 35: oj.school.ClassServer.QueryAllClass:input_type -> oj.school.UserIDReq
+	18, // 36: oj.school.ClassServer.QueryAllRelationCourse:input_type -> oj.school.QueryCoursePageSizeReq
+	0,  // 37: oj.school.ClassServer.CountClassUser:input_type -> oj.school.CountClassUserReq
+	29, // 38: oj.school.ClassServer.QueryAllMyClassUser:input_type -> oj.school.QueryClassReq
+	44, // 39: oj.school.TermServer.AddTerm:input_type -> oj.school.AddTermReq
+	43, // 40: oj.school.TermServer.UpdateTerm:input_type -> oj.school.UpdateTermReq
+	25, // 41: oj.school.TermServer.UpdateTermStatus:input_type -> oj.school.UpdateTermStatusReq
+	24, // 42: oj.school.TermServer.SetPresentTerm:input_type -> oj.school.SetPresentTermReq
+	21, // 43: oj.school.TermServer.QueryPresentTerm:input_type -> oj.school.UserIDReq
+	19, // 44: oj.school.TermServer.QueryAllTerm:input_type -> oj.school.QueryAllTermReq
+	15, // 45: oj.school.TermServer.QueryTerm:input_type -> oj.school.QueryTermReq
+	46, // 46: oj.school.CourseServer.AddCourse:output_type -> oj.school.CommonRsp
+	46, // 47: oj.school.CourseServer.UpdateCourse:output_type -> oj.school.CommonRsp
+	46, // 48: oj.school.CourseServer.UpdateCourseStatus:output_type -> oj.school.CommonRsp
+	17, // 49: oj.school.CourseServer.QueryAllCourse:output_type -> oj.school.QueryCoursePageSizeRsp
+	17, // 50: oj.school.CourseServer.QueryMyCourse:output_type -> oj.school.QueryCoursePageSizeRsp
+	14, // 51: oj.school.CourseServer.QueryCourse:output_type -> oj.school.QueryCourseRsp
+	17, // 52: oj.school.CourseServer.QueryCoursePageSize:output_type -> oj.school.QueryCoursePageSizeRsp
+	42, // 53: oj.school.ClassServer.QueryUserClass:output_type -> oj.school.QueryUserClassRsp
+	46, // 54: oj.school.ClassServer.AddClass:output_type -> oj.school.CommonRsp
+	46, // 55: oj.school.ClassServer.UpdateClass:output_type -> oj.school.CommonRsp
+	46, // 56: oj.school.ClassServer.UpdateClassStatus:output_type -> oj.school.CommonRsp
+	46, // 57: oj.school.ClassServer.UpdateClassUser:output_type -> oj.school.CommonRsp
+	35, // 58: oj.school.ClassServer.QueryClassUser:output_type -> oj.school.QueryClassUserRsp
+	33, // 59: oj.school.ClassServer.QueryClassPageSize:output_type -> oj.school.QueryClassPageSizeRsp
+	32, // 60: oj.school.ClassServer.QueryClass:output_type -> oj.school.QueryClassRsp
+	12, // 61: oj.school.ClassServer.QueryContestClassUser:output_type -> oj.school.QueryContestClassUserRsp
+	5,  // 62: oj.school.ClassServer.QueryMyClass:output_type -> oj.school.QueryMyClassRsp
+	5,  // 63: oj.school.ClassServer.QueryContestClass:output_type -> oj.school.QueryMyClassRsp
+	10, // 64: oj.school.ClassServer.QueryCourseClass:output_type -> oj.school.QueryCourseClassRsp
+	4,  // 65: oj.school.ClassServer.QueryAllClass:output_type -> oj.school.QueryAllRelationRsp
+	4,  // 66: oj.school.ClassServer.QueryAllRelationCourse:output_type -> oj.school.QueryAllRelationRsp
+	1,  // 67: oj.school.ClassServer.CountClassUser:output_type -> oj.school.CountClassUserRsp
+	35, // 68: oj.school.ClassServer.QueryAllMyClassUser:output_type -> oj.school.QueryClassUserRsp
+	46, // 69: oj.school.TermServer.AddTerm:output_type -> oj.school.CommonRsp
+	46, // 70: oj.school.TermServer.UpdateTerm:output_type -> oj.school.CommonRsp
+	46, // 71: oj.school.TermServer.UpdateTermStatus:output_type -> oj.school.CommonRsp
+	46, // 72: oj.school.TermServer.SetPresentTerm:output_type -> oj.school.CommonRsp
+	22, // 73: oj.school.TermServer.QueryPresentTerm:output_type -> oj.school.QueryPresentTermRsp
+	20, // 74: oj.school.TermServer.QueryAllTerm:output_type -> oj.school.QueryAllTermRsp
+	16, // 75: oj.school.TermServer.QueryTerm:output_type -> oj.school.QueryTermRsp
+	46, // [46:76] is the sub-list for method output_type
+	16, // [16:46] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_school_proto_init() }
@@ -3666,7 +3535,7 @@ func file_school_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_school_proto_rawDesc), len(file_school_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   50,
+			NumMessages:   48,
 			NumExtensions: 0,
 			NumServices:   3,
 		},

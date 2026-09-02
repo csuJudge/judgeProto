@@ -31,14 +31,8 @@ type CourseServerService interface {
 	QueryMyCourse(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryCoursePageSizeRsp, error)
 	// QueryCourse QueryCourse 查询课程
 	QueryCourse(ctx context.Context, req *QueryCourseReq) (*QueryCourseRsp, error)
-	// QueryCourseKnowledge QueryCourseKnowledge 查询课程的知识点
-	QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq) (*QueryCourseKnowledgeRsp, error)
 	// QueryCoursePageSize QueryCoursePageSize 分页查询所有课程
 	QueryCoursePageSize(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryCoursePageSizeRsp, error)
-	// QueryTermCourse QueryTermCourse 查询学期的课程
-	QueryTermCourse(ctx context.Context, req *QueryTermReq) (*QueryCoursePageSizeRsp, error)
-	// QueryAllRelationData QueryAllRelationData 查询所有关联数据
-	QueryAllRelationData(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryAllRelationRsp, error)
 }
 
 func CourseServerService_AddCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -149,24 +143,6 @@ func CourseServerService_QueryCourse_Handler(svr interface{}, ctx context.Contex
 	return rsp, nil
 }
 
-func CourseServerService_QueryCourseKnowledge_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &QueryCourseKnowledgeReq{}
-	filters, err := f(req)
-	if err != nil {
-		return nil, err
-	}
-	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(CourseServerService).QueryCourseKnowledge(ctx, reqbody.(*QueryCourseKnowledgeReq))
-	}
-
-	var rsp interface{}
-	rsp, err = filters.Filter(ctx, req, handleFunc)
-	if err != nil {
-		return nil, err
-	}
-	return rsp, nil
-}
-
 func CourseServerService_QueryCoursePageSize_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
 	req := &QueryCoursePageSizeReq{}
 	filters, err := f(req)
@@ -175,42 +151,6 @@ func CourseServerService_QueryCoursePageSize_Handler(svr interface{}, ctx contex
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
 		return svr.(CourseServerService).QueryCoursePageSize(ctx, reqbody.(*QueryCoursePageSizeReq))
-	}
-
-	var rsp interface{}
-	rsp, err = filters.Filter(ctx, req, handleFunc)
-	if err != nil {
-		return nil, err
-	}
-	return rsp, nil
-}
-
-func CourseServerService_QueryTermCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &QueryTermReq{}
-	filters, err := f(req)
-	if err != nil {
-		return nil, err
-	}
-	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(CourseServerService).QueryTermCourse(ctx, reqbody.(*QueryTermReq))
-	}
-
-	var rsp interface{}
-	rsp, err = filters.Filter(ctx, req, handleFunc)
-	if err != nil {
-		return nil, err
-	}
-	return rsp, nil
-}
-
-func CourseServerService_QueryAllRelationData_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &QueryCoursePageSizeReq{}
-	filters, err := f(req)
-	if err != nil {
-		return nil, err
-	}
-	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(CourseServerService).QueryAllRelationData(ctx, reqbody.(*QueryCoursePageSizeReq))
 	}
 
 	var rsp interface{}
@@ -251,20 +191,8 @@ var CourseServerServer_ServiceDesc = server.ServiceDesc{
 			Func: CourseServerService_QueryCourse_Handler,
 		},
 		{
-			Name: "/oj.school.CourseServer/QueryCourseKnowledge",
-			Func: CourseServerService_QueryCourseKnowledge_Handler,
-		},
-		{
 			Name: "/oj.school.CourseServer/QueryCoursePageSize",
 			Func: CourseServerService_QueryCoursePageSize_Handler,
-		},
-		{
-			Name: "/oj.school.CourseServer/QueryTermCourse",
-			Func: CourseServerService_QueryTermCourse_Handler,
-		},
-		{
-			Name: "/oj.school.CourseServer/QueryAllRelationData",
-			Func: CourseServerService_QueryAllRelationData_Handler,
 		},
 	},
 }
@@ -900,24 +828,9 @@ func (s *UnimplementedCourseServer) QueryCourse(ctx context.Context, req *QueryC
 	return nil, errors.New("rpc QueryCourse of service CourseServer is not implemented")
 }
 
-// QueryCourseKnowledge QueryCourseKnowledge 查询课程的知识点
-func (s *UnimplementedCourseServer) QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq) (*QueryCourseKnowledgeRsp, error) {
-	return nil, errors.New("rpc QueryCourseKnowledge of service CourseServer is not implemented")
-}
-
 // QueryCoursePageSize QueryCoursePageSize 分页查询所有课程
 func (s *UnimplementedCourseServer) QueryCoursePageSize(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryCoursePageSizeRsp, error) {
 	return nil, errors.New("rpc QueryCoursePageSize of service CourseServer is not implemented")
-}
-
-// QueryTermCourse QueryTermCourse 查询学期的课程
-func (s *UnimplementedCourseServer) QueryTermCourse(ctx context.Context, req *QueryTermReq) (*QueryCoursePageSizeRsp, error) {
-	return nil, errors.New("rpc QueryTermCourse of service CourseServer is not implemented")
-}
-
-// QueryAllRelationData QueryAllRelationData 查询所有关联数据
-func (s *UnimplementedCourseServer) QueryAllRelationData(ctx context.Context, req *QueryCoursePageSizeReq) (*QueryAllRelationRsp, error) {
-	return nil, errors.New("rpc QueryAllRelationData of service CourseServer is not implemented")
 }
 
 type UnimplementedClassServer struct{}
@@ -1059,14 +972,8 @@ type CourseServerClientProxy interface {
 	QueryMyCourse(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (rsp *QueryCoursePageSizeRsp, err error)
 	// QueryCourse QueryCourse 查询课程
 	QueryCourse(ctx context.Context, req *QueryCourseReq, opts ...client.Option) (rsp *QueryCourseRsp, err error)
-	// QueryCourseKnowledge QueryCourseKnowledge 查询课程的知识点
-	QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq, opts ...client.Option) (rsp *QueryCourseKnowledgeRsp, err error)
 	// QueryCoursePageSize QueryCoursePageSize 分页查询所有课程
 	QueryCoursePageSize(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (rsp *QueryCoursePageSizeRsp, err error)
-	// QueryTermCourse QueryTermCourse 查询学期的课程
-	QueryTermCourse(ctx context.Context, req *QueryTermReq, opts ...client.Option) (rsp *QueryCoursePageSizeRsp, err error)
-	// QueryAllRelationData QueryAllRelationData 查询所有关联数据
-	QueryAllRelationData(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (rsp *QueryAllRelationRsp, err error)
 }
 
 type CourseServerClientProxyImpl struct {
@@ -1198,26 +1105,6 @@ func (c *CourseServerClientProxyImpl) QueryCourse(ctx context.Context, req *Quer
 	return rsp, nil
 }
 
-func (c *CourseServerClientProxyImpl) QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq, opts ...client.Option) (*QueryCourseKnowledgeRsp, error) {
-	ctx, msg := codec.WithCloneMessage(ctx)
-	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/oj.school.CourseServer/QueryCourseKnowledge")
-	msg.WithCalleeServiceName(CourseServerServer_ServiceDesc.ServiceName)
-	msg.WithCalleeApp("")
-	msg.WithCalleeServer("")
-	msg.WithCalleeService("CourseServer")
-	msg.WithCalleeMethod("QueryCourseKnowledge")
-	msg.WithSerializationType(codec.SerializationTypePB)
-	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
-	callopts = append(callopts, c.opts...)
-	callopts = append(callopts, opts...)
-	rsp := &QueryCourseKnowledgeRsp{}
-	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
-		return nil, err
-	}
-	return rsp, nil
-}
-
 func (c *CourseServerClientProxyImpl) QueryCoursePageSize(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (*QueryCoursePageSizeRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
@@ -1232,46 +1119,6 @@ func (c *CourseServerClientProxyImpl) QueryCoursePageSize(ctx context.Context, r
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryCoursePageSizeRsp{}
-	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
-		return nil, err
-	}
-	return rsp, nil
-}
-
-func (c *CourseServerClientProxyImpl) QueryTermCourse(ctx context.Context, req *QueryTermReq, opts ...client.Option) (*QueryCoursePageSizeRsp, error) {
-	ctx, msg := codec.WithCloneMessage(ctx)
-	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/oj.school.CourseServer/QueryTermCourse")
-	msg.WithCalleeServiceName(CourseServerServer_ServiceDesc.ServiceName)
-	msg.WithCalleeApp("")
-	msg.WithCalleeServer("")
-	msg.WithCalleeService("CourseServer")
-	msg.WithCalleeMethod("QueryTermCourse")
-	msg.WithSerializationType(codec.SerializationTypePB)
-	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
-	callopts = append(callopts, c.opts...)
-	callopts = append(callopts, opts...)
-	rsp := &QueryCoursePageSizeRsp{}
-	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
-		return nil, err
-	}
-	return rsp, nil
-}
-
-func (c *CourseServerClientProxyImpl) QueryAllRelationData(ctx context.Context, req *QueryCoursePageSizeReq, opts ...client.Option) (*QueryAllRelationRsp, error) {
-	ctx, msg := codec.WithCloneMessage(ctx)
-	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/oj.school.CourseServer/QueryAllRelationData")
-	msg.WithCalleeServiceName(CourseServerServer_ServiceDesc.ServiceName)
-	msg.WithCalleeApp("")
-	msg.WithCalleeServer("")
-	msg.WithCalleeService("CourseServer")
-	msg.WithCalleeMethod("QueryAllRelationData")
-	msg.WithSerializationType(codec.SerializationTypePB)
-	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
-	callopts = append(callopts, c.opts...)
-	callopts = append(callopts, opts...)
-	rsp := &QueryAllRelationRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

@@ -16,14 +16,8 @@ service CourseServer {
     rpc QueryMyCourse(QueryCoursePageSizeReq) returns (QueryCoursePageSizeRsp) {}
     // QueryCourse 查询课程
     rpc QueryCourse(QueryCourseReq) returns (QueryCourseRsp) {}
-    // QueryCourseKnowledge 查询课程的知识点
-    rpc QueryCourseKnowledge(QueryCourseKnowledgeReq) returns (QueryCourseKnowledgeRsp) {}
     // QueryCoursePageSize 分页查询所有课程
     rpc QueryCoursePageSize(QueryCoursePageSizeReq) returns (QueryCoursePageSizeRsp) {}
-    // QueryTermCourse 查询学期的课程
-    rpc QueryTermCourse(QueryTermReq) returns (QueryCoursePageSizeRsp) {}
-    // QueryAllRelationData 查询所有关联数据
-    rpc QueryAllRelationData(QueryCoursePageSizeReq) returns (QueryAllRelationRsp) {}
 }
 
 service ClassServer {
@@ -122,17 +116,6 @@ message MyClass {
     string className = 2;  // 班级名称
 }
 
-
-message QueryCourseKnowledgeReq {
-    int32 courseID = 1;  // 课程编号
-    int32 userID   = 2;  // 用户编号
-}
-
-message QueryCourseKnowledgeRsp {
-    string message               = 1;  // 返回信息
-    int32 code                   = 2;  // 返回码
-    repeated Knowledge knowledge = 3;  // 知识点
-}
 
 message Knowledge {
     int32 id    = 1;  // 知识点主键
