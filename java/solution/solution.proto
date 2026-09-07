@@ -47,8 +47,8 @@ message QueryRuntimeInfoRsp{
   string message = 1;  // 返回信息
   int32 code = 2;  // 返回码
   int32 result = 3; // 结果
-  string runtimeInfo = 4;  // 运行信息
-  string compileInfo = 5;  //  编译信息
+  runtimeInfo runtimeInfo = 4;  // 运行信息
+  compileInfo compileInfo = 5;  //  编译信息
 }
 
 message AddSolutionReq{
@@ -74,4 +74,20 @@ message solution {
   int32 score = 6; // 得分
   string createdTime = 7; // 提交时间
   string finishTime = 8; // 完成时间
+}
+
+message compileInfo {
+  string log = 2; // 完整输出
+  int32 status = 1; // 编译状态
+  int32 duration =3;// 耗时
+}
+
+message runtimeInfo{
+  int32 problemCaseID = 1;// 样例编号
+  int32 status = 2; // 编译状态
+  string  output = 3; // 运行输出
+  string errorOutput =4; // 错误输出
+  int32 exitCode = 5;// 进程退出码
+  int32 time = 6; // 运行耗时
+  int32 memory = 7; // 峰值内存
 }
