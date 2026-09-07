@@ -24,10 +24,10 @@ service ProblemServer {
 message Problem {
   int32 id = 1; // 题目编号
   int32 type = 2; // 类型
-  int32 title = 3; // 题目名称
+  string title = 3; // 题目名称
   string description = 4; // 题目描述
-  int32 inputDescription = 5; // 输入描述
-  int32 outputDescription = 6; // 输出描述
+  string inputDescription = 5; // 输入描述
+  string outputDescription = 6; // 输出描述
   int32 totalPoints = 7; // 满分
   int32 timeLimit = 8; // 时间上限
   int32 memoryLimit = 9; // 内存上限
@@ -60,10 +60,10 @@ message UpdateProblemStatusReq{
 message UpdateProblemReq{
   int32 problemID = 1; // 题目编号
   int32 type = 2; // 类型
-  int32 title = 3; // 题目名称
-  int32 description = 4; // 题目描述
-  int32 inputDescription = 5; // 输入描述
-  int32 outputDescription = 6; // 输出描述
+  string title = 3; // 题目名称
+  string description = 4; // 题目描述
+  string inputDescription = 5; // 输入描述
+  string outputDescription = 6; // 输出描述
   int32 totalPoints = 7; // 满分
   int32 timeLimit = 8; // 时间上限
   int32 memoryLimit = 9; // 内存上限
@@ -115,10 +115,10 @@ message QueryProblemRsp{
 
 message AddProblemReq{
   int32 type = 1; // 类型
-  int32 title = 2; // 题目名称
-  int32 description = 3; // 题目描述
-  int32 inputDescription = 4; // 输入描述
-  int32 outputDescription = 5; // 输出描述
+  string title = 2; // 题目名称
+  string description = 3; // 题目描述
+  string inputDescription = 4; // 输入描述
+  string outputDescription = 5; // 输出描述
   int32 totalPoints = 6; // 满分
   int32 timeLimit = 7; // 时间上限
   int32 memoryLimit = 8; // 内存上限
