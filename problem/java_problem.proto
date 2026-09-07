@@ -1,5 +1,5 @@
 syntax            = "proto3";
-option go_package = "github.com/csuJudge/judgeProto/java/javaProblem";
+option go_package = "github.com/csuJudge/judgeProto/problem/javaProblem";
 
 package oj.java.problem;
 
