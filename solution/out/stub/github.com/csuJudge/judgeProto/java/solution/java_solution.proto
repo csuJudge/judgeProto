@@ -1,0 +1,101 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto/java/solution";
+
+package oj.java.solution;
+
+service SolutionServer {
+  // QueryRuntimeInfo 查询信息
+  rpc QueryRuntimeInfo(QueryRuntimeInfoReq) returns (QueryRuntimeInfoRsp) {}
+  // QuerySourceCode 查询源代码
+  rpc QuerySourceCode(QuerySourceCodeReq) returns (QuerySourceCodeRsp) {}
+  // AddSolution 添加提交数据
+  rpc AddSolution(AddSolutionReq) returns (AddSolutionRsp) {}
+  // QuerySolution 查询提交数据
+  rpc QuerySolution(QuerySolutionReq) returns (QuerySolutionRsp) {}
+  // QueryResult 查询结果
+  rpc QueryResult(QueryRuntimeInfoReq) returns (QueryResultRsp) {}
+}
+
+message QueryResultRsp{
+  string message = 1;  // 返回信息
+  int32 code = 2;  // 返回码
+  int32 result = 3; // 结果
+}
+
+message QuerySolutionReq{
+  int32 userID = 1; // 用户编号
+  int32 page = 2; // 页
+  int32 limit = 3; // 页大小
+}
+
+message QuerySolutionRsp{
+  string message = 1;  // 返回信息
+  int32 code = 2;  // 返回码
+  int32 total = 3; // 总数
+  repeated solution solution = 4; // 提交数据
+}
+
+message QuerySourceCodeReq{
+  int32 solutionID = 1; // 提交编号
+  int32 userID = 2; // 用户编号
+}
+
+message QuerySourceCodeRsp{
+  string message = 1;  // 返回信息
+  int32 code = 2;  // 返回码
+  repeated string sourceCode = 3; // 源码
+}
+
+message QueryRuntimeInfoReq{
+  int32 solutionID = 1; // 提交编号
+  int32 userID = 2; // 用户编号
+}
+
+message QueryRuntimeInfoRsp{
+  string message = 1;  // 返回信息
+  int32 code = 2;  // 返回码
+  int32 result = 3; // 结果
+  repeated runtimeInfo runtimeInfo = 4;  // 运行信息
+  compileInfo compileInfo = 5;  //  编译信息
+}
+
+message AddSolutionReq{
+  int32 problemID = 1;   // 题目编号
+  int32 userID = 2;   // 用户编号
+  int32 contestID = 3;   // 考试编号
+  string userCode = 4;   // 用户代码
+  int32 projectID = 5; // 项目编号
+}
+
+message AddSolutionRsp{
+  string message = 1;  // 返回信息
+  int32 code = 2;  // 返回码
+  int32 solutionID = 3;  // 提交编
+}
+
+message solution {
+  int32 solutionID = 1; // 提交编号
+  int32 projectID = 2; // 项目编号
+  int32 problemID = 3; // 题目编号
+  int32 status = 4; // 状态
+  int32 result = 5; // 结果
+  int32 score = 6; // 得分
+  string createdTime = 7; // 提交时间
+  string finishTime = 8; // 完成时间
+}
+
+message compileInfo {
+  string log = 2; // 完整输出
+  int32 status = 1; // 编译状态
+  int32 duration =3;// 耗时
+}
+
+message runtimeInfo{
+  int32 problemCaseID = 1;// 样例编号
+  int32 status = 2; // 编译状态
+  string  output = 3; // 运行输出
+  string errorOutput =4; // 错误输出
+  int32 exitCode = 5;// 进程退出码
+  int32 time = 6; // 运行耗时
+  int32 memory = 7; // 峰值内存
+}
