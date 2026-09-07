@@ -25,7 +25,7 @@ message Problem {
   int32 id = 1; // 题目编号
   int32 type = 2; // 类型
   int32 title = 3; // 题目名称
-  int32 description = 4; // 题目描述
+  string description = 4; // 题目描述
   int32 inputDescription = 5; // 输入描述
   int32 outputDescription = 6; // 输出描述
   int32 totalPoints = 7; // 满分
@@ -36,6 +36,8 @@ message Problem {
   int32 enable = 12; // 状态
   string createdTime = 13; // 创建时间
   string updatedTime = 14; // 更新时间
+  int32 solved = 15; // 解决数
+  int32 submission = 16; // 提交数
 }
 
 message QueryProblemNameReq{
