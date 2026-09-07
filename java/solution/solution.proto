@@ -12,6 +12,14 @@ service SolutionServer {
   rpc AddSolution(AddSolutionReq) returns (AddSolutionRsp) {}
   // QuerySolution 查询提交数据
   rpc QuerySolution(QuerySolutionReq) returns (QuerySolutionRsp) {}
+  // QueryResult 查询结果
+  rpc QueryResult(QueryRuntimeInfoReq) returns (QueryResultRsp) {}
+}
+
+message QueryResultRsp{
+  string message = 1;  // 返回信息
+  int32 code = 2;  // 返回码
+  int32 result = 3; // 结果
 }
 
 message QuerySolutionReq{
@@ -47,7 +55,7 @@ message QueryRuntimeInfoRsp{
   string message = 1;  // 返回信息
   int32 code = 2;  // 返回码
   int32 result = 3; // 结果
-  runtimeInfo runtimeInfo = 4;  // 运行信息
+  repeated runtimeInfo runtimeInfo = 4;  // 运行信息
   compileInfo compileInfo = 5;  //  编译信息
 }
 

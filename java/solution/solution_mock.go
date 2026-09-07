@@ -60,6 +60,21 @@ func (mr *MockSolutionServerServiceMockRecorder) AddSolution(ctx, req any) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddSolution", reflect.TypeOf((*MockSolutionServerService)(nil).AddSolution), ctx, req)
 }
 
+// QueryResult mocks base method.
+func (m *MockSolutionServerService) QueryResult(ctx context.Context, req *QueryRuntimeInfoReq) (*QueryResultRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryResult", ctx, req)
+	ret0, _ := ret[0].(*QueryResultRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryResult indicates an expected call of QueryResult.
+func (mr *MockSolutionServerServiceMockRecorder) QueryResult(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryResult", reflect.TypeOf((*MockSolutionServerService)(nil).QueryResult), ctx, req)
+}
+
 // QueryRuntimeInfo mocks base method.
 func (m *MockSolutionServerService) QueryRuntimeInfo(ctx context.Context, req *QueryRuntimeInfoReq) (*QueryRuntimeInfoRsp, error) {
 	m.ctrl.T.Helper()
@@ -151,6 +166,26 @@ func (mr *MockSolutionServerClientProxyMockRecorder) AddSolution(ctx, req any, o
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddSolution", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).AddSolution), varargs...)
+}
+
+// QueryResult mocks base method.
+func (m *MockSolutionServerClientProxy) QueryResult(ctx context.Context, req *QueryRuntimeInfoReq, opts ...client.Option) (*QueryResultRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryResult", varargs...)
+	ret0, _ := ret[0].(*QueryResultRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryResult indicates an expected call of QueryResult.
+func (mr *MockSolutionServerClientProxyMockRecorder) QueryResult(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryResult", reflect.TypeOf((*MockSolutionServerClientProxy)(nil).QueryResult), varargs...)
 }
 
 // QueryRuntimeInfo mocks base method.
