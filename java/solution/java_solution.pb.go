@@ -4,7 +4,7 @@
 // 	protoc        v3.19.1
 // source: java_solution.proto
 
-package javaSolution
+package solution
 
 import (
 	reflect "reflect"

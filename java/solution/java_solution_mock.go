@@ -7,7 +7,7 @@
 //
 
 // Package javaSolution is a generated GoMock package.
-package javaSolution
+package solution
 
 import (
 	context "context"
