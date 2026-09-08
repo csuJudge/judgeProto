@@ -68,13 +68,15 @@ message QueryProjectRsp{
 }
 
 message Project {
-  string projectName = 1; // 项目名称
-  repeated File files = 2; // 文件
+  int32 projectID = 1; // 项目编号
+  string projectName = 2; // 项目名称
+  repeated File files = 3; // 文件
 }
 
 message File {
-  string Path = 1; // 路径
-  string Content = 2; // 代码
+  int32 FileID = 1; // 文件编号
+  string Path = 2; // 路径
+  string Content = 3; // 代码
 }
 
 message CommonRsp {
