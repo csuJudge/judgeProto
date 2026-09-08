@@ -1,0 +1,83 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/judgeProto/java/javaProject";
+
+package oj.java.project;
+
+service ProjectServer {
+  // QueryProject 查询项目
+  rpc QueryProject(QueryProjectReq) returns (QueryProjectRsp) {}
+  // AddProject 添加项目
+  rpc AddProject(AddProjectReq) returns (CommonRsp) {}
+  // UpdateProjectStatus 更新项目状态
+  rpc UpdateProjectStatus(UpdateStatusReq) returns (CommonRsp) {}
+  // UpdateProject 更新项目
+  rpc UpdateProject(UpdateProjectReq) returns (CommonRsp) {}
+}
+
+
+service FileServer {
+  // AddFile 添加文件
+  rpc AddFile(AddFileReq) returns (CommonRsp) {}
+  // UpdateFileStatus 更新文件状态
+  rpc UpdateFileStatus(UpdateStatusReq) returns (CommonRsp) {}
+  // UpdateFile 更新文件
+  rpc UpdateFile(UpdateFileReq) returns (CommonRsp) {}
+}
+
+message UpdateFileReq{
+  int32 userID = 1; // 用户编号
+  int32 projectID = 2; // 项目编号
+  string filePath = 3; // 项目路径
+  string content = 4; // 代码
+  int32 fileID = 5; // 主键
+}
+
+message AddFileReq{
+  int32 userID = 1; // 用户编号
+  int32 projectID = 2; // 项目编号
+  string filePath = 3; // 项目路径
+}
+
+message UpdateProjectReq{
+  int32 userID = 1; // 用户编号
+  string projectName = 3; // 项目名称
+  int32 projectID = 4; // 项目编号
+}
+
+message UpdateStatusReq {
+  int32 ID = 1;  // 编号
+  int32 userID   = 2;  // 用户主键
+  int32 status   = 3;  // 状态
+}
+
+message AddProjectReq{
+  int32 userID = 1; // 用户编号
+  int32 problemID = 2; // 题目编号
+  string projectName = 3; // 项目名称
+}
+
+message QueryProjectReq{
+  int32 userID = 1; // 用户编号
+  int32 problemID = 2; // 题目编号
+}
+
+message QueryProjectRsp{
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+  repeated Project projects = 3; // 项目
+}
+
+message Project {
+  string projectName = 1; // 项目名称
+  repeated File files = 2; // 文件
+}
+
+message File {
+  string Path = 1; // 路径
+  string Content = 2; // 代码
+}
+
+message CommonRsp {
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+}
