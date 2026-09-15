@@ -84,6 +84,7 @@ message solution {
   string finishTime = 8; // 完成时间
   string problemName = 9; // 题目名称
   string userName = 10;// 提交人姓名
+  int32 userID = 11; // 创建人主键
 }
 
 message compileInfo {
