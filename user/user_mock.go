@@ -210,6 +210,21 @@ func (mr *MockUserServerServiceMockRecorder) QueryUserInfo(ctx, req any) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserInfo", reflect.TypeOf((*MockUserServerService)(nil).QueryUserInfo), ctx, req)
 }
 
+// QueryUserName mocks base method.
+func (m *MockUserServerService) QueryUserName(ctx context.Context, req *QueryUserNameReq) (*QueryUserNameRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryUserName", ctx, req)
+	ret0, _ := ret[0].(*QueryUserNameRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserName indicates an expected call of QueryUserName.
+func (mr *MockUserServerServiceMockRecorder) QueryUserName(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserName", reflect.TypeOf((*MockUserServerService)(nil).QueryUserName), ctx, req)
+}
+
 // QueryUserPrivilege mocks base method.
 func (m *MockUserServerService) QueryUserPrivilege(ctx context.Context, req *QueryUserPrivilegeReq) (*QueryUserPrivilegeRsp, error) {
 	m.ctrl.T.Helper()
@@ -606,6 +621,26 @@ func (mr *MockUserServerClientProxyMockRecorder) QueryUserInfo(ctx, req any, opt
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserInfo", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryUserInfo), varargs...)
+}
+
+// QueryUserName mocks base method.
+func (m *MockUserServerClientProxy) QueryUserName(ctx context.Context, req *QueryUserNameReq, opts ...client.Option) (*QueryUserNameRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryUserName", varargs...)
+	ret0, _ := ret[0].(*QueryUserNameRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryUserName indicates an expected call of QueryUserName.
+func (mr *MockUserServerClientProxyMockRecorder) QueryUserName(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryUserName", reflect.TypeOf((*MockUserServerClientProxy)(nil).QueryUserName), varargs...)
 }
 
 // QueryUserPrivilege mocks base method.

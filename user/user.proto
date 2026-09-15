@@ -46,6 +46,18 @@ service UserServer {
     rpc QueryUserProblemCount(QueryUserPrivilegeReq) returns (QueryUserProblemCountRsp){}
     // ImportUser 导入用户
     rpc ImportUser(ImportUserReq) returns (ImportUserRsp){}
+    // QueryUserName 查询用户姓名
+    rpc QueryUserName(QueryUserNameReq) returns (QueryUserNameRsp){}
+}
+
+message QueryUserNameReq{
+    string userIDs = 1; // 一批用户编号
+}
+
+message QueryUserNameRsp{
+    string message = 1;  // 返回信息
+    int32 code     = 2;  // 返回码
+    repeated User users = 3; // 用户信息
 }
 
 message ImportUserReq{

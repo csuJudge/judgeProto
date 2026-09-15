@@ -82,6 +82,8 @@ message solution {
   int32 score = 6; // 得分
   string createdTime = 7; // 提交时间
   string finishTime = 8; // 完成时间
+  string problemName = 9; // 题目名称
+  string userName = 10;// 提交人姓名
 }
 
 message compileInfo {
