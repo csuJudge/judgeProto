@@ -85,6 +85,8 @@ message solution {
   string problemName = 9; // 题目名称
   string userName = 10;// 提交人姓名
   int32 userID = 11; // 创建人主键
+  int32 timeCost = 12; // 时间开销
+  int32 memoryCost = 13; // 内存开销
 }
 
 message compileInfo {
