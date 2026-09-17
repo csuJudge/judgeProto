@@ -22,7 +22,7 @@ type ProjectServerService interface {
 	// QueryProject QueryProject 查询项目
 	QueryProject(ctx context.Context, req *QueryProjectReq) (*QueryProjectRsp, error)
 	// AddProject AddProject 添加项目
-	AddProject(ctx context.Context, req *AddProjectReq) (*CommonRsp, error)
+	AddProject(ctx context.Context, req *AddProjectReq) (*AddProjectRsp, error)
 	// UpdateProjectStatus UpdateProjectStatus 更新项目状态
 	UpdateProjectStatus(ctx context.Context, req *UpdateStatusReq) (*CommonRsp, error)
 	// UpdateProject UpdateProject 更新项目
@@ -135,7 +135,7 @@ func RegisterProjectServerService(s server.Service, svr ProjectServerService) {
 // FileServerService defines service.
 type FileServerService interface {
 	// AddFile AddFile 添加文件
-	AddFile(ctx context.Context, req *AddFileReq) (*CommonRsp, error)
+	AddFile(ctx context.Context, req *AddFileReq) (*AddFileRsp, error)
 	// UpdateFileStatus UpdateFileStatus 更新文件状态
 	UpdateFileStatus(ctx context.Context, req *UpdateStatusReq) (*CommonRsp, error)
 	// UpdateFile UpdateFile 更新文件
@@ -233,7 +233,7 @@ func (s *UnimplementedProjectServer) QueryProject(ctx context.Context, req *Quer
 }
 
 // AddProject AddProject 添加项目
-func (s *UnimplementedProjectServer) AddProject(ctx context.Context, req *AddProjectReq) (*CommonRsp, error) {
+func (s *UnimplementedProjectServer) AddProject(ctx context.Context, req *AddProjectReq) (*AddProjectRsp, error) {
 	return nil, errors.New("rpc AddProject of service ProjectServer is not implemented")
 }
 
@@ -250,7 +250,7 @@ func (s *UnimplementedProjectServer) UpdateProject(ctx context.Context, req *Upd
 type UnimplementedFileServer struct{}
 
 // AddFile AddFile 添加文件
-func (s *UnimplementedFileServer) AddFile(ctx context.Context, req *AddFileReq) (*CommonRsp, error) {
+func (s *UnimplementedFileServer) AddFile(ctx context.Context, req *AddFileReq) (*AddFileRsp, error) {
 	return nil, errors.New("rpc AddFile of service FileServer is not implemented")
 }
 
@@ -275,7 +275,7 @@ type ProjectServerClientProxy interface {
 	// QueryProject QueryProject 查询项目
 	QueryProject(ctx context.Context, req *QueryProjectReq, opts ...client.Option) (rsp *QueryProjectRsp, err error)
 	// AddProject AddProject 添加项目
-	AddProject(ctx context.Context, req *AddProjectReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	AddProject(ctx context.Context, req *AddProjectReq, opts ...client.Option) (rsp *AddProjectRsp, err error)
 	// UpdateProjectStatus UpdateProjectStatus 更新项目状态
 	UpdateProjectStatus(ctx context.Context, req *UpdateStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// UpdateProject UpdateProject 更新项目
@@ -311,7 +311,7 @@ func (c *ProjectServerClientProxyImpl) QueryProject(ctx context.Context, req *Qu
 	return rsp, nil
 }
 
-func (c *ProjectServerClientProxyImpl) AddProject(ctx context.Context, req *AddProjectReq, opts ...client.Option) (*CommonRsp, error) {
+func (c *ProjectServerClientProxyImpl) AddProject(ctx context.Context, req *AddProjectReq, opts ...client.Option) (*AddProjectRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.java.project.ProjectServer/AddProject")
@@ -324,7 +324,7 @@ func (c *ProjectServerClientProxyImpl) AddProject(ctx context.Context, req *AddP
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &CommonRsp{}
+	rsp := &AddProjectRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
@@ -374,7 +374,7 @@ func (c *ProjectServerClientProxyImpl) UpdateProject(ctx context.Context, req *U
 // FileServerClientProxy defines service client proxy
 type FileServerClientProxy interface {
 	// AddFile AddFile 添加文件
-	AddFile(ctx context.Context, req *AddFileReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	AddFile(ctx context.Context, req *AddFileReq, opts ...client.Option) (rsp *AddFileRsp, err error)
 	// UpdateFileStatus UpdateFileStatus 更新文件状态
 	UpdateFileStatus(ctx context.Context, req *UpdateStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// UpdateFile UpdateFile 更新文件
@@ -390,7 +390,7 @@ var NewFileServerClientProxy = func(opts ...client.Option) FileServerClientProxy
 	return &FileServerClientProxyImpl{client: client.DefaultClient, opts: opts}
 }
 
-func (c *FileServerClientProxyImpl) AddFile(ctx context.Context, req *AddFileReq, opts ...client.Option) (*CommonRsp, error) {
+func (c *FileServerClientProxyImpl) AddFile(ctx context.Context, req *AddFileReq, opts ...client.Option) (*AddFileRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/oj.java.project.FileServer/AddFile")
@@ -403,7 +403,7 @@ func (c *FileServerClientProxyImpl) AddFile(ctx context.Context, req *AddFileReq
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &CommonRsp{}
+	rsp := &AddFileRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

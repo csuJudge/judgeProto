@@ -46,10 +46,10 @@ func (m *MockProjectServerService) ISGOMOCK() struct{} {
 }
 
 // AddProject mocks base method.
-func (m *MockProjectServerService) AddProject(ctx context.Context, req *AddProjectReq) (*CommonRsp, error) {
+func (m *MockProjectServerService) AddProject(ctx context.Context, req *AddProjectReq) (*AddProjectRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddProject", ctx, req)
-	ret0, _ := ret[0].(*CommonRsp)
+	ret0, _ := ret[0].(*AddProjectRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -134,10 +134,10 @@ func (m *MockFileServerService) ISGOMOCK() struct{} {
 }
 
 // AddFile mocks base method.
-func (m *MockFileServerService) AddFile(ctx context.Context, req *AddFileReq) (*CommonRsp, error) {
+func (m *MockFileServerService) AddFile(ctx context.Context, req *AddFileReq) (*AddFileRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddFile", ctx, req)
-	ret0, _ := ret[0].(*CommonRsp)
+	ret0, _ := ret[0].(*AddFileRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -207,14 +207,14 @@ func (m *MockProjectServerClientProxy) ISGOMOCK() struct{} {
 }
 
 // AddProject mocks base method.
-func (m *MockProjectServerClientProxy) AddProject(ctx context.Context, req *AddProjectReq, opts ...client.Option) (*CommonRsp, error) {
+func (m *MockProjectServerClientProxy) AddProject(ctx context.Context, req *AddProjectReq, opts ...client.Option) (*AddProjectRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "AddProject", varargs...)
-	ret0, _ := ret[0].(*CommonRsp)
+	ret0, _ := ret[0].(*AddProjectRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -315,14 +315,14 @@ func (m *MockFileServerClientProxy) ISGOMOCK() struct{} {
 }
 
 // AddFile mocks base method.
-func (m *MockFileServerClientProxy) AddFile(ctx context.Context, req *AddFileReq, opts ...client.Option) (*CommonRsp, error) {
+func (m *MockFileServerClientProxy) AddFile(ctx context.Context, req *AddFileReq, opts ...client.Option) (*AddFileRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "AddFile", varargs...)
-	ret0, _ := ret[0].(*CommonRsp)
+	ret0, _ := ret[0].(*AddFileRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
