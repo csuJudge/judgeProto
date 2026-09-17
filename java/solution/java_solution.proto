@@ -8,12 +8,19 @@ service SolutionServer {
   rpc QueryRuntimeInfo(QueryRuntimeInfoReq) returns (QueryRuntimeInfoRsp) {}
   // QuerySourceCode 查询源代码
   rpc QuerySourceCode(QuerySourceCodeReq) returns (QuerySourceCodeRsp) {}
+  // QueryLatestCode 查询最新的代码
+  rpc QueryLatestCode(QueryLatestCodeReq) returns (QuerySourceCodeRsp) {}
   // AddSolution 添加提交数据
   rpc AddSolution(AddSolutionReq) returns (AddSolutionRsp) {}
   // QuerySolution 查询提交数据
   rpc QuerySolution(QuerySolutionReq) returns (QuerySolutionRsp) {}
   // QueryResult 查询结果
   rpc QueryResult(QueryRuntimeInfoReq) returns (QueryResultRsp) {}
+}
+
+message QueryLatestCodeReq{
+  int32 userID  = 1; // 用户编号
+  int32 problemID = 2; // 题目编号
 }
 
 message QueryResultRsp{
@@ -43,7 +50,7 @@ message QuerySourceCodeReq{
 message QuerySourceCodeRsp{
   string message = 1;  // 返回信息
   int32 code = 2;  // 返回码
-  repeated string sourceCode = 3; // 源码
+  string sourceCode = 3; // 源码
 }
 
 message QueryRuntimeInfoReq{

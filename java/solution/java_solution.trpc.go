@@ -23,6 +23,8 @@ type SolutionServerService interface {
 	QueryRuntimeInfo(ctx context.Context, req *QueryRuntimeInfoReq) (*QueryRuntimeInfoRsp, error)
 	// QuerySourceCode QuerySourceCode 查询源代码
 	QuerySourceCode(ctx context.Context, req *QuerySourceCodeReq) (*QuerySourceCodeRsp, error)
+	// QueryLatestCode QueryLatestCode 查询最新的代码
+	QueryLatestCode(ctx context.Context, req *QueryLatestCodeReq) (*QuerySourceCodeRsp, error)
 	// AddSolution AddSolution 添加提交数据
 	AddSolution(ctx context.Context, req *AddSolutionReq) (*AddSolutionRsp, error)
 	// QuerySolution QuerySolution 查询提交数据
@@ -57,6 +59,24 @@ func SolutionServerService_QuerySourceCode_Handler(svr interface{}, ctx context.
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
 		return svr.(SolutionServerService).QuerySourceCode(ctx, reqbody.(*QuerySourceCodeReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func SolutionServerService_QueryLatestCode_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryLatestCodeReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(SolutionServerService).QueryLatestCode(ctx, reqbody.(*QueryLatestCodeReq))
 	}
 
 	var rsp interface{}
@@ -135,6 +155,10 @@ var SolutionServerServer_ServiceDesc = server.ServiceDesc{
 			Func: SolutionServerService_QuerySourceCode_Handler,
 		},
 		{
+			Name: "/oj.java.solution.SolutionServer/QueryLatestCode",
+			Func: SolutionServerService_QueryLatestCode_Handler,
+		},
+		{
 			Name: "/oj.java.solution.SolutionServer/AddSolution",
 			Func: SolutionServerService_AddSolution_Handler,
 		},
@@ -170,6 +194,11 @@ func (s *UnimplementedSolutionServer) QuerySourceCode(ctx context.Context, req *
 	return nil, errors.New("rpc QuerySourceCode of service SolutionServer is not implemented")
 }
 
+// QueryLatestCode QueryLatestCode 查询最新的代码
+func (s *UnimplementedSolutionServer) QueryLatestCode(ctx context.Context, req *QueryLatestCodeReq) (*QuerySourceCodeRsp, error) {
+	return nil, errors.New("rpc QueryLatestCode of service SolutionServer is not implemented")
+}
+
 // AddSolution AddSolution 添加提交数据
 func (s *UnimplementedSolutionServer) AddSolution(ctx context.Context, req *AddSolutionReq) (*AddSolutionRsp, error) {
 	return nil, errors.New("rpc AddSolution of service SolutionServer is not implemented")
@@ -197,6 +226,8 @@ type SolutionServerClientProxy interface {
 	QueryRuntimeInfo(ctx context.Context, req *QueryRuntimeInfoReq, opts ...client.Option) (rsp *QueryRuntimeInfoRsp, err error)
 	// QuerySourceCode QuerySourceCode 查询源代码
 	QuerySourceCode(ctx context.Context, req *QuerySourceCodeReq, opts ...client.Option) (rsp *QuerySourceCodeRsp, err error)
+	// QueryLatestCode QueryLatestCode 查询最新的代码
+	QueryLatestCode(ctx context.Context, req *QueryLatestCodeReq, opts ...client.Option) (rsp *QuerySourceCodeRsp, err error)
 	// AddSolution AddSolution 添加提交数据
 	AddSolution(ctx context.Context, req *AddSolutionReq, opts ...client.Option) (rsp *AddSolutionRsp, err error)
 	// QuerySolution QuerySolution 查询提交数据
@@ -243,6 +274,26 @@ func (c *SolutionServerClientProxyImpl) QuerySourceCode(ctx context.Context, req
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("SolutionServer")
 	msg.WithCalleeMethod("QuerySourceCode")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QuerySourceCodeRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *SolutionServerClientProxyImpl) QueryLatestCode(ctx context.Context, req *QueryLatestCodeReq, opts ...client.Option) (*QuerySourceCodeRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.java.solution.SolutionServer/QueryLatestCode")
+	msg.WithCalleeServiceName(SolutionServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("SolutionServer")
+	msg.WithCalleeMethod("QueryLatestCode")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
