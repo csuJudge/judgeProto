@@ -7,21 +7,32 @@ service ProjectServer {
   // QueryProject 查询项目
   rpc QueryProject(QueryProjectReq) returns (QueryProjectRsp) {}
   // AddProject 添加项目
-  rpc AddProject(AddProjectReq) returns (CommonRsp) {}
+  rpc AddProject(AddProjectReq) returns (AddProjectRsp) {}
   // UpdateProjectStatus 更新项目状态
   rpc UpdateProjectStatus(UpdateStatusReq) returns (CommonRsp) {}
   // UpdateProject 更新项目
   rpc UpdateProject(UpdateProjectReq) returns (CommonRsp) {}
 }
 
-
 service FileServer {
   // AddFile 添加文件
-  rpc AddFile(AddFileReq) returns (CommonRsp) {}
+  rpc AddFile(AddFileReq) returns (AddFileRsp) {}
   // UpdateFileStatus 更新文件状态
   rpc UpdateFileStatus(UpdateStatusReq) returns (CommonRsp) {}
   // UpdateFile 更新文件
   rpc UpdateFile(UpdateFileReq) returns (CommonRsp) {}
+}
+
+message AddProjectRsp{
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+  int32 projectID = 3; // 主键
+}
+
+message AddFileRsp{
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+  int32 fileID = 3; // 主键
 }
 
 message UpdateFileReq{
