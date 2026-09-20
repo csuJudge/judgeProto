@@ -21,6 +21,10 @@ import (
 type ExperimentServerService interface {
 	// AddKeyAction AddKeyAction 添加击键行为
 	AddKeyAction(ctx context.Context, req *AddKeyActionReq) (*CommonRsp, error)
+	// AddInteraction AddInteraction 添加交互行为（鼠标/滚动/选区/焦点）
+	AddInteraction(ctx context.Context, req *AddInteractionReq) (*CommonRsp, error)
+	// AddKeyActionSegment AddKeyActionSegment 添加未提交的击键段（学生关标签页时补发）
+	AddKeyActionSegment(ctx context.Context, req *AddKeyActionSegmentReq) (*CommonRsp, error)
 	// AddCode AddCode 添加代码
 	AddCode(ctx context.Context, req *AddCodeReq) (*CommonRsp, error)
 	// QueryCode QueryCode 查询代码
@@ -37,6 +41,42 @@ func ExperimentServerService_AddKeyAction_Handler(svr interface{}, ctx context.C
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
 		return svr.(ExperimentServerService).AddKeyAction(ctx, reqbody.(*AddKeyActionReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ExperimentServerService_AddInteraction_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &AddInteractionReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ExperimentServerService).AddInteraction(ctx, reqbody.(*AddInteractionReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func ExperimentServerService_AddKeyActionSegment_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &AddKeyActionSegmentReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(ExperimentServerService).AddKeyActionSegment(ctx, reqbody.(*AddKeyActionSegmentReq))
 	}
 
 	var rsp interface{}
@@ -111,6 +151,14 @@ var ExperimentServerServer_ServiceDesc = server.ServiceDesc{
 			Func: ExperimentServerService_AddKeyAction_Handler,
 		},
 		{
+			Name: "/oj.experiment.ExperimentServer/AddInteraction",
+			Func: ExperimentServerService_AddInteraction_Handler,
+		},
+		{
+			Name: "/oj.experiment.ExperimentServer/AddKeyActionSegment",
+			Func: ExperimentServerService_AddKeyActionSegment_Handler,
+		},
+		{
 			Name: "/oj.experiment.ExperimentServer/AddCode",
 			Func: ExperimentServerService_AddCode_Handler,
 		},
@@ -141,6 +189,16 @@ func (s *UnimplementedExperimentServer) AddKeyAction(ctx context.Context, req *A
 	return nil, errors.New("rpc AddKeyAction of service ExperimentServer is not implemented")
 }
 
+// AddInteraction AddInteraction 添加交互行为（鼠标/滚动/选区/焦点）
+func (s *UnimplementedExperimentServer) AddInteraction(ctx context.Context, req *AddInteractionReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc AddInteraction of service ExperimentServer is not implemented")
+}
+
+// AddKeyActionSegment AddKeyActionSegment 添加未提交的击键段（学生关标签页时补发）
+func (s *UnimplementedExperimentServer) AddKeyActionSegment(ctx context.Context, req *AddKeyActionSegmentReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc AddKeyActionSegment of service ExperimentServer is not implemented")
+}
+
 // AddCode AddCode 添加代码
 func (s *UnimplementedExperimentServer) AddCode(ctx context.Context, req *AddCodeReq) (*CommonRsp, error) {
 	return nil, errors.New("rpc AddCode of service ExperimentServer is not implemented")
@@ -166,6 +224,10 @@ func (s *UnimplementedExperimentServer) QueryMyCodeList(ctx context.Context, req
 type ExperimentServerClientProxy interface {
 	// AddKeyAction AddKeyAction 添加击键行为
 	AddKeyAction(ctx context.Context, req *AddKeyActionReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// AddInteraction AddInteraction 添加交互行为（鼠标/滚动/选区/焦点）
+	AddInteraction(ctx context.Context, req *AddInteractionReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// AddKeyActionSegment AddKeyActionSegment 添加未提交的击键段（学生关标签页时补发）
+	AddKeyActionSegment(ctx context.Context, req *AddKeyActionSegmentReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// AddCode AddCode 添加代码
 	AddCode(ctx context.Context, req *AddCodeReq, opts ...client.Option) (rsp *CommonRsp, err error)
 	// QueryCode QueryCode 查询代码
@@ -192,6 +254,46 @@ func (c *ExperimentServerClientProxyImpl) AddKeyAction(ctx context.Context, req 
 	msg.WithCalleeServer("")
 	msg.WithCalleeService("ExperimentServer")
 	msg.WithCalleeMethod("AddKeyAction")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ExperimentServerClientProxyImpl) AddInteraction(ctx context.Context, req *AddInteractionReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.experiment.ExperimentServer/AddInteraction")
+	msg.WithCalleeServiceName(ExperimentServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ExperimentServer")
+	msg.WithCalleeMethod("AddInteraction")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *ExperimentServerClientProxyImpl) AddKeyActionSegment(ctx context.Context, req *AddKeyActionSegmentReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.experiment.ExperimentServer/AddKeyActionSegment")
+	msg.WithCalleeServiceName(ExperimentServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("ExperimentServer")
+	msg.WithCalleeMethod("AddKeyActionSegment")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)

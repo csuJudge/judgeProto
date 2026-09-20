@@ -6,6 +6,10 @@ package oj.experiment;
 service ExperimentServer {
   // AddKeyAction 添加击键行为
   rpc AddKeyAction(AddKeyActionReq) returns (CommonRsp) {}
+  // AddInteraction 添加交互行为（鼠标/滚动/选区/焦点）
+  rpc AddInteraction(AddInteractionReq) returns (CommonRsp) {}
+  // AddKeyActionSegment 添加未提交的击键段（学生关标签页时补发）
+  rpc AddKeyActionSegment(AddKeyActionSegmentReq) returns (CommonRsp) {}
   // AddCode 添加代码
   rpc AddCode(AddCodeReq) returns (CommonRsp) {}
   // QueryCode 查询代码
@@ -56,6 +60,33 @@ message AddKeyActionReq{
   int32 userID = 5; // 用户编号
   int32 solutionType = 6; // 提交类型
   string remoteIP = 7; // 提交IP
+}
+
+message AddInteractionReq{
+  string action = 1; // 交互行为（JSON 数组字符串）
+  string sessionKey = 2; // 页面会话标识，刷新会换；多标签页靠它区分
+  int32 batchIndex = 3; // 同一会话内第几批，从 1 开始
+  string flushReason = 4; // timer / pagehide / submit / test / compile / judge
+  int32 eventCount = 5; // 本批事件条数
+  string startTime = 6; // 页面加载时刻
+  int32 problemID = 7; // 题目编号
+  int32 solutionID = 8; // 提交编号；定时批与补发批为 0
+  int32 userID = 9; // 用户编号
+  string workID = 10; // 跨页面加载的同一次投入
+  int32 resumed = 11; // 1 = 这次页面加载是接着上次回来的
+  int32 gapBeforeS = 12; // 距上一次活动的秒数
+  string remoteIP = 13; // 提交IP
+}
+
+message AddKeyActionSegmentReq{
+  string action = 1; // 击键行为
+  string startTime = 2; // 页面加载时刻
+  int32 problemID = 3; // 题目编号
+  int32 userID = 4; // 用户编号
+  string workID = 5; // 跨页面加载的同一次投入
+  int32 resumed = 6; // 1 = 这次页面加载是接着上次回来的
+  int32 gapBeforeS = 7; // 距上一次活动的秒数
+  string remoteIP = 8; // 提交IP
 }
 
 message Code{

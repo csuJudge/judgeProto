@@ -446,6 +446,246 @@ func (x *AddKeyActionReq) GetRemoteIP() string {
 	return ""
 }
 
+type AddInteractionReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Action        string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`           // 交互行为（JSON 数组字符串）
+	SessionKey    string                 `protobuf:"bytes,2,opt,name=sessionKey,proto3" json:"sessionKey,omitempty"`   // 页面会话标识，刷新会换；多标签页靠它区分
+	BatchIndex    int32                  `protobuf:"varint,3,opt,name=batchIndex,proto3" json:"batchIndex,omitempty"`  // 同一会话内第几批，从 1 开始
+	FlushReason   string                 `protobuf:"bytes,4,opt,name=flushReason,proto3" json:"flushReason,omitempty"` // timer / pagehide / submit / test / compile / judge
+	EventCount    int32                  `protobuf:"varint,5,opt,name=eventCount,proto3" json:"eventCount,omitempty"`  // 本批事件条数
+	StartTime     string                 `protobuf:"bytes,6,opt,name=startTime,proto3" json:"startTime,omitempty"`     // 页面加载时刻
+	ProblemID     int32                  `protobuf:"varint,7,opt,name=problemID,proto3" json:"problemID,omitempty"`    // 题目编号
+	SolutionID    int32                  `protobuf:"varint,8,opt,name=solutionID,proto3" json:"solutionID,omitempty"`  // 提交编号；定时批与补发批为 0
+	UserID        int32                  `protobuf:"varint,9,opt,name=userID,proto3" json:"userID,omitempty"`          // 用户编号
+	WorkID        string                 `protobuf:"bytes,10,opt,name=workID,proto3" json:"workID,omitempty"`          // 跨页面加载的同一次投入
+	Resumed       int32                  `protobuf:"varint,11,opt,name=resumed,proto3" json:"resumed,omitempty"`       // 1 = 这次页面加载是接着上次回来的
+	GapBeforeS    int32                  `protobuf:"varint,12,opt,name=gapBeforeS,proto3" json:"gapBeforeS,omitempty"` // 距上一次活动的秒数
+	RemoteIP      string                 `protobuf:"bytes,13,opt,name=remoteIP,proto3" json:"remoteIP,omitempty"`      // 提交IP
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddInteractionReq) Reset() {
+	*x = AddInteractionReq{}
+	mi := &file_experiment_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddInteractionReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddInteractionReq) ProtoMessage() {}
+
+func (x *AddInteractionReq) ProtoReflect() protoreflect.Message {
+	mi := &file_experiment_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddInteractionReq.ProtoReflect.Descriptor instead.
+func (*AddInteractionReq) Descriptor() ([]byte, []int) {
+	return file_experiment_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *AddInteractionReq) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+func (x *AddInteractionReq) GetSessionKey() string {
+	if x != nil {
+		return x.SessionKey
+	}
+	return ""
+}
+
+func (x *AddInteractionReq) GetBatchIndex() int32 {
+	if x != nil {
+		return x.BatchIndex
+	}
+	return 0
+}
+
+func (x *AddInteractionReq) GetFlushReason() string {
+	if x != nil {
+		return x.FlushReason
+	}
+	return ""
+}
+
+func (x *AddInteractionReq) GetEventCount() int32 {
+	if x != nil {
+		return x.EventCount
+	}
+	return 0
+}
+
+func (x *AddInteractionReq) GetStartTime() string {
+	if x != nil {
+		return x.StartTime
+	}
+	return ""
+}
+
+func (x *AddInteractionReq) GetProblemID() int32 {
+	if x != nil {
+		return x.ProblemID
+	}
+	return 0
+}
+
+func (x *AddInteractionReq) GetSolutionID() int32 {
+	if x != nil {
+		return x.SolutionID
+	}
+	return 0
+}
+
+func (x *AddInteractionReq) GetUserID() int32 {
+	if x != nil {
+		return x.UserID
+	}
+	return 0
+}
+
+func (x *AddInteractionReq) GetWorkID() string {
+	if x != nil {
+		return x.WorkID
+	}
+	return ""
+}
+
+func (x *AddInteractionReq) GetResumed() int32 {
+	if x != nil {
+		return x.Resumed
+	}
+	return 0
+}
+
+func (x *AddInteractionReq) GetGapBeforeS() int32 {
+	if x != nil {
+		return x.GapBeforeS
+	}
+	return 0
+}
+
+func (x *AddInteractionReq) GetRemoteIP() string {
+	if x != nil {
+		return x.RemoteIP
+	}
+	return ""
+}
+
+type AddKeyActionSegmentReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Action        string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`          // 击键行为
+	StartTime     string                 `protobuf:"bytes,2,opt,name=startTime,proto3" json:"startTime,omitempty"`    // 页面加载时刻
+	ProblemID     int32                  `protobuf:"varint,3,opt,name=problemID,proto3" json:"problemID,omitempty"`   // 题目编号
+	UserID        int32                  `protobuf:"varint,4,opt,name=userID,proto3" json:"userID,omitempty"`         // 用户编号
+	WorkID        string                 `protobuf:"bytes,5,opt,name=workID,proto3" json:"workID,omitempty"`          // 跨页面加载的同一次投入
+	Resumed       int32                  `protobuf:"varint,6,opt,name=resumed,proto3" json:"resumed,omitempty"`       // 1 = 这次页面加载是接着上次回来的
+	GapBeforeS    int32                  `protobuf:"varint,7,opt,name=gapBeforeS,proto3" json:"gapBeforeS,omitempty"` // 距上一次活动的秒数
+	RemoteIP      string                 `protobuf:"bytes,8,opt,name=remoteIP,proto3" json:"remoteIP,omitempty"`      // 提交IP
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddKeyActionSegmentReq) Reset() {
+	*x = AddKeyActionSegmentReq{}
+	mi := &file_experiment_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddKeyActionSegmentReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddKeyActionSegmentReq) ProtoMessage() {}
+
+func (x *AddKeyActionSegmentReq) ProtoReflect() protoreflect.Message {
+	mi := &file_experiment_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddKeyActionSegmentReq.ProtoReflect.Descriptor instead.
+func (*AddKeyActionSegmentReq) Descriptor() ([]byte, []int) {
+	return file_experiment_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *AddKeyActionSegmentReq) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+func (x *AddKeyActionSegmentReq) GetStartTime() string {
+	if x != nil {
+		return x.StartTime
+	}
+	return ""
+}
+
+func (x *AddKeyActionSegmentReq) GetProblemID() int32 {
+	if x != nil {
+		return x.ProblemID
+	}
+	return 0
+}
+
+func (x *AddKeyActionSegmentReq) GetUserID() int32 {
+	if x != nil {
+		return x.UserID
+	}
+	return 0
+}
+
+func (x *AddKeyActionSegmentReq) GetWorkID() string {
+	if x != nil {
+		return x.WorkID
+	}
+	return ""
+}
+
+func (x *AddKeyActionSegmentReq) GetResumed() int32 {
+	if x != nil {
+		return x.Resumed
+	}
+	return 0
+}
+
+func (x *AddKeyActionSegmentReq) GetGapBeforeS() int32 {
+	if x != nil {
+		return x.GapBeforeS
+	}
+	return 0
+}
+
+func (x *AddKeyActionSegmentReq) GetRemoteIP() string {
+	if x != nil {
+		return x.RemoteIP
+	}
+	return ""
+}
+
 type Code struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Language      int32                  `protobuf:"varint,1,opt,name=Language,proto3" json:"Language,omitempty"`      // 语言
@@ -458,7 +698,7 @@ type Code struct {
 
 func (x *Code) Reset() {
 	*x = Code{}
-	mi := &file_experiment_proto_msgTypes[6]
+	mi := &file_experiment_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -470,7 +710,7 @@ func (x *Code) String() string {
 func (*Code) ProtoMessage() {}
 
 func (x *Code) ProtoReflect() protoreflect.Message {
-	mi := &file_experiment_proto_msgTypes[6]
+	mi := &file_experiment_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -483,7 +723,7 @@ func (x *Code) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Code.ProtoReflect.Descriptor instead.
 func (*Code) Descriptor() ([]byte, []int) {
-	return file_experiment_proto_rawDescGZIP(), []int{6}
+	return file_experiment_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Code) GetLanguage() int32 {
@@ -526,7 +766,7 @@ type QueryMyCodeListRsp struct {
 
 func (x *QueryMyCodeListRsp) Reset() {
 	*x = QueryMyCodeListRsp{}
-	mi := &file_experiment_proto_msgTypes[7]
+	mi := &file_experiment_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -538,7 +778,7 @@ func (x *QueryMyCodeListRsp) String() string {
 func (*QueryMyCodeListRsp) ProtoMessage() {}
 
 func (x *QueryMyCodeListRsp) ProtoReflect() protoreflect.Message {
-	mi := &file_experiment_proto_msgTypes[7]
+	mi := &file_experiment_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -551,7 +791,7 @@ func (x *QueryMyCodeListRsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryMyCodeListRsp.ProtoReflect.Descriptor instead.
 func (*QueryMyCodeListRsp) Descriptor() ([]byte, []int) {
-	return file_experiment_proto_rawDescGZIP(), []int{7}
+	return file_experiment_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *QueryMyCodeListRsp) GetMessage() string {
@@ -621,7 +861,43 @@ const file_experiment_proto_rawDesc = "" +
 	"\tproblemID\x18\x04 \x01(\x05R\tproblemID\x12\x16\n" +
 	"\x06userID\x18\x05 \x01(\x05R\x06userID\x12\"\n" +
 	"\fsolutionType\x18\x06 \x01(\x05R\fsolutionType\x12\x1a\n" +
-	"\bremoteIP\x18\a \x01(\tR\bremoteIP\"r\n" +
+	"\bremoteIP\x18\a \x01(\tR\bremoteIP\"\x8f\x03\n" +
+	"\x11AddInteractionReq\x12\x16\n" +
+	"\x06action\x18\x01 \x01(\tR\x06action\x12\x1e\n" +
+	"\n" +
+	"sessionKey\x18\x02 \x01(\tR\n" +
+	"sessionKey\x12\x1e\n" +
+	"\n" +
+	"batchIndex\x18\x03 \x01(\x05R\n" +
+	"batchIndex\x12 \n" +
+	"\vflushReason\x18\x04 \x01(\tR\vflushReason\x12\x1e\n" +
+	"\n" +
+	"eventCount\x18\x05 \x01(\x05R\n" +
+	"eventCount\x12\x1c\n" +
+	"\tstartTime\x18\x06 \x01(\tR\tstartTime\x12\x1c\n" +
+	"\tproblemID\x18\a \x01(\x05R\tproblemID\x12\x1e\n" +
+	"\n" +
+	"solutionID\x18\b \x01(\x05R\n" +
+	"solutionID\x12\x16\n" +
+	"\x06userID\x18\t \x01(\x05R\x06userID\x12\x16\n" +
+	"\x06workID\x18\n" +
+	" \x01(\tR\x06workID\x12\x18\n" +
+	"\aresumed\x18\v \x01(\x05R\aresumed\x12\x1e\n" +
+	"\n" +
+	"gapBeforeS\x18\f \x01(\x05R\n" +
+	"gapBeforeS\x12\x1a\n" +
+	"\bremoteIP\x18\r \x01(\tR\bremoteIP\"\xf2\x01\n" +
+	"\x16AddKeyActionSegmentReq\x12\x16\n" +
+	"\x06action\x18\x01 \x01(\tR\x06action\x12\x1c\n" +
+	"\tstartTime\x18\x02 \x01(\tR\tstartTime\x12\x1c\n" +
+	"\tproblemID\x18\x03 \x01(\x05R\tproblemID\x12\x16\n" +
+	"\x06userID\x18\x04 \x01(\x05R\x06userID\x12\x16\n" +
+	"\x06workID\x18\x05 \x01(\tR\x06workID\x12\x18\n" +
+	"\aresumed\x18\x06 \x01(\x05R\aresumed\x12\x1e\n" +
+	"\n" +
+	"gapBeforeS\x18\a \x01(\x05R\n" +
+	"gapBeforeS\x12\x1a\n" +
+	"\bremoteIP\x18\b \x01(\tR\bremoteIP\"r\n" +
 	"\x04Code\x12\x1a\n" +
 	"\bLanguage\x18\x01 \x01(\x05R\bLanguage\x12\x12\n" +
 	"\x04Code\x18\x02 \x01(\tR\x04Code\x12\x18\n" +
@@ -631,9 +907,11 @@ const file_experiment_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12/\n" +
 	"\buserCode\x18\x03 \x03(\v2\x13.oj.experiment.CodeR\buserCode\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total2\xc4\x02\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total2\xee\x03\n" +
 	"\x10ExperimentServer\x12J\n" +
-	"\fAddKeyAction\x12\x1e.oj.experiment.AddKeyActionReq\x1a\x18.oj.experiment.CommonRsp\"\x00\x12@\n" +
+	"\fAddKeyAction\x12\x1e.oj.experiment.AddKeyActionReq\x1a\x18.oj.experiment.CommonRsp\"\x00\x12N\n" +
+	"\x0eAddInteraction\x12 .oj.experiment.AddInteractionReq\x1a\x18.oj.experiment.CommonRsp\"\x00\x12X\n" +
+	"\x13AddKeyActionSegment\x12%.oj.experiment.AddKeyActionSegmentReq\x1a\x18.oj.experiment.CommonRsp\"\x00\x12@\n" +
 	"\aAddCode\x12\x19.oj.experiment.AddCodeReq\x1a\x18.oj.experiment.CommonRsp\"\x00\x12G\n" +
 	"\tQueryCode\x12\x1b.oj.experiment.QueryCodeReq\x1a\x1b.oj.experiment.QueryCodeRsp\"\x00\x12Y\n" +
 	"\x0fQueryMyCodeList\x12!.oj.experiment.QueryMyCodeListReq\x1a!.oj.experiment.QueryMyCodeListRsp\"\x00B+Z)github.com/csuJudge/judgeProto/experimentb\x06proto3"
@@ -650,30 +928,36 @@ func file_experiment_proto_rawDescGZIP() []byte {
 	return file_experiment_proto_rawDescData
 }
 
-var file_experiment_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_experiment_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_experiment_proto_goTypes = []any{
-	(*QueryMyCodeListReq)(nil), // 0: oj.experiment.QueryMyCodeListReq
-	(*CommonRsp)(nil),          // 1: oj.experiment.CommonRsp
-	(*AddCodeReq)(nil),         // 2: oj.experiment.AddCodeReq
-	(*QueryCodeReq)(nil),       // 3: oj.experiment.QueryCodeReq
-	(*QueryCodeRsp)(nil),       // 4: oj.experiment.QueryCodeRsp
-	(*AddKeyActionReq)(nil),    // 5: oj.experiment.AddKeyActionReq
-	(*Code)(nil),               // 6: oj.experiment.Code
-	(*QueryMyCodeListRsp)(nil), // 7: oj.experiment.QueryMyCodeListRsp
+	(*QueryMyCodeListReq)(nil),     // 0: oj.experiment.QueryMyCodeListReq
+	(*CommonRsp)(nil),              // 1: oj.experiment.CommonRsp
+	(*AddCodeReq)(nil),             // 2: oj.experiment.AddCodeReq
+	(*QueryCodeReq)(nil),           // 3: oj.experiment.QueryCodeReq
+	(*QueryCodeRsp)(nil),           // 4: oj.experiment.QueryCodeRsp
+	(*AddKeyActionReq)(nil),        // 5: oj.experiment.AddKeyActionReq
+	(*AddInteractionReq)(nil),      // 6: oj.experiment.AddInteractionReq
+	(*AddKeyActionSegmentReq)(nil), // 7: oj.experiment.AddKeyActionSegmentReq
+	(*Code)(nil),                   // 8: oj.experiment.Code
+	(*QueryMyCodeListRsp)(nil),     // 9: oj.experiment.QueryMyCodeListRsp
 }
 var file_experiment_proto_depIdxs = []int32{
-	6, // 0: oj.experiment.QueryCodeRsp.userCode:type_name -> oj.experiment.Code
-	6, // 1: oj.experiment.QueryMyCodeListRsp.userCode:type_name -> oj.experiment.Code
+	8, // 0: oj.experiment.QueryCodeRsp.userCode:type_name -> oj.experiment.Code
+	8, // 1: oj.experiment.QueryMyCodeListRsp.userCode:type_name -> oj.experiment.Code
 	5, // 2: oj.experiment.ExperimentServer.AddKeyAction:input_type -> oj.experiment.AddKeyActionReq
-	2, // 3: oj.experiment.ExperimentServer.AddCode:input_type -> oj.experiment.AddCodeReq
-	3, // 4: oj.experiment.ExperimentServer.QueryCode:input_type -> oj.experiment.QueryCodeReq
-	0, // 5: oj.experiment.ExperimentServer.QueryMyCodeList:input_type -> oj.experiment.QueryMyCodeListReq
-	1, // 6: oj.experiment.ExperimentServer.AddKeyAction:output_type -> oj.experiment.CommonRsp
-	1, // 7: oj.experiment.ExperimentServer.AddCode:output_type -> oj.experiment.CommonRsp
-	4, // 8: oj.experiment.ExperimentServer.QueryCode:output_type -> oj.experiment.QueryCodeRsp
-	7, // 9: oj.experiment.ExperimentServer.QueryMyCodeList:output_type -> oj.experiment.QueryMyCodeListRsp
-	6, // [6:10] is the sub-list for method output_type
-	2, // [2:6] is the sub-list for method input_type
+	6, // 3: oj.experiment.ExperimentServer.AddInteraction:input_type -> oj.experiment.AddInteractionReq
+	7, // 4: oj.experiment.ExperimentServer.AddKeyActionSegment:input_type -> oj.experiment.AddKeyActionSegmentReq
+	2, // 5: oj.experiment.ExperimentServer.AddCode:input_type -> oj.experiment.AddCodeReq
+	3, // 6: oj.experiment.ExperimentServer.QueryCode:input_type -> oj.experiment.QueryCodeReq
+	0, // 7: oj.experiment.ExperimentServer.QueryMyCodeList:input_type -> oj.experiment.QueryMyCodeListReq
+	1, // 8: oj.experiment.ExperimentServer.AddKeyAction:output_type -> oj.experiment.CommonRsp
+	1, // 9: oj.experiment.ExperimentServer.AddInteraction:output_type -> oj.experiment.CommonRsp
+	1, // 10: oj.experiment.ExperimentServer.AddKeyActionSegment:output_type -> oj.experiment.CommonRsp
+	1, // 11: oj.experiment.ExperimentServer.AddCode:output_type -> oj.experiment.CommonRsp
+	4, // 12: oj.experiment.ExperimentServer.QueryCode:output_type -> oj.experiment.QueryCodeRsp
+	9, // 13: oj.experiment.ExperimentServer.QueryMyCodeList:output_type -> oj.experiment.QueryMyCodeListRsp
+	8, // [8:14] is the sub-list for method output_type
+	2, // [2:8] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
 	2, // [2:2] is the sub-list for extension extendee
 	0, // [0:2] is the sub-list for field type_name
@@ -690,7 +974,7 @@ func file_experiment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_experiment_proto_rawDesc), len(file_experiment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
