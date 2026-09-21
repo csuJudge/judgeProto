@@ -596,6 +596,7 @@ type AddKeyActionSegmentReq struct {
 	Resumed       int32                  `protobuf:"varint,6,opt,name=resumed,proto3" json:"resumed,omitempty"`       // 1 = 这次页面加载是接着上次回来的
 	GapBeforeS    int32                  `protobuf:"varint,7,opt,name=gapBeforeS,proto3" json:"gapBeforeS,omitempty"` // 距上一次活动的秒数
 	RemoteIP      string                 `protobuf:"bytes,8,opt,name=remoteIP,proto3" json:"remoteIP,omitempty"`      // 提交IP
+	SessionKey    string                 `protobuf:"bytes,9,opt,name=sessionKey,proto3" json:"sessionKey,omitempty"`  // 页面会话标识，和 interaction 表对齐用
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -682,6 +683,13 @@ func (x *AddKeyActionSegmentReq) GetGapBeforeS() int32 {
 func (x *AddKeyActionSegmentReq) GetRemoteIP() string {
 	if x != nil {
 		return x.RemoteIP
+	}
+	return ""
+}
+
+func (x *AddKeyActionSegmentReq) GetSessionKey() string {
+	if x != nil {
+		return x.SessionKey
 	}
 	return ""
 }
@@ -886,7 +894,7 @@ const file_experiment_proto_rawDesc = "" +
 	"\n" +
 	"gapBeforeS\x18\f \x01(\x05R\n" +
 	"gapBeforeS\x12\x1a\n" +
-	"\bremoteIP\x18\r \x01(\tR\bremoteIP\"\xf2\x01\n" +
+	"\bremoteIP\x18\r \x01(\tR\bremoteIP\"\x92\x02\n" +
 	"\x16AddKeyActionSegmentReq\x12\x16\n" +
 	"\x06action\x18\x01 \x01(\tR\x06action\x12\x1c\n" +
 	"\tstartTime\x18\x02 \x01(\tR\tstartTime\x12\x1c\n" +
@@ -897,7 +905,10 @@ const file_experiment_proto_rawDesc = "" +
 	"\n" +
 	"gapBeforeS\x18\a \x01(\x05R\n" +
 	"gapBeforeS\x12\x1a\n" +
-	"\bremoteIP\x18\b \x01(\tR\bremoteIP\"r\n" +
+	"\bremoteIP\x18\b \x01(\tR\bremoteIP\x12\x1e\n" +
+	"\n" +
+	"sessionKey\x18\t \x01(\tR\n" +
+	"sessionKey\"r\n" +
 	"\x04Code\x12\x1a\n" +
 	"\bLanguage\x18\x01 \x01(\x05R\bLanguage\x12\x12\n" +
 	"\x04Code\x18\x02 \x01(\tR\x04Code\x12\x18\n" +

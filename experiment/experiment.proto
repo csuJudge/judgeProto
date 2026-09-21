@@ -87,6 +87,7 @@ message AddKeyActionSegmentReq{
   int32 resumed = 6; // 1 = 这次页面加载是接着上次回来的
   int32 gapBeforeS = 7; // 距上一次活动的秒数
   string remoteIP = 8; // 提交IP
+  string sessionKey = 9; // 页面会话标识，和 interaction 表对齐用
 }
 
 message Code{
