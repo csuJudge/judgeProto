@@ -358,6 +358,16 @@ message AddSolutionReq {
     string ip = 9;   // ip信息
     string startTime = 10;  // 进入题目的时间
     int32 solutionType = 11;  // 提交的类型
+    string workID = 12; // 跨页面加载的同一次投入
+    string sessionKey = 13; // 页面会话标识，和 interaction 表对齐用
+    string flushReason = 14; // submit / test / compile
+    int32 resumed = 15; // 1 = 这次页面加载是接着上次回来的
+    int32 gapBeforeS = 16; // 距上一次活动的秒数
+    string batchID = 17; // 客户端生成的幂等击键批次标识
+    int32 batchIndex = 18; // 同一会话内第几批，从 1 开始
+    int32 eventCount = 19; // 客户端声明的本批事件数；服务端会重新计算
+    string schemaVersion = 20; // 击键事件结构版本
+    int64 clientSentAtMs = 21; // 客户端发起上报的 Unix 毫秒时间
 }
 
 message QuerySimListReq {

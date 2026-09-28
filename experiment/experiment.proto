@@ -60,6 +60,16 @@ message AddKeyActionReq{
   int32 userID = 5; // 用户编号
   int32 solutionType = 6; // 提交类型
   string remoteIP = 7; // 提交IP
+  string workID = 8; // 跨页面加载的同一次投入
+  string sessionKey = 9; // 页面会话标识，和 interaction 表对齐用
+  string flushReason = 10; // submit / test / compile / timer / visibility / pagehide
+  int32 resumed = 11; // 1 = 这次页面加载是接着上次回来的
+  int32 gapBeforeS = 12; // 距上一次活动的秒数
+  string batchID = 13; // 客户端生成的幂等批次标识
+  int32 batchIndex = 14; // 同一会话内第几批，从 1 开始
+  int32 eventCount = 15; // 客户端声明的本批事件数；服务端会重新计算
+  string schemaVersion = 16; // 击键事件结构版本
+  int64 clientSentAtMs = 17; // 客户端发起上报的 Unix 毫秒时间
 }
 
 message AddInteractionReq{
@@ -76,6 +86,9 @@ message AddInteractionReq{
   int32 resumed = 11; // 1 = 这次页面加载是接着上次回来的
   int32 gapBeforeS = 12; // 距上一次活动的秒数
   string remoteIP = 13; // 提交IP
+  string batchID = 14; // 客户端生成的幂等批次标识
+  string schemaVersion = 15; // 交互事件结构版本
+  int64 clientSentAtMs = 16; // 客户端发起上报的 Unix 毫秒时间
 }
 
 message AddKeyActionSegmentReq{
@@ -88,6 +101,12 @@ message AddKeyActionSegmentReq{
   int32 gapBeforeS = 7; // 距上一次活动的秒数
   string remoteIP = 8; // 提交IP
   string sessionKey = 9; // 页面会话标识，和 interaction 表对齐用
+  string flushReason = 10; // timer / visibility / pagehide
+  string batchID = 11; // 客户端生成的幂等批次标识
+  int32 batchIndex = 12; // 同一会话内第几批，从 1 开始
+  int32 eventCount = 13; // 客户端声明的本批事件数；服务端会重新计算
+  string schemaVersion = 14; // 击键事件结构版本
+  int64 clientSentAtMs = 15; // 客户端发起上报的 Unix 毫秒时间
 }
 
 message Code{

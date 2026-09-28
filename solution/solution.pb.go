@@ -7,12 +7,11 @@
 package solution
 
 import (
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
-
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -2751,20 +2750,30 @@ func (x *QueryUserProblemSolutionRsp) GetUnAcceptProblems() string {
 }
 
 type AddSolutionReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProblemID     int32                  `protobuf:"varint,1,opt,name=problemID,proto3" json:"problemID,omitempty"`        // 题目编号
-	UserID        int32                  `protobuf:"varint,2,opt,name=userID,proto3" json:"userID,omitempty"`              // 用户编号
-	Language      int32                  `protobuf:"varint,3,opt,name=language,proto3" json:"language,omitempty"`          // 语言
-	ContestID     int32                  `protobuf:"varint,4,opt,name=contestID,proto3" json:"contestID,omitempty"`        // 考试编号
-	UserCode      string                 `protobuf:"bytes,5,opt,name=userCode,proto3" json:"userCode,omitempty"`           // 用户代码
-	Input         string                 `protobuf:"bytes,6,opt,name=input,proto3" json:"input,omitempty"`                 // 输入
-	KeyAction     string                 `protobuf:"bytes,7,opt,name=keyAction,proto3" json:"keyAction,omitempty"`         // 击键行为
-	Type          int32                  `protobuf:"varint,8,opt,name=type,proto3" json:"type,omitempty"`                  // 类型
-	Ip            string                 `protobuf:"bytes,9,opt,name=ip,proto3" json:"ip,omitempty"`                       // ip信息
-	StartTime     string                 `protobuf:"bytes,10,opt,name=startTime,proto3" json:"startTime,omitempty"`        // 进入题目的时间
-	SolutionType  int32                  `protobuf:"varint,11,opt,name=solutionType,proto3" json:"solutionType,omitempty"` // 提交的类型
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	ProblemID      int32                  `protobuf:"varint,1,opt,name=problemID,proto3" json:"problemID,omitempty"`            // 题目编号
+	UserID         int32                  `protobuf:"varint,2,opt,name=userID,proto3" json:"userID,omitempty"`                  // 用户编号
+	Language       int32                  `protobuf:"varint,3,opt,name=language,proto3" json:"language,omitempty"`              // 语言
+	ContestID      int32                  `protobuf:"varint,4,opt,name=contestID,proto3" json:"contestID,omitempty"`            // 考试编号
+	UserCode       string                 `protobuf:"bytes,5,opt,name=userCode,proto3" json:"userCode,omitempty"`               // 用户代码
+	Input          string                 `protobuf:"bytes,6,opt,name=input,proto3" json:"input,omitempty"`                     // 输入
+	KeyAction      string                 `protobuf:"bytes,7,opt,name=keyAction,proto3" json:"keyAction,omitempty"`             // 击键行为
+	Type           int32                  `protobuf:"varint,8,opt,name=type,proto3" json:"type,omitempty"`                      // 类型
+	Ip             string                 `protobuf:"bytes,9,opt,name=ip,proto3" json:"ip,omitempty"`                           // ip信息
+	StartTime      string                 `protobuf:"bytes,10,opt,name=startTime,proto3" json:"startTime,omitempty"`            // 进入题目的时间
+	SolutionType   int32                  `protobuf:"varint,11,opt,name=solutionType,proto3" json:"solutionType,omitempty"`     // 提交的类型
+	WorkID         string                 `protobuf:"bytes,12,opt,name=workID,proto3" json:"workID,omitempty"`                  // 跨页面加载的同一次投入
+	SessionKey     string                 `protobuf:"bytes,13,opt,name=sessionKey,proto3" json:"sessionKey,omitempty"`          // 页面会话标识，和 interaction 表对齐用
+	FlushReason    string                 `protobuf:"bytes,14,opt,name=flushReason,proto3" json:"flushReason,omitempty"`        // submit / test / compile
+	Resumed        int32                  `protobuf:"varint,15,opt,name=resumed,proto3" json:"resumed,omitempty"`               // 1 = 这次页面加载是接着上次回来的
+	GapBeforeS     int32                  `protobuf:"varint,16,opt,name=gapBeforeS,proto3" json:"gapBeforeS,omitempty"`         // 距上一次活动的秒数
+	BatchID        string                 `protobuf:"bytes,17,opt,name=batchID,proto3" json:"batchID,omitempty"`                // 客户端生成的幂等击键批次标识
+	BatchIndex     int32                  `protobuf:"varint,18,opt,name=batchIndex,proto3" json:"batchIndex,omitempty"`         // 同一会话内第几批，从 1 开始
+	EventCount     int32                  `protobuf:"varint,19,opt,name=eventCount,proto3" json:"eventCount,omitempty"`         // 客户端声明的本批事件数；服务端会重新计算
+	SchemaVersion  string                 `protobuf:"bytes,20,opt,name=schemaVersion,proto3" json:"schemaVersion,omitempty"`    // 击键事件结构版本
+	ClientSentAtMs int64                  `protobuf:"varint,21,opt,name=clientSentAtMs,proto3" json:"clientSentAtMs,omitempty"` // 客户端发起上报的 Unix 毫秒时间
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *AddSolutionReq) Reset() {
@@ -2870,6 +2879,76 @@ func (x *AddSolutionReq) GetStartTime() string {
 func (x *AddSolutionReq) GetSolutionType() int32 {
 	if x != nil {
 		return x.SolutionType
+	}
+	return 0
+}
+
+func (x *AddSolutionReq) GetWorkID() string {
+	if x != nil {
+		return x.WorkID
+	}
+	return ""
+}
+
+func (x *AddSolutionReq) GetSessionKey() string {
+	if x != nil {
+		return x.SessionKey
+	}
+	return ""
+}
+
+func (x *AddSolutionReq) GetFlushReason() string {
+	if x != nil {
+		return x.FlushReason
+	}
+	return ""
+}
+
+func (x *AddSolutionReq) GetResumed() int32 {
+	if x != nil {
+		return x.Resumed
+	}
+	return 0
+}
+
+func (x *AddSolutionReq) GetGapBeforeS() int32 {
+	if x != nil {
+		return x.GapBeforeS
+	}
+	return 0
+}
+
+func (x *AddSolutionReq) GetBatchID() string {
+	if x != nil {
+		return x.BatchID
+	}
+	return ""
+}
+
+func (x *AddSolutionReq) GetBatchIndex() int32 {
+	if x != nil {
+		return x.BatchIndex
+	}
+	return 0
+}
+
+func (x *AddSolutionReq) GetEventCount() int32 {
+	if x != nil {
+		return x.EventCount
+	}
+	return 0
+}
+
+func (x *AddSolutionReq) GetSchemaVersion() string {
+	if x != nil {
+		return x.SchemaVersion
+	}
+	return ""
+}
+
+func (x *AddSolutionReq) GetClientSentAtMs() int64 {
+	if x != nil {
+		return x.ClientSentAtMs
 	}
 	return 0
 }
@@ -4403,7 +4482,7 @@ const file_solution_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12&\n" +
 	"\x0eacceptProblems\x18\x03 \x01(\tR\x0eacceptProblems\x12*\n" +
-	"\x10unAcceptProblems\x18\x04 \x01(\tR\x10unAcceptProblems\"\xb6\x02\n" +
+	"\x10unAcceptProblems\x18\x04 \x01(\tR\x10unAcceptProblems\"\xf2\x04\n" +
 	"\x0eAddSolutionReq\x12\x1c\n" +
 	"\tproblemID\x18\x01 \x01(\x05R\tproblemID\x12\x16\n" +
 	"\x06userID\x18\x02 \x01(\x05R\x06userID\x12\x1a\n" +
@@ -4416,7 +4495,25 @@ const file_solution_proto_rawDesc = "" +
 	"\x02ip\x18\t \x01(\tR\x02ip\x12\x1c\n" +
 	"\tstartTime\x18\n" +
 	" \x01(\tR\tstartTime\x12\"\n" +
-	"\fsolutionType\x18\v \x01(\x05R\fsolutionType\"q\n" +
+	"\fsolutionType\x18\v \x01(\x05R\fsolutionType\x12\x16\n" +
+	"\x06workID\x18\f \x01(\tR\x06workID\x12\x1e\n" +
+	"\n" +
+	"sessionKey\x18\r \x01(\tR\n" +
+	"sessionKey\x12 \n" +
+	"\vflushReason\x18\x0e \x01(\tR\vflushReason\x12\x18\n" +
+	"\aresumed\x18\x0f \x01(\x05R\aresumed\x12\x1e\n" +
+	"\n" +
+	"gapBeforeS\x18\x10 \x01(\x05R\n" +
+	"gapBeforeS\x12\x18\n" +
+	"\abatchID\x18\x11 \x01(\tR\abatchID\x12\x1e\n" +
+	"\n" +
+	"batchIndex\x18\x12 \x01(\x05R\n" +
+	"batchIndex\x12\x1e\n" +
+	"\n" +
+	"eventCount\x18\x13 \x01(\x05R\n" +
+	"eventCount\x12$\n" +
+	"\rschemaVersion\x18\x14 \x01(\tR\rschemaVersion\x12&\n" +
+	"\x0eclientSentAtMs\x18\x15 \x01(\x03R\x0eclientSentAtMs\"q\n" +
 	"\x0fQuerySimListReq\x12\x1c\n" +
 	"\tcontestID\x18\x01 \x01(\x05R\tcontestID\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x14\n" +

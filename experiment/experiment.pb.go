@@ -7,12 +7,11 @@
 package experiment
 
 import (
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
-
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -355,16 +354,26 @@ func (x *QueryCodeRsp) GetUserCode() *Code {
 }
 
 type AddKeyActionReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Action        string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`              // 击键行为
-	SolutionID    int32                  `protobuf:"varint,2,opt,name=solutionID,proto3" json:"solutionID,omitempty"`     // 提交编号
-	StartTime     string                 `protobuf:"bytes,3,opt,name=startTime,proto3" json:"startTime,omitempty"`        // 开始时间
-	ProblemID     int32                  `protobuf:"varint,4,opt,name=problemID,proto3" json:"problemID,omitempty"`       // 题目编号
-	UserID        int32                  `protobuf:"varint,5,opt,name=userID,proto3" json:"userID,omitempty"`             // 用户编号
-	SolutionType  int32                  `protobuf:"varint,6,opt,name=solutionType,proto3" json:"solutionType,omitempty"` // 提交类型
-	RemoteIP      string                 `protobuf:"bytes,7,opt,name=remoteIP,proto3" json:"remoteIP,omitempty"`          // 提交IP
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Action         string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`                   // 击键行为
+	SolutionID     int32                  `protobuf:"varint,2,opt,name=solutionID,proto3" json:"solutionID,omitempty"`          // 提交编号
+	StartTime      string                 `protobuf:"bytes,3,opt,name=startTime,proto3" json:"startTime,omitempty"`             // 开始时间
+	ProblemID      int32                  `protobuf:"varint,4,opt,name=problemID,proto3" json:"problemID,omitempty"`            // 题目编号
+	UserID         int32                  `protobuf:"varint,5,opt,name=userID,proto3" json:"userID,omitempty"`                  // 用户编号
+	SolutionType   int32                  `protobuf:"varint,6,opt,name=solutionType,proto3" json:"solutionType,omitempty"`      // 提交类型
+	RemoteIP       string                 `protobuf:"bytes,7,opt,name=remoteIP,proto3" json:"remoteIP,omitempty"`               // 提交IP
+	WorkID         string                 `protobuf:"bytes,8,opt,name=workID,proto3" json:"workID,omitempty"`                   // 跨页面加载的同一次投入
+	SessionKey     string                 `protobuf:"bytes,9,opt,name=sessionKey,proto3" json:"sessionKey,omitempty"`           // 页面会话标识，和 interaction 表对齐用
+	FlushReason    string                 `protobuf:"bytes,10,opt,name=flushReason,proto3" json:"flushReason,omitempty"`        // submit / test / compile / timer / visibility / pagehide
+	Resumed        int32                  `protobuf:"varint,11,opt,name=resumed,proto3" json:"resumed,omitempty"`               // 1 = 这次页面加载是接着上次回来的
+	GapBeforeS     int32                  `protobuf:"varint,12,opt,name=gapBeforeS,proto3" json:"gapBeforeS,omitempty"`         // 距上一次活动的秒数
+	BatchID        string                 `protobuf:"bytes,13,opt,name=batchID,proto3" json:"batchID,omitempty"`                // 客户端生成的幂等批次标识
+	BatchIndex     int32                  `protobuf:"varint,14,opt,name=batchIndex,proto3" json:"batchIndex,omitempty"`         // 同一会话内第几批，从 1 开始
+	EventCount     int32                  `protobuf:"varint,15,opt,name=eventCount,proto3" json:"eventCount,omitempty"`         // 客户端声明的本批事件数；服务端会重新计算
+	SchemaVersion  string                 `protobuf:"bytes,16,opt,name=schemaVersion,proto3" json:"schemaVersion,omitempty"`    // 击键事件结构版本
+	ClientSentAtMs int64                  `protobuf:"varint,17,opt,name=clientSentAtMs,proto3" json:"clientSentAtMs,omitempty"` // 客户端发起上报的 Unix 毫秒时间
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *AddKeyActionReq) Reset() {
@@ -446,23 +455,96 @@ func (x *AddKeyActionReq) GetRemoteIP() string {
 	return ""
 }
 
+func (x *AddKeyActionReq) GetWorkID() string {
+	if x != nil {
+		return x.WorkID
+	}
+	return ""
+}
+
+func (x *AddKeyActionReq) GetSessionKey() string {
+	if x != nil {
+		return x.SessionKey
+	}
+	return ""
+}
+
+func (x *AddKeyActionReq) GetFlushReason() string {
+	if x != nil {
+		return x.FlushReason
+	}
+	return ""
+}
+
+func (x *AddKeyActionReq) GetResumed() int32 {
+	if x != nil {
+		return x.Resumed
+	}
+	return 0
+}
+
+func (x *AddKeyActionReq) GetGapBeforeS() int32 {
+	if x != nil {
+		return x.GapBeforeS
+	}
+	return 0
+}
+
+func (x *AddKeyActionReq) GetBatchID() string {
+	if x != nil {
+		return x.BatchID
+	}
+	return ""
+}
+
+func (x *AddKeyActionReq) GetBatchIndex() int32 {
+	if x != nil {
+		return x.BatchIndex
+	}
+	return 0
+}
+
+func (x *AddKeyActionReq) GetEventCount() int32 {
+	if x != nil {
+		return x.EventCount
+	}
+	return 0
+}
+
+func (x *AddKeyActionReq) GetSchemaVersion() string {
+	if x != nil {
+		return x.SchemaVersion
+	}
+	return ""
+}
+
+func (x *AddKeyActionReq) GetClientSentAtMs() int64 {
+	if x != nil {
+		return x.ClientSentAtMs
+	}
+	return 0
+}
+
 type AddInteractionReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Action        string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`           // 交互行为（JSON 数组字符串）
-	SessionKey    string                 `protobuf:"bytes,2,opt,name=sessionKey,proto3" json:"sessionKey,omitempty"`   // 页面会话标识，刷新会换；多标签页靠它区分
-	BatchIndex    int32                  `protobuf:"varint,3,opt,name=batchIndex,proto3" json:"batchIndex,omitempty"`  // 同一会话内第几批，从 1 开始
-	FlushReason   string                 `protobuf:"bytes,4,opt,name=flushReason,proto3" json:"flushReason,omitempty"` // timer / pagehide / submit / test / compile / judge
-	EventCount    int32                  `protobuf:"varint,5,opt,name=eventCount,proto3" json:"eventCount,omitempty"`  // 本批事件条数
-	StartTime     string                 `protobuf:"bytes,6,opt,name=startTime,proto3" json:"startTime,omitempty"`     // 页面加载时刻
-	ProblemID     int32                  `protobuf:"varint,7,opt,name=problemID,proto3" json:"problemID,omitempty"`    // 题目编号
-	SolutionID    int32                  `protobuf:"varint,8,opt,name=solutionID,proto3" json:"solutionID,omitempty"`  // 提交编号；定时批与补发批为 0
-	UserID        int32                  `protobuf:"varint,9,opt,name=userID,proto3" json:"userID,omitempty"`          // 用户编号
-	WorkID        string                 `protobuf:"bytes,10,opt,name=workID,proto3" json:"workID,omitempty"`          // 跨页面加载的同一次投入
-	Resumed       int32                  `protobuf:"varint,11,opt,name=resumed,proto3" json:"resumed,omitempty"`       // 1 = 这次页面加载是接着上次回来的
-	GapBeforeS    int32                  `protobuf:"varint,12,opt,name=gapBeforeS,proto3" json:"gapBeforeS,omitempty"` // 距上一次活动的秒数
-	RemoteIP      string                 `protobuf:"bytes,13,opt,name=remoteIP,proto3" json:"remoteIP,omitempty"`      // 提交IP
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Action         string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`                   // 交互行为（JSON 数组字符串）
+	SessionKey     string                 `protobuf:"bytes,2,opt,name=sessionKey,proto3" json:"sessionKey,omitempty"`           // 页面会话标识，刷新会换；多标签页靠它区分
+	BatchIndex     int32                  `protobuf:"varint,3,opt,name=batchIndex,proto3" json:"batchIndex,omitempty"`          // 同一会话内第几批，从 1 开始
+	FlushReason    string                 `protobuf:"bytes,4,opt,name=flushReason,proto3" json:"flushReason,omitempty"`         // timer / pagehide / submit / test / compile / judge
+	EventCount     int32                  `protobuf:"varint,5,opt,name=eventCount,proto3" json:"eventCount,omitempty"`          // 本批事件条数
+	StartTime      string                 `protobuf:"bytes,6,opt,name=startTime,proto3" json:"startTime,omitempty"`             // 页面加载时刻
+	ProblemID      int32                  `protobuf:"varint,7,opt,name=problemID,proto3" json:"problemID,omitempty"`            // 题目编号
+	SolutionID     int32                  `protobuf:"varint,8,opt,name=solutionID,proto3" json:"solutionID,omitempty"`          // 提交编号；定时批与补发批为 0
+	UserID         int32                  `protobuf:"varint,9,opt,name=userID,proto3" json:"userID,omitempty"`                  // 用户编号
+	WorkID         string                 `protobuf:"bytes,10,opt,name=workID,proto3" json:"workID,omitempty"`                  // 跨页面加载的同一次投入
+	Resumed        int32                  `protobuf:"varint,11,opt,name=resumed,proto3" json:"resumed,omitempty"`               // 1 = 这次页面加载是接着上次回来的
+	GapBeforeS     int32                  `protobuf:"varint,12,opt,name=gapBeforeS,proto3" json:"gapBeforeS,omitempty"`         // 距上一次活动的秒数
+	RemoteIP       string                 `protobuf:"bytes,13,opt,name=remoteIP,proto3" json:"remoteIP,omitempty"`              // 提交IP
+	BatchID        string                 `protobuf:"bytes,14,opt,name=batchID,proto3" json:"batchID,omitempty"`                // 客户端生成的幂等批次标识
+	SchemaVersion  string                 `protobuf:"bytes,15,opt,name=schemaVersion,proto3" json:"schemaVersion,omitempty"`    // 交互事件结构版本
+	ClientSentAtMs int64                  `protobuf:"varint,16,opt,name=clientSentAtMs,proto3" json:"clientSentAtMs,omitempty"` // 客户端发起上报的 Unix 毫秒时间
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *AddInteractionReq) Reset() {
@@ -586,19 +668,46 @@ func (x *AddInteractionReq) GetRemoteIP() string {
 	return ""
 }
 
+func (x *AddInteractionReq) GetBatchID() string {
+	if x != nil {
+		return x.BatchID
+	}
+	return ""
+}
+
+func (x *AddInteractionReq) GetSchemaVersion() string {
+	if x != nil {
+		return x.SchemaVersion
+	}
+	return ""
+}
+
+func (x *AddInteractionReq) GetClientSentAtMs() int64 {
+	if x != nil {
+		return x.ClientSentAtMs
+	}
+	return 0
+}
+
 type AddKeyActionSegmentReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Action        string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`          // 击键行为
-	StartTime     string                 `protobuf:"bytes,2,opt,name=startTime,proto3" json:"startTime,omitempty"`    // 页面加载时刻
-	ProblemID     int32                  `protobuf:"varint,3,opt,name=problemID,proto3" json:"problemID,omitempty"`   // 题目编号
-	UserID        int32                  `protobuf:"varint,4,opt,name=userID,proto3" json:"userID,omitempty"`         // 用户编号
-	WorkID        string                 `protobuf:"bytes,5,opt,name=workID,proto3" json:"workID,omitempty"`          // 跨页面加载的同一次投入
-	Resumed       int32                  `protobuf:"varint,6,opt,name=resumed,proto3" json:"resumed,omitempty"`       // 1 = 这次页面加载是接着上次回来的
-	GapBeforeS    int32                  `protobuf:"varint,7,opt,name=gapBeforeS,proto3" json:"gapBeforeS,omitempty"` // 距上一次活动的秒数
-	RemoteIP      string                 `protobuf:"bytes,8,opt,name=remoteIP,proto3" json:"remoteIP,omitempty"`      // 提交IP
-	SessionKey    string                 `protobuf:"bytes,9,opt,name=sessionKey,proto3" json:"sessionKey,omitempty"`  // 页面会话标识，和 interaction 表对齐用
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Action         string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`                   // 击键行为
+	StartTime      string                 `protobuf:"bytes,2,opt,name=startTime,proto3" json:"startTime,omitempty"`             // 页面加载时刻
+	ProblemID      int32                  `protobuf:"varint,3,opt,name=problemID,proto3" json:"problemID,omitempty"`            // 题目编号
+	UserID         int32                  `protobuf:"varint,4,opt,name=userID,proto3" json:"userID,omitempty"`                  // 用户编号
+	WorkID         string                 `protobuf:"bytes,5,opt,name=workID,proto3" json:"workID,omitempty"`                   // 跨页面加载的同一次投入
+	Resumed        int32                  `protobuf:"varint,6,opt,name=resumed,proto3" json:"resumed,omitempty"`                // 1 = 这次页面加载是接着上次回来的
+	GapBeforeS     int32                  `protobuf:"varint,7,opt,name=gapBeforeS,proto3" json:"gapBeforeS,omitempty"`          // 距上一次活动的秒数
+	RemoteIP       string                 `protobuf:"bytes,8,opt,name=remoteIP,proto3" json:"remoteIP,omitempty"`               // 提交IP
+	SessionKey     string                 `protobuf:"bytes,9,opt,name=sessionKey,proto3" json:"sessionKey,omitempty"`           // 页面会话标识，和 interaction 表对齐用
+	FlushReason    string                 `protobuf:"bytes,10,opt,name=flushReason,proto3" json:"flushReason,omitempty"`        // timer / visibility / pagehide
+	BatchID        string                 `protobuf:"bytes,11,opt,name=batchID,proto3" json:"batchID,omitempty"`                // 客户端生成的幂等批次标识
+	BatchIndex     int32                  `protobuf:"varint,12,opt,name=batchIndex,proto3" json:"batchIndex,omitempty"`         // 同一会话内第几批，从 1 开始
+	EventCount     int32                  `protobuf:"varint,13,opt,name=eventCount,proto3" json:"eventCount,omitempty"`         // 客户端声明的本批事件数；服务端会重新计算
+	SchemaVersion  string                 `protobuf:"bytes,14,opt,name=schemaVersion,proto3" json:"schemaVersion,omitempty"`    // 击键事件结构版本
+	ClientSentAtMs int64                  `protobuf:"varint,15,opt,name=clientSentAtMs,proto3" json:"clientSentAtMs,omitempty"` // 客户端发起上报的 Unix 毫秒时间
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *AddKeyActionSegmentReq) Reset() {
@@ -692,6 +801,48 @@ func (x *AddKeyActionSegmentReq) GetSessionKey() string {
 		return x.SessionKey
 	}
 	return ""
+}
+
+func (x *AddKeyActionSegmentReq) GetFlushReason() string {
+	if x != nil {
+		return x.FlushReason
+	}
+	return ""
+}
+
+func (x *AddKeyActionSegmentReq) GetBatchID() string {
+	if x != nil {
+		return x.BatchID
+	}
+	return ""
+}
+
+func (x *AddKeyActionSegmentReq) GetBatchIndex() int32 {
+	if x != nil {
+		return x.BatchIndex
+	}
+	return 0
+}
+
+func (x *AddKeyActionSegmentReq) GetEventCount() int32 {
+	if x != nil {
+		return x.EventCount
+	}
+	return 0
+}
+
+func (x *AddKeyActionSegmentReq) GetSchemaVersion() string {
+	if x != nil {
+		return x.SchemaVersion
+	}
+	return ""
+}
+
+func (x *AddKeyActionSegmentReq) GetClientSentAtMs() int64 {
+	if x != nil {
+		return x.ClientSentAtMs
+	}
+	return 0
 }
 
 type Code struct {
@@ -859,7 +1010,7 @@ const file_experiment_proto_rawDesc = "" +
 	"\fQueryCodeRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12/\n" +
-	"\buserCode\x18\x03 \x01(\v2\x13.oj.experiment.CodeR\buserCode\"\xdd\x01\n" +
+	"\buserCode\x18\x03 \x01(\v2\x13.oj.experiment.CodeR\buserCode\"\x99\x04\n" +
 	"\x0fAddKeyActionReq\x12\x16\n" +
 	"\x06action\x18\x01 \x01(\tR\x06action\x12\x1e\n" +
 	"\n" +
@@ -869,7 +1020,26 @@ const file_experiment_proto_rawDesc = "" +
 	"\tproblemID\x18\x04 \x01(\x05R\tproblemID\x12\x16\n" +
 	"\x06userID\x18\x05 \x01(\x05R\x06userID\x12\"\n" +
 	"\fsolutionType\x18\x06 \x01(\x05R\fsolutionType\x12\x1a\n" +
-	"\bremoteIP\x18\a \x01(\tR\bremoteIP\"\x8f\x03\n" +
+	"\bremoteIP\x18\a \x01(\tR\bremoteIP\x12\x16\n" +
+	"\x06workID\x18\b \x01(\tR\x06workID\x12\x1e\n" +
+	"\n" +
+	"sessionKey\x18\t \x01(\tR\n" +
+	"sessionKey\x12 \n" +
+	"\vflushReason\x18\n" +
+	" \x01(\tR\vflushReason\x12\x18\n" +
+	"\aresumed\x18\v \x01(\x05R\aresumed\x12\x1e\n" +
+	"\n" +
+	"gapBeforeS\x18\f \x01(\x05R\n" +
+	"gapBeforeS\x12\x18\n" +
+	"\abatchID\x18\r \x01(\tR\abatchID\x12\x1e\n" +
+	"\n" +
+	"batchIndex\x18\x0e \x01(\x05R\n" +
+	"batchIndex\x12\x1e\n" +
+	"\n" +
+	"eventCount\x18\x0f \x01(\x05R\n" +
+	"eventCount\x12$\n" +
+	"\rschemaVersion\x18\x10 \x01(\tR\rschemaVersion\x12&\n" +
+	"\x0eclientSentAtMs\x18\x11 \x01(\x03R\x0eclientSentAtMs\"\xf7\x03\n" +
 	"\x11AddInteractionReq\x12\x16\n" +
 	"\x06action\x18\x01 \x01(\tR\x06action\x12\x1e\n" +
 	"\n" +
@@ -894,7 +1064,10 @@ const file_experiment_proto_rawDesc = "" +
 	"\n" +
 	"gapBeforeS\x18\f \x01(\x05R\n" +
 	"gapBeforeS\x12\x1a\n" +
-	"\bremoteIP\x18\r \x01(\tR\bremoteIP\"\x92\x02\n" +
+	"\bremoteIP\x18\r \x01(\tR\bremoteIP\x12\x18\n" +
+	"\abatchID\x18\x0e \x01(\tR\abatchID\x12$\n" +
+	"\rschemaVersion\x18\x0f \x01(\tR\rschemaVersion\x12&\n" +
+	"\x0eclientSentAtMs\x18\x10 \x01(\x03R\x0eclientSentAtMs\"\xdc\x03\n" +
 	"\x16AddKeyActionSegmentReq\x12\x16\n" +
 	"\x06action\x18\x01 \x01(\tR\x06action\x12\x1c\n" +
 	"\tstartTime\x18\x02 \x01(\tR\tstartTime\x12\x1c\n" +
@@ -908,7 +1081,18 @@ const file_experiment_proto_rawDesc = "" +
 	"\bremoteIP\x18\b \x01(\tR\bremoteIP\x12\x1e\n" +
 	"\n" +
 	"sessionKey\x18\t \x01(\tR\n" +
-	"sessionKey\"r\n" +
+	"sessionKey\x12 \n" +
+	"\vflushReason\x18\n" +
+	" \x01(\tR\vflushReason\x12\x18\n" +
+	"\abatchID\x18\v \x01(\tR\abatchID\x12\x1e\n" +
+	"\n" +
+	"batchIndex\x18\f \x01(\x05R\n" +
+	"batchIndex\x12\x1e\n" +
+	"\n" +
+	"eventCount\x18\r \x01(\x05R\n" +
+	"eventCount\x12$\n" +
+	"\rschemaVersion\x18\x0e \x01(\tR\rschemaVersion\x12&\n" +
+	"\x0eclientSentAtMs\x18\x0f \x01(\x03R\x0eclientSentAtMs\"r\n" +
 	"\x04Code\x12\x1a\n" +
 	"\bLanguage\x18\x01 \x01(\x05R\bLanguage\x12\x12\n" +
 	"\x04Code\x18\x02 \x01(\tR\x04Code\x12\x18\n" +
