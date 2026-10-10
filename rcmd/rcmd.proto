@@ -10,6 +10,9 @@ service RcmdServer {
 message RcmdProblemReq{
   int32 userID = 1; // 用户编号
   int32 limit = 2; // 返回的数量
+  int32 problemID = 3; // 题目编号
+  string knowledge = 4; // 知识
+  int32 rcmdType = 5; // 推荐类型
 }
 
 message RcmdProblemRsp{

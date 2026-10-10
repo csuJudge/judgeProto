@@ -19,6 +19,7 @@ import (
 
 // RecallServerService defines service.
 type RecallServerService interface {
+	// Recall Recall 召回
 	Recall(ctx context.Context, req *RecallReq) (*RecallRsp, error)
 }
 
@@ -63,6 +64,7 @@ func RegisterRecallServerService(s server.Service, svr RecallServerService) {
 
 type UnimplementedRecallServer struct{}
 
+// Recall Recall 召回
 func (s *UnimplementedRecallServer) Recall(ctx context.Context, req *RecallReq) (*RecallRsp, error) {
 	return nil, errors.New("rpc Recall of service RecallServer is not implemented")
 }
@@ -75,6 +77,7 @@ func (s *UnimplementedRecallServer) Recall(ctx context.Context, req *RecallReq) 
 
 // RecallServerClientProxy defines service client proxy
 type RecallServerClientProxy interface {
+	// Recall Recall 召回
 	Recall(ctx context.Context, req *RecallReq, opts ...client.Option) (rsp *RecallRsp, err error)
 }
 

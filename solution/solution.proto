@@ -143,6 +143,7 @@ message CountProblemSolutionStatisticsRsp {
 message QueryAllUserSolutionReq {
     int32 userID = 1;  // 用户编号
     int32 problemID = 2;  // 题目编号
+    int32 contestID = 3; // 作业编号
 }
 
 message QueryAllUserSolutionRsp {
