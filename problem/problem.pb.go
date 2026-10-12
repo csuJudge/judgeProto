@@ -1012,8 +1012,9 @@ func (x *QueryProblemListRsp) GetTotal() int32 {
 
 type QueryContestProblemReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ContestID     int32                  `protobuf:"varint,1,opt,name=contestID,proto3" json:"contestID,omitempty"` // 作业编号
-	UserID        int32                  `protobuf:"varint,2,opt,name=userID,proto3" json:"userID,omitempty"`       // 用户编号
+	ContestID     int32                  `protobuf:"varint,1,opt,name=contestID,proto3" json:"contestID,omitempty"`     // 作业编号
+	UserID        int32                  `protobuf:"varint,2,opt,name=userID,proto3" json:"userID,omitempty"`           // 用户编号
+	ContestType   int32                  `protobuf:"varint,3,opt,name=contestType,proto3" json:"contestType,omitempty"` // 作业类型
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1058,6 +1059,13 @@ func (x *QueryContestProblemReq) GetContestID() int32 {
 func (x *QueryContestProblemReq) GetUserID() int32 {
 	if x != nil {
 		return x.UserID
+	}
+	return 0
+}
+
+func (x *QueryContestProblemReq) GetContestType() int32 {
+	if x != nil {
+		return x.ContestType
 	}
 	return 0
 }
@@ -3513,10 +3521,11 @@ const file_problem_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x121\n" +
 	"\aproblem\x18\x03 \x03(\v2\x17.oj.problem.ProblemListR\aproblem\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\"N\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"p\n" +
 	"\x16QueryContestProblemReq\x12\x1c\n" +
 	"\tcontestID\x18\x01 \x01(\x05R\tcontestID\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\x05R\x06userID\"\x81\x01\n" +
+	"\x06userID\x18\x02 \x01(\x05R\x06userID\x12 \n" +
+	"\vcontestType\x18\x03 \x01(\x05R\vcontestType\"\x81\x01\n" +
 	"\x19QueryContestProblemReqRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x126\n" +
