@@ -400,6 +400,7 @@ type AddContestReq struct {
 	People        string                 `protobuf:"bytes,10,opt,name=people,proto3" json:"people,omitempty"`            // 人员
 	ClassID       string                 `protobuf:"bytes,11,opt,name=classID,proto3" json:"classID,omitempty"`          // 班级
 	Mode          int32                  `protobuf:"varint,12,opt,name=mode,proto3" json:"mode,omitempty"`               // 模式
+	ContestType   int32                  `protobuf:"varint,13,opt,name=contestType,proto3" json:"contestType,omitempty"` // 作业类型
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -514,6 +515,13 @@ func (x *AddContestReq) GetClassID() string {
 func (x *AddContestReq) GetMode() int32 {
 	if x != nil {
 		return x.Mode
+	}
+	return 0
+}
+
+func (x *AddContestReq) GetContestType() int32 {
+	if x != nil {
+		return x.ContestType
 	}
 	return 0
 }
@@ -720,12 +728,13 @@ func (x *UpdateContestStatusReq) GetStatus() int32 {
 
 type QueryContestListReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`           // 页
-	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`         // 页大小
-	UserID        int32                  `protobuf:"varint,3,opt,name=userID,proto3" json:"userID,omitempty"`       // 用户主键
-	QueryType     int32                  `protobuf:"varint,4,opt,name=queryType,proto3" json:"queryType,omitempty"` // 查询的类型
-	ClassID       string                 `protobuf:"bytes,5,opt,name=classID,proto3" json:"classID,omitempty"`      // 班级编号
-	Name          string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`            // 作业名称
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`               // 页
+	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`             // 页大小
+	UserID        int32                  `protobuf:"varint,3,opt,name=userID,proto3" json:"userID,omitempty"`           // 用户主键
+	QueryType     int32                  `protobuf:"varint,4,opt,name=queryType,proto3" json:"queryType,omitempty"`     // 查询的类型
+	ClassID       string                 `protobuf:"bytes,5,opt,name=classID,proto3" json:"classID,omitempty"`          // 班级编号
+	Name          string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`                // 作业名称
+	ContestType   int32                  `protobuf:"varint,7,opt,name=contestType,proto3" json:"contestType,omitempty"` // 作业类型
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -800,6 +809,13 @@ func (x *QueryContestListReq) GetName() string {
 		return x.Name
 	}
 	return ""
+}
+
+func (x *QueryContestListReq) GetContestType() int32 {
+	if x != nil {
+		return x.ContestType
+	}
+	return 0
 }
 
 type QueryContestListRsp struct {
@@ -896,9 +912,10 @@ func (x *QueryContestListRsp) GetRunningCount() int32 {
 
 type QueryContestReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ContestID     int32                  `protobuf:"varint,1,opt,name=contestID,proto3" json:"contestID,omitempty"` // 作业编号
-	UserID        int32                  `protobuf:"varint,2,opt,name=userID,proto3" json:"userID,omitempty"`       // 用户主键
-	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`    // 密码
+	ContestID     int32                  `protobuf:"varint,1,opt,name=contestID,proto3" json:"contestID,omitempty"`     // 作业编号
+	UserID        int32                  `protobuf:"varint,2,opt,name=userID,proto3" json:"userID,omitempty"`           // 用户主键
+	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`        // 密码
+	ContestType   int32                  `protobuf:"varint,4,opt,name=contestType,proto3" json:"contestType,omitempty"` // 作业类型
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -952,6 +969,13 @@ func (x *QueryContestReq) GetPassword() string {
 		return x.Password
 	}
 	return ""
+}
+
+func (x *QueryContestReq) GetContestType() int32 {
+	if x != nil {
+		return x.ContestType
+	}
+	return 0
 }
 
 type QueryContestRsp struct {
@@ -1423,7 +1447,7 @@ const file_contest_proto_rawDesc = "" +
 	"\x0econtestProblem\x18\x03 \x01(\tR\x0econtestProblem\x12 \n" +
 	"\vcontestUser\x18\x04 \x01(\tR\vcontestUser\x12\x18\n" +
 	"\aprivate\x18\x05 \x01(\x05R\aprivate\x12\"\n" +
-	"\fcontestClass\x18\x06 \x01(\tR\fcontestClass\"\xd3\x02\n" +
+	"\fcontestClass\x18\x06 \x01(\tR\fcontestClass\"\xf5\x02\n" +
 	"\rAddContestReq\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\x05R\x06userID\x12\x1c\n" +
 	"\tstartTime\x18\x02 \x01(\tR\tstartTime\x12\x18\n" +
@@ -1437,7 +1461,8 @@ const file_contest_proto_rawDesc = "" +
 	"\x06people\x18\n" +
 	" \x01(\tR\x06people\x12\x18\n" +
 	"\aclassID\x18\v \x01(\tR\aclassID\x12\x12\n" +
-	"\x04mode\x18\f \x01(\x05R\x04mode\"\xf4\x02\n" +
+	"\x04mode\x18\f \x01(\x05R\x04mode\x12 \n" +
+	"\vcontestType\x18\r \x01(\x05R\vcontestType\"\xf4\x02\n" +
 	"\x10UpdateContestReq\x12\x1c\n" +
 	"\tcontestID\x18\x01 \x01(\x05R\tcontestID\x12\x16\n" +
 	"\x06userID\x18\x02 \x01(\x05R\x06userID\x12\x1c\n" +
@@ -1456,14 +1481,15 @@ const file_contest_proto_rawDesc = "" +
 	"\x16UpdateContestStatusReq\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\x05R\x06userID\x12\x1c\n" +
 	"\tcontestID\x18\x02 \x01(\x05R\tcontestID\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\x05R\x06status\"\xa3\x01\n" +
+	"\x06status\x18\x03 \x01(\x05R\x06status\"\xc5\x01\n" +
 	"\x13QueryContestListReq\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x16\n" +
 	"\x06userID\x18\x03 \x01(\x05R\x06userID\x12\x1c\n" +
 	"\tqueryType\x18\x04 \x01(\x05R\tqueryType\x12\x18\n" +
 	"\aclassID\x18\x05 \x01(\tR\aclassID\x12\x12\n" +
-	"\x04name\x18\x06 \x01(\tR\x04name\"\xf0\x01\n" +
+	"\x04name\x18\x06 \x01(\tR\x04name\x12 \n" +
+	"\vcontestType\x18\a \x01(\x05R\vcontestType\"\xf0\x01\n" +
 	"\x13QueryContestListRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12/\n" +
@@ -1471,11 +1497,12 @@ const file_contest_proto_rawDesc = "" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\x12\x1a\n" +
 	"\bEndCount\x18\x05 \x01(\x05R\bEndCount\x12$\n" +
 	"\rnotStartCount\x18\x06 \x01(\x05R\rnotStartCount\x12\"\n" +
-	"\frunningCount\x18\a \x01(\x05R\frunningCount\"c\n" +
+	"\frunningCount\x18\a \x01(\x05R\frunningCount\"\x85\x01\n" +
 	"\x0fQueryContestReq\x12\x1c\n" +
 	"\tcontestID\x18\x01 \x01(\x05R\tcontestID\x12\x16\n" +
 	"\x06userID\x18\x02 \x01(\x05R\x06userID\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\"\x80\x01\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\x12 \n" +
+	"\vcontestType\x18\x04 \x01(\x05R\vcontestType\"\x80\x01\n" +
 	"\x0fQueryContestRsp\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12-\n" +
