@@ -157,6 +157,7 @@ message Contest {
     int32 participants = 14; // 参与人数
     int32 canUpdate = 15; // 是否能被更新
     int32 mode = 16; // 模式
+    int32 contestType = 17; // 作业了下
 }
 
 message Class {

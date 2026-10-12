@@ -1064,6 +1064,7 @@ type Contest struct {
 	Participants  int32                  `protobuf:"varint,14,opt,name=participants,proto3" json:"participants,omitempty"` // 参与人数
 	CanUpdate     int32                  `protobuf:"varint,15,opt,name=canUpdate,proto3" json:"canUpdate,omitempty"`       // 是否能被更新
 	Mode          int32                  `protobuf:"varint,16,opt,name=mode,proto3" json:"mode,omitempty"`                 // 模式
+	ContestType   int32                  `protobuf:"varint,17,opt,name=contestType,proto3" json:"contestType,omitempty"`   // 作业了下
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1206,6 +1207,13 @@ func (x *Contest) GetCanUpdate() int32 {
 func (x *Contest) GetMode() int32 {
 	if x != nil {
 		return x.Mode
+	}
+	return 0
+}
+
+func (x *Contest) GetContestType() int32 {
+	if x != nil {
+		return x.ContestType
 	}
 	return 0
 }
@@ -1507,7 +1515,7 @@ const file_contest_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12-\n" +
 	"\acontest\x18\x03 \x01(\v2\x13.oj.contest.ContestR\acontest\x12\x10\n" +
-	"\x03see\x18\x04 \x01(\bR\x03see\"\xfc\x03\n" +
+	"\x03see\x18\x04 \x01(\bR\x03see\"\x9e\x04\n" +
 	"\aContest\x12\x1c\n" +
 	"\tcontestID\x18\x01 \x01(\x05R\tcontestID\x12\x1c\n" +
 	"\tstartTime\x18\x02 \x01(\tR\tstartTime\x12\x18\n" +
@@ -1525,7 +1533,8 @@ const file_contest_proto_rawDesc = "" +
 	"\aclasses\x18\r \x03(\v2\x11.oj.contest.ClassR\aclasses\x12\"\n" +
 	"\fparticipants\x18\x0e \x01(\x05R\fparticipants\x12\x1c\n" +
 	"\tcanUpdate\x18\x0f \x01(\x05R\tcanUpdate\x12\x12\n" +
-	"\x04mode\x18\x10 \x01(\x05R\x04mode\"?\n" +
+	"\x04mode\x18\x10 \x01(\x05R\x04mode\x12 \n" +
+	"\vcontestType\x18\x11 \x01(\x05R\vcontestType\"?\n" +
 	"\x05Class\x12\x18\n" +
 	"\aclassID\x18\x01 \x01(\x05R\aclassID\x12\x1c\n" +
 	"\tClassName\x18\x02 \x01(\tR\tClassName\"9\n" +
