@@ -1,0 +1,132 @@
+syntax            = "proto3";
+option go_package = "github.com/csuJudge/objectiveProto/objective";
+
+package oj.objective;
+
+
+service ObjectiveServer {
+  // AddObjective 添加客观题
+  rpc AddObjective(AddObjectiveReq) returns (CommonRsp) {}
+  // UpdateObjective 更新客观题
+  rpc UpdateObjective(UpdateObjectiveReq) returns (CommonRsp) {}
+  // UpdateObjectiveStatus 更新客观题状态
+  rpc UpdateObjectiveStatus(UpdateObjectiveStatusReq) returns (CommonRsp) {}
+  // QueryObjective 查询客观题
+  rpc QueryObjective(QueryObjectiveReq) returns (QueryObjectiveRsp) {}
+  // QueryAllObjective 查询客观题
+  rpc QueryAllObjective(QueryObjectiveListReq) returns (QueryObjectiveListRsp) {}
+  // QueryObjectiveList 分页查询客观题
+  rpc QueryObjectiveList(QueryObjectiveListReq) returns (QueryObjectiveListRsp) {}
+  // IsCorrectObjective 是否客观题错误
+  rpc IsCorrectObjective(IsCorrectObjectiveReq) returns (IsCorrectObjectiveRsp) {}
+  // QueryObjectSolutionList 查询客观题做题记录
+  rpc QueryObjectSolutionList(QueryObjectSolutionListReq) returns (QueryObjectSolutionListRsp) {}
+}
+
+message QueryObjectSolutionListRsp{
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+  int32 total = 3; // 总数
+}
+
+message ObjectiveSolution{
+  int32 objectiveID       = 1;   // 客观题主键
+  int32 objectiveType     = 2;  // 客观题类型
+  int32 isRight           = 3;  // 是否做对
+  string creator          = 4;   // 题目类型
+  string createTime       = 5;   // 创建时间
+  string userAnswer = 6; // 你的答案
+}
+
+message QueryObjectSolutionListReq{
+  int32 page = 1; // 页
+  int32 limit = 2; // 页大小
+  int32 userID = 3; // 用户编号
+  int32 contestID = 4; // 作业编号
+
+}
+
+message CommonRsp {
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+}
+
+message QueryObjectiveListRsp {
+  string message                = 1;  // 返回信息
+  int32 code                    = 2;  // 返回码
+  repeated Objective objectives = 3;  // 客观题集合
+  int32 total                   = 4;  // 总数
+}
+
+message QueryObjectiveListReq {
+  int32 userID = 1;  // 用户主键
+  int32 page   = 2;  // 页
+  int32 limit  = 3;  // 页大小
+}
+
+message IsCorrectObjectiveRsp {
+  string message = 1;  // 返回信息
+  int32 code     = 2;  // 返回码
+  int32 isRight  = 3;  // 是否正确
+}
+
+message IsCorrectObjectiveReq {
+  int32 userID      = 1;  // 用户主键
+  int32 objectiveID = 2;  // 客观题主键
+  string answer     = 3;  // 答案
+}
+
+message QueryObjectiveReq {
+  int32 userID      = 1;  // 用户主键
+  int32 objectiveID = 2;  // 客观题主键
+}
+
+message Option {
+  int32 optionID = 1;  // 选项主键
+  string content = 2;  // 内容
+}
+
+message Objective {
+  int32 objectiveID       = 1;   // 客观题主键
+  string content          = 2;   // 名称
+  string name             = 3;   // 出题人
+  string creator          = 4;   // 题目类型
+  string answer           = 5;   // 答案
+  string updateTime       = 6;   // 更新时间
+  string createTime       = 7;   // 创建时间
+  int32 enable            = 8;   // 是否可用
+  repeated Option options = 9;   // 选项
+  int32 objectiveType     = 10;  // 客观题类型
+  int32 isRight           = 11;  // 是否做对
+}
+
+message QueryObjectiveRsp {
+  string message      = 1;  // 返回信息
+  int32 code          = 2;  // 返回码
+  Objective objective = 3;  // 客观题
+}
+
+message AddObjectiveReq {
+  string content    = 1;  // 内容
+  string name       = 2;  // 名称
+  int32 userID      = 3;  // 用户编号
+  string answer     = 4;  // 答案
+  string options    = 5;  // 选项
+  int32 problemType = 6;  // 题目类型
+}
+
+message UpdateObjectiveReq {
+  int32 objectiveID = 1;  // 客观题主键
+  string content    = 2;  // 内容
+  string name       = 3;  // 名称
+  int32 userID      = 4;  // 用户编号
+  string answer     = 5;  // 答案
+  string options    = 6;  // 选项
+  int32 problemType = 7;  // 题目类型
+}
+
+message UpdateObjectiveStatusReq {
+  int32 objectiveID = 1;  // 客观题主键
+  int32 userID      = 2;  // 用户编号
+  int32 status      = 3;  // 状态
+}
