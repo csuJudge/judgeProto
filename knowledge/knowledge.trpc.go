@@ -39,6 +39,10 @@ type KnowledgeServerService interface {
 	QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq) (*QueryKnowledgeRsp, error)
 	// UpdateCourseKnowledge UpdateCourseKnowledgeReq 更新课程的知识点
 	UpdateCourseKnowledge(ctx context.Context, req *UpdateCourseKnowledgeReq) (*CommonRsp, error)
+	// QueryMyMastery QueryMyMastery 查询我的知识点掌握度（BKT 知识追踪）
+	QueryMyMastery(ctx context.Context, req *QueryMyMasteryReq) (*QueryMyMasteryRsp, error)
+	// QueryClassMastery QueryClassMastery 查询班级知识点掌握度热力图
+	QueryClassMastery(ctx context.Context, req *QueryClassMasteryReq) (*QueryClassMasteryRsp, error)
 }
 
 func KnowledgeServerService_QueryKnowledge_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -221,6 +225,42 @@ func KnowledgeServerService_UpdateCourseKnowledge_Handler(svr interface{}, ctx c
 	return rsp, nil
 }
 
+func KnowledgeServerService_QueryMyMastery_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryMyMasteryReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).QueryMyMastery(ctx, reqbody.(*QueryMyMasteryReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func KnowledgeServerService_QueryClassMastery_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryClassMasteryReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).QueryClassMastery(ctx, reqbody.(*QueryClassMasteryReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // KnowledgeServerServer_ServiceDesc descriptor for server.RegisterService.
 var KnowledgeServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.knowledge.KnowledgeServer",
@@ -265,6 +305,14 @@ var KnowledgeServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.knowledge.KnowledgeServer/UpdateCourseKnowledge",
 			Func: KnowledgeServerService_UpdateCourseKnowledge_Handler,
+		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/QueryMyMastery",
+			Func: KnowledgeServerService_QueryMyMastery_Handler,
+		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/QueryClassMastery",
+			Func: KnowledgeServerService_QueryClassMastery_Handler,
 		},
 	},
 }
@@ -330,6 +378,16 @@ func (s *UnimplementedKnowledgeServer) UpdateCourseKnowledge(ctx context.Context
 	return nil, errors.New("rpc UpdateCourseKnowledge of service KnowledgeServer is not implemented")
 }
 
+// QueryMyMastery QueryMyMastery 查询我的知识点掌握度（BKT 知识追踪）
+func (s *UnimplementedKnowledgeServer) QueryMyMastery(ctx context.Context, req *QueryMyMasteryReq) (*QueryMyMasteryRsp, error) {
+	return nil, errors.New("rpc QueryMyMastery of service KnowledgeServer is not implemented")
+}
+
+// QueryClassMastery QueryClassMastery 查询班级知识点掌握度热力图
+func (s *UnimplementedKnowledgeServer) QueryClassMastery(ctx context.Context, req *QueryClassMasteryReq) (*QueryClassMasteryRsp, error) {
+	return nil, errors.New("rpc QueryClassMastery of service KnowledgeServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -358,6 +416,10 @@ type KnowledgeServerClientProxy interface {
 	QueryCourseKnowledge(ctx context.Context, req *QueryCourseKnowledgeReq, opts ...client.Option) (rsp *QueryKnowledgeRsp, err error)
 	// UpdateCourseKnowledge UpdateCourseKnowledgeReq 更新课程的知识点
 	UpdateCourseKnowledge(ctx context.Context, req *UpdateCourseKnowledgeReq, opts ...client.Option) (rsp *CommonRsp, err error)
+	// QueryMyMastery QueryMyMastery 查询我的知识点掌握度（BKT 知识追踪）
+	QueryMyMastery(ctx context.Context, req *QueryMyMasteryReq, opts ...client.Option) (rsp *QueryMyMasteryRsp, err error)
+	// QueryClassMastery QueryClassMastery 查询班级知识点掌握度热力图
+	QueryClassMastery(ctx context.Context, req *QueryClassMasteryReq, opts ...client.Option) (rsp *QueryClassMasteryRsp, err error)
 }
 
 type KnowledgeServerClientProxyImpl struct {
@@ -563,6 +625,46 @@ func (c *KnowledgeServerClientProxyImpl) UpdateCourseKnowledge(ctx context.Conte
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) QueryMyMastery(ctx context.Context, req *QueryMyMasteryReq, opts ...client.Option) (*QueryMyMasteryRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/QueryMyMastery")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("QueryMyMastery")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryMyMasteryRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) QueryClassMastery(ctx context.Context, req *QueryClassMasteryReq, opts ...client.Option) (*QueryClassMasteryRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/QueryClassMastery")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("QueryClassMastery")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryClassMasteryRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

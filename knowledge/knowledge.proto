@@ -10,6 +10,8 @@ service KnowledgeServer {
     rpc AddKnowledge(AddKnowledgeReq) returns (CommonRsp) {}
     // QueryProblemKnowledge 查询题目的知识点
     rpc QueryProblemKnowledge(QueryProblemKnowledgeReq) returns (QueryProblemKnowledgeRsp) {}
+    // QueryAllProblemKnowledge 查询题目所有的知识点
+    rpc QueryAllProblemKnowledge(QueryProblemKnowledgeReq) returns (QueryProblemKnowledgeRsp) {}
     // UpdateKnowledge 更新知识点
     rpc UpdateKnowledge(UpdateKnowledgeReq) returns (CommonRsp) {}
     // UpdateKnowledgeStatus 更新知识点状态
@@ -22,6 +24,10 @@ service KnowledgeServer {
     rpc QueryCourseKnowledge(QueryCourseKnowledgeReq) returns (QueryKnowledgeRsp) {}
     // UpdateCourseKnowledgeReq 更新课程的知识点
     rpc UpdateCourseKnowledge(UpdateCourseKnowledgeReq) returns (CommonRsp) {}
+    // QueryMyMastery 查询我的知识点掌握度（BKT 知识追踪）
+    rpc QueryMyMastery(QueryMyMasteryReq) returns (QueryMyMasteryRsp) {}
+    // QueryClassMastery 查询班级知识点掌握度热力图
+    rpc QueryClassMastery(QueryClassMasteryReq) returns (QueryClassMasteryRsp) {}
 }
 
 message UpdateCourseKnowledgeReq{
@@ -99,4 +105,54 @@ message Knowledge {
     string createTime = 4;  // 创建时间
     int32 enable      = 5;  // 状态
     int32 weight      = 6;  // 权重
+}
+
+// ========== 知识点掌握度（BKT 知识追踪；数据由 oj_index_daemon 离线计算，落 user_knowledge_mastery 表） ==========
+
+message QueryMyMasteryReq {
+    int32 userID = 1;  // 用户编号
+}
+
+message MyMasteryPoint {
+    int32  knowledgeID = 1;  // 知识点编号
+    string name        = 2;  // 知识点名称
+    double mastery     = 3;  // BKT 掌握概率（0~1）
+    int32  tryCount    = 4;  // 尝试次数
+    int32  acCount     = 5;  // AC 次数
+    double acRate      = 6;  // AC 率（百分比）
+    string lastTime    = 7;  // 最近一次提交时间
+    string level       = 8;  // weak | learning | mastered
+}
+
+message QueryMyMasteryRsp {
+    string message           = 1;  // 返回信息
+    int32 code               = 2;  // 返回码
+    repeated MyMasteryPoint points = 3;  // 我的知识点掌握度（按掌握度升序）
+}
+
+message QueryClassMasteryReq {
+    int32 classID = 1;  // 班级编号
+}
+
+message ClassMasteryKP {
+    int32 knowledgeID  = 1;  // 知识点编号
+    string name         = 2;  // 知识点名称
+    double classAvg     = 3;  // 班级平均掌握度（仅统计有数据的学生）
+    int32 coveredUsers = 4;  // 有数据的学生数
+    int32 weakUsers    = 5;  // 薄弱学生数
+}
+
+message ClassMasteryUser {
+    int32  userID     = 1;  // 用户编号
+    string userName   = 2;  // 用户名
+    string userNumber = 3;  // 学号
+    repeated double matrix = 4;  // 与 knowledgePoints 顺序对齐，-1 表示该学生无此知识点数据
+}
+
+message QueryClassMasteryRsp {
+    string message             = 1;  // 返回信息
+    int32 code                 = 2;  // 返回码
+    int32 classID              = 3;  // 班级编号
+    repeated ClassMasteryKP knowledgePoints = 4;  // 知识点列（按编号升序）
+    repeated ClassMasteryUser users         = 5;  // 学生行
 }
