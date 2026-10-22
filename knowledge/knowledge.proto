@@ -34,15 +34,18 @@ message UpdateCourseKnowledgeReq{
     int32 courseID = 1;  // 课程编号
     int32 userID    = 2;  // 用户编号
     string knowledgeIDs = 3; // 知识点编号
+    int32 platform = 4;  // 注写平台
 }
 
 message QueryCourseKnowledgeReq{
     string courseIDs = 1;  // 课程编号
     int32 userID    = 2;  // 用户编号
+    int32 platform = 3;  // 注写平台
 }
 
 message UserIDReq {
     int32 userID = 1;  // 用户编号
+    int32 platform = 2;  // 注写平台
 }
 
 message UpdateKnowledgeWeightReq {
@@ -50,24 +53,28 @@ message UpdateKnowledgeWeightReq {
     int32 knowledgeID = 2;  // 知识点主键
     int32 moveType    = 3;  // 类型
     int32 weight      = 4;  // 权重
+    int32 platform = 5;  // 注写平台
 }
 
 message UpdateKnowledgeStatusReq {
     int32 userID      = 1;  // 用户主键
     int32 knowledgeID = 2;  // 知识点主键
     int32 status      = 3;  // 状态
+    int32 platform = 4;  // 注写平台
 }
 
 message UpdateKnowledgeReq {
     int32 knowledgeID = 1;  // 知识点主键
     string name       = 2;  // 知识点名称
     int32 userID      = 3;  // 用户主键
+    int32 platform = 4;  // 注写平台
 }
 
 message QueryKnowledgePageSizeReq {
     int32 page   = 1;  // 页
     int32 limit  = 2;  // 页大小
     int32 userID = 3;  // 用户编号
+    int32 platform = 4;  // 注写平台
 }
 
 message QueryKnowledgeRsp {
@@ -80,6 +87,7 @@ message QueryKnowledgeRsp {
 message AddKnowledgeReq {
     string name  = 1;  // 知识点名称
     int32 userID = 2;  // 用户主键
+    int32 platform = 3;  // 注写平台
 }
 
 message CommonRsp {
@@ -90,6 +98,7 @@ message CommonRsp {
 message QueryProblemKnowledgeReq {
     int32 problemID = 1;  // 问题编号
     int32 userID    = 2;  // 用户编号
+    int32 platform = 3;  // 注写平台
 }
 
 message QueryProblemKnowledgeRsp {
@@ -111,6 +120,7 @@ message Knowledge {
 
 message QueryMyMasteryReq {
     int32 userID = 1;  // 用户编号
+    int32 platform = 2;  // 注写平台
 }
 
 message MyMasteryPoint {
@@ -132,6 +142,7 @@ message QueryMyMasteryRsp {
 
 message QueryClassMasteryReq {
     int32 classID = 1;  // 班级编号
+    int32 platform = 2;  // 注写平台
 }
 
 message ClassMasteryKP {
