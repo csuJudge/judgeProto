@@ -13,6 +13,7 @@ message RcmdProblemReq{
   int32 problemID = 3; // 题目编号
   string knowledge = 4; // 知识
   int32 rcmdType = 5; // 推荐类型
+  int32 contestID = 6; // 作业编号
 }
 
 message RcmdProblemRsp{
