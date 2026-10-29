@@ -179,6 +179,7 @@ message QueryClassMasteryRsp {
 
 message QueryContentCoursesReq {
     int32 userID = 1;  // 登录用户编号（仅日志/trace）
+    int32 includeDisabled = 2;  // 1 表示包含停用项（管理端），0 仅启用项
 }
 
 message ContentTopicSkeleton {
@@ -198,6 +199,7 @@ message ContentChapter {
     string color            = 5;  // 主题色
     int32 sortOrder         = 6;  // 排序
     repeated ContentTopicSkeleton topics = 7;  // 小节骨架
+    int32 enable            = 8;  // 1 启用 0 停用 -1 删除
 }
 
 message ContentCourse {
@@ -211,6 +213,7 @@ message ContentCourse {
     int32 totalTopics        = 8;  // 小节总数
     int32 sortOrder          = 9;  // 排序
     repeated ContentChapter chapters = 10;  // 章节
+    int32 enable             = 11;  // 1 启用 0 停用 -1 删除
 }
 
 message QueryContentCoursesRsp {
@@ -229,6 +232,7 @@ message ContentTopic {
     string animation    = 7;  // 动画 key，空串表示无动画
     repeated string tips = 8;  // 提示
     int32 sortOrder     = 9;  // 排序
+    int32 enable        = 10;  // 1 启用 0 停用 -1 删除
 }
 
 message QueryContentChapterReq {
