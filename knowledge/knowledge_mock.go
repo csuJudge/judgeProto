@@ -60,6 +60,21 @@ func (mr *MockKnowledgeServerServiceMockRecorder) AddKnowledge(ctx, req any) *go
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddKnowledge", reflect.TypeOf((*MockKnowledgeServerService)(nil).AddKnowledge), ctx, req)
 }
 
+// MoveContent mocks base method.
+func (m *MockKnowledgeServerService) MoveContent(ctx context.Context, req *MoveContentReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "MoveContent", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// MoveContent indicates an expected call of MoveContent.
+func (mr *MockKnowledgeServerServiceMockRecorder) MoveContent(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MoveContent", reflect.TypeOf((*MockKnowledgeServerService)(nil).MoveContent), ctx, req)
+}
+
 // QueryAllProblemKnowledge mocks base method.
 func (m *MockKnowledgeServerService) QueryAllProblemKnowledge(ctx context.Context, req *QueryProblemKnowledgeReq) (*QueryProblemKnowledgeRsp, error) {
 	m.ctrl.T.Helper()
@@ -88,6 +103,51 @@ func (m *MockKnowledgeServerService) QueryClassMastery(ctx context.Context, req 
 func (mr *MockKnowledgeServerServiceMockRecorder) QueryClassMastery(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassMastery", reflect.TypeOf((*MockKnowledgeServerService)(nil).QueryClassMastery), ctx, req)
+}
+
+// QueryContentChapter mocks base method.
+func (m *MockKnowledgeServerService) QueryContentChapter(ctx context.Context, req *QueryContentChapterReq) (*QueryContentChapterRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryContentChapter", ctx, req)
+	ret0, _ := ret[0].(*QueryContentChapterRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContentChapter indicates an expected call of QueryContentChapter.
+func (mr *MockKnowledgeServerServiceMockRecorder) QueryContentChapter(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContentChapter", reflect.TypeOf((*MockKnowledgeServerService)(nil).QueryContentChapter), ctx, req)
+}
+
+// QueryContentCourses mocks base method.
+func (m *MockKnowledgeServerService) QueryContentCourses(ctx context.Context, req *QueryContentCoursesReq) (*QueryContentCoursesRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryContentCourses", ctx, req)
+	ret0, _ := ret[0].(*QueryContentCoursesRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContentCourses indicates an expected call of QueryContentCourses.
+func (mr *MockKnowledgeServerServiceMockRecorder) QueryContentCourses(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContentCourses", reflect.TypeOf((*MockKnowledgeServerService)(nil).QueryContentCourses), ctx, req)
+}
+
+// QueryContentTopic mocks base method.
+func (m *MockKnowledgeServerService) QueryContentTopic(ctx context.Context, req *QueryContentTopicReq) (*QueryContentTopicRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QueryContentTopic", ctx, req)
+	ret0, _ := ret[0].(*QueryContentTopicRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContentTopic indicates an expected call of QueryContentTopic.
+func (mr *MockKnowledgeServerServiceMockRecorder) QueryContentTopic(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContentTopic", reflect.TypeOf((*MockKnowledgeServerService)(nil).QueryContentTopic), ctx, req)
 }
 
 // QueryCourseKnowledge mocks base method.
@@ -163,6 +223,66 @@ func (m *MockKnowledgeServerService) QueryProblemKnowledge(ctx context.Context, 
 func (mr *MockKnowledgeServerServiceMockRecorder) QueryProblemKnowledge(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryProblemKnowledge", reflect.TypeOf((*MockKnowledgeServerService)(nil).QueryProblemKnowledge), ctx, req)
+}
+
+// SaveContentChapter mocks base method.
+func (m *MockKnowledgeServerService) SaveContentChapter(ctx context.Context, req *SaveContentChapterReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SaveContentChapter", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SaveContentChapter indicates an expected call of SaveContentChapter.
+func (mr *MockKnowledgeServerServiceMockRecorder) SaveContentChapter(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveContentChapter", reflect.TypeOf((*MockKnowledgeServerService)(nil).SaveContentChapter), ctx, req)
+}
+
+// SaveContentCourse mocks base method.
+func (m *MockKnowledgeServerService) SaveContentCourse(ctx context.Context, req *SaveContentCourseReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SaveContentCourse", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SaveContentCourse indicates an expected call of SaveContentCourse.
+func (mr *MockKnowledgeServerServiceMockRecorder) SaveContentCourse(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveContentCourse", reflect.TypeOf((*MockKnowledgeServerService)(nil).SaveContentCourse), ctx, req)
+}
+
+// SaveContentTopic mocks base method.
+func (m *MockKnowledgeServerService) SaveContentTopic(ctx context.Context, req *SaveContentTopicReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SaveContentTopic", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SaveContentTopic indicates an expected call of SaveContentTopic.
+func (mr *MockKnowledgeServerServiceMockRecorder) SaveContentTopic(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveContentTopic", reflect.TypeOf((*MockKnowledgeServerService)(nil).SaveContentTopic), ctx, req)
+}
+
+// UpdateContentStatus mocks base method.
+func (m *MockKnowledgeServerService) UpdateContentStatus(ctx context.Context, req *UpdateContentStatusReq) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateContentStatus", ctx, req)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateContentStatus indicates an expected call of UpdateContentStatus.
+func (mr *MockKnowledgeServerServiceMockRecorder) UpdateContentStatus(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateContentStatus", reflect.TypeOf((*MockKnowledgeServerService)(nil).UpdateContentStatus), ctx, req)
 }
 
 // UpdateCourseKnowledge mocks base method.
@@ -273,6 +393,26 @@ func (mr *MockKnowledgeServerClientProxyMockRecorder) AddKnowledge(ctx, req any,
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddKnowledge", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).AddKnowledge), varargs...)
 }
 
+// MoveContent mocks base method.
+func (m *MockKnowledgeServerClientProxy) MoveContent(ctx context.Context, req *MoveContentReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "MoveContent", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// MoveContent indicates an expected call of MoveContent.
+func (mr *MockKnowledgeServerClientProxyMockRecorder) MoveContent(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MoveContent", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).MoveContent), varargs...)
+}
+
 // QueryAllProblemKnowledge mocks base method.
 func (m *MockKnowledgeServerClientProxy) QueryAllProblemKnowledge(ctx context.Context, req *QueryProblemKnowledgeReq, opts ...client.Option) (*QueryProblemKnowledgeRsp, error) {
 	m.ctrl.T.Helper()
@@ -311,6 +451,66 @@ func (mr *MockKnowledgeServerClientProxyMockRecorder) QueryClassMastery(ctx, req
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryClassMastery", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).QueryClassMastery), varargs...)
+}
+
+// QueryContentChapter mocks base method.
+func (m *MockKnowledgeServerClientProxy) QueryContentChapter(ctx context.Context, req *QueryContentChapterReq, opts ...client.Option) (*QueryContentChapterRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryContentChapter", varargs...)
+	ret0, _ := ret[0].(*QueryContentChapterRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContentChapter indicates an expected call of QueryContentChapter.
+func (mr *MockKnowledgeServerClientProxyMockRecorder) QueryContentChapter(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContentChapter", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).QueryContentChapter), varargs...)
+}
+
+// QueryContentCourses mocks base method.
+func (m *MockKnowledgeServerClientProxy) QueryContentCourses(ctx context.Context, req *QueryContentCoursesReq, opts ...client.Option) (*QueryContentCoursesRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryContentCourses", varargs...)
+	ret0, _ := ret[0].(*QueryContentCoursesRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContentCourses indicates an expected call of QueryContentCourses.
+func (mr *MockKnowledgeServerClientProxyMockRecorder) QueryContentCourses(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContentCourses", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).QueryContentCourses), varargs...)
+}
+
+// QueryContentTopic mocks base method.
+func (m *MockKnowledgeServerClientProxy) QueryContentTopic(ctx context.Context, req *QueryContentTopicReq, opts ...client.Option) (*QueryContentTopicRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "QueryContentTopic", varargs...)
+	ret0, _ := ret[0].(*QueryContentTopicRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QueryContentTopic indicates an expected call of QueryContentTopic.
+func (mr *MockKnowledgeServerClientProxyMockRecorder) QueryContentTopic(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryContentTopic", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).QueryContentTopic), varargs...)
 }
 
 // QueryCourseKnowledge mocks base method.
@@ -411,6 +611,86 @@ func (mr *MockKnowledgeServerClientProxyMockRecorder) QueryProblemKnowledge(ctx,
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryProblemKnowledge", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).QueryProblemKnowledge), varargs...)
+}
+
+// SaveContentChapter mocks base method.
+func (m *MockKnowledgeServerClientProxy) SaveContentChapter(ctx context.Context, req *SaveContentChapterReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "SaveContentChapter", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SaveContentChapter indicates an expected call of SaveContentChapter.
+func (mr *MockKnowledgeServerClientProxyMockRecorder) SaveContentChapter(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveContentChapter", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).SaveContentChapter), varargs...)
+}
+
+// SaveContentCourse mocks base method.
+func (m *MockKnowledgeServerClientProxy) SaveContentCourse(ctx context.Context, req *SaveContentCourseReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "SaveContentCourse", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SaveContentCourse indicates an expected call of SaveContentCourse.
+func (mr *MockKnowledgeServerClientProxyMockRecorder) SaveContentCourse(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveContentCourse", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).SaveContentCourse), varargs...)
+}
+
+// SaveContentTopic mocks base method.
+func (m *MockKnowledgeServerClientProxy) SaveContentTopic(ctx context.Context, req *SaveContentTopicReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "SaveContentTopic", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SaveContentTopic indicates an expected call of SaveContentTopic.
+func (mr *MockKnowledgeServerClientProxyMockRecorder) SaveContentTopic(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveContentTopic", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).SaveContentTopic), varargs...)
+}
+
+// UpdateContentStatus mocks base method.
+func (m *MockKnowledgeServerClientProxy) UpdateContentStatus(ctx context.Context, req *UpdateContentStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateContentStatus", varargs...)
+	ret0, _ := ret[0].(*CommonRsp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateContentStatus indicates an expected call of UpdateContentStatus.
+func (mr *MockKnowledgeServerClientProxyMockRecorder) UpdateContentStatus(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateContentStatus", reflect.TypeOf((*MockKnowledgeServerClientProxy)(nil).UpdateContentStatus), varargs...)
 }
 
 // UpdateCourseKnowledge mocks base method.

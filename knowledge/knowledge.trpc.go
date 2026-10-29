@@ -43,6 +43,22 @@ type KnowledgeServerService interface {
 	QueryMyMastery(ctx context.Context, req *QueryMyMasteryReq) (*QueryMyMasteryRsp, error)
 	// QueryClassMastery QueryClassMastery 查询班级知识点掌握度热力图
 	QueryClassMastery(ctx context.Context, req *QueryClassMasteryReq) (*QueryClassMasteryRsp, error)
+	// QueryContentCourses ===== 知识讲解内容（v2.7.5 新增，只做追加） =====
+	QueryContentCourses(ctx context.Context, req *QueryContentCoursesReq) (*QueryContentCoursesRsp, error)
+
+	QueryContentChapter(ctx context.Context, req *QueryContentChapterReq) (*QueryContentChapterRsp, error)
+
+	QueryContentTopic(ctx context.Context, req *QueryContentTopicReq) (*QueryContentTopicRsp, error)
+
+	SaveContentCourse(ctx context.Context, req *SaveContentCourseReq) (*CommonRsp, error)
+
+	SaveContentChapter(ctx context.Context, req *SaveContentChapterReq) (*CommonRsp, error)
+
+	SaveContentTopic(ctx context.Context, req *SaveContentTopicReq) (*CommonRsp, error)
+
+	UpdateContentStatus(ctx context.Context, req *UpdateContentStatusReq) (*CommonRsp, error)
+
+	MoveContent(ctx context.Context, req *MoveContentReq) (*CommonRsp, error)
 }
 
 func KnowledgeServerService_QueryKnowledge_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -261,6 +277,150 @@ func KnowledgeServerService_QueryClassMastery_Handler(svr interface{}, ctx conte
 	return rsp, nil
 }
 
+func KnowledgeServerService_QueryContentCourses_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryContentCoursesReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).QueryContentCourses(ctx, reqbody.(*QueryContentCoursesReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func KnowledgeServerService_QueryContentChapter_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryContentChapterReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).QueryContentChapter(ctx, reqbody.(*QueryContentChapterReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func KnowledgeServerService_QueryContentTopic_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &QueryContentTopicReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).QueryContentTopic(ctx, reqbody.(*QueryContentTopicReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func KnowledgeServerService_SaveContentCourse_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &SaveContentCourseReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).SaveContentCourse(ctx, reqbody.(*SaveContentCourseReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func KnowledgeServerService_SaveContentChapter_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &SaveContentChapterReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).SaveContentChapter(ctx, reqbody.(*SaveContentChapterReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func KnowledgeServerService_SaveContentTopic_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &SaveContentTopicReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).SaveContentTopic(ctx, reqbody.(*SaveContentTopicReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func KnowledgeServerService_UpdateContentStatus_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UpdateContentStatusReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).UpdateContentStatus(ctx, reqbody.(*UpdateContentStatusReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func KnowledgeServerService_MoveContent_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &MoveContentReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(KnowledgeServerService).MoveContent(ctx, reqbody.(*MoveContentReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // KnowledgeServerServer_ServiceDesc descriptor for server.RegisterService.
 var KnowledgeServerServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "oj.knowledge.KnowledgeServer",
@@ -313,6 +473,38 @@ var KnowledgeServerServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/oj.knowledge.KnowledgeServer/QueryClassMastery",
 			Func: KnowledgeServerService_QueryClassMastery_Handler,
+		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/QueryContentCourses",
+			Func: KnowledgeServerService_QueryContentCourses_Handler,
+		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/QueryContentChapter",
+			Func: KnowledgeServerService_QueryContentChapter_Handler,
+		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/QueryContentTopic",
+			Func: KnowledgeServerService_QueryContentTopic_Handler,
+		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/SaveContentCourse",
+			Func: KnowledgeServerService_SaveContentCourse_Handler,
+		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/SaveContentChapter",
+			Func: KnowledgeServerService_SaveContentChapter_Handler,
+		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/SaveContentTopic",
+			Func: KnowledgeServerService_SaveContentTopic_Handler,
+		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/UpdateContentStatus",
+			Func: KnowledgeServerService_UpdateContentStatus_Handler,
+		},
+		{
+			Name: "/oj.knowledge.KnowledgeServer/MoveContent",
+			Func: KnowledgeServerService_MoveContent_Handler,
 		},
 	},
 }
@@ -388,6 +580,32 @@ func (s *UnimplementedKnowledgeServer) QueryClassMastery(ctx context.Context, re
 	return nil, errors.New("rpc QueryClassMastery of service KnowledgeServer is not implemented")
 }
 
+// QueryContentCourses ===== 知识讲解内容（v2.7.5 新增，只做追加） =====
+func (s *UnimplementedKnowledgeServer) QueryContentCourses(ctx context.Context, req *QueryContentCoursesReq) (*QueryContentCoursesRsp, error) {
+	return nil, errors.New("rpc QueryContentCourses of service KnowledgeServer is not implemented")
+}
+func (s *UnimplementedKnowledgeServer) QueryContentChapter(ctx context.Context, req *QueryContentChapterReq) (*QueryContentChapterRsp, error) {
+	return nil, errors.New("rpc QueryContentChapter of service KnowledgeServer is not implemented")
+}
+func (s *UnimplementedKnowledgeServer) QueryContentTopic(ctx context.Context, req *QueryContentTopicReq) (*QueryContentTopicRsp, error) {
+	return nil, errors.New("rpc QueryContentTopic of service KnowledgeServer is not implemented")
+}
+func (s *UnimplementedKnowledgeServer) SaveContentCourse(ctx context.Context, req *SaveContentCourseReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc SaveContentCourse of service KnowledgeServer is not implemented")
+}
+func (s *UnimplementedKnowledgeServer) SaveContentChapter(ctx context.Context, req *SaveContentChapterReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc SaveContentChapter of service KnowledgeServer is not implemented")
+}
+func (s *UnimplementedKnowledgeServer) SaveContentTopic(ctx context.Context, req *SaveContentTopicReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc SaveContentTopic of service KnowledgeServer is not implemented")
+}
+func (s *UnimplementedKnowledgeServer) UpdateContentStatus(ctx context.Context, req *UpdateContentStatusReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc UpdateContentStatus of service KnowledgeServer is not implemented")
+}
+func (s *UnimplementedKnowledgeServer) MoveContent(ctx context.Context, req *MoveContentReq) (*CommonRsp, error) {
+	return nil, errors.New("rpc MoveContent of service KnowledgeServer is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -420,6 +638,22 @@ type KnowledgeServerClientProxy interface {
 	QueryMyMastery(ctx context.Context, req *QueryMyMasteryReq, opts ...client.Option) (rsp *QueryMyMasteryRsp, err error)
 	// QueryClassMastery QueryClassMastery 查询班级知识点掌握度热力图
 	QueryClassMastery(ctx context.Context, req *QueryClassMasteryReq, opts ...client.Option) (rsp *QueryClassMasteryRsp, err error)
+	// QueryContentCourses ===== 知识讲解内容（v2.7.5 新增，只做追加） =====
+	QueryContentCourses(ctx context.Context, req *QueryContentCoursesReq, opts ...client.Option) (rsp *QueryContentCoursesRsp, err error)
+
+	QueryContentChapter(ctx context.Context, req *QueryContentChapterReq, opts ...client.Option) (rsp *QueryContentChapterRsp, err error)
+
+	QueryContentTopic(ctx context.Context, req *QueryContentTopicReq, opts ...client.Option) (rsp *QueryContentTopicRsp, err error)
+
+	SaveContentCourse(ctx context.Context, req *SaveContentCourseReq, opts ...client.Option) (rsp *CommonRsp, err error)
+
+	SaveContentChapter(ctx context.Context, req *SaveContentChapterReq, opts ...client.Option) (rsp *CommonRsp, err error)
+
+	SaveContentTopic(ctx context.Context, req *SaveContentTopicReq, opts ...client.Option) (rsp *CommonRsp, err error)
+
+	UpdateContentStatus(ctx context.Context, req *UpdateContentStatusReq, opts ...client.Option) (rsp *CommonRsp, err error)
+
+	MoveContent(ctx context.Context, req *MoveContentReq, opts ...client.Option) (rsp *CommonRsp, err error)
 }
 
 type KnowledgeServerClientProxyImpl struct {
@@ -665,6 +899,166 @@ func (c *KnowledgeServerClientProxyImpl) QueryClassMastery(ctx context.Context, 
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &QueryClassMasteryRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) QueryContentCourses(ctx context.Context, req *QueryContentCoursesReq, opts ...client.Option) (*QueryContentCoursesRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/QueryContentCourses")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("QueryContentCourses")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryContentCoursesRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) QueryContentChapter(ctx context.Context, req *QueryContentChapterReq, opts ...client.Option) (*QueryContentChapterRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/QueryContentChapter")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("QueryContentChapter")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryContentChapterRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) QueryContentTopic(ctx context.Context, req *QueryContentTopicReq, opts ...client.Option) (*QueryContentTopicRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/QueryContentTopic")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("QueryContentTopic")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &QueryContentTopicRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) SaveContentCourse(ctx context.Context, req *SaveContentCourseReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/SaveContentCourse")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("SaveContentCourse")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) SaveContentChapter(ctx context.Context, req *SaveContentChapterReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/SaveContentChapter")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("SaveContentChapter")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) SaveContentTopic(ctx context.Context, req *SaveContentTopicReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/SaveContentTopic")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("SaveContentTopic")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) UpdateContentStatus(ctx context.Context, req *UpdateContentStatusReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/UpdateContentStatus")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("UpdateContentStatus")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *KnowledgeServerClientProxyImpl) MoveContent(ctx context.Context, req *MoveContentReq, opts ...client.Option) (*CommonRsp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/oj.knowledge.KnowledgeServer/MoveContent")
+	msg.WithCalleeServiceName(KnowledgeServerServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("")
+	msg.WithCalleeServer("")
+	msg.WithCalleeService("KnowledgeServer")
+	msg.WithCalleeMethod("MoveContent")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &CommonRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
