@@ -28,6 +28,15 @@ service KnowledgeServer {
     rpc QueryMyMastery(QueryMyMasteryReq) returns (QueryMyMasteryRsp) {}
     // QueryClassMastery 查询班级知识点掌握度热力图
     rpc QueryClassMastery(QueryClassMasteryReq) returns (QueryClassMasteryRsp) {}
+    // ===== 知识讲解内容（v2.7.5 新增，只做追加） =====
+    rpc QueryContentCourses(QueryContentCoursesReq) returns (QueryContentCoursesRsp) {}
+    rpc QueryContentChapter(QueryContentChapterReq) returns (QueryContentChapterRsp) {}
+    rpc QueryContentTopic(QueryContentTopicReq) returns (QueryContentTopicRsp) {}
+    rpc SaveContentCourse(SaveContentCourseReq) returns (CommonRsp) {}
+    rpc SaveContentChapter(SaveContentChapterReq) returns (CommonRsp) {}
+    rpc SaveContentTopic(SaveContentTopicReq) returns (CommonRsp) {}
+    rpc UpdateContentStatus(UpdateContentStatusReq) returns (CommonRsp) {}
+    rpc MoveContent(MoveContentReq) returns (CommonRsp) {}
 }
 
 message UpdateCourseKnowledgeReq{
@@ -166,4 +175,128 @@ message QueryClassMasteryRsp {
     int32 classID              = 3;  // 班级编号
     repeated ClassMasteryKP knowledgePoints = 4;  // 知识点列（按编号升序）
     repeated ClassMasteryUser users         = 5;  // 学生行
+}
+
+message QueryContentCoursesReq {
+    int32 userID = 1;  // 登录用户编号（仅日志/trace）
+}
+
+message ContentTopicSkeleton {
+    int32 id           = 1;  // 小节主键
+    string title       = 2;  // 小节标题
+    string summary     = 3;  // 一句话摘要
+    int32 sortOrder    = 4;  // 排序
+    bool hasCode       = 5;  // 是否含代码块
+    string animation   = 6;  // 动画 key，空串表示无动画
+}
+
+message ContentChapter {
+    int32 id                = 1;  // 章节主键
+    int32 contentCourseID   = 2;  // 所属讲解课程主键
+    string title            = 3;  // 章节标题
+    string icon             = 4;  // 图标名
+    string color            = 5;  // 主题色
+    int32 sortOrder         = 6;  // 排序
+    repeated ContentTopicSkeleton topics = 7;  // 小节骨架
+}
+
+message ContentCourse {
+    int32 id                 = 1;  // 讲解课程主键
+    int32 courseID           = 2;  // 平台课程 course.id，0 表示未挂钩
+    string name              = 3;  // 课程名
+    string slug              = 4;  // 英文标识
+    string description       = 5;  // 课程描述
+    string icon              = 6;  // 图标名
+    string color             = 7;  // 主题色
+    int32 totalTopics        = 8;  // 小节总数
+    int32 sortOrder          = 9;  // 排序
+    repeated ContentChapter chapters = 10;  // 章节
+}
+
+message QueryContentCoursesRsp {
+    string message                = 1;
+    int32 code                    = 2;
+    repeated ContentCourse courses = 3;
+}
+
+message ContentTopic {
+    int32 id            = 1;  // 小节主键
+    int32 chapterID     = 2;  // 所属章节主键
+    string title        = 3;  // 小节标题
+    string summary      = 4;  // 摘要
+    repeated string details = 5;  // 讲解要点
+    string code         = 6;  // 示例代码
+    string animation    = 7;  // 动画 key，空串表示无动画
+    repeated string tips = 8;  // 提示
+    int32 sortOrder     = 9;  // 排序
+}
+
+message QueryContentChapterReq {
+    int32 chapterID = 1;
+}
+
+message QueryContentChapterRsp {
+    string message            = 1;
+    int32 code                = 2;
+    ContentChapter chapter    = 3;
+    repeated ContentTopic topics = 4;
+}
+
+message QueryContentTopicReq {
+    int32 topicID = 1;
+}
+
+message QueryContentTopicRsp {
+    string message     = 1;
+    int32 code         = 2;
+    ContentTopic topic = 3;
+}
+
+message SaveContentCourseReq {
+    int32 id            = 1;  // 0 表示新增
+    int32 courseID      = 2;  // 平台课程编号
+    string name         = 3;
+    string slug         = 4;
+    string description  = 5;
+    string icon         = 6;
+    string color        = 7;
+    int32 sortOrder     = 8;
+    int32 userID        = 9;
+}
+
+message SaveContentChapterReq {
+    int32 id                = 1;  // 0 表示新增
+    int32 contentCourseID   = 2;
+    string title            = 3;
+    string icon             = 4;
+    string color            = 5;
+    int32 sortOrder         = 6;
+    int32 userID            = 7;
+}
+
+message SaveContentTopicReq {
+    int32 id            = 1;  // 0 表示新增
+    int32 chapterID     = 2;
+    string title        = 3;
+    string summary      = 4;
+    repeated string details = 5;
+    string code         = 6;
+    string animation    = 7;
+    repeated string tips = 8;
+    int32 sortOrder     = 9;
+    int32 userID        = 10;
+}
+
+message UpdateContentStatusReq {
+    int32 id      = 1;
+    int32 level   = 2;  // 1 课程 2 章节 3 小节
+    int32 enable  = 3;  // 1 启用 0 停用 -1 删除
+    int32 userID  = 4;
+}
+
+message MoveContentReq {
+    int32 id         = 1;
+    int32 level      = 2;  // 1 课程 2 章节 3 小节
+    int32 direction  = 3;  // 1 上移 2 下移
+    int32 userID     = 4;
 }
