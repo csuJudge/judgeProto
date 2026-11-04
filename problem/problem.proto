@@ -257,6 +257,7 @@ message ProblemList {
     float passRate   = 6;  // 通过率
     int32 isDone     = 7;  // 是否做完
     string knowledge = 8; // 知识点
+    int32 visit = 10; // 浏览数
 }
 
 message QueryAllProblemRsp {
