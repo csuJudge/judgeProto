@@ -282,10 +282,11 @@ message QueryClassPageSizeRsp {
 }
 
 message QueryClassUserReq {
-    int32 classID = 1;  // 班级编号
-    int32 page    = 2;  // 页
-    int32 limit   = 3;  // 页大小
-    int32 userID  = 4;  // 用户编号
+    int32 classID  = 1;  // 班级编号
+    int32 page     = 2;  // 页
+    int32 limit    = 3;  // 页大小
+    int32 userID   = 4;  // 用户编号
+    string keyword = 5;  // 搜索关键字（按姓名/学工号模糊匹配，为空则不过滤）
 }
 
 message QueryClassUserRsp {
